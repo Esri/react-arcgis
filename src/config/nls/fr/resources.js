@@ -1,0 +1,3 @@
+define(({
+  error: "Erreur"
+}));

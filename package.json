@@ -1,0 +1,48 @@
+{
+  "name": "ts-arcapp",
+  "version": "1.0.0",
+  "description": "Webpack boilerplate for building ArcGIS JS API 4.x App using TypeScript & Calcite Web (SASS)",
+  "main": "app.js",
+  "scripts": {
+    "build": "webpack --config ./webpack.config.js",
+    "start": "webpack-dev-server --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicksenger/application-boilerplate-ts.git"
+  },
+  "keywords": [
+    "Esri",
+    "ArcGIS",
+    "Webpack",
+    "TypeScript",
+    "SASS"
+  ],
+  "author": "Nick Senger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicksenger/application-boilerplate-ts/issues"
+  },
+  "homepage": "https://github.com/nicksenger/application-boilerplate-ts#readme",
+  "devDependencies": {
+    "@types/arcgis-js-api": "^4.2.0",
+    "awesome-typescript-loader": "^3.1.2",
+    "calcite-web": "github:esri/calcite-web#v1.0.0-rc.2",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.26.4",
+    "dojo-typings": "^1.11.6",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.10.1",
+    "html-webpack-plugin": "^2.28.0",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.3",
+    "source-map-loader": "^0.1.6",
+    "style-loader": "^0.13.2",
+    "typescript": "^2.2.1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "dependencies": {
+    "esri-promise": "^0.1.1"
+  }
+}

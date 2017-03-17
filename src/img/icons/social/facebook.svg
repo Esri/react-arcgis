@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<g id="Flikr">
+</g>
+<g id="Minimal_Idle">
+</g>
+<g id="Minimal_Hover_COlor" display="none">
+</g>
+<g id="Blue_Gradient" display="none">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-801" y1="310" x2="1159" y2="310" gradientTransform="matrix(1 0 0 -1 244 125)">
+		<stop  offset="0" style="stop-color:#00AEEF"/>
+		<stop  offset="1" style="stop-color:#2E3092"/>
+	</linearGradient>
+	<rect x="-557" y="-445" display="inline" fill="url(#SVGID_1_)" width="1960" height="520"/>
+</g>
+<path fill="#FFFFFF" d="M22.117,7H7.883C7.396,7,7,7.395,7,7.883v14.234C7,22.604,7.396,23,7.883,23H15v-7h-3v-2h3v-0.992
+	c0-2.066,1.277-3.192,3.121-3.192C19.004,9.816,20,9.882,20,9.912V12h-1.764C17.234,12,17,12.148,17,12.848V14h2.73l-0.911,2H17v7
+	h5.117C22.604,23,23,22.604,23,22.117V7.883C23,7.395,22.604,7,22.117,7z"/>
+<g id="Square_Hover_Color" display="none">
+	<rect display="inline" fill="#3C5998" width="30" height="30"/>
+	<path id="Blue_28_" display="inline" fill="#FFFFFF" d="M22.117,23C22.604,23,23,22.604,23,22.117V7.883
+		C23,7.395,22.604,7,22.117,7H7.883C7.395,7,7,7.395,7,7.883v14.234C7,22.604,7.395,23,7.883,23H22.117z"/>
+	<path id="f_28_" display="inline" fill="#3C5998" d="M17,23v-7h1.819l0.911-2H17v-1.152C17,12.148,17.234,12,18.236,12H20V9.912
+		c0-0.029-0.996-0.095-1.879-0.095c-1.844,0-3.121,1.125-3.121,3.192V14h-3v2h3v7H17z"/>
+</g>
+<g id="Circle_Idle" display="none">
+	<path display="inline" opacity="0.3" enable-background="new    " d="M15,30L15,30C6.716,30,0,23.284,0,15l0,0
+		C0,6.716,6.716,0,15,0l0,0c8.284,0,15,6.716,15,15l0,0C30,23.284,23.284,30,15,30z"/>
+	<path display="inline" fill="#FFFFFF" d="M22.117,7H7.883C7.396,7,7,7.395,7,7.883v14.234C7,22.604,7.396,23,7.883,23H15v-7h-3v-2
+		h3v-0.992c0-2.066,1.277-3.192,3.121-3.192C19.004,9.816,20,9.882,20,9.912V12h-1.764C17.234,12,17,12.148,17,12.848V14h2.73
+		l-0.911,2H17v7h5.117C22.604,23,23,22.604,23,22.117V7.883C23,7.395,22.604,7,22.117,7z"/>
+</g>
+<g id="Circle_Hover_Color" display="none">
+	<path display="inline" fill="#3C5998" d="M15,30L15,30C6.716,30,0,23.284,0,15l0,0C0,6.716,6.716,0,15,0l0,0
+		c8.284,0,15,6.716,15,15l0,0C30,23.284,23.284,30,15,30z"/>
+	<path id="Blue_3_" display="inline" fill="#FFFFFF" d="M22.117,23C22.604,23,23,22.604,23,22.117V7.883C23,7.395,22.604,7,22.117,7
+		H7.883C7.395,7,7,7.395,7,7.883v14.234C7,22.604,7.395,23,7.883,23H22.117z"/>
+	<path id="f_3_" display="inline" fill="#3C5998" d="M17,23v-7h1.819l0.911-2H17v-1.152C17,12.148,17.234,12,18.236,12H20V9.912
+		c0-0.029-0.996-0.095-1.879-0.095c-1.844,0-3.121,1.125-3.121,3.192V14h-3v2h3v7H17z"/>
+</g>
+<g id="Layer_10">
+</g>
+<g id="Text">
+</g>
+</svg>

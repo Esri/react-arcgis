@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<g id="Flikr">
+</g>
+<g id="Minimal_Idle">
+</g>
+<g id="Minimal_Hover_COlor" display="none">
+</g>
+<g id="Blue_Gradient" display="none">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-1521" y1="310" x2="439" y2="310" gradientTransform="matrix(1 0 0 -1 244 125)">
+		<stop  offset="0" style="stop-color:#00AEEF"/>
+		<stop  offset="1" style="stop-color:#2E3092"/>
+	</linearGradient>
+	<rect x="-1277" y="-445" display="inline" fill="url(#SVGID_1_)" width="1960" height="520"/>
+</g>
+<path fill="#FFFFFF" d="M21.002,9.332c-1.816-0.442-10.187-0.442-12.004,0c-1.482,0.36-1.82,1.895-1.897,2.818
+	c-0.137,1.642-0.131,4.129,0,5.7c0.078,0.924,0.416,2.459,1.897,2.818c1.816,0.442,10.188,0.442,12.004,0
+	c1.482-0.359,1.82-1.895,1.897-2.818c0.138-1.642,0.132-4.128,0-5.7C22.822,11.227,22.484,9.692,21.002,9.332z M13,17.447v-4.895
+	L18,15L13,17.447z"/>
+<g id="Square_Hover_Color" display="none">
+	<rect display="inline" fill="#D12221" width="30" height="30"/>
+	<path display="inline" fill="#FFFFFF" d="M21.002,9.332c1.482,0.36,1.82,1.895,1.897,2.818c0.132,1.571,0.138,4.058,0,5.7
+		c-0.077,0.924-0.415,2.459-1.897,2.818c-1.816,0.442-10.188,0.442-12.004,0c-1.482-0.359-1.82-1.895-1.897-2.818
+		c-0.131-1.57-0.137-4.058,0-5.7c0.078-0.923,0.416-2.458,1.897-2.818C10.815,8.89,19.186,8.89,21.002,9.332z"/>
+	<polygon display="inline" fill="#D12221" points="13,12.553 13,17.447 18,15 	"/>
+</g>
+<g id="Circle_Idle" display="none">
+	<path display="inline" opacity="0.3" enable-background="new    " d="M15,30L15,30C6.716,30,0,23.284,0,15l0,0
+		C0,6.716,6.716,0,15,0l0,0c8.284,0,15,6.716,15,15l0,0C30,23.284,23.284,30,15,30z"/>
+	<path display="inline" fill="#FFFFFF" d="M21.002,9.332c-1.816-0.442-10.187-0.442-12.004,0c-1.482,0.36-1.82,1.895-1.897,2.818
+		c-0.137,1.642-0.131,4.129,0,5.7c0.078,0.924,0.416,2.459,1.897,2.818c1.816,0.442,10.188,0.442,12.004,0
+		c1.482-0.359,1.82-1.895,1.897-2.818c0.138-1.642,0.132-4.128,0-5.7C22.822,11.227,22.484,9.692,21.002,9.332z M13,17.447v-4.895
+		L18,15L13,17.447z"/>
+</g>
+<g id="Circle_Hover_Color" display="none">
+	<path display="inline" fill="#D12221" d="M15,30L15,30C6.716,30,0,23.284,0,15l0,0C0,6.716,6.716,0,15,0l0,0
+		c8.284,0,15,6.716,15,15l0,0C30,23.284,23.284,30,15,30z"/>
+	<path display="inline" fill="#FFFFFF" d="M21.002,9.332c1.482,0.36,1.82,1.895,1.897,2.818c0.132,1.571,0.138,4.058,0,5.7
+		c-0.077,0.924-0.415,2.459-1.897,2.818c-1.816,0.442-10.188,0.442-12.004,0c-1.482-0.359-1.82-1.895-1.897-2.818
+		c-0.131-1.57-0.137-4.058,0-5.7c0.078-0.923,0.416-2.458,1.897-2.818C10.815,8.89,19.186,8.89,21.002,9.332z"/>
+	<polygon display="inline" fill="#D12221" points="13,12.553 13,17.447 18,15 	"/>
+</g>
+<g id="Layer_10">
+</g>
+<g id="Text">
+</g>
+</svg>
