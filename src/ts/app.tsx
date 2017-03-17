@@ -6,7 +6,7 @@ import Map from './components/Map';
 import Scene from './components/Scene';
 
 ReactDOM.render(
-  <Map 
+  <Scene 
     style={{ width: '100vw', height: '100vh' }}
   />,
   document.getElementById('react-container')

@@ -10,7 +10,7 @@ export interface MapViewProps {
         allLayers?: __esri.Collection,
         basemap?: __esri.BasemapProperties,
         ground?: __esri.GroundProperties,
-    }
+    },
     viewProperties?: {
         center?: __esri.PointProperties,
         constraints?: __esri.MapViewConstraints,
@@ -20,7 +20,7 @@ export interface MapViewProps {
         scale?: number,
         viewpoint?: __esri.ViewpointProperties,
         zoom?: number
-    }
+    },
     onClick?: (e: EventProperties) => any,
     onDoubleClick?: (e: EventProperties) => any,
     onDrag?: (e: EventProperties) => any,

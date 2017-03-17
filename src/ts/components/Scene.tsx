@@ -10,7 +10,7 @@ export interface MapViewProps {
         allLayers?: __esri.Collection,
         basemap?: __esri.BasemapProperties,
         ground?: __esri.GroundProperties
-    }
+    },
     viewProperties?: {
         camera?: __esri.CameraProperties;
         center?: __esri.PointProperties;
@@ -23,13 +23,46 @@ export interface MapViewProps {
         viewingMode?: string;
         viewpoint?: __esri.ViewpointProperties;
         zoom?: number;
-    }
+    },
+    onClick?: (e: EventProperties) => any,
+    onDoubleClick?: (e: EventProperties) => any,
+    onDrag?: (e: EventProperties) => any,
+    onHold?: (e: EventProperties) => any,
+    onKeyDown?: (e: EventProperties) => any,
+    onKeyUp?: (e: EventProperties) => any,
+    onLayerViewCreate?: (e: EventProperties) => any,
+    onLayerViewDestroy?: (e: EventProperties) => any,
+    onMouseWheel?: (e: EventProperties) => any,
+    onPointerDown?: (e: EventProperties) => any,
+    onPointerMove?: (e: EventProperties) => any,
+    onPointerUp?: (e: EventProperties) => any,
+    onResize?: (e: EventProperties) => any
+}
+
+interface EventProperties {
+    [propName: string]: any
 }
 
 interface ComponentState { 
     mapContainerId: string,
     map: __esri.Map,
     view: __esri.View
+}
+
+const eventMap = {
+    onClick: 'click',
+    onDoubleClick: 'double-click',
+    onDrag: 'drag',
+    onHold: 'hold',
+    onKeyDown: 'key-down',
+    onKeyUp: 'key-up',
+    onLayerViewCreate: 'layerview-create',
+    onLayerViewDestroy: 'layerview-destroy',
+    onMouseWheel: 'mouse-wheel',
+    onPointerDown: 'pointer-down',
+    onPointerMove: 'pointer-move',
+    onPointerUp: 'pointer-up',
+    onResize: 'resize'
 }
 
 export default class Scene extends React.Component<MapViewProps, ComponentState> {
@@ -49,31 +82,37 @@ export default class Scene extends React.Component<MapViewProps, ComponentState>
         ]).then(([
             Map, SceneView
         ]) => {
-            let mapProperties = {
+            let mapProperties = { // Set some default map properties
                 basemap: "streets-relief-vector",
                 ground: "world-elevation"
             }
             if (typeof this.props.mapProperties === 'object') {
-                mapProperties = Object.keys(this.props.mapProperties).reduce((p, c) => {
+                mapProperties = Object.keys(this.props.mapProperties).reduce((p, c) => {    // Overwrite defaults with user defined properties
                     p[c] = this.props.mapProperties[c];
                     return p;
                 }, {...mapProperties});
             }
             const map: __esri.Map = new Map(mapProperties);
 
-            let viewProperties = {
+            let viewProperties = {  // Set some default view properties
                 map,
                 container: this.state.mapContainerId,
                 scale: 500000,
                 center: [-122.4443, 47.2529]
             }
-            if (typeof this.props.viewProperties === 'object') {
+            if (typeof this.props.viewProperties === 'object') {  // Overwrite defaults with user defined properties
                 viewProperties = Object.keys(this.props.viewProperties).reduce((p, c) => {
                     p[c] = this.props.viewProperties[c];
                     return p;
                 }, {...viewProperties});
             }
             const view: __esri.SceneView = new SceneView(viewProperties);
+
+            Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
+                if (this.props[key]) {
+                    view.on(eventMap[key], this.props[key]);
+                }
+            });
 
             this.setState({ map, view });
         })
