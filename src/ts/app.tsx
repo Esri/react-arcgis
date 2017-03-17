@@ -2,12 +2,12 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import '../css/index.scss';
-import { MapView } from './components/MapView';
+import Map from './components/Map';
+import Scene from './components/Scene';
 
 ReactDOM.render(
-  <MapView 
-    style={{ width: '100vw', height: '100vh' }} 
-    basemap="topo-vector"
+  <Scene 
+    style={{ width: '50vw', height: '100vh' }}
   />,
   document.getElementById('react-container')
 );
