@@ -43,6 +43,10 @@
     "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
-    "esri-promise": "^0.1.1"
+    "@types/react": "^15.0.16",
+    "@types/react-dom": "^0.14.23",
+    "esri-promise": "^0.1.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }

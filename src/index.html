@@ -1,30 +1,15 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <!-- Define the versions of IE that will be used to render the page. See Microsoft documentation for details. Optional. -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- Responsive -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <!-- End Responsive -->
-  <!-- Use protocol relative urls that way if the browser is viewing the page via HTTPS the js/css file will be requested using the HTTPS protocol -->
-  <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
-  <!-- Load any application specific styles -->
-  <link rel="stylesheet" href="./bundle.css">
-</head>
-
-<body class="boilerplate--loading">
-  <div class="boilerplate-loading-indicator">
-    <div class="boilerplate-loading-message" id="loading_message"></div>
-  </div>
-  <div id="viewDiv" class="boilerplate-view"></div>
-  <script type="text/javascript" src="./config/dojoConfig.js"></script>
-  <script type="text/javascript" src="https://js.arcgis.com/4.3/"></script>
-  <script type="text/javascript" src="./app.js"></script>
-</body>
-
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React-ArcGIS Test</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+    <link rel="stylesheet" href="./bundle.css">
+  </head>
+  <body>
+    <div id="react-container"></div>
+    <script type="text/javascript" src="./app.js"></script>
+  </body>
 </html>

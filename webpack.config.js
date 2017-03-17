@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
     entry: {
         app: [
-            './src/ts/app'
+            './src/ts/app.tsx'
         ]
     },
     output: {
@@ -39,10 +39,10 @@ module.exports = {
             inject: false,
             template: 'src/index.html'
         }),
-        new ExtractTextPlugin('bundle.css'),
-        new CopyWebpackPlugin([
-            { from: 'src/config', to: 'config' }
-        ])
+        new ExtractTextPlugin('bundle.css')
+        // new CopyWebpackPlugin([
+        //     { from: 'src/config', to: 'config' }
+        // ])
     ],
 
     devServer: {
