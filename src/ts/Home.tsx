@@ -8,7 +8,10 @@ import Widget from './components/widgets/Widget';
 export default (props) => (
     <div>
         <Scene 
-            style={{ width: '50vw', height: '50vh', border: '1px solid black' }}
+            style={{ width: '80vw', height: '80vh', border: '1px solid black' }}
+            mapProperties={{
+                basemap: 'satellite'
+            }}
         >
             <Widget />
             <Widget />

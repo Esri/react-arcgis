@@ -13,15 +13,7 @@ export default class Widget extends React.Component<WidgetProps, ComponentState>
     constructor(props) {
         super(props);
         this.state = {
-            view: null
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (this.state.view !== nextProps.view) {
-            this.setState({
-                view: nextProps.view
-            });
+            view: this.props.view
         }
     }
 
