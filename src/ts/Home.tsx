@@ -7,9 +7,13 @@ import Widget from './components/widgets/Widget';
 
 export default (props) => (
     <div>
-        <Map style={{ width: '100vw', height: '100vh' }}>
+        <Scene 
+            style={{ width: '50vw', height: '50vh', border: '1px solid black' }}
+        >
             <Widget />
-        </Map>
+            <Widget />
+            <Widget />
+        </Scene>
     </div>
 )
 

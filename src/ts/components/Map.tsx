@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { esriPromise } from 'esri-promise';
-import MapContainer from './mapContainer';
+import MapContainer from './MapContainer';
 import Widget from './widgets/Widget';
 
 export interface MapViewProps {
@@ -9,7 +9,7 @@ export interface MapViewProps {
     },
     mapProperties?: {
         allLayers?: __esri.Collection,
-        basemap?: __esri.BasemapProperties,
+        basemap?: string,
         ground?: __esri.GroundProperties,
     },
     viewProperties?: {
@@ -34,7 +34,10 @@ export interface MapViewProps {
     onPointerDown?: (e: EventProperties) => any,
     onPointerMove?: (e: EventProperties) => any,
     onPointerUp?: (e: EventProperties) => any,
-    onResize?: (e: EventProperties) => any
+    onResize?: (e: EventProperties) => any,
+
+    onLoad?: (map: __esri.Map, view: __esri.MapView) => any,
+    onFail?: (e: any) => any
 }
 
 interface EventProperties {
@@ -43,9 +46,10 @@ interface EventProperties {
 
 
 interface ComponentState { 
+    status: string,
     mapContainerId: string,
     map: __esri.Map,
-    view: __esri.View
+    view: __esri.MapView
 }
 
 const eventMap = {
@@ -68,6 +72,7 @@ export default class MapView extends React.Component<MapViewProps, ComponentStat
     constructor(props) {
         super(props);
         this.state = {
+            status: 'loading',
             mapContainerId: Math.random().toString(36).substring(14),
             map: null,
             view: null
@@ -83,55 +88,70 @@ export default class MapView extends React.Component<MapViewProps, ComponentStat
             Map, MapView
         ]) => {
             this.renderMap(Map, MapView);
-        })
+            if (this.props.onLoad) {
+                this.props.onLoad(this.state.map, this.state.view);
+            }
+        }).catch((e) => {
+            this.setState({ status: 'failed' });
+            if (this.props.onFail) {
+                this.props.onFail(e);
+            }
+        });
     }
 
     render() {
-        const childrenWithProps = React.Children.map(this.props.children, (child) => {
-            let childEl = child as React.ReactElement<any>
-            return React.cloneElement(childEl, { view: this.state.view });
-        })
+        const centerStyle = {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)'
+        };
+        const mapStyle = { position: 'relative', ...this.props.style }
+        if (this.state.status === 'loaded') {
+            const childrenWithProps = React.Children.map(this.props.children, (child) => {
+                let childEl = child as React.ReactElement<any>
+                return React.cloneElement(childEl, { view: this.state.view });
+            });
+            return (
+                <div style={mapStyle}>
+                    <MapContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
+                    {childrenWithProps}
+                </div>
+            );
+        } else if (this.state.status === 'loading') {
+            return (
+                <div style={mapStyle}>
+                    <MapContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
+                    <h3 style={centerStyle}>Loading the map..</h3>
+                </div>
+            );
+        }
         return (
-            <div style={this.props.style}>
-                <MapContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
-                {childrenWithProps}
+            <div style={mapStyle}>
+                <h3 style={centerStyle}>The ArcGIS API failed to load.</h3>
             </div>
         );
     }
 
     private renderMap(Map: __esri.MapConstructor, MapView: __esri.MapViewConstructor) {
-        let mapProperties = { basemap: "streets-vector" } // Set some default map properties
-        if (typeof this.props.mapProperties === 'object') {
-            mapProperties = Object.keys(this.props.mapProperties).reduce((p, c) => {    // Overwrite defaults with user defined properties
-                p[c] = this.props.mapProperties[c];
-                return p;
-            }, {...mapProperties});
-        }
-        const map: __esri.Map = new Map(mapProperties);
+        let mapProperties = { basemap: "streets-vector", ...this.props.mapProperties } // Set some default map properties
+        const map: __esri.Map = new Map(mapProperties);  // Make the map
 
         let viewProperties = {  // Set some default view properties
             map,
             container: this.state.mapContainerId,
             center: [-122.4443, 47.2529],
-            zoom: 6
+            zoom: 6,
+            ...this.props.viewProperties
         };
-        if (typeof this.props.viewProperties === 'object') {
-            viewProperties = Object.keys(this.props.viewProperties).reduce((p, c) => {  // Overwrite defaults with user defined properties
-                p[c] = this.props.viewProperties[c];
-                return p;
-            }, {...viewProperties});
-        }
-        const view: __esri.MapView = new MapView(viewProperties);
+        const view: __esri.MapView = new MapView(viewProperties);  // Make the view
 
         Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
             if (this.props[key]) {
-                view.on(eventMap[key], this.props[key]);
+                view.on(eventMap[key], this.props[key]);  // Make the view
             }
         });
-        this.setState({ map, view });   // Set the map and view as part of the component state
-
-        React.Children.map(this.props.children, (child) => {
-            let childEl = child as React.ReactElement<any>;
-        });
+        this.setState({ map, view, status: 'loaded' });   // Set the map and view as part of the component state
     }
 }
