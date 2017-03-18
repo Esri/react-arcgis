@@ -1,13 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import '../css/index.scss';
-import Map from './components/Map';
-import Scene from './components/Scene';
+import Home from './Home';
 
 ReactDOM.render(
-  <Scene 
-    style={{ width: '100vw', height: '100vh' }}
-  />,
+  <Home />,
   document.getElementById('react-container')
 );

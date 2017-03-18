@@ -63,7 +63,7 @@ const eventMap = {
     onPointerMove: 'pointer-move',
     onPointerUp: 'pointer-up',
     onResize: 'resize'
-}
+};
 
 export default class Scene extends React.Component<MapViewProps, ComponentState> {
     constructor(props) {
@@ -73,56 +73,61 @@ export default class Scene extends React.Component<MapViewProps, ComponentState>
             map: null,
             view: null
         }
+        this.renderScene = this.renderScene.bind(this);
     }
 
-    componentDidMount() {
+    private componentDidMount() {
         esriPromise([
             'esri/Map',
             'esri/views/SceneView'
         ]).then(([
             Map, SceneView
         ]) => {
-            let mapProperties = { // Set some default map properties
-                basemap: "streets-relief-vector",
-                ground: "world-elevation"
-            }
-            if (typeof this.props.mapProperties === 'object') {
-                mapProperties = Object.keys(this.props.mapProperties).reduce((p, c) => {    // Overwrite defaults with user defined properties
-                    p[c] = this.props.mapProperties[c];
-                    return p;
-                }, {...mapProperties});
-            }
-            const map: __esri.Map = new Map(mapProperties);
-
-            let viewProperties = {  // Set some default view properties
-                map,
-                container: this.state.mapContainerId,
-                scale: 500000,
-                center: [-122.4443, 47.2529]
-            }
-            if (typeof this.props.viewProperties === 'object') {  // Overwrite defaults with user defined properties
-                viewProperties = Object.keys(this.props.viewProperties).reduce((p, c) => {
-                    p[c] = this.props.viewProperties[c];
-                    return p;
-                }, {...viewProperties});
-            }
-            const view: __esri.SceneView = new SceneView(viewProperties);
-
-            Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
-                if (this.props[key]) {
-                    view.on(eventMap[key], this.props[key]);
-                }
-            });
-
-            this.setState({ map, view });
+            this.renderScene(Map, SceneView);
         })
     }
 
     render() {
         return (
-            <div style={{ width: '100%', height: '100%' }}>
-                <MapContainer id={this.state.mapContainerId} style={this.props.style} />
+            <div style={this.props.style}>
+                <MapContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
             </div>
         );
+    }
+
+    private renderScene(Map: __esri.MapConstructor, SceneView: __esri.SceneViewConstructor) {
+        let mapProperties = { // Set some default map properties
+            basemap: "streets-relief-vector",
+            ground: "world-elevation"
+        }
+        if (typeof this.props.mapProperties === 'object') {
+            mapProperties = Object.keys(this.props.mapProperties).reduce((p, c) => {    // Overwrite defaults with user defined properties
+                p[c] = this.props.mapProperties[c];
+                return p;
+            }, {...mapProperties});
+        }
+        const map: __esri.Map = new Map(mapProperties);
+
+        let viewProperties = {  // Set some default view properties
+            map,
+            container: this.state.mapContainerId,
+            scale: 500000,
+            center: [-122.4443, 47.2529]
+        }
+        if (typeof this.props.viewProperties === 'object') {  // Overwrite defaults with user defined properties
+            viewProperties = Object.keys(this.props.viewProperties).reduce((p, c) => {
+                p[c] = this.props.viewProperties[c];
+                return p;
+            }, {...viewProperties});
+        }
+        const view: __esri.SceneView = new SceneView(viewProperties);
+
+        Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
+            if (this.props[key]) {
+                view.on(eventMap[key], this.props[key]);
+            }
+        });
+
+        this.setState({ map, view });
     }
 }

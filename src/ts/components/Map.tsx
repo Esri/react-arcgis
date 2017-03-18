@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { esriPromise } from 'esri-promise';
 import MapContainer from './mapContainer';
+import Widget from './widgets/Widget';
 
 export interface MapViewProps {
     style?: {
@@ -71,54 +72,66 @@ export default class MapView extends React.Component<MapViewProps, ComponentStat
             map: null,
             view: null
         }
+        this.renderMap = this.renderMap.bind(this);
     }
 
-    componentDidMount() {
+    private componentDidMount() {
         esriPromise([
             'esri/Map',
             'esri/views/MapView'
         ]).then(([
             Map, MapView
         ]) => {
-            
-            let mapProperties = { basemap: "streets-vector" } // Set some default map properties
-            if (typeof this.props.mapProperties === 'object') {
-                mapProperties = Object.keys(this.props.mapProperties).reduce((p, c) => {    // Overwrite defaults with user defined properties
-                    p[c] = this.props.mapProperties[c];
-                    return p;
-                }, {...mapProperties});
-            }
-            const map: __esri.Map = new Map(mapProperties);
-
-            let viewProperties = {  // Set some default view properties
-                map,
-                container: this.state.mapContainerId,
-                center: [-122.4443, 47.2529],
-                zoom: 6
-            };
-            if (typeof this.props.viewProperties === 'object') {
-                viewProperties = Object.keys(this.props.viewProperties).reduce((p, c) => {  // Overwrite defaults with user defined properties
-                    p[c] = this.props.viewProperties[c];
-                    return p;
-                }, {...viewProperties});
-            }
-            const view: __esri.MapView = new MapView(viewProperties);
-
-            Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
-                if (this.props[key]) {
-                    view.on(eventMap[key], this.props[key]);
-                }
-            });
-
-            this.setState({ map, view });   // Set the map and view as part of the component state
+            this.renderMap(Map, MapView);
         })
     }
 
     render() {
+        const childrenWithProps = React.Children.map(this.props.children, (child) => {
+            let childEl = child as React.ReactElement<any>
+            return React.cloneElement(childEl, { view: this.state.view });
+        })
         return (
-            <div style={{ width: '100%', height: '100%' }}>
-                <MapContainer id={this.state.mapContainerId} style={this.props.style} />
+            <div style={this.props.style}>
+                <MapContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
+                {childrenWithProps}
             </div>
         );
+    }
+
+    private renderMap(Map: __esri.MapConstructor, MapView: __esri.MapViewConstructor) {
+        let mapProperties = { basemap: "streets-vector" } // Set some default map properties
+        if (typeof this.props.mapProperties === 'object') {
+            mapProperties = Object.keys(this.props.mapProperties).reduce((p, c) => {    // Overwrite defaults with user defined properties
+                p[c] = this.props.mapProperties[c];
+                return p;
+            }, {...mapProperties});
+        }
+        const map: __esri.Map = new Map(mapProperties);
+
+        let viewProperties = {  // Set some default view properties
+            map,
+            container: this.state.mapContainerId,
+            center: [-122.4443, 47.2529],
+            zoom: 6
+        };
+        if (typeof this.props.viewProperties === 'object') {
+            viewProperties = Object.keys(this.props.viewProperties).reduce((p, c) => {  // Overwrite defaults with user defined properties
+                p[c] = this.props.viewProperties[c];
+                return p;
+            }, {...viewProperties});
+        }
+        const view: __esri.MapView = new MapView(viewProperties);
+
+        Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
+            if (this.props[key]) {
+                view.on(eventMap[key], this.props[key]);
+            }
+        });
+        this.setState({ map, view });   // Set the map and view as part of the component state
+
+        React.Children.map(this.props.children, (child) => {
+            let childEl = child as React.ReactElement<any>;
+        });
     }
 }
