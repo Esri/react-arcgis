@@ -4,7 +4,7 @@ import { esriPromise } from 'esri-promise';
 export interface GraphicProps {
     map?: __esri.Map,
     view?: __esri.SceneView | __esri.MapView,
-    layer?: __esri.Layer,
+    layer?: __esri.GraphicsLayer,
     graphicProperties?: {
       [propName: string]: any;
     }
@@ -16,7 +16,7 @@ export interface GraphicProps {
 interface ComponentState {
     map?: __esri.Map,
     view?: __esri.View,
-    layer?: __esri.Layer,
+    layer?: __esri.GraphicsLayer,
     constructor: __esri.GraphicConstructor,
     instance: __esri.Graphic,
     geometry: __esri.Geometry,
@@ -37,6 +37,7 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
         }
         this.renderGraphic = this.renderGraphic.bind(this);
         this.registerSymbol = this.registerSymbol.bind(this);
+        this.registerGeometry = this.registerGeometry.bind(this);
     }
 
     componentDidMount() {
@@ -55,7 +56,11 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
     }
 
     componentWillUnmount() {
-      // Remove from layer or view..
+      if (this.state.layer) {
+        this.state.layer.graphics.remove(this.state.instance);
+      } else if (this.state.view) {
+        this.state.view.graphics.remove(this.state.instance);
+      }
     }
 
     render() {
@@ -67,12 +72,31 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
               registerGeometry: this.registerGeometry
           });
       });
-      return childrenWithProps;
+      return (
+        <div>
+          {childrenWithProps}
+        </div>
+      );
     }
 
     public renderGraphic() {
       if (this.state.constructor && this.state.symbol && this.state.geometry) {
-        // Render the graphic
+        const graphic = new this.state.constructor({
+          geometry: this.state.geometry,
+          symbol: this.state.symbol,
+          ...this.props.graphicProperties
+        });
+        this.setState({
+          instance: graphic
+        });
+        if (this.state.layer) {
+          this.state.layer.graphics.add(graphic);
+        } else if (this.state.view) {
+          this.state.view.graphics.add(graphic);
+        }
+        if (this.props.onLoad) {
+          this.props.onLoad(graphic);
+        }
       }
     }
 
