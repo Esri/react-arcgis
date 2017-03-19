@@ -1,37 +1,35 @@
 import * as React from 'react';
 import Symbol from './SymbolBase';
 
-export interface SymbolCompositeProps {
-    graphic?: __esri.Graphic,
-    symbolProperties?: {
-      [propName: string]: any;
-    }
+import {
+    FontProps,
+    PictureFillSymbolProps,
+    PictureMarkerSymbolProps,
+    SimpleFillSymbolProps,
+    SimpleLineSymbolProps,
+    SimpleMarkerSymbolProps
+} from './SymbolInterfaces';
 
-    registerSymbol?: (intance: __esri.Symbol) => any,
-    onLoad?: (instance: __esri.Symbol) => any,
-    onFail?: (e: any) => any
-}
-
-export const Font = (props: SymbolCompositeProps) => (
+export const Font = (props: FontProps) => (
     <Symbol {...props} scriptUri='esri/symbols/Font' />
 );
 
-export const PictureFillSymbol = (props: SymbolCompositeProps) => (
+export const PictureFillSymbol = (props: PictureFillSymbolProps) => (
     <Symbol {...props} scriptUri='esri/symbols/PictureFillSymbol' />
 );
 
-export const PictureMarkerSymbol = (props: SymbolCompositeProps) => (
+export const PictureMarkerSymbol = (props: PictureMarkerSymbolProps) => (
     <Symbol {...props} scriptUri='esri/symbols/PictureMarkerSymbol' />
 );
 
-export const SimpleFillSymbol = (props: SymbolCompositeProps) => (
+export const SimpleFillSymbol = (props: SimpleFillSymbolProps) => (
     <Symbol {...props} scriptUri='esri/symbols/SimpleFillSymbol' />
 );
 
-export const SimpleLineSymbol = (props: SymbolCompositeProps) => (
+export const SimpleLineSymbol = (props: SimpleLineSymbolProps) => (
     <Symbol {...props} scriptUri='esri/symbols/SimpleLineSymbol' />
 );
 
-export const SimpleMarkerSymbol = (props: SymbolCompositeProps) => (
+export const SimpleMarkerSymbol = (props: SimpleMarkerSymbolProps) => (
     <Symbol {...props} scriptUri='esri/symbols/SimpleMarkerSymbol' />
 );
