@@ -137,7 +137,7 @@ export default class Scene extends React.Component<MapViewProps, ComponentState>
 
     private renderScene(Map: __esri.MapConstructor, SceneView: __esri.SceneViewConstructor) {
         let mapProperties = { // Set some default map properties
-            basemap: "streets-relief-vector",
+            basemap: "satellite",
             ground: "world-elevation",
             ...this.props.mapProperties
         }

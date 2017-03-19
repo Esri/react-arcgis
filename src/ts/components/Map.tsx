@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { esriPromise } from 'esri-promise';
 import MapContainer from './MapContainer';
-import Widget from './widgets/Widget';
 
 export interface MapViewProps {
     style?: {
@@ -111,7 +110,11 @@ export default class MapView extends React.Component<MapViewProps, ComponentStat
         if (this.state.status === 'loaded') {
             const childrenWithProps = React.Children.map(this.props.children, (child) => {
                 let childEl = child as React.ReactElement<any>
-                return React.cloneElement(childEl, { view: this.state.view });
+                return React.cloneElement(childEl,
+                {
+                    view: this.state.view,
+                    map: this.state.map
+                });
             });
             return (
                 <div style={mapStyle}>

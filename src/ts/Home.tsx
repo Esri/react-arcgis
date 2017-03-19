@@ -3,13 +3,13 @@ import * as React from 'react';
 import '../css/index.scss';
 import Map from './components/Map';
 import Scene from './components/Scene';
-import BasemapGallery from './components/widgets/BasemapGallery';
+import { Locate } from './components/widgets/WidgetComposites';
 
 interface ComponentState {
     active: boolean;
 }
 
-export default class Home extends React.Component<null, ComponentState>{
+export default class HomeComponent extends React.Component<null, ComponentState>{
     constructor(props) {
         super(props);
         this.state = {
@@ -20,15 +20,9 @@ export default class Home extends React.Component<null, ComponentState>{
     render() {
         return (
             <div>
-                <Scene 
-                    style={{ width: '80vw', height: '80vh', border: '1px solid black' }}
-                    mapProperties={{
-                        basemap: 'satellite'
-                    }}
-                >
-                    <BasemapGallery position="bottom-right" />
+                <Scene style={{ width: '100vw', height: '100vh' }} >
+                    <Locate position="top-right" />
                 </Scene>
-                <button onClick={() => this.setState({ active: !this.state.active })}>Toggle</button>
             </div>
         )
     }

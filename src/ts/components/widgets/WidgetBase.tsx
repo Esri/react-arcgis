@@ -1,25 +1,32 @@
 import * as React from 'react';
 import { esriPromise } from 'esri-promise';
 
-export interface BasemapGalleryProps {
+export interface WidgetProps {
+    scriptUri: string,
+    map?: __esri.Map,
     view?: __esri.SceneView | __esri.MapView,
     position?: string,
     widgetProperties?: {
-      activeBasemap?: __esri.BasemapProperties;
-      source?: __esri.LocalBasemapsSource | __esri.PortalBasemapsSource;
-      viewModel?: __esri.BasemapGalleryViewModelProperties;
+      [propName: string]: any;
     }
+
+    onLoad?: (instance: __esri.Widget) => any,
+    onFail?: (e: any) => any
 }
 
 interface ComponentState {
+    scriptUri: string,
+    map: __esri.Map,
     view: __esri.View,
-    instance: __esri.BasemapGallery
+    instance: __esri.Widget
 }
 
-export default class BasemapGallery extends React.Component<BasemapGalleryProps, ComponentState> {
+export default class Widget extends React.Component<WidgetProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
+            scriptUri: this.props.scriptUri,
+            map: this.props.map,
             view: this.props.view,
             instance: null
         }
@@ -28,13 +35,18 @@ export default class BasemapGallery extends React.Component<BasemapGalleryProps,
 
     componentDidMount() {
       esriPromise([
-        'esri/widgets/BasemapGallery'
+        this.props.scriptUri
       ]).then(([
-        BasemapGallery
+        Widget
       ]) => {
-        this.renderWidget(BasemapGallery)
+        this.renderWidget(Widget)
+        if (this.props.onLoad) {
+          this.props.onLoad(this.state.instance);
+        }
       }).catch((e) => {
-        // console.log(e);
+        if (this.props.onFail) {
+          this.props.onFail(e);
+        }
       });
     }
 
@@ -46,10 +58,10 @@ export default class BasemapGallery extends React.Component<BasemapGalleryProps,
         return null;
     }
 
-    private renderWidget(BasemapGallery) {
+    private renderWidget(Widget: __esri.WidgetConstructor) {
       const widgetProperties = { view: this.state.view, ...this.props.widgetProperties };
       const position = this.props.position ? this.props.position : 'manual';
-      const instance = new BasemapGallery(widgetProperties);
+      const instance = new Widget(widgetProperties);
       this.setState({ instance });
       this.state.view.ui.add(instance, { position });
     }
