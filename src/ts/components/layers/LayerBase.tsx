@@ -1,28 +1,31 @@
 import * as React from 'react';
 import { esriPromise } from 'esri-promise';
 
-export interface WidgetProps {
+export interface LayerProps {
     scriptUri: string,
+    map?: __esri.Map,
     view?: __esri.SceneView | __esri.MapView,
     layerProperties?: {
       [propName: string]: any;
     }
 
-    onLoad?: (instance: __esri.Widget) => any,
+    onLoad?: (instance: __esri.Layer) => any,
     onFail?: (e: any) => any
 }
 
 interface ComponentState {
     scriptUri: string,
+    map: __esri.Map,
     view: __esri.View,
-    instance: __esri.Widget
+    instance: __esri.Layer
 }
 
-export default class Layer extends React.Component<WidgetProps, ComponentState> {
+export default class Layer extends React.Component<LayerProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
             scriptUri: this.props.scriptUri,
+            map: this.props.map,
             view: this.props.view,
             instance: null
         }
@@ -47,17 +50,26 @@ export default class Layer extends React.Component<WidgetProps, ComponentState> 
     }
 
     componentWillUnmount() {
-      this.state.view.ui.remove(this.state.instance);
+      this.state.map.remove(this.state.instance);
     }
 
     render() {
-        return null;
+        const childrenWithProps = React.Children.map(this.props.children, (child) => {
+          const childEl = child as React.ReactElement<any>
+          return React.cloneElement(childEl,
+            { layer: this.state.instance }
+          );
+        });
+        return (
+          <div>
+            {childrenWithProps}
+          </div>
+        );
     }
 
-    private renderLayer(Layer) {
-      const layerProperties = { view: this.state.view, ...this.props.layerProperties };
-      const instance = new Layer(layerProperties);
+    private renderLayer(Layer: __esri.LayerConstructor) {
+      const instance = new Layer(this.props.layerProperties);
       this.setState({ instance });
-      this.state.view.ui.add(instance);
+      this.state.map.add(instance);
     }
 }

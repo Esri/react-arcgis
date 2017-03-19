@@ -65,7 +65,7 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
 
     render() {
       const childrenWithProps = React.Children.map(this.props.children, (child) => {
-          let childEl = child as React.ReactElement<any>
+          const childEl = child as React.ReactElement<any>
           return React.cloneElement(childEl,
           {
               registerSymbol: this.registerSymbol,
