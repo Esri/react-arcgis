@@ -17,13 +17,15 @@ interface ComponentState {
     scriptUri: string,
     map: __esri.Map,
     view: __esri.View,
-    instance: __esri.Layer
+    instance: __esri.Layer,
+    status: string
 }
 
 export default class Layer extends React.Component<LayerProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
+            status: 'loading',
             scriptUri: this.props.scriptUri,
             map: this.props.map,
             view: this.props.view,
@@ -39,10 +41,12 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
         Layer
       ]) => {
         this.renderLayer(Layer)
+        this.setState({ status: 'loaded' });
         if (this.props.onLoad) {
           this.props.onLoad(this.state.instance);
         }
       }).catch((e) => {
+        this.setState({ status: 'failed' });
         if (this.props.onFail) {
           this.props.onFail(e);
         }
@@ -54,6 +58,7 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
     }
 
     render() {
+      if (this.state.status === 'loaded') {
         const childrenWithProps = React.Children.map(this.props.children, (child) => {
           const childEl = child as React.ReactElement<any>
           return React.cloneElement(childEl,
@@ -65,6 +70,8 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
             {childrenWithProps}
           </div>
         );
+      }
+      return null;
     }
 
     private renderLayer(Layer: __esri.LayerConstructor) {

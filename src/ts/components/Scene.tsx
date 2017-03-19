@@ -112,7 +112,11 @@ export default class Scene extends React.Component<MapViewProps, ComponentState>
         if (this.state.status === 'loaded') {
             const childrenWithProps = React.Children.map(this.props.children, (child) => {
                 let childEl = child as React.ReactElement<any>
-                return React.cloneElement(childEl, { view: this.state.view });
+                return React.cloneElement(childEl,
+                {
+                    view: this.state.view,
+                    map: this.state.map
+                });
             });
             return (
                 <div style={mapStyle}>
