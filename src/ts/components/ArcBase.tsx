@@ -1,52 +1,51 @@
-import * as React from 'react';
 import { esriPromise } from 'esri-promise';
+import * as React from 'react';
 import ArcContainer from './ArcContainer';
 
 export interface BaseProps {
     style?: {
         [propName: string]: any
-    },
-    mapProperties?: __esri.MapProperties,
-    viewProperties?: __esri.MapViewProperties | __esri.SceneViewProperties,
-    viewWatchables?: string[],
-    onClick?: (e: EventProperties) => any,
-    onDoubleClick?: (e: EventProperties) => any,
-    onDrag?: (e: EventProperties) => any,
-    onHold?: (e: EventProperties) => any,
-    onKeyDown?: (e: EventProperties) => any,
-    onKeyUp?: (e: EventProperties) => any,
-    onLayerViewCreate?: (e: EventProperties) => any,
-    onLayerViewDestroy?: (e: EventProperties) => any,
-    onMouseWheel?: (e: EventProperties) => any,
-    onPointerDown?: (e: EventProperties) => any,
-    onPointerMove?: (e: EventProperties) => any,
-    onPointerUp?: (e: EventProperties) => any,
-    onResize?: (e: EventProperties) => any,
-    onLoad?: (map: __esri.Map, view: __esri.MapView | __esri.SceneView) => any,
-    onFail?: (e: any) => any
-    onMapPropertyChange?: (key: string, value: any) => any
-    onViewPropertyChange?: (key: string, value: any) => any
+    };
+    mapProperties?: __esri.MapProperties;
+    viewProperties?: __esri.MapViewProperties | __esri.SceneViewProperties;
+    viewWatchables?: string[];
+    onClick?: (e: EventProperties) => any;
+    onDoubleClick?: (e: EventProperties) => any;
+    onDrag?: (e: EventProperties) => any;
+    onHold?: (e: EventProperties) => any;
+    onKeyDown?: (e: EventProperties) => any;
+    onKeyUp?: (e: EventProperties) => any;
+    onLayerViewCreate?: (e: EventProperties) => any;
+    onLayerViewDestroy?: (e: EventProperties) => any;
+    onMouseWheel?: (e: EventProperties) => any;
+    onPointerDown?: (e: EventProperties) => any;
+    onPointerMove?: (e: EventProperties) => any;
+    onPointerUp?: (e: EventProperties) => any;
+    onResize?: (e: EventProperties) => any;
+    onLoad?: (map: __esri.Map, view: __esri.MapView | __esri.SceneView) => any;
+    onFail?: (e: any) => any;
+    onMapPropertyChange?: (key: string, value: any) => any;
+    onViewPropertyChange?: (key: string, value: any) => any;
 }
 
 interface ArcProps extends BaseProps {
-    scriptUri: string[],
+    scriptUri: string[];
 }
 
 interface EventProperties {
-    [propName: string]: any
+    [propName: string]: any;
 }
 
 
-interface ComponentState { 
-    status: string,
-    watchUtils: __esri.watchUtils,
-    mapContainerId: string,
-    map: __esri.Map,
-    mapWatchables: string[],
-    view: __esri.MapView | __esri.SceneView,
-    viewWatchables: string[],
-    mapProperties: __esri.MapProperties,
-    viewProperties: __esri.MapViewProperties | __esri.SceneViewProperties
+interface ComponentState {
+    map: __esri.Map;
+    mapContainerId: string;
+    mapProperties: __esri.MapProperties;
+    mapWatchables: string[];
+    view: __esri.MapView | __esri.SceneView;
+    viewProperties: __esri.MapViewProperties | __esri.SceneViewProperties;
+    viewWatchables: string[];
+    status: string;
 }
 
 const eventMap = {
@@ -69,26 +68,63 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
-            status: 'loading',
-            watchUtils: null,
-            mapContainerId: Math.random().toString(36).substring(14),
             map: null,
-            view: null,
-            mapWatchables: ['allLayers', 'basemap', 'declaredClass', 'ground', 'layers'],
-            viewWatchables: this.props.viewWatchables,
+            mapContainerId: Math.random().toString(36).substring(14),
             mapProperties: this.props.mapProperties,
-            viewProperties: this.props.viewProperties
+            mapWatchables: ['allLayers', 'basemap', 'declaredClass', 'ground', 'layers'],
+            status: 'loading',
+            view: null,
+            viewProperties: this.props.viewProperties,
+            viewWatchables: this.props.viewWatchables,
         }
         this.renderMap = this.renderMap.bind(this);
         this.registerStateChanges = this.registerStateChanges.bind(this);
     }
 
+    public render() {
+        const centerStyle = {
+            left: '50%',
+            marginRight: '-50%',
+            position: 'absolute',
+            top: '50%',
+            transform: 'translate(-50%, -50%)'
+        };
+        const mapStyle = { position: 'relative', ...this.props.style }
+        if (this.state.status === 'loaded') {
+            const childrenWithProps = React.Children.map(this.props.children, (child) => {
+                const childEl = child as React.ReactElement<any>;
+                return React.cloneElement(childEl, {
+                        map: this.state.map,
+                        view: this.state.view
+                    }
+                );
+            });
+            return (
+                <div style={mapStyle}>
+                    <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
+                    {childrenWithProps}
+                </div>
+            );
+        } else if (this.state.status === 'loading') {
+            return (
+                <div style={mapStyle}>
+                    <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
+                    <h3 style={centerStyle}>Loading..</h3>
+                </div>
+            );
+        }
+        return (
+            <div style={mapStyle}>
+                <h3 style={centerStyle}>The ArcGIS API failed to load.</h3>
+            </div>
+        );
+    }
+
     private componentDidMount() {
-        esriPromise(this.props.scriptUri.concat(['esri/core/watchUtils']))
+        esriPromise(this.props.scriptUri)
         .then(([
-            Map, View, watchUtils
+            Map, View
         ]) => {
-            this.setState({ watchUtils });
             this.renderMap(Map, View);
             this.registerStateChanges(this.state.map, 'mapProperties', this.state.mapWatchables, this.props.onMapPropertyChange);
             this.registerStateChanges(this.state.view, 'viewProperties', this.state.viewWatchables, this.props.onViewPropertyChange);
@@ -103,45 +139,6 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         });
     }
 
-    render() {
-        const centerStyle = {
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)'
-        };
-        const mapStyle = { position: 'relative', ...this.props.style }
-        if (this.state.status === 'loaded') {
-            const childrenWithProps = React.Children.map(this.props.children, (child) => {
-                let childEl = child as React.ReactElement<any>
-                return React.cloneElement(childEl,
-                {
-                    view: this.state.view,
-                    map: this.state.map
-                });
-            });
-            return (
-                <div style={mapStyle}>
-                    <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
-                    {childrenWithProps}
-                </div>
-            );
-        } else if (this.state.status === 'loading') {
-            return (
-                <div style={mapStyle}>
-                    <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
-                    <h3 style={centerStyle}>Loading the map..</h3>
-                </div>
-            );
-        }
-        return (
-            <div style={mapStyle}>
-                <h3 style={centerStyle}>The ArcGIS API failed to load.</h3>
-            </div>
-        );
-    }
-
     private renderMap(Map: __esri.MapConstructor, View: __esri.ViewConstructor) {
         const map: __esri.Map = new Map(this.props.mapProperties);  // Make the map
         const viewProperties: __esri.ViewProperties | __esri.MapProperties = {
@@ -150,8 +147,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             ...this.props.viewProperties
         }
         const view: __esri.View = new View(viewProperties);  // Make the view
-        let typedView = view as __esri.MapView | __esri.SceneView;
-
+        const typedView = view as __esri.MapView | __esri.SceneView;
         Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
             if (this.props[key]) {
                 typedView.on(eventMap[key], this.props[key]);
@@ -161,14 +157,14 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
     }
 
     private registerStateChanges(
-        targetObj: __esri.Map | __esri.MapView | __esri.SceneView, 
-        componentStateKey: string, 
-        watchables: string[], 
+        targetObj: __esri.Map | __esri.MapView | __esri.SceneView,
+        componentStateKey: string,
+        watchables: string[],
         callback: (propName: string, value: any) => any
     ) {
         watchables.forEach((propKey) => {
             targetObj.watch(propKey, (newValue) => {
-                let newState = {...this.state}
+                const newState = {...this.state};
                 newState[componentStateKey][propKey] = newValue;
                 this.setState(newState);
                 callback(propKey, newValue);
@@ -180,7 +176,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         if (nextProps.mapProperties !== this.state.mapProperties && this.state.map) {
             this.state.mapWatchables.forEach((key) => {
                 if (nextProps.mapProperties[key] !== this.state.mapProperties[key]) {
-                    let newState = {...this.state};
+                    const newState = {...this.state};
                     newState.mapProperties[key] = nextProps.mapProperties[key];
                     this.setState(newState);
                     this.state.map[key] = nextProps.mapProperties[key];
@@ -190,7 +186,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         if (nextProps.viewProperties !== this.state.viewProperties && this.state.view) {
             this.state.viewWatchables.forEach((key) => {
                 if (nextProps.viewProperties[key] !== this.state.viewProperties[key]) {
-                    let newState = {...this.state};
+                    const newState = {...this.state};
                     newState.viewProperties[key] = nextProps.viewProperties[key];
                     this.setState(newState);
                     this.state.view[key] = nextProps.viewProperties[key];

@@ -1,36 +1,39 @@
-import * as React from 'react';
 import { esriPromise } from 'esri-promise';
+import * as React from 'react';
 
 export interface GeometryProps {
-    scriptUri: string,
-    graphic?: __esri.Graphic,
+    scriptUri: string;
+    graphic?: __esri.Graphic;
     geometryProperties?: {
       [propName: string]: any;
-    }
-
-    registerGeometry?: (intance: __esri.Geometry) => any,
-    onLoad?: (instance: __esri.Geometry) => any,
-    onFail?: (e: any) => any
+    };
+    registerGeometry?: (intance: __esri.Geometry) => any;
+    onLoad?: (instance: __esri.Geometry) => any;
+    onFail?: (e: any) => any;
 }
 
 interface ComponentState {
-    scriptUri: string,
-    graphic: __esri.Graphic,
-    instance: __esri.Geometry
+    scriptUri: string;
+    graphic: __esri.Graphic;
+    instance: __esri.Geometry;
 }
 
 export default class Geometry extends React.Component<GeometryProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
-            scriptUri: this.props.scriptUri,
             graphic: this.props.graphic,
-            instance: null
+            instance: null,
+            scriptUri: this.props.scriptUri,
         }
         this.createGeometry = this.createGeometry.bind(this);
     }
 
-    componentDidMount() {
+    public render() {
+        return null;
+    }
+
+    private componentDidMount() {
       esriPromise([
         this.props.scriptUri
       ]).then(([
@@ -47,9 +50,6 @@ export default class Geometry extends React.Component<GeometryProps, ComponentSt
       });
     }
 
-    render() {
-        return null;
-    }
 
     private createGeometry(Geometry: __esri.GeometryConstructor) {
       const instance = new Geometry(this.props.geometryProperties);

@@ -1,45 +1,48 @@
-import * as React from 'react';
 import { esriPromise } from 'esri-promise';
+import * as React from 'react';
 
 export interface WidgetProps {
-    scriptUri: string,
-    map?: __esri.Map,
-    view?: __esri.SceneView | __esri.MapView,
-    position?: string,
+    scriptUri: string;
+    map?: __esri.Map;
+    view?: __esri.SceneView | __esri.MapView;
+    position?: string;
     widgetProperties?: {
       [propName: string]: any;
-    }
-
-    onLoad?: (instance: __esri.Widget) => any,
-    onFail?: (e: any) => any
+    };
+    onLoad?: (instance: __esri.Widget) => any;
+    onFail?: (e: any) => any;
 }
 
 interface ComponentState {
-    scriptUri: string,
-    map: __esri.Map,
-    view: __esri.View,
-    instance: __esri.Widget
+    scriptUri: string;
+    map: __esri.Map;
+    view: __esri.View;
+    instance: __esri.Widget;
 }
 
 export default class Widget extends React.Component<WidgetProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
-            scriptUri: this.props.scriptUri,
+            instance: null,
             map: this.props.map,
+            scriptUri: this.props.scriptUri,
             view: this.props.view,
-            instance: null
         }
         this.renderWidget = this.renderWidget.bind(this);
     }
 
-    componentDidMount() {
+    public render() {
+        return null;
+    }
+
+    private componentDidMount() {
       esriPromise([
         this.props.scriptUri
       ]).then(([
         Widget
       ]) => {
-        this.renderWidget(Widget)
+        this.renderWidget(Widget);
         if (this.props.onLoad) {
           this.props.onLoad(this.state.instance);
         }
@@ -50,12 +53,8 @@ export default class Widget extends React.Component<WidgetProps, ComponentState>
       });
     }
 
-    componentWillUnmount() {
+    private componentWillUnmount() {
       this.state.view.ui.remove(this.state.instance);
-    }
-
-    render() {
-        return null;
     }
 
     private renderWidget(Widget: __esri.WidgetConstructor) {

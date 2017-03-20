@@ -10,11 +10,11 @@ interface SceneProps extends BaseProps {
 }
 
 export const Map = (props: MapProps) => (
-  <ArcView 
+  <ArcView
     scriptUri={['esri/Map', 'esri/views/MapView']}
     {...props}
     mapProperties = {{
-      basemap: "streets-vector",
+      basemap: 'streets-vector',
       ...props.mapProperties
     }}
     viewProperties = {{
@@ -36,26 +36,26 @@ export const Map = (props: MapProps) => (
       'zoom'
     ]}
     onViewPropertyChange = {
-      ( props.onViewPropertyChange ? props.onViewPropertyChange : () => {} )
+      ( props.onViewPropertyChange ? props.onViewPropertyChange : () => null )
     }
     onMapPropertyChange = {
-      ( props.onMapPropertyChange ? props.onMapPropertyChange : () => {} )
+      ( props.onMapPropertyChange ? props.onMapPropertyChange : () => null )
     }
   />
 );
 
 export const Scene = (props: SceneProps) => (
-  <ArcView 
+  <ArcView
     scriptUri={['esri/Map', 'esri/views/SceneView']}
     {...props}
     mapProperties = {{
-      basemap: "satellite",
-      ground: "world-elevation",
+      basemap: 'satellite',
+      ground: 'world-elevation',
       ...props.mapProperties
     }}
     viewProperties = {{
-      scale: 500000,
       center: [-122.4443, 47.2529],
+      scale: 500000,
       ...props.viewProperties
     }}
     viewWatchables = {[
@@ -69,10 +69,10 @@ export const Scene = (props: SceneProps) => (
       'zoom'
     ]}
     onViewPropertyChange = {
-      ( props.onViewPropertyChange ? props.onViewPropertyChange : () => {} )
+      ( props.onViewPropertyChange ? props.onViewPropertyChange : () => null )
     }
     onMapPropertyChange = {
-      ( props.onMapPropertyChange ? props.onMapPropertyChange : () => {} )
+      ( props.onMapPropertyChange ? props.onMapPropertyChange : () => null )
     }
   />
 );

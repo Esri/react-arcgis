@@ -1,18 +1,18 @@
 import * as React from 'react';
 
-export interface ArcContainerProps {
-    id: string,
+export interface IArcContainerProps {
+    id: string;
     style?: {
-        [propName: string]: any
-    }
+        [propName: string]: any;
+    };
 }
 
-export default class ArcContainer extends React.Component<ArcContainerProps, undefined> {
-    shouldComponentUpdate() {
-        return false;
+export default class ArcContainer extends React.Component<IArcContainerProps, undefined> {
+    public render() {
+        return <div id={this.props.id} style={this.props.style}></div>;
     }
 
-    render() {
-        return <div id={this.props.id} style={this.props.style}></div>
+    private shouldComponentUpdate() {
+        return false;
     }
 }

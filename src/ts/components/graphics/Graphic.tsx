@@ -1,72 +1,48 @@
-import * as React from 'react';
 import { esriPromise } from 'esri-promise';
+import * as React from 'react';
 
 export interface GraphicProps {
-    map?: __esri.Map,
-    view?: __esri.SceneView | __esri.MapView,
-    layer?: __esri.GraphicsLayer,
-    graphicProperties?: __esri.GraphicProperties,
-    onLoad?: (instance: __esri.Graphic) => any,
-    onFail?: (e: any) => any
+    map?: __esri.Map;
+    view?: __esri.SceneView | __esri.MapView;
+    layer?: __esri.GraphicsLayer;
+    graphicProperties?: __esri.GraphicProperties;
+    onLoad?: (instance: __esri.Graphic) => any;
+    onFail?: (e: any) => any;
 }
 
 interface ComponentState {
-    map?: __esri.Map,
-    view?: __esri.View,
-    layer?: __esri.GraphicsLayer,
-    constructor: __esri.GraphicConstructor,
-    instance: __esri.Graphic,
-    geometry: __esri.Geometry,
-    symbol: __esri.Symbol
+    map?: __esri.Map;
+    view?: __esri.View;
+    layer?: __esri.GraphicsLayer;
+    constructor: __esri.GraphicConstructor;
+    instance: __esri.Graphic;
+    geometry: __esri.Geometry;
+    symbol: __esri.Symbol;
 }
 
 export default class Graphic extends React.Component<GraphicProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
-            map: this.props.map,
-            view: this.props.view,
-            layer: this.props.layer,
             constructor: null,
-            instance: null,
             geometry: null,
-            symbol: null
+            instance: null,
+            layer: this.props.layer,
+            map: this.props.map,
+            symbol: null,
+            view: this.props.view,
         }
         this.renderGraphic = this.renderGraphic.bind(this);
         this.registerSymbol = this.registerSymbol.bind(this);
         this.registerGeometry = this.registerGeometry.bind(this);
     }
 
-    componentDidMount() {
-      esriPromise([
-        'esri/Graphic'
-      ]).then(([
-        Graphic
-      ]) => {
-        this.setState({ constructor: Graphic });
-        this.renderGraphic();
-      }).catch((e) => {
-        if (this.props.onFail) {
-          this.props.onFail(e);
-        }
-      });
-    }
-
-    componentWillUnmount() {
-      if (this.state.layer) {
-        this.state.layer.graphics.remove(this.state.instance);
-      } else if (this.state.view) {
-        this.state.view.graphics.remove(this.state.instance);
-      }
-    }
-
-    render() {
+    public render() {
       const childrenWithProps = React.Children.map(this.props.children, (child) => {
           const childEl = child as React.ReactElement<any>
-          return React.cloneElement(childEl,
-          {
+          return React.cloneElement(childEl,  {
+              registerGeometry: this.registerGeometry,
               registerSymbol: this.registerSymbol,
-              registerGeometry: this.registerGeometry
           });
       });
       return (
@@ -105,5 +81,28 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
     public registerGeometry(geometry: __esri.Geometry) {
       this.setState({ geometry });
       this.renderGraphic();
+    }
+
+    private componentDidMount() {
+      esriPromise([
+        'esri/Graphic'
+      ]).then(([
+        Graphic
+      ]) => {
+        this.setState({ constructor: Graphic });
+        this.renderGraphic();
+      }).catch((e) => {
+        if (this.props.onFail) {
+          this.props.onFail(e);
+        }
+      });
+    }
+
+    private componentWillUnmount() {
+      if (this.state.layer) {
+        this.state.layer.graphics.remove(this.state.instance);
+      } else if (this.state.view) {
+        this.state.view.graphics.remove(this.state.instance);
+      }
     }
 }

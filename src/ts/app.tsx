@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import Home from './Home';
+import Test from './Test';
 
 ReactDOM.render(
-  <Home />,
+  <Test />,
   document.getElementById('react-container')
 );
