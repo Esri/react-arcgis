@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "outDir": "./dist/",
         "sourceMap": true,
         "noImplicitAny": false,
         "module": "commonjs",
@@ -9,6 +8,7 @@
         "jsx": "react"
     },
     "include": [
+        "./index.ts",
         "./src/**/*"
     ],
     "files": [

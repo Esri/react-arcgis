@@ -26,6 +26,8 @@
   "homepage": "https://github.com/nicksenger/application-boilerplate-ts#readme",
   "devDependencies": {
     "@types/arcgis-js-api": "^4.2.0",
+    "@types/react": "^15.0.16",
+    "@types/react-dom": "^0.14.23",
     "awesome-typescript-loader": "^3.1.2",
     "calcite-web": "github:esri/calcite-web#v1.0.0-rc.2",
     "copy-webpack-plugin": "^4.0.1",
@@ -44,8 +46,6 @@
     "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
-    "@types/react": "^15.0.16",
-    "@types/react-dom": "^0.14.23",
     "esri-promise": "^0.1.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
