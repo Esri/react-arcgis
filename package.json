@@ -1,7 +1,7 @@
 {
-  "name": "ts-arcapp",
-  "version": "1.0.0",
-  "description": "Webpack boilerplate for building ArcGIS JS API 4.x App using TypeScript & Calcite Web (SASS)",
+  "name": "react-arcgis",
+  "version": "0.0.1",
+  "description": "React component library for Esri ArcGIS JavaScript API",
   "main": "app.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js",
@@ -9,21 +9,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nicksenger/application-boilerplate-ts.git"
+    "url": "git+https://github.com/nicksenger/react-arcgis.git"
   },
   "keywords": [
     "Esri",
     "ArcGIS",
-    "Webpack",
     "TypeScript",
-    "SASS"
+    "React",
+    "Map"
   ],
   "author": "Nick Senger",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nicksenger/application-boilerplate-ts/issues"
+    "url": "https://github.com/nicksenger/react-arcgis/issues"
   },
-  "homepage": "https://github.com/nicksenger/application-boilerplate-ts#readme",
+  "homepage": "https://github.com/nicksenger/react-arcgis#readme",
   "devDependencies": {
     "@types/arcgis-js-api": "^4.2.0",
     "@types/react": "^15.0.16",
