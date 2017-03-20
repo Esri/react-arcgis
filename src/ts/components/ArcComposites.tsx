@@ -6,7 +6,7 @@ interface MapProps extends BaseProps {
 }
 
 interface SceneProps extends BaseProps {
-  viewProperties?: __esri.SceneViewProperties;
+    viewProperties?: __esri.SceneViewProperties;
 }
 
 export const Map = (props: MapProps) => (
@@ -22,6 +22,25 @@ export const Map = (props: MapProps) => (
       zoom: 6,
       ...props.viewProperties
     }}
+    viewWatchables = {[
+      'camera',
+      'center',
+      'clippingArea',
+      'constraints',
+      'environment',
+      'extent',
+      'qualityProfile',
+      'scale',
+      'viewingMode',
+      'viewpoint',
+      'zoom'
+    ]}
+    onViewPropertyChange = {
+      ( props.onViewPropertyChange ? props.onViewPropertyChange : () => {} )
+    }
+    onMapPropertyChange = {
+      ( props.onMapPropertyChange ? props.onMapPropertyChange : () => {} )
+    }
   />
 );
 
@@ -39,5 +58,21 @@ export const Scene = (props: SceneProps) => (
       center: [-122.4443, 47.2529],
       ...props.viewProperties
     }}
+    viewWatchables = {[
+      'center',
+      'constraints',
+      'extent',
+      'resizeAlign',
+      'rotation',
+      'scale',
+      'viewpoint',
+      'zoom'
+    ]}
+    onViewPropertyChange = {
+      ( props.onViewPropertyChange ? props.onViewPropertyChange : () => {} )
+    }
+    onMapPropertyChange = {
+      ( props.onMapPropertyChange ? props.onMapPropertyChange : () => {} )
+    }
   />
 );
