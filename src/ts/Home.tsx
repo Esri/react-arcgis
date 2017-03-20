@@ -1,8 +1,7 @@
 import * as React from 'react';
 
 import '../css/index.scss';
-import Map from './components/Map';
-import Scene from './components/Scene';
+import { Map, Scene } from './components/ArcComposites';
 import { Search, BasemapGallery } from './components/widgets/WidgetComposites';
 import { Polygon, Polyline, Point } from './components/geometry/GeometryComposites';
 import { SimpleFillSymbol, SimpleLineSymbol, SimpleMarkerSymbol } from './components/symbols/SymbolComposites';
@@ -23,9 +22,9 @@ export default class HomeComponent extends React.Component<null, ComponentState>
 
     render() {
         return (
-            <div>
-                <Scene style={{ width: '100vw', height: '100vh' }} />
-            </div>
+            <Scene style={{ width: '100vw', height: '100vh' }}>
+                <Search position="top-right" />
+            </Scene>
         )
     }
 }

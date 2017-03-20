@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-export interface MapContainerProps {
+export interface ArcContainerProps {
     id: string,
     style?: {
         [propName: string]: any
     }
 }
 
-export default class MapContainer extends React.Component<MapContainerProps, undefined> {
+export default class ArcContainer extends React.Component<ArcContainerProps, undefined> {
     shouldComponentUpdate() {
         return false;
     }

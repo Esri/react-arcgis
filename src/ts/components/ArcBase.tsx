@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { esriPromise } from 'esri-promise';
-import MapContainer from './MapContainer';
+import ArcContainer from './ArcContainer';
 
-export interface SceneViewProps {
+export interface BaseProps {
     style?: {
         [propName: string]: any
     },
     mapProperties?: __esri.MapProperties,
-    viewProperties?: __esri.SceneViewProperties,
-    
+    viewProperties?: __esri.MapViewProperties | __esri.SceneViewProperties,
     onClick?: (e: EventProperties) => any,
     onDoubleClick?: (e: EventProperties) => any,
     onDrag?: (e: EventProperties) => any,
@@ -21,21 +20,25 @@ export interface SceneViewProps {
     onPointerDown?: (e: EventProperties) => any,
     onPointerMove?: (e: EventProperties) => any,
     onPointerUp?: (e: EventProperties) => any,
-    onResize?: (e: EventProperties) => any
-
-    onLoad?: (map: __esri.Map, view: __esri.SceneView) => any,
+    onResize?: (e: EventProperties) => any,
+    onLoad?: (map: __esri.Map, view: __esri.MapView | __esri.SceneView) => any,
     onFail?: (e: any) => any
+}
+
+interface ArcProps extends BaseProps {
+    scriptUri: string[],
 }
 
 interface EventProperties {
     [propName: string]: any
 }
 
+
 interface ComponentState { 
     status: string,
     mapContainerId: string,
     map: __esri.Map,
-    view: __esri.SceneView
+    view: __esri.MapView | __esri.SceneView
 }
 
 const eventMap = {
@@ -52,9 +55,9 @@ const eventMap = {
     onPointerMove: 'pointer-move',
     onPointerUp: 'pointer-up',
     onResize: 'resize'
-};
+}
 
-export default class Scene extends React.Component<SceneViewProps, ComponentState> {
+export class ArcView extends React.Component<ArcProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -63,26 +66,24 @@ export default class Scene extends React.Component<SceneViewProps, ComponentStat
             map: null,
             view: null
         }
-        this.renderScene = this.renderScene.bind(this);
+        this.renderMap = this.renderMap.bind(this);
     }
 
     private componentDidMount() {
-        esriPromise([
-            'esri/Map',
-            'esri/views/SceneView'
-        ]).then(([
-            Map, SceneView
+        esriPromise(this.props.scriptUri)
+        .then(([
+            Map, View
         ]) => {
-            this.renderScene(Map, SceneView);
+            this.renderMap(Map, View);
             if (this.props.onLoad) {
                 this.props.onLoad(this.state.map, this.state.view);
             }
         }).catch((e) => {
-            this.setState({ status: 'failed' })
+            this.setState({ status: 'failed' });
             if (this.props.onFail) {
                 this.props.onFail(e);
             }
-        })
+        });
     }
 
     render() {
@@ -105,48 +106,40 @@ export default class Scene extends React.Component<SceneViewProps, ComponentStat
             });
             return (
                 <div style={mapStyle}>
-                    <MapContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
+                    <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
                     {childrenWithProps}
                 </div>
             );
         } else if (this.state.status === 'loading') {
             return (
                 <div style={mapStyle}>
-                    <MapContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
-                    <h3 style={centerStyle}>Loading the scene..</h3>
+                    <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
+                    <h3 style={centerStyle}>Loading the map..</h3>
                 </div>
             );
         }
         return (
             <div style={mapStyle}>
-                <h3 style={centerStyle}>Failed to load the ArcGIS API.</h3>
+                <h3 style={centerStyle}>The ArcGIS API failed to load.</h3>
             </div>
         );
     }
 
-    private renderScene(Map: __esri.MapConstructor, SceneView: __esri.SceneViewConstructor) {
-        let mapProperties = { // Set some default map properties
-            basemap: "satellite",
-            ground: "world-elevation",
-            ...this.props.mapProperties
-        }
-        const map: __esri.Map = new Map(mapProperties);
-
-        let viewProperties = {  // Set some default view properties
+    private renderMap(Map: __esri.MapConstructor, View: __esri.ViewConstructor) {
+        const map: __esri.Map = new Map(this.props.mapProperties);  // Make the map
+        const viewProperties: __esri.ViewProperties | __esri.MapProperties = {
             map,
             container: this.state.mapContainerId,
-            scale: 500000,
-            center: [-122.4443, 47.2529],
             ...this.props.viewProperties
         }
-        const view: __esri.SceneView = new SceneView(viewProperties);
+        const view: __esri.View = new View(viewProperties);  // Make the view
+        let typedView = view as __esri.MapView | __esri.SceneView;
 
         Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
             if (this.props[key]) {
-                view.on(eventMap[key], this.props[key]);
+                typedView.on(eventMap[key], this.props[key]);
             }
         });
-
-        this.setState({ map, view, status: 'loaded' });
+        this.setState({ map, view: typedView, status: 'loaded' });   // Set the map and view as part of the component state
     }
 }
