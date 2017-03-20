@@ -2,28 +2,13 @@ import * as React from 'react';
 import { esriPromise } from 'esri-promise';
 import MapContainer from './MapContainer';
 
-export interface MapViewProps {
+export interface SceneViewProps {
     style?: {
         [propName: string]: any
     },
-    mapProperties?: {
-        allLayers?: __esri.Collection,
-        basemap?: __esri.BasemapProperties,
-        ground?: __esri.GroundProperties
-    },
-    viewProperties?: {
-        camera?: __esri.CameraProperties;
-        center?: __esri.PointProperties;
-        clippingArea?: __esri.ExtentProperties;
-        constraints?: __esri.SceneViewConstraintsProperties;
-        environment?: __esri.SceneViewEnvironmentProperties;
-        extent?: __esri.ExtentProperties;
-        qualityProfile?: string;
-        scale?: number;
-        viewingMode?: string;
-        viewpoint?: __esri.ViewpointProperties;
-        zoom?: number;
-    },
+    mapProperties?: __esri.MapProperties,
+    viewProperties?: __esri.SceneViewProperties,
+    
     onClick?: (e: EventProperties) => any,
     onDoubleClick?: (e: EventProperties) => any,
     onDrag?: (e: EventProperties) => any,
@@ -69,7 +54,7 @@ const eventMap = {
     onResize: 'resize'
 };
 
-export default class Scene extends React.Component<MapViewProps, ComponentState> {
+export default class Scene extends React.Component<SceneViewProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {

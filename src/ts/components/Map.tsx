@@ -6,21 +6,9 @@ export interface MapViewProps {
     style?: {
         [propName: string]: any
     },
-    mapProperties?: {
-        allLayers?: __esri.Collection,
-        basemap?: string,
-        ground?: __esri.GroundProperties,
-    },
-    viewProperties?: {
-        center?: __esri.PointProperties,
-        constraints?: __esri.MapViewConstraints,
-        extent?: __esri.ExtentProperties,
-        resizeAlign?: string,
-        rotation?: number,
-        scale?: number,
-        viewpoint?: __esri.ViewpointProperties,
-        zoom?: number
-    },
+    mapProperties?: __esri.MapProperties,
+    viewProperties?: __esri.MapViewProperties,
+
     onClick?: (e: EventProperties) => any,
     onDoubleClick?: (e: EventProperties) => any,
     onDrag?: (e: EventProperties) => any,
