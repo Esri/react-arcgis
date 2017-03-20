@@ -37,6 +37,8 @@
     "file-loader": "^0.10.1",
     "html-webpack-plugin": "^2.28.0",
     "node-sass": "^4.5.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "sass-loader": "^6.0.3",
     "source-map-loader": "^0.1.6",
     "style-loader": "^0.13.2",
@@ -46,8 +48,6 @@
     "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
-    "esri-promise": "^0.1.1",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "esri-promise": "^0.1.1"
   }
 }
