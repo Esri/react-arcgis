@@ -1,45 +1,45 @@
 import * as React from 'react';
 import Geometry from './GeometryBase';
 
-export interface GeometryCompositeProps {
-    graphic?: __esri.Graphic,
-    geometryProperties?: {
-      [propName: string]: any;
-    }
+import {
+    CircleProps,
+    ExtentProps,
+    MultipointProps,
+    PointProps,
+    PolygonProps,
+    PolylineProps,
+    ScreenPointProps,
+    SpatialReferenceProps
+} from './GeometryInterfaces';
 
-    registerGeometry?: (intance: __esri.Geometry) => any,
-    onLoad?: (instance: __esri.Geometry) => any,
-    onFail?: (e: any) => any
-}
-
-export const Circle = (props: GeometryCompositeProps) => (
+export const Circle = (props: CircleProps) => (
     <Geometry {...props} scriptUri='esri/geometry/Circle' />
 );
 
-export const Extent = (props: GeometryCompositeProps) => (
+export const Extent = (props: ExtentProps) => (
     <Geometry {...props} scriptUri='esri/geometry/Extent' />
 );
 
-export const Multipoint = (props: GeometryCompositeProps) => (
+export const Multipoint = (props: MultipointProps) => (
     <Geometry {...props} scriptUri='esri/geometry/Multipoint' />
 );
 
-export const Point = (props: GeometryCompositeProps) => (
+export const Point = (props: PointProps) => (
     <Geometry {...props} scriptUri='esri/geometry/Point' />
 );
 
-export const Polygon = (props: GeometryCompositeProps) => (
+export const Polygon = (props: PolygonProps) => (
     <Geometry {...props} scriptUri='esri/geometry/Polygon' />
 );
 
-export const Polyline = (props: GeometryCompositeProps) => (
+export const Polyline = (props: PolylineProps) => (
     <Geometry {...props} scriptUri='esri/geometry/Polyline' />
 );
 
-export const ScreenPoint = (props: GeometryCompositeProps) => (
+export const ScreenPoint = (props: ScreenPointProps) => (
     <Geometry {...props} scriptUri='esri/geometry/ScreenPoint' />
 );
 
-export const SpatialReference = (props: GeometryCompositeProps) => (
+export const SpatialReference = (props: SpatialReferenceProps) => (
     <Geometry {...props} scriptUri='esri/geometry/SpatialReference' />
 );

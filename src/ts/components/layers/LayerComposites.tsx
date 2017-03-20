@@ -1,77 +1,85 @@
 import * as React from 'react';
 import Layer from './LayerBase';
 
-export interface LayerCompositeProps {
-    map?: __esri.Map,
-    view?: __esri.SceneView | __esri.MapView,
-    layerProperties?: {
-      [propName: string]: any;
-    }
+import {
+    CSVLayerProps,
+    ElevationLayerProps,
+    FeatureLayerProps,
+    GeoRSSLayerProps,
+    GraphicsLayerProps,
+    GroupLayerProps,
+    ImageryLayerProps,
+    IntegratedMeshLayerProps,
+    MapImageLayerProps,
+    OpenStreetMapLayerProps,
+    PointCloudLayerProps,
+    SceneLayerProps,
+    StreamLayerProps,
+    TileLayerProps,
+    VectorTileLayerProps,
+    WebTileLayerProps
+} from './LayerInterfaces';
 
-    onLoad?: (instance: __esri.Layer) => any,
-    onFail?: (e: any) => any
-}
-
-export const CSVLayer = (props: LayerCompositeProps) => (
+export const CSVLayer = (props: CSVLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/CSVLayer' />
 );
 
-export const ElevationLayer = (props: LayerCompositeProps) => (
+export const ElevationLayer = (props: ElevationLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/ElevationLayer' />
 );
 
-export const FeatureLayer = (props: LayerCompositeProps) => (
+export const FeatureLayer = (props: FeatureLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/FeatureLayer' />
 );
 
-export const GeoRSSLayer = (props: LayerCompositeProps) => (
+export const GeoRSSLayer = (props: GeoRSSLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/GeoRSSLayer' />
 );
 
-export const GraphicsLayer = (props: LayerCompositeProps) => (
+export const GraphicsLayer = (props: GraphicsLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/GraphicsLayer' />
 );
 
-export const GroupLayer = (props: LayerCompositeProps) => (
+export const GroupLayer = (props: GroupLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/GroupLayer' />
 );
 
-export const ImageryLayer = (props: LayerCompositeProps) => (
+export const ImageryLayer = (props: ImageryLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/ImageryLayer' />
 );
 
-export const IntegratedMeshLayer = (props: LayerCompositeProps) => (
+export const IntegratedMeshLayer = (props: IntegratedMeshLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/IntegratedMeshLayer' />
 );
 
-export const MapImageLayer = (props: LayerCompositeProps) => (
+export const MapImageLayer = (props: MapImageLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/MapImageLayer' />
 );
 
-export const OpenStreetMapLayer = (props: LayerCompositeProps) => (
+export const OpenStreetMapLayer = (props: OpenStreetMapLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/OpenStreetMapLayer' />
 );
 
-export const PointCloudLayer = (props: LayerCompositeProps) => (
+export const PointCloudLayer = (props: PointCloudLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/PointCloudLayer' />
 );
 
-export const SceneLayer = (props: LayerCompositeProps) => (
+export const SceneLayer = (props: SceneLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/SceneLayer' />
 );
 
-export const StreamLayer = (props: LayerCompositeProps) => (
+export const StreamLayer = (props: StreamLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/StreamLayer' />
 );
 
-export const TileLayer = (props: LayerCompositeProps) => (
+export const TileLayer = (props: TileLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/TileLayer' />
 );
 
-export const VectorTileLayer = (props: LayerCompositeProps) => (
+export const VectorTileLayer = (props: VectorTileLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/VectorTileLayer' />
 );
 
-export const WebTileLayer = (props: LayerCompositeProps) => (
+export const WebTileLayer = (props: WebTileLayerProps) => (
     <Layer {...props} scriptUri='esri/layers/WebTileLayer' />
 );

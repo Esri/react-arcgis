@@ -5,10 +5,7 @@ export interface GraphicProps {
     map?: __esri.Map,
     view?: __esri.SceneView | __esri.MapView,
     layer?: __esri.GraphicsLayer,
-    graphicProperties?: {
-      [propName: string]: any;
-    }
-
+    graphicProperties?: __esri.GraphicProperties,
     onLoad?: (instance: __esri.Graphic) => any,
     onFail?: (e: any) => any
 }
