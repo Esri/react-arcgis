@@ -89,7 +89,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             top: '50%',
             transform: 'translate(-50%, -50%)'
         };
-        const mapStyle = { position: 'relative', ...this.props.style }
+        const mapStyle = { position: 'relative', width: '100%', height: '100%', ...this.props.style }
         if (this.state.status === 'loaded') {
             const childrenWithProps = React.Children.map(this.props.children, (child) => {
                 const childEl = child as React.ReactElement<any>;
