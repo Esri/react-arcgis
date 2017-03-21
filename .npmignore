@@ -3,7 +3,7 @@ src/css
 src/fonts
 src/img
 src/**/*.js
-src/**/*.d.ts
+src/**/*.js.map
 src/index.html
 src/ts/app.tsx
 src/ts/Test.tsx

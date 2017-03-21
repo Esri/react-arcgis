@@ -162,7 +162,7 @@ var ArcView = (function (_super) {
             top: '50%',
             transform: 'translate(-50%, -50%)'
         };
-        var mapStyle = __assign({ position: 'relative' }, this.props.style);
+        var mapStyle = __assign({ position: 'relative', width: '100%', height: '100%' }, this.props.style);
         if (this.state.status === 'loaded') {
             var childrenWithProps = React.Children.map(this.props.children, function (child) {
                 var childEl = child;

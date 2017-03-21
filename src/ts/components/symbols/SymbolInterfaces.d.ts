@@ -1,5 +1,8 @@
 export interface SymbolCompositeProps {
     graphic?: __esri.Graphic;
+    symbolProperties?: {
+      [propName: string]: any;
+    };
     registerSymbol?: (intance: __esri.Symbol) => any;
     onLoad?: (instance: __esri.Symbol) => any;
     onFail?: (e: any) => any;

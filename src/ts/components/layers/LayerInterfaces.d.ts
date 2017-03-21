@@ -1,8 +1,11 @@
 export interface LayerCompositeProps {
-    map?: __esri.Map,
-    view?: __esri.SceneView | __esri.MapView,
-    onLoad?: (instance: __esri.Layer) => any,
-    onFail?: (e: any) => any
+    map?: __esri.Map;
+    view?: __esri.SceneView | __esri.MapView;
+    layerProperties?: {
+      [propName: string]: any;
+    };
+    onLoad?: (instance: __esri.Layer) => any;
+    onFail?: (e: any) => any;
 }
 
 export interface CSVLayerProps extends LayerCompositeProps {
