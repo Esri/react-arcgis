@@ -1,4 +1,4 @@
-interface SymbolCompositeProps {
+export interface SymbolCompositeProps {
     graphic?: __esri.Graphic;
     registerSymbol?: (intance: __esri.Symbol) => any;
     onLoad?: (instance: __esri.Symbol) => any;
@@ -6,25 +6,25 @@ interface SymbolCompositeProps {
 }
 
 export interface FontProps extends SymbolCompositeProps {
-  symbolProperties: __esri.FontProperties;
+  // symbolProperties: __esri.FontProperties;
 }
 
 export interface PictureFillSymbolProps extends SymbolCompositeProps {
-  symbolProperties: __esri.PictureFillSymbolProperties;
+  // symbolProperties: __esri.PictureFillSymbolProperties;
 }
 
 export interface PictureMarkerSymbolProps extends SymbolCompositeProps {
-  symbolProperties: __esri.PictureMarkerSymbolProperties;
+  // symbolProperties: __esri.PictureMarkerSymbolProperties;
 }
 
 export interface SimpleFillSymbolProps extends SymbolCompositeProps {
-  symbolProperties: __esri.SimpleFillSymbolProperties;
+  // symbolProperties: __esri.SimpleFillSymbolProperties;
 }
 
 export interface SimpleLineSymbolProps extends SymbolCompositeProps {
-  symbolProperties: __esri.SimpleLineSymbolProperties;
+  // symbolProperties: __esri.SimpleLineSymbolProperties;
 }
 
 export interface SimpleMarkerSymbolProps extends SymbolCompositeProps {
-  symbolProperties: __esri.SimpleMarkerSymbolProperties;
+  // symbolProperties: __esri.SimpleMarkerSymbolProperties;
 }

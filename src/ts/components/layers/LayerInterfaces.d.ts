@@ -6,65 +6,65 @@ export interface LayerCompositeProps {
 }
 
 export interface CSVLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.CSVLayerProperties
+    // layerProperties: __esri.CSVLayerProperties
 }
 
 export interface ElevationLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.ElevationLayerProperties
+    // layerProperties: __esri.ElevationLayerProperties
 }
 
 export interface FeatureLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.FeatureLayerProperties
+    // layerProperties: __esri.FeatureLayerProperties
 }
 
 export interface GeoRSSLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.GeoRSSLayerProperties
+    // layerProperties: __esri.GeoRSSLayerProperties
 }
 
 export interface GraphicsLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.GraphicsLayerProperties
+    // layerProperties: __esri.GraphicsLayerProperties
 }
 
 export interface GroupLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.GroupLayerProperties
+    // layerProperties: __esri.GroupLayerProperties
 }
 
 export interface ImageryLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.ImageryLayerProperties
+    // layerProperties: __esri.ImageryLayerProperties
 }
 
 export interface IntegratedMeshLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.IntegratedMeshLayerProperties
+    // layerProperties: __esri.IntegratedMeshLayerProperties
 }
 
 export interface MapImageLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.MapImageLayerProperties
+    // layerProperties: __esri.MapImageLayerProperties
 }
 
 export interface OpenStreetMapLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.OpenStreetMapLayerProperties
+    // layerProperties: __esri.OpenStreetMapLayerProperties
 }
 
 export interface PointCloudLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.PointCloudLayerProperties
+    // layerProperties: __esri.PointCloudLayerProperties
 }
 
 export interface SceneLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.SceneLayerProperties
+    // layerProperties: __esri.SceneLayerProperties
 }
 
 export interface StreamLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.StreamLayerProperties
+    // layerProperties: __esri.StreamLayerProperties
 }
 
 export interface TileLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.TileLayerProperties
+    // layerProperties: __esri.TileLayerProperties
 }
 
 export interface VectorTileLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.VectorTileLayerProperties
+    // layerProperties: __esri.VectorTileLayerProperties
 }
 
 export interface WebTileLayerProps extends LayerCompositeProps {
-    layerProperties: __esri.WebTileLayerProperties
+    // layerProperties: __esri.WebTileLayerProperties
 }
