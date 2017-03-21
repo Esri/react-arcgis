@@ -25,7 +25,7 @@ ReactDOM.render(
 
 Or, we can render a 3D web-scene:
 
-```jsx
+```js
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Scene } from 'react-arcgis';
@@ -36,9 +36,9 @@ ReactDOM.render(
 );
 ```
 
-If you want to change the style of the `Ma`p or `Scene`, pass a style object into the Map or Scene's properties:
+If you want to change the style of the `Map` or `Scene`, pass a style object into the Map or Scene's properties:
 
-```jsx
+```js
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Scene } from 'react-arcgis';
@@ -51,7 +51,7 @@ ReactDOM.render(
 
 You can also pass properties into the `Map`, `MapView`, or `SceneView` via this viewProperties or mapProperties props:
 
-```jsx
+```js
 import * as React from 'react';
 import { Map } from 'react-arcgis';
 
@@ -63,9 +63,9 @@ export default (props) => (
 )
 ```
 
-These properties bind directly to the available properties on the ArcGIS API constructors:
+These properties bind directly to the available properties on the [ArcGIS API constructors](https://developers.arcgis.com/javascript/latest/api-reference/index.html):
 
-```jsx
+```js
 import * as React from 'react';
 import { Scene } from 'react-arcgis';
 
@@ -83,7 +83,7 @@ export default (props) => (
 
 If you want, you can also render some widgets on the map by nesting them in the `<Map />` or `<Scene />`:
 
-```jsx
+```js
 import * as React from 'react';
 import { Scene, Widgets } from 'react-arcgis';
 
@@ -107,7 +107,7 @@ export default (props) => (
 
 Maybe you want to render some graphics as well? You can do that too. The desired `Symbol` and `Geometry` are simply nested within a `<Graphic></Graphic>` tag:
 
-```jsx
+```js
 import * as React from 'react';
 import { Scene, Graphic, Symbols, Geometry } from 'react-arcgis';
 
@@ -148,7 +148,7 @@ export default (props) => (
 
 You can also nest graphics inside of a GraphicsLayer:
 
-```jsx
+```js
 import * as React from 'react';
 import { Scene, Layers } from 'react-arcgis';
 
@@ -187,7 +187,7 @@ export default (props) => (
 
 The other types of layers, like `FeatureLayer`, can also be created:
 
-```jsx
+```js
 import * as React from 'react';
 import { Scene, Layers } from 'react-arcgis';
 
@@ -215,7 +215,7 @@ export default (props) => (
 
 The `<Map />` or `<Scene />` is a big ball of internal state in a React application that does not necessarily follow React's intended unidirectional data-flow. The best we can do (as far as I'm aware) is treat the entire map like a giant text-box, and try to make it a "controlled component" by routing all of its state changes through the parent. We can do this much like we would with an ordinary text-box, using the `onMapStateChange` and `onViewStateChange` events:
 
-```jsx
+```js
 import * as React from 'react';
 import { Scene } from 'react-arcgis';
 
