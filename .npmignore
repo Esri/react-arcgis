@@ -2,6 +2,8 @@ dist
 src/css
 src/fonts
 src/img
+src/**/*.js
+src/**/*.d.ts
 src/index.html
-src/ts/app/tsx
+src/ts/app.tsx
 src/ts/Test.tsx

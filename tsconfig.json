@@ -3,6 +3,7 @@
         "sourceMap": true,
         "noImplicitAny": false,
         "module": "commonjs",
+        "moduleResolution": "node",
         "target": "es5",
         "experimentalDecorators": true,
         "jsx": "react"

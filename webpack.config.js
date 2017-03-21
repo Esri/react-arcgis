@@ -7,11 +7,21 @@ module.exports = {
     entry: {
         app: [
             './src/ts/app.tsx'
+        ],
+        index: [
+            './index.ts'
         ]
     },
     output: {
         path: __dirname + '/dist',
-        filename: '[name].js'
+        filename: '[name].js',
+        library: 'react-arcgis',
+        libraryTarget: 'umd',
+        umdNamedDefine: true
+    },
+    externals: {
+        'react': 'commonjs react',
+        'esri-promise': 'commonjs esri-promise'
     },
 
     devtool: 'source-map',
