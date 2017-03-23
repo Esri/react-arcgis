@@ -163,6 +163,9 @@ var ArcView = (function (_super) {
             transform: 'translate(-50%, -50%)'
         };
         var mapStyle = __assign({ position: 'relative', width: '100%', height: '100%' }, this.props.style);
+        var loadElement = (this.props.loadComponent ? React.createElement(this.props.loadComponent, null) : React.createElement("h3", { style: centerStyle }, "Loading.."));
+        var failElement = (this.props.failComponent ? React.createElement(this.props.failComponent, null) :
+            React.createElement("h3", { style: centerStyle }, "The ArcGIS API failed to load."));
         if (this.state.status === 'loaded') {
             var childrenWithProps = React.Children.map(this.props.children, function (child) {
                 var childEl = child;
@@ -178,10 +181,9 @@ var ArcView = (function (_super) {
         else if (this.state.status === 'loading') {
             return (React.createElement("div", { style: mapStyle },
                 React.createElement(ArcContainer_1.default, { id: this.state.mapContainerId, style: { width: '100%', height: '100%' } }),
-                React.createElement("h3", { style: centerStyle }, "Loading..")));
+                loadElement));
         }
-        return (React.createElement("div", { style: mapStyle },
-            React.createElement("h3", { style: centerStyle }, "The ArcGIS API failed to load.")));
+        return (React.createElement("div", { style: mapStyle }, failElement));
     };
     ArcView.prototype.componentDidMount = function () {
         var _this = this;

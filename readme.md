@@ -1,10 +1,16 @@
 # React-ArcGIS
 
-React-ArcGIS is a library of React components which use the ArcGIS API for JavaScript v.4.3. React-ArcGIS components will handle fetching of the required AMD scripts and render themselves into the DOM. (Please note that this fetching process will give window['require'] to the dojo loader)
+React-ArcGIS is a library of React components which use the ArcGIS API for JavaScript v.4.3. React-ArcGIS components will handle fetching of the required AMD scripts and render themselves when ready. (Please note that this fetching process will give window['require'] to the dojo loader)
 
 ## Installation:
 
 1. Run `npm i --save react-arcgis`
+
+
+## Recently added stuff:
+
+- You can now add custom loader components to a `<Map />` or `<Scene />` through the `loadComponent` and `failComponent` props.
+
 
 ## Basic Usage:
 
@@ -36,7 +42,7 @@ ReactDOM.render(
 );
 ```
 
-If you want to change the style of the `Map` or `Scene`, pass a style object into the Map or Scene's properties:
+If you want to change the style of the `Map` or `Scene`, pass a style object into the Map or Scene's props:
 
 ```js
 import * as React from 'react';
@@ -63,7 +69,7 @@ export default (props) => (
 )
 ```
 
-These properties bind directly to the available properties on the [ArcGIS API constructors](https://developers.arcgis.com/javascript/latest/api-reference/index.html):
+These properties passed directly to the available properties on the corresponding [ArcGIS API classes](https://developers.arcgis.com/javascript/latest/api-reference/index.html):
 
 ```js
 import * as React from 'react';
@@ -105,7 +111,7 @@ export default (props) => (
 )
 ```
 
-Maybe you want to render some graphics as well? You can do that too. The desired `Symbol` and `Geometry` are simply nested within a `<Graphic></Graphic>` tag:
+You can render some graphics too if you want. The desired `Symbol` and `Geometry` are simply nested within a `<Graphic></Graphic>` tag:
 
 ```js
 import * as React from 'react';
@@ -213,7 +219,7 @@ export default (props) => (
 
 ## Advanced Usage:
 
-The `<Map />` or `<Scene />` is a big ball of internal state in a React application that does not necessarily follow React's intended unidirectional data-flow. The best we can do (as far as I'm aware) is treat the entire map like a giant text-box, and try to make it a "controlled component" by routing all of its state changes through the parent. We can do this much like we would with an ordinary text-box, using the `onMapStateChange` and `onViewStateChange` events:
+The `<Map />` or `<Scene />` is a big ball of internal state in a React application. The best we can do to gain control of its state in the react app (as far as I'm aware) is treat the entire map like a giant text-box, and try to make it a "controlled component" by routing all of its state changes through the parent. We can do this much like we would with an ordinary text-box, using the `onMapStateChange` and `onViewStateChange` events included in the components (these work by mapping all of the available watchers to a single callback, so you probably dont want to do any heavy lifting there):
 
 ```js
 import * as React from 'react';
@@ -265,8 +271,66 @@ export default class TestComponent extends React.Component<null, ComponentState>
 }
 ```
 
-This way you can control the map in response to events in your UI, time, some stream of data, etc.
+This way you can control the map in response to events in your UI, time, some stream of data, or whatever other crazy things your application may be doing.
 
-Hopefully this package helps you incorporate Esri's awesome ArcGIS API for JavaScript into your React applications!
+If you want to access the events on the `Map` or `View`, those are all available through the <Map /> or <Scene /> components by way of a react-style camelCase prop corresponding to the name of the event on the ArcGIS JS API class in question. For example:
+
+```js
+import * as React from 'react';
+import { Scene } from 'react-arcgis';
+
+export default (props) => (
+    <Scene
+        onClick={myAwesomeCallback}
+        onDoubleClick={myAwesomeCallback}
+        onDrag={myAwesomeCallback}
+        onHold={myAwesomeCallback}
+        onKeyDown={myAwesomeCallback}
+        onKeyUp={myAwesomeCallback}
+        onLayerViewCreate={myAwesomeCallback}
+        onLayerViewDestroy={myAwesomeCallback}
+        onMouseWheel={myAwesomeCallback}
+        onPointerDown={myAwesomeCallback}
+        onPointerMove={myAwesomeCallback}
+        onPointerUp={myAwesomeCallback}
+        onResize={myAwesomeCallback}
+    />
+)
+```
+
+This would call `myAwesomeCallback` when the user does just about anything with the map.
+
+
+All of the components in the library fire off a request for their dependencies in the ArcGIS API when they are first created. If you want to do something when the scripts are loaded (or when they fail to load), you can attach a callback to the `onLoad` and/or `onFail` events of the component:
+
+```js
+export default (props) => (
+    <Map
+        onLoad={celebrateCallback}
+        onFail={cryCallback}
+    />
+)
+```
+
+If you want the map/scene to look a certain way before it loads or fails, attach a custom component to the `loadComponent` or `failComponent` props of the `<Map />` or `<Scene />`:
+
+```js
+export default (props) => {
+    const SpecialLoadComponent = () => (
+        <h3>Special load underway..</h3>
+    );
+
+    const SpecialFailComponent = () => (
+        <h3>Epic Fail!</h3>
+    );
+    
+    return <Scene loadComponent={SpecialLoadComponent} failComponent={SpecialFailComponent} />
+}
+```
+
+
+
+
+Hopefully this package helps you incorporate Esri's awesome ArcGIS API for JavaScript into your ReactJS applications!
 
 Happy coding! :]

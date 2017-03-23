@@ -26,6 +26,8 @@ export interface BaseProps {
     onFail?: (e: any) => any;
     onMapPropertyChange?: (key: string, value: any) => any;
     onViewPropertyChange?: (key: string, value: any) => any;
+    loadComponent?: any;
+    failComponent?: any;
 }
 
 interface ArcProps extends BaseProps {
@@ -89,7 +91,12 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             top: '50%',
             transform: 'translate(-50%, -50%)'
         };
-        const mapStyle = { position: 'relative', width: '100%', height: '100%', ...this.props.style }
+        const mapStyle = { position: 'relative', width: '100%', height: '100%', ...this.props.style };
+        const loadElement = (this.props.loadComponent ? <this.props.loadComponent /> : <h3 style={centerStyle}>Loading..</h3>);
+        const failElement = (
+            this.props.failComponent ? <this.props.failComponent /> : 
+            <h3 style={centerStyle}>The ArcGIS API failed to load.</h3>
+        );
         if (this.state.status === 'loaded') {
             const childrenWithProps = React.Children.map(this.props.children, (child) => {
                 const childEl = child as React.ReactElement<any>;
@@ -109,13 +116,13 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             return (
                 <div style={mapStyle}>
                     <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
-                    <h3 style={centerStyle}>Loading..</h3>
+                    {loadElement}
                 </div>
             );
         }
         return (
             <div style={mapStyle}>
-                <h3 style={centerStyle}>The ArcGIS API failed to load.</h3>
+                {failElement}
             </div>
         );
     }

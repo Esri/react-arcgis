@@ -25,6 +25,12 @@ export default class TestComponent extends React.Component<null, ComponentState>
     }
 
     public render() {
+        const SpecialLoadComponent = () => (
+            <h3>Special load underway..</h3>
+        );
+        const SpecialFailComponent = () => (
+            <h3>Epic Fail!</h3>
+        );
         return (
             <div>
                 <Scene
@@ -32,6 +38,8 @@ export default class TestComponent extends React.Component<null, ComponentState>
                     mapProperties={this.state.myMapProperties}
                     viewProperties={this.state.myViewProperties}
                     onViewPropertyChange={this.handleViewPropertyChange}
+                    loadComponent={SpecialLoadComponent}
+                    failComponent={SpecialFailComponent}
                 >
                     <BasemapGallery position="top-right" />
                 </Scene>

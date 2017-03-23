@@ -4661,6 +4661,9 @@ var ArcView = (function (_super) {
             transform: 'translate(-50%, -50%)'
         };
         var mapStyle = __assign({ position: 'relative', width: '100%', height: '100%' }, this.props.style);
+        var loadElement = (this.props.loadComponent ? React.createElement(this.props.loadComponent, null) : React.createElement("h3", { style: centerStyle }, "Loading.."));
+        var failElement = (this.props.failComponent ? React.createElement(this.props.failComponent, null) :
+            React.createElement("h3", { style: centerStyle }, "The ArcGIS API failed to load."));
         if (this.state.status === 'loaded') {
             var childrenWithProps = React.Children.map(this.props.children, function (child) {
                 var childEl = child;
@@ -4676,10 +4679,9 @@ var ArcView = (function (_super) {
         else if (this.state.status === 'loading') {
             return (React.createElement("div", { style: mapStyle },
                 React.createElement(ArcContainer_1.default, { id: this.state.mapContainerId, style: { width: '100%', height: '100%' } }),
-                React.createElement("h3", { style: centerStyle }, "Loading..")));
+                loadElement));
         }
-        return (React.createElement("div", { style: mapStyle },
-            React.createElement("h3", { style: centerStyle }, "The ArcGIS API failed to load.")));
+        return (React.createElement("div", { style: mapStyle }, failElement));
     };
     ArcView.prototype.componentDidMount = function () {
         var _this = this;
@@ -9859,8 +9861,10 @@ var TestComponent = (function (_super) {
     }
     TestComponent.prototype.render = function () {
         var _this = this;
+        var SpecialLoadComponent = function () { return (React.createElement("h3", null, "Special load underway..")); };
+        var SpecialFailComponent = function () { return (React.createElement("h3", null, "Epic Fail!")); };
         return (React.createElement("div", null,
-            React.createElement(ArcComposites_1.Scene, { style: { width: '80vw', height: '80vh' }, mapProperties: this.state.myMapProperties, viewProperties: this.state.myViewProperties, onViewPropertyChange: this.handleViewPropertyChange },
+            React.createElement(ArcComposites_1.Scene, { style: { width: '80vw', height: '80vh' }, mapProperties: this.state.myMapProperties, viewProperties: this.state.myViewProperties, onViewPropertyChange: this.handleViewPropertyChange, loadComponent: SpecialLoadComponent, failComponent: SpecialFailComponent },
                 React.createElement(WidgetComposites_1.BasemapGallery, { position: "top-right" })),
             React.createElement("button", { onClick: this.resetZoom }, "ResetZoom"),
             React.createElement("button", { onClick: function () { return _this.setBasemap('topo'); } }, "Topo Basemap"),
