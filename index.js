@@ -274,6 +274,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(6);
 var ArcBase_1 = __webpack_require__(33);
 exports.Map = function (props) { return (React.createElement(ArcBase_1.ArcView, __assign({ scriptUri: ['esri/Map', 'esri/views/MapView'] }, props, { mapProperties: __assign({ basemap: 'streets-vector' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], zoom: 6 }, props.viewProperties), viewWatchables: [
+        'center',
+        'constraints',
+        'extent',
+        'resizeAlign',
+        'rotation',
+        'scale',
+        'zoom'
+    ], onViewPropertyChange: (props.onViewPropertyChange ? props.onViewPropertyChange : function () { return null; }), onMapPropertyChange: (props.onMapPropertyChange ? props.onMapPropertyChange : function () { return null; }) }))); };
+exports.Scene = function (props) { return (React.createElement(ArcBase_1.ArcView, __assign({ scriptUri: ['esri/Map', 'esri/views/SceneView'] }, props, { mapProperties: __assign({ basemap: 'satellite', ground: 'world-elevation' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], scale: 500000 }, props.viewProperties), viewWatchables: [
         'camera',
         'center',
         'clippingArea',
@@ -283,16 +292,6 @@ exports.Map = function (props) { return (React.createElement(ArcBase_1.ArcView, 
         'qualityProfile',
         'scale',
         'viewingMode',
-        'viewpoint',
-        'zoom'
-    ], onViewPropertyChange: (props.onViewPropertyChange ? props.onViewPropertyChange : function () { return null; }), onMapPropertyChange: (props.onMapPropertyChange ? props.onMapPropertyChange : function () { return null; }) }))); };
-exports.Scene = function (props) { return (React.createElement(ArcBase_1.ArcView, __assign({ scriptUri: ['esri/Map', 'esri/views/SceneView'] }, props, { mapProperties: __assign({ basemap: 'satellite', ground: 'world-elevation' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], scale: 500000 }, props.viewProperties), viewWatchables: [
-        'center',
-        'constraints',
-        'extent',
-        'resizeAlign',
-        'rotation',
-        'scale',
         'viewpoint',
         'zoom'
     ], onViewPropertyChange: (props.onViewPropertyChange ? props.onViewPropertyChange : function () { return null; }), onMapPropertyChange: (props.onMapPropertyChange ? props.onMapPropertyChange : function () { return null; }) }))); };

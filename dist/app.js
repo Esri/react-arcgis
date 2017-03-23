@@ -4771,6 +4771,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(6);
 var ArcBase_1 = __webpack_require__(33);
 exports.Map = function (props) { return (React.createElement(ArcBase_1.ArcView, __assign({ scriptUri: ['esri/Map', 'esri/views/MapView'] }, props, { mapProperties: __assign({ basemap: 'streets-vector' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], zoom: 6 }, props.viewProperties), viewWatchables: [
+        'center',
+        'constraints',
+        'extent',
+        'resizeAlign',
+        'rotation',
+        'scale',
+        'zoom'
+    ], onViewPropertyChange: (props.onViewPropertyChange ? props.onViewPropertyChange : function () { return null; }), onMapPropertyChange: (props.onMapPropertyChange ? props.onMapPropertyChange : function () { return null; }) }))); };
+exports.Scene = function (props) { return (React.createElement(ArcBase_1.ArcView, __assign({ scriptUri: ['esri/Map', 'esri/views/SceneView'] }, props, { mapProperties: __assign({ basemap: 'satellite', ground: 'world-elevation' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], scale: 500000 }, props.viewProperties), viewWatchables: [
         'camera',
         'center',
         'clippingArea',
@@ -4780,16 +4789,6 @@ exports.Map = function (props) { return (React.createElement(ArcBase_1.ArcView, 
         'qualityProfile',
         'scale',
         'viewingMode',
-        'viewpoint',
-        'zoom'
-    ], onViewPropertyChange: (props.onViewPropertyChange ? props.onViewPropertyChange : function () { return null; }), onMapPropertyChange: (props.onMapPropertyChange ? props.onMapPropertyChange : function () { return null; }) }))); };
-exports.Scene = function (props) { return (React.createElement(ArcBase_1.ArcView, __assign({ scriptUri: ['esri/Map', 'esri/views/SceneView'] }, props, { mapProperties: __assign({ basemap: 'satellite', ground: 'world-elevation' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], scale: 500000 }, props.viewProperties), viewWatchables: [
-        'center',
-        'constraints',
-        'extent',
-        'resizeAlign',
-        'rotation',
-        'scale',
         'viewpoint',
         'zoom'
     ], onViewPropertyChange: (props.onViewPropertyChange ? props.onViewPropertyChange : function () { return null; }), onMapPropertyChange: (props.onMapPropertyChange ? props.onMapPropertyChange : function () { return null; }) }))); };
@@ -9847,12 +9846,8 @@ var TestComponent = (function (_super) {
     function TestComponent(props) {
         var _this = _super.call(this, props) || this;
         _this.state = {
-            myMapProperties: {
-                basemap: 'satellite'
-            },
-            myViewProperties: {
-                zoom: 0
-            }
+            myMapProperties: {},
+            myViewProperties: {}
         };
         _this.handleViewPropertyChange = _this.handleViewPropertyChange.bind(_this);
         _this.resetZoom = _this.resetZoom.bind(_this);
@@ -9860,18 +9855,14 @@ var TestComponent = (function (_super) {
         return _this;
     }
     TestComponent.prototype.render = function () {
-        var _this = this;
         var SpecialLoadComponent = function () { return (React.createElement("h3", null, "Special load underway..")); };
         var SpecialFailComponent = function () { return (React.createElement("h3", null, "Epic Fail!")); };
         return (React.createElement("div", null,
-            React.createElement(ArcComposites_1.Scene, { style: { width: '80vw', height: '80vh' }, mapProperties: this.state.myMapProperties, viewProperties: this.state.myViewProperties, onViewPropertyChange: this.handleViewPropertyChange, loadComponent: SpecialLoadComponent, failComponent: SpecialFailComponent },
-                React.createElement(WidgetComposites_1.BasemapGallery, { position: "top-right" })),
-            React.createElement("button", { onClick: this.resetZoom }, "ResetZoom"),
-            React.createElement("button", { onClick: function () { return _this.setBasemap('topo'); } }, "Topo Basemap"),
-            React.createElement("button", { onClick: function () { return _this.setBasemap('satellite'); } }, "Satellite Basemap"),
-            React.createElement("button", { onClick: function () { return _this.goto(-122.4443, 47.2529); } }, "Go to Tacoma")));
+            React.createElement(ArcComposites_1.Map, { style: { width: '80vw', height: '80vh' }, mapProperties: this.state.myMapProperties, viewProperties: this.state.myViewProperties, onViewPropertyChange: this.handleViewPropertyChange, loadComponent: SpecialLoadComponent, failComponent: SpecialFailComponent },
+                React.createElement(WidgetComposites_1.BasemapGallery, { position: "top-right" }))));
     };
     TestComponent.prototype.handleViewPropertyChange = function (key, value) {
+        console.log(key, value);
         var newViewProperties = __assign({}, this.state.myViewProperties);
         newViewProperties[key] = value;
         this.setState({

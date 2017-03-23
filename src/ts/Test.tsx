@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../css/index.scss';
-import { Scene } from './components/ArcComposites';
+import { Map } from './components/ArcComposites';
 import { BasemapGallery } from './components/widgets/WidgetComposites';
 
 interface ComponentState {
@@ -12,12 +12,8 @@ export default class TestComponent extends React.Component<null, ComponentState>
     constructor(props) {
         super(props);
         this.state = {
-            myMapProperties: {
-                basemap: 'satellite'
-            },
-            myViewProperties: {
-                zoom: 0
-            }
+            myMapProperties: {},
+            myViewProperties: {}
         };
         this.handleViewPropertyChange = this.handleViewPropertyChange.bind(this);
         this.resetZoom = this.resetZoom.bind(this);
@@ -33,7 +29,7 @@ export default class TestComponent extends React.Component<null, ComponentState>
         );
         return (
             <div>
-                <Scene
+                <Map
                     style={{ width: '80vw', height: '80vh' }}
                     mapProperties={this.state.myMapProperties}
                     viewProperties={this.state.myViewProperties}
@@ -42,16 +38,13 @@ export default class TestComponent extends React.Component<null, ComponentState>
                     failComponent={SpecialFailComponent}
                 >
                     <BasemapGallery position="top-right" />
-                </Scene>
-                <button onClick={this.resetZoom}>ResetZoom</button>
-                <button onClick={() => this.setBasemap('topo')}>Topo Basemap</button>
-                <button onClick={() => this.setBasemap('satellite')}>Satellite Basemap</button>
-                <button onClick={() => this.goto(-122.4443, 47.2529)}>Go to Tacoma</button>
+                </Map>
             </div>
         );
     }
 
     private handleViewPropertyChange(key: string, value: any) {
+        console.log(key, value);
         const newViewProperties = {...this.state.myViewProperties};
         newViewProperties[key] = value;
         this.setState({

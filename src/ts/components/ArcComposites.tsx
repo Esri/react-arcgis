@@ -23,16 +23,12 @@ export const Map = (props: MapProps) => (
       ...props.viewProperties
     }}
     viewWatchables = {[
-      'camera',
       'center',
-      'clippingArea',
       'constraints',
-      'environment',
       'extent',
-      'qualityProfile',
+      'resizeAlign',
+      'rotation',
       'scale',
-      'viewingMode',
-      'viewpoint',
       'zoom'
     ]}
     onViewPropertyChange = {
@@ -59,12 +55,15 @@ export const Scene = (props: SceneProps) => (
       ...props.viewProperties
     }}
     viewWatchables = {[
+      'camera',
       'center',
+      'clippingArea',
       'constraints',
+      'environment',
       'extent',
-      'resizeAlign',
-      'rotation',
+      'qualityProfile',
       'scale',
+      'viewingMode',
       'viewpoint',
       'zoom'
     ]}
