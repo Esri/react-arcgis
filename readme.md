@@ -273,7 +273,7 @@ export default class TestComponent extends React.Component<null, ComponentState>
 
 This way you can control the map in response to events in your UI, time, some stream of data, or whatever other crazy things your application may be doing.
 
-If you want to access the events on the `Map` or `View`, those are all available through the <Map /> or <Scene /> components by way of a react-style camelCase prop corresponding to the name of the event on the ArcGIS JS API class in question. For example:
+If you want to access the events on the `Map` or `View`, those are all available through the `<Map />` or `<Scene />` components by way of a react-style camelCase prop corresponding to the name of the event on the ArcGIS JS API class in question. For example:
 
 ```js
 import * as React from 'react';
