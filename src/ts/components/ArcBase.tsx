@@ -71,7 +71,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         super(props);
         this.state = {
             map: null,
-            mapContainerId: Math.random().toString(36).substring(14),
+            mapContainerId: Math.random().toString(36).substring(0, 14),
             mapProperties: this.props.mapProperties,
             mapWatchables: ['allLayers', 'basemap', 'declaredClass', 'ground', 'layers'],
             status: 'loading',

@@ -4639,7 +4639,7 @@ var ArcView = (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.state = {
             map: null,
-            mapContainerId: Math.random().toString(36).substring(14),
+            mapContainerId: Math.random().toString(36).substring(0, 14),
             mapProperties: _this.props.mapProperties,
             mapWatchables: ['allLayers', 'basemap', 'declaredClass', 'ground', 'layers'],
             status: 'loading',
