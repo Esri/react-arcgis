@@ -192,7 +192,6 @@ var ArcView = (function (_super) {
             var Map = _a[0], View = _a[1];
             _this.renderMap(Map, View)
                 .then(function () {
-                console.log('hi');
                 _this.setState({ status: 'loaded' });
                 _this.registerStateChanges(_this.state.map, 'mapProperties', _this.state.mapWatchables, _this.props.onMapPropertyChange);
                 _this.registerStateChanges(_this.state.view, 'viewProperties', _this.state.viewWatchables, _this.props.onViewPropertyChange);
