@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../css/index.scss';
-import { Map } from './components/ArcComposites';
+import { Scene } from './components/ArcComposites';
 import { BasemapGallery } from './components/widgets/WidgetComposites';
 
 interface ComponentState {
@@ -21,24 +21,16 @@ export default class TestComponent extends React.Component<null, ComponentState>
     }
 
     public render() {
-        const SpecialLoadComponent = () => (
-            <h3>Special load underway..</h3>
-        );
-        const SpecialFailComponent = () => (
-            <h3>Epic Fail!</h3>
-        );
         return (
             <div>
-                <Map
+                <Scene
                     style={{ width: '80vw', height: '80vh' }}
                     mapProperties={this.state.myMapProperties}
                     viewProperties={this.state.myViewProperties}
                     onViewPropertyChange={this.handleViewPropertyChange}
-                    loadComponent={SpecialLoadComponent}
-                    failComponent={SpecialFailComponent}
                 >
                     <BasemapGallery position="top-right" />
-                </Map>
+                </Scene>
             </div>
         );
     }

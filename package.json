@@ -37,6 +37,7 @@
     "file-loader": "^0.10.1",
     "html-webpack-plugin": "^2.28.0",
     "node-sass": "^4.5.0",
+    "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "sass-loader": "^6.0.3",
     "source-map-loader": "^0.1.6",
@@ -45,9 +46,6 @@
     "typescript": "^2.2.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.2"
-  },
-  "peerDependencies": {
-    "react": "^15.4.2"
   },
   "dependencies": {
     "esri-promise": "^0.2.0"

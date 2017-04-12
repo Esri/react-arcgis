@@ -94,7 +94,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         const mapStyle = { position: 'relative', width: '100%', height: '100%', ...this.props.style };
         const loadElement = (this.props.loadComponent ? <this.props.loadComponent /> : <h3 style={centerStyle}>Loading..</h3>);
         const failElement = (
-            this.props.failComponent ? <this.props.failComponent /> : 
+            this.props.failComponent ? <this.props.failComponent /> :
             <h3 style={centerStyle}>The ArcGIS API failed to load.</h3>
         );
         if (this.state.status === 'loaded') {
@@ -132,12 +132,30 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         .then(([
             Map, View
         ]) => {
-            this.renderMap(Map, View);
-            this.registerStateChanges(this.state.map, 'mapProperties', this.state.mapWatchables, this.props.onMapPropertyChange);
-            this.registerStateChanges(this.state.view, 'viewProperties', this.state.viewWatchables, this.props.onViewPropertyChange);
-            if (this.props.onLoad) {
-                this.props.onLoad(this.state.map, this.state.view);
-            }
+            this.renderMap(Map, View)
+                .then(
+                    () => {
+                        console.log('hi');
+                        this.setState({ status: 'loaded' });
+                        this.registerStateChanges(
+                            this.state.map,
+                            'mapProperties',
+                            this.state.mapWatchables,
+                            this.props.onMapPropertyChange
+                        );
+                        this.registerStateChanges(
+                            this.state.view,
+                            'viewProperties',
+                            this.state.viewWatchables,
+                            this.props.onViewPropertyChange
+                        );
+                        if (this.props.onLoad) {
+                            this.props.onLoad(this.state.map, this.state.view);
+                        }
+                    },
+                    (e) => {
+                        throw e;
+                    });
         }).catch((e) => {
             this.setState({ status: 'failed' });
             if (this.props.onFail) {
@@ -160,7 +178,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
                 typedView.on(eventMap[key], this.props[key]);
             }
         });
-        this.setState({ map, view: typedView, status: 'loaded' });   // Set the map and view as part of the component state
+        return view;
     }
 
     private registerStateChanges(

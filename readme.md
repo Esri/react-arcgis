@@ -10,6 +10,7 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 ## Recently added stuff:
 
 - You can now add custom loader components to a `<Map />` or `<Scene />` through the `loadComponent` and `failComponent` props.
+- The loading component will be displayed until the `<Map />` or `<Scene />` is finished rendering.
 
 
 ## Basic Usage:
