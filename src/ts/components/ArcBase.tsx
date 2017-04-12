@@ -135,7 +135,6 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             this.renderMap(Map, View)
                 .then(
                     () => {
-                        console.log('hi');
                         this.setState({ status: 'loaded' });
                         this.registerStateChanges(
                             this.state.map,
