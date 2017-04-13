@@ -28,6 +28,7 @@ export default class TestComponent extends React.Component<null, ComponentState>
                     mapProperties={this.state.myMapProperties}
                     viewProperties={this.state.myViewProperties}
                     onViewPropertyChange={this.handleViewPropertyChange}
+                    onLoad={(map, view) => console.log(map, view)}
                 >
                     <BasemapGallery position="top-right" />
                 </Scene>

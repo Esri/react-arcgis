@@ -136,6 +136,9 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
                 .then(
                     () => {
                         this.setState({ status: 'loaded' });
+                        if (this.props.onLoad) {
+                            this.props.onLoad(this.state.map, this.state.view);
+                        }
                         this.registerStateChanges(
                             this.state.map,
                             'mapProperties',
@@ -148,9 +151,6 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
                             this.state.viewWatchables,
                             this.props.onViewPropertyChange
                         );
-                        if (this.props.onLoad) {
-                            this.props.onLoad(this.state.map, this.state.view);
-                        }
                     },
                     (e) => {
                         throw e;
@@ -176,6 +176,10 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             if (this.props[key]) {
                 typedView.on(eventMap[key], this.props[key]);
             }
+        });
+        this.setState({
+            map,
+            view: typedView
         });
         return view;
     }
