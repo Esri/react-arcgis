@@ -193,11 +193,11 @@ var ArcView = (function (_super) {
             _this.renderMap(Map, View)
                 .then(function () {
                 _this.setState({ status: 'loaded' });
-                _this.registerStateChanges(_this.state.map, 'mapProperties', _this.state.mapWatchables, _this.props.onMapPropertyChange);
-                _this.registerStateChanges(_this.state.view, 'viewProperties', _this.state.viewWatchables, _this.props.onViewPropertyChange);
                 if (_this.props.onLoad) {
                     _this.props.onLoad(_this.state.map, _this.state.view);
                 }
+                _this.registerStateChanges(_this.state.map, 'mapProperties', _this.state.mapWatchables, _this.props.onMapPropertyChange);
+                _this.registerStateChanges(_this.state.view, 'viewProperties', _this.state.viewWatchables, _this.props.onViewPropertyChange);
             }, function (e) {
                 throw e;
             });
@@ -218,6 +218,10 @@ var ArcView = (function (_super) {
             if (_this.props[key]) {
                 typedView.on(eventMap[key], _this.props[key]);
             }
+        });
+        this.setState({
+            map: map,
+            view: typedView
         });
         return view;
     };
