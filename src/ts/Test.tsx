@@ -27,8 +27,8 @@ export default class TestComponent extends React.Component<null, ComponentState>
                 <div style={{ display: 'inline-block', width: '100%', height: '100%' }}>
                     <WebScene
                         id='f8aa0c25485a40a1ada1e4b600522681'
-                        onViewPropertyChange={this.handleViewPropertyChange}
                     >
+                        <BasemapGallery position="bottom-left" />
                     </WebScene>
                 </div>
             </div>

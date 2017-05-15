@@ -24,12 +24,6 @@ export const WebMap = (props: MapProps) => (
             'scale',
             'zoom'
         ]}
-        onViewPropertyChange = {
-            ( props.onViewPropertyChange ? props.onViewPropertyChange : () => null )
-        }
-        onMapPropertyChange = {
-            ( props.onMapPropertyChange ? props.onMapPropertyChange : () => null )
-        }
     />
 );
 
@@ -52,11 +46,5 @@ export const WebScene = (props: SceneProps) => (
             'viewpoint',
             'zoom'
         ]}
-        onViewPropertyChange = {
-            ( props.onViewPropertyChange ? props.onViewPropertyChange : () => null )
-        }
-        onMapPropertyChange = {
-            ( props.onMapPropertyChange ? props.onMapPropertyChange : () => null )
-        }
     />
 );

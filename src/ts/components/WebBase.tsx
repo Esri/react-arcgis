@@ -26,8 +26,6 @@ export interface BaseProps {
     onResize?: (e: EventProperties) => any;
     onLoad?: (map: __esri.Map, view: __esri.MapView | __esri.SceneView) => any;
     onFail?: (e: any) => any;
-    onMapPropertyChange?: (key: string, value: any) => any;
-    onViewPropertyChange?: (key: string, value: any) => any;
     loadComponent?: any;
     failComponent?: any;
 };
@@ -164,18 +162,6 @@ export class WebView extends React.Component<ArcProps, ComponentState> {
                 if (this.props.onLoad) {
                     this.props.onLoad(map, view);
                 }
-                this.registerStateChanges(
-                    map,
-                    'mapProperties',
-                    this.state.mapWatchables,
-                    this.props.onMapPropertyChange
-                );
-                this.registerStateChanges(
-                    view,
-                    'viewProperties',
-                    this.state.viewWatchables,
-                    this.props.onViewPropertyChange
-                );
             }).otherwise(this.handleErr);
     }
 
@@ -197,31 +183,6 @@ export class WebView extends React.Component<ArcProps, ComponentState> {
                 callback(propKey, newValue);
             });
         });
-    }
-
-    private componentWillReceiveProps(nextProps) {
-        if (nextProps.mapProperties !== this.state.mapProperties && this.state.map) {
-            this.state.mapWatchables.forEach((key) => {
-                console.log(key);
-                if (nextProps.mapProperties[key] !== this.state.mapProperties[key]) {
-                    const newState = {...this.state};
-                    newState.mapProperties[key] = nextProps.mapProperties[key];
-                    this.setState(newState);
-                    this.state.map[key] = nextProps.mapProperties[key];
-                }
-            });
-        }
-        if (nextProps.viewProperties !== this.state.viewProperties && this.state.view) {
-            this.state.viewWatchables.forEach((key) => {
-                console.log(key);
-                if (nextProps.viewProperties[key] !== this.state.viewProperties[key]) {
-                    const newState = {...this.state};
-                    newState.viewProperties[key] = nextProps.viewProperties[key];
-                    this.setState(newState);
-                    this.state.view[key] = nextProps.viewProperties[key];
-                }
-            });
-        }
     }
 };
 
