@@ -25,14 +25,10 @@
   },
   "homepage": "https://github.com/nicksenger/react-arcgis#readme",
   "devDependencies": {
-    "@types/arcgis-js-api": "^4.2.0",
-    "@types/react": "^15.0.16",
-    "@types/react-dom": "^0.14.23",
     "awesome-typescript-loader": "^3.1.2",
     "calcite-web": "github:esri/calcite-web#v1.0.0-rc.2",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.4",
-    "dojo-typings": "^1.11.6",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "html-webpack-plugin": "^2.28.0",
@@ -43,11 +39,15 @@
     "source-map-loader": "^0.1.6",
     "style-loader": "^0.13.2",
     "tslint-react": "^2.5.0",
-    "typescript": "^2.2.1",
+    "typescript": "^2.3.2",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
+    "@types/arcgis-js-api": "^4.2.0",
+    "@types/react": "^15.0.16",
+    "@types/react-dom": "^0.14.23",
+    "dojo-typings": "^1.11.6",
     "esri-promise": "^0.2.0"
   }
 }

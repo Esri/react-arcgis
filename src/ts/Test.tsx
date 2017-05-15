@@ -1,7 +1,8 @@
 import * as React from 'react';
 import '../css/index.scss';
 import { Scene } from './components/ArcComposites';
-import { BasemapGallery } from './components/widgets/WidgetComposites';
+import { WebMap, WebScene } from './components/WebComposites';
+import { BasemapGallery, Legend, Search } from './components/widgets/WidgetComposites';
 
 interface ComponentState {
     myViewProperties: __esri.SceneViewProperties;
@@ -22,22 +23,19 @@ export default class TestComponent extends React.Component<null, ComponentState>
 
     public render() {
         return (
-            <div>
-                <Scene
-                    style={{ width: '80vw', height: '80vh' }}
-                    mapProperties={this.state.myMapProperties}
-                    viewProperties={this.state.myViewProperties}
-                    onViewPropertyChange={this.handleViewPropertyChange}
-                    onLoad={(map, view) => console.log(map, view)}
-                >
-                    <BasemapGallery position="top-right" />
-                </Scene>
+            <div style={{ width: '100vw', height: '100vh' }}>
+                <div style={{ display: 'inline-block', width: '100%', height: '100%' }}>
+                    <WebScene
+                        id='f8aa0c25485a40a1ada1e4b600522681'
+                        onViewPropertyChange={this.handleViewPropertyChange}
+                    >
+                    </WebScene>
+                </div>
             </div>
         );
     }
 
     private handleViewPropertyChange(key: string, value: any) {
-        console.log(key, value);
         const newViewProperties = {...this.state.myViewProperties};
         newViewProperties[key] = value;
         this.setState({
