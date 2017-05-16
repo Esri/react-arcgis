@@ -10,6 +10,9 @@ export interface BaseProps {
     };
     mapProperties?: __esri.WebMapProperties | __esri.WebSceneProperties;
     viewProperties?: __esri.MapViewProperties | __esri.SceneViewProperties;
+    boundProperties?: {
+        [propName: string]: any;
+    };
     viewWatchables?: string[];
     onClick?: (e: EventProperties) => any;
     onDoubleClick?: (e: EventProperties) => any;
@@ -47,6 +50,9 @@ interface ComponentState {
     viewProperties: __esri.MapViewProperties | __esri.SceneViewProperties;
     viewWatchables: string[];
     status: string;
+    boundProperties: {
+        [propName: string]: any;
+    };
 }
 
 const eventMap = {
@@ -69,6 +75,7 @@ export class WebView extends React.Component<ArcProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
+            boundProperties: this.props.boundProperties,
             map: null,
             mapContainerId: Math.random().toString(36).substring(0, 14),
             mapProperties: this.props.mapProperties,
@@ -80,7 +87,6 @@ export class WebView extends React.Component<ArcProps, ComponentState> {
         }
         this.loadMap = this.loadMap.bind(this);
         this.handleErr = this.handleErr.bind(this);
-        this.registerStateChanges = this.registerStateChanges.bind(this);
     }
 
     public render() {
@@ -169,19 +175,15 @@ export class WebView extends React.Component<ArcProps, ComponentState> {
         this.setState({ status: 'failed' });
     }
 
-    private registerStateChanges(
-        targetObj: __esri.WebMap | __esri.WebScene | __esri.MapView | __esri.SceneView,
-        componentStateKey: string,
-        watchables: string[],
-        callback: (propName: string, value: any) => any
-    ) {
-        watchables.forEach((propKey) => {
-            targetObj.watch(propKey, (newValue) => {
-                const newState = {...this.state};
-                newState[componentStateKey][propKey] = newValue;
-                this.setState(newState);
-                callback(propKey, newValue);
-            });
+    private componentWillReceiveProps(nextProps) {
+        Object.keys(this.state.boundProperties).forEach((key) => {
+            if (this.state.map[key]) {
+                this.state.map.set(key, nextProps.boundProperties[key]);
+            } else if (this.state.view[key]) {
+                const changes = {};
+                changes[key] = nextProps.boundProperties[key];
+                this.state.view.set(changes);
+            }
         });
     }
 };
