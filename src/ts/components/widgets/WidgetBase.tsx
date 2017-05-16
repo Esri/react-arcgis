@@ -79,4 +79,4 @@ export default class Widget extends React.Component<WidgetProps, ComponentState>
             }
         });
     }
-}
+};

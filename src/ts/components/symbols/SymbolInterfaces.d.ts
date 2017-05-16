@@ -1,4 +1,7 @@
 export interface SymbolCompositeProps {
+    boundProperties?: {
+      [propName: string]: any;
+    };
     graphic?: __esri.Graphic;
     symbolProperties?: {
       [propName: string]: any;

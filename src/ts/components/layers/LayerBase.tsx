@@ -2,6 +2,9 @@ import { esriPromise } from 'esri-promise';
 import * as React from 'react';
 
 export interface LayerProps {
+    boundProperties: {
+      [propName: string]: any;
+    };
     scriptUri: string;
     map?: __esri.Map;
     view?: __esri.SceneView | __esri.MapView;
@@ -13,6 +16,9 @@ export interface LayerProps {
 }
 
 interface ComponentState {
+    boundProperties: {
+      [propName: string]: any;
+    }
     scriptUri: string;
     map: __esri.Map;
     view: __esri.View;
@@ -24,6 +30,7 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
+            boundProperties: this.props.boundProperties,
             instance: null,
             map: this.props.map,
             scriptUri: this.props.scriptUri,
@@ -78,4 +85,12 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
       this.setState({ instance });
       this.state.map.add(instance);
     }
-}
+
+    private componentWillReceiveProps(nextProps) {
+        Object.keys(this.state.boundProperties).forEach((key) => {
+            if (this.state.instance.get(key)) {
+                this.state.instance.set(key, nextProps.boundProperties[key]);
+            }
+        });
+    }
+};
