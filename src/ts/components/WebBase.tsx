@@ -13,7 +13,6 @@ export interface BaseProps {
     boundProperties?: {
         [propName: string]: any;
     };
-    viewWatchables?: string[];
     onClick?: (e: EventProperties) => any;
     onDoubleClick?: (e: EventProperties) => any;
     onDrag?: (e: EventProperties) => any;
@@ -45,10 +44,8 @@ interface ComponentState {
     map: __esri.WebMap;
     mapContainerId: string;
     mapProperties: __esri.MapProperties;
-    mapWatchables: string[];
     view: __esri.MapView | __esri.SceneView;
     viewProperties: __esri.MapViewProperties | __esri.SceneViewProperties;
-    viewWatchables: string[];
     status: string;
     boundProperties: {
         [propName: string]: any;
@@ -79,12 +76,10 @@ export class WebView extends React.Component<ArcProps, ComponentState> {
             map: null,
             mapContainerId: Math.random().toString(36).substring(0, 14),
             mapProperties: this.props.mapProperties,
-            mapWatchables: ['allLayers', 'basemap', 'declaredClass', 'ground', 'layers'],
             status: 'loading',
             view: null,
-            viewProperties: this.props.viewProperties,
-            viewWatchables: this.props.viewWatchables,
-        }
+            viewProperties: this.props.viewProperties
+        };
         this.loadMap = this.loadMap.bind(this);
         this.handleErr = this.handleErr.bind(this);
     }
@@ -177,9 +172,9 @@ export class WebView extends React.Component<ArcProps, ComponentState> {
 
     private componentWillReceiveProps(nextProps) {
         Object.keys(this.state.boundProperties).forEach((key) => {
-            if (this.state.map[key]) {
+            if (this.state.map.get(key)) {
                 this.state.map.set(key, nextProps.boundProperties[key]);
-            } else if (this.state.view[key]) {
+            } else if (this.state.view.get(key)) {
                 const changes = {};
                 changes[key] = nextProps.boundProperties[key];
                 this.state.view.set(changes);

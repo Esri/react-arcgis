@@ -16,15 +16,6 @@ export const WebMap = (props: MapProps) => (
         viewProperties = {{...props.viewProperties}}
         mapProperties = {{...props.mapProperties}}
         boundProperties = {{...props.boundProperties}}
-        viewWatchables={[
-            'center',
-            'constraints',
-            'extent',
-            'resizeAlign',
-            'rotation',
-            'scale',
-            'zoom'
-        ]}
     />
 );
 
@@ -35,18 +26,5 @@ export const WebScene = (props: SceneProps) => (
         viewProperties = {{...props.viewProperties}}
         mapProperties = {{...props.mapProperties}}
         boundProperties = {{...props.boundProperties}}
-        viewWatchables={[
-            'camera',
-            'center',
-            'clippingArea',
-            'constraints',
-            'environment',
-            'extent',
-            'qualityProfile',
-            'scale',
-            'viewingMode',
-            'viewpoint',
-            'zoom'
-        ]}
     />
 );

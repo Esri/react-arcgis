@@ -8,7 +8,9 @@ export interface BaseProps {
     };
     mapProperties?: __esri.MapProperties;
     viewProperties?: __esri.MapViewProperties | __esri.SceneViewProperties;
-    viewWatchables?: string[];
+    boundProperties?: {
+        [propName: string]: any;
+    };
     onClick?: (e: EventProperties) => any;
     onDoubleClick?: (e: EventProperties) => any;
     onDrag?: (e: EventProperties) => any;
@@ -38,13 +40,14 @@ interface EventProperties {
 
 
 interface ComponentState {
+    boundProperties: {
+        [propName: string]: any;
+    };
     map: __esri.Map;
     mapContainerId: string;
     mapProperties: __esri.MapProperties;
-    mapWatchables: string[];
     view: __esri.MapView | __esri.SceneView;
     viewProperties: __esri.MapViewProperties | __esri.SceneViewProperties;
-    viewWatchables: string[];
     status: string;
 }
 
@@ -68,14 +71,13 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
+            boundProperties: this.props.boundProperties,
             map: null,
             mapContainerId: Math.random().toString(36).substring(0, 14),
             mapProperties: this.props.mapProperties,
-            mapWatchables: ['allLayers', 'basemap', 'declaredClass', 'ground', 'layers'],
             status: 'loading',
             view: null,
-            viewProperties: this.props.viewProperties,
-            viewWatchables: this.props.viewWatchables,
+            viewProperties: this.props.viewProperties
         }
         this.renderMap = this.renderMap.bind(this);
     }
@@ -167,5 +169,17 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             view: typedView
         });
         return view;
+    }
+
+    private componentWillReceiveProps(nextProps) {
+        Object.keys(this.state.boundProperties).forEach((key) => {
+            if (this.state.map.get(key)) {
+                this.state.map.set(key, nextProps.boundProperties[key]);
+            } else if (this.state.view.get(key)) {
+                const changes = {};
+                changes[key] = nextProps.boundProperties[key];
+                this.state.view.set(changes);
+            }
+        });
     }
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../css/index.scss';
-import { Scene } from './components/ArcComposites';
+import { Map, Scene } from './components/ArcComposites';
 import { WebMap, WebScene } from './components/WebComposites';
 import { BasemapGallery, Legend, Search } from './components/widgets/WidgetComposites';
 
@@ -19,7 +19,8 @@ export default class TestComponent extends React.Component<null, ComponentState>
             myMap: null,
             myView: null,
             boundProps: {
-                zoom: null
+                zoom: null,
+                foobar: null
             }
         };
         this.handleMapLoad = this.handleMapLoad.bind(this);
@@ -28,15 +29,13 @@ export default class TestComponent extends React.Component<null, ComponentState>
 
     public render() {
         return (
-            <div style={{ width: '100vw', height: '100vh' }}>
+            <div style={{ width: '80vw', height: '80vh' }}>
                 <div style={{ display: 'inline-block', width: '100%', height: '100%' }}>
-                    <WebMap
-                        id='6627e1dd5f594160ac60f9dfc411673f'
+                    <Map
                         onLoad={this.handleMapLoad}
                         boundProperties={this.state.boundProps}
-                    >
-                        <BasemapGallery position="bottom-left" />
-                    </WebMap>
+                        mapProperties={{ basemap: 'osm' }}
+                    />
                 </div>
                 <button onClick={this.resetZoom}>Reset Zoom</button>
             </div>
@@ -52,7 +51,7 @@ export default class TestComponent extends React.Component<null, ComponentState>
 
     private resetZoom() {
         this.setState({
-            boundProps: {...this.state.boundProps, zoom: 0}
+            boundProps: {...this.state.boundProps, zoom: 0, foobar: 5000}
         });
     }
 }
