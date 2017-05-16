@@ -2,6 +2,9 @@ import { esriPromise } from 'esri-promise';
 import * as React from 'react';
 
 export interface GraphicProps {
+    boundProperties?: {
+      [propName: string]: any;
+    };
     map?: __esri.Map;
     view?: __esri.SceneView | __esri.MapView;
     layer?: __esri.GraphicsLayer;
@@ -11,6 +14,9 @@ export interface GraphicProps {
 }
 
 interface ComponentState {
+    boundProperties: {
+      [propName: string]: any;
+    }
     map?: __esri.Map;
     view?: __esri.View;
     layer?: __esri.GraphicsLayer;
@@ -24,6 +30,7 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
     constructor(props) {
         super(props);
         this.state = {
+            boundProperties: this.props.boundProperties,
             constructor: null,
             geometry: null,
             instance: null,
@@ -104,5 +111,15 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
       } else if (this.state.view) {
         this.state.view.graphics.remove(this.state.instance);
       }
+    }
+
+    private componentWillReceiveProps(nextProps) {
+        if (nextProps.boundProperties) {
+          Object.keys(this.state.boundProperties).forEach((key) => {
+              if (this.state.instance.get(key)) {
+                  this.state.instance.set(key, nextProps.boundProperties[key]);
+              }
+          });
+        }
     }
 }
