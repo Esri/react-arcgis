@@ -3,6 +3,9 @@ import * as React from 'react';
 
 export interface WidgetProps {
     scriptUri: string;
+    boundProperties: {
+        [propName: string]: any;
+    };
     map?: __esri.Map;
     view?: __esri.SceneView | __esri.MapView;
     position?: string;
@@ -14,6 +17,9 @@ export interface WidgetProps {
 }
 
 interface ComponentState {
+    boundProperties: {
+      [propName: string]: any;
+    };
     scriptUri: string;
     map: __esri.Map;
     view: __esri.View;
@@ -24,6 +30,7 @@ export default class Widget extends React.Component<WidgetProps, ComponentState>
     constructor(props) {
         super(props);
         this.state = {
+            boundProperties: this.props.boundProperties,
             instance: null,
             map: this.props.map,
             scriptUri: this.props.scriptUri,
@@ -63,5 +70,13 @@ export default class Widget extends React.Component<WidgetProps, ComponentState>
       const instance = new Widget(widgetProperties);
       this.setState({ instance });
       this.state.view.ui.add(instance, { position });
+    }
+
+    private componentWillReceiveProps(nextProps) {
+        Object.keys(this.state.boundProperties).forEach((key) => {
+            if (this.state.instance.get(key)) {
+                this.state.instance.set(key, nextProps.boundProperties[key]);
+            }
+        });
     }
 }
