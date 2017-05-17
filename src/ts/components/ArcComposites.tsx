@@ -22,7 +22,6 @@ export const Map = (props: MapProps) => (
       zoom: 6,
       ...props.viewProperties
     }}
-    boundProperties = {{ ...props.boundProperties }}
   />
 );
 
@@ -40,6 +39,5 @@ export const Scene = (props: SceneProps) => (
       scale: 500000,
       ...props.viewProperties
     }}
-    boundProperties = {{ ...props.boundProperties }}
   />
 );

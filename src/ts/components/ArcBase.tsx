@@ -8,9 +8,6 @@ export interface BaseProps {
     };
     mapProperties?: __esri.MapProperties;
     viewProperties?: __esri.MapViewProperties | __esri.SceneViewProperties;
-    boundProperties?: {
-        [propName: string]: any;
-    };
     onClick?: (e: EventProperties) => any;
     onDoubleClick?: (e: EventProperties) => any;
     onDrag?: (e: EventProperties) => any;
@@ -71,7 +68,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
-            boundProperties: this.props.boundProperties,
+            boundProperties: null,
             map: null,
             mapContainerId: Math.random().toString(36).substring(0, 14),
             mapProperties: this.props.mapProperties,
@@ -172,12 +169,15 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
     }
 
     private componentWillReceiveProps(nextProps) {
-        Object.keys(this.state.boundProperties).forEach((key) => {
-            if (this.state.map.get(key)) {
-                this.state.map.set(key, nextProps.boundProperties[key]);
-            } else if (this.state.view.get(key)) {
+        Object.keys(nextProps.mapProperties).forEach((key) => {
+            if (this.state.map.get(key) && this.state.map.get(key) !== nextProps.mapProperties[key]) {
+                this.state.map.set(key, nextProps.mapProperties[key]);
+            }
+        });
+        Object.keys(nextProps.viewProperties).forEach((key) => {
+            if (this.state.view.get(key) && this.state.view.get(key) !== nextProps.viewProperties[key]) {
                 const changes = {};
-                changes[key] = nextProps.boundProperties[key];
+                changes[key] = nextProps.viewProperties[key];
                 this.state.view.set(changes);
             }
         });
