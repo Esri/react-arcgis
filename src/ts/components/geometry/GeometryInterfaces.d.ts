@@ -1,7 +1,4 @@
 interface GeometryCompositeProps {
-    boundProperties?: {
-      [propName: string]: any;
-    }
     graphic?: __esri.Graphic;
     geometryProperties?: {
       [propName: string]: any;

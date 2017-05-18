@@ -47,9 +47,6 @@ interface ComponentState {
     view: __esri.MapView | __esri.SceneView;
     viewProperties: __esri.MapViewProperties | __esri.SceneViewProperties;
     status: string;
-    boundProperties: {
-        [propName: string]: any;
-    };
 }
 
 const eventMap = {
@@ -72,7 +69,6 @@ export class WebView extends React.Component<ArcProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
-            boundProperties: this.props.boundProperties,
             map: null,
             mapContainerId: Math.random().toString(36).substring(0, 14),
             mapProperties: this.props.mapProperties,
@@ -155,6 +151,11 @@ export class WebView extends React.Component<ArcProps, ComponentState> {
                     container: this.state.mapContainerId,
                     map
                 });
+                Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
+                    if (this.props[key]) {
+                        view.on(eventMap[key], this.props[key]);
+                    }
+                });
                 this.setState({
                     status: 'loaded',
                     map,
@@ -170,13 +171,16 @@ export class WebView extends React.Component<ArcProps, ComponentState> {
         this.setState({ status: 'failed' });
     }
 
-    private componentWillReceiveProps(nextProps) {
-        Object.keys(this.state.boundProperties).forEach((key) => {
-            if (this.state.map.get(key)) {
-                this.state.map.set(key, nextProps.boundProperties[key]);
-            } else if (this.state.view.get(key)) {
+    private componentWillReceiveProps(nextProps: BaseProps) {
+        Object.keys(nextProps.mapProperties).forEach((key) => {
+            if (this.state.map.get(key) && this.state.map.get(key) !== nextProps.mapProperties[key]) {
+                this.state.map.set(key, nextProps.mapProperties[key]);
+            }
+        });
+        Object.keys(nextProps.viewProperties).forEach((key) => {
+            if (this.state.view.get(key) && this.state.view.get(key) !== nextProps.viewProperties[key]) {
                 const changes = {};
-                changes[key] = nextProps.boundProperties[key];
+                changes[key] = nextProps.viewProperties[key];
                 this.state.view.set(changes);
             }
         });

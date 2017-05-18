@@ -1,7 +1,4 @@
 export interface LayerCompositeProps {
-    boundProperties?: {
-        [propName: string]: any;
-    }
     map?: __esri.Map;
     view?: __esri.SceneView | __esri.MapView;
     layerProperties?: {

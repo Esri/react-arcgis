@@ -37,9 +37,6 @@ interface EventProperties {
 
 
 interface ComponentState {
-    boundProperties: {
-        [propName: string]: any;
-    };
     map: __esri.Map;
     mapContainerId: string;
     mapProperties: __esri.MapProperties;
@@ -68,7 +65,6 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
-            boundProperties: null,
             map: null,
             mapContainerId: Math.random().toString(36).substring(0, 14),
             mapProperties: this.props.mapProperties,
@@ -168,7 +164,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         return view;
     }
 
-    private componentWillReceiveProps(nextProps) {
+    private componentWillReceiveProps(nextProps: BaseProps) {
         Object.keys(nextProps.mapProperties).forEach((key) => {
             if (this.state.map.get(key) && this.state.map.get(key) !== nextProps.mapProperties[key]) {
                 this.state.map.set(key, nextProps.mapProperties[key]);

@@ -2,9 +2,6 @@ import { esriPromise } from 'esri-promise';
 import * as React from 'react';
 
 export interface GeometryProps {
-    boundProperties: {
-      [propName: string]: any;
-    };
     scriptUri: string;
     graphic?: __esri.Graphic;
     geometryProperties?: {
@@ -16,9 +13,6 @@ export interface GeometryProps {
 }
 
 interface ComponentState {
-    boundProperties: {
-      [propName: string]: any;
-    }
     scriptUri: string;
     graphic: __esri.Graphic;
     instance: __esri.Geometry;
@@ -28,7 +22,6 @@ export default class Geometry extends React.Component<GeometryProps, ComponentSt
     constructor(props) {
         super(props);
         this.state = {
-            boundProperties: this.props.boundProperties,
             graphic: this.props.graphic,
             instance: null,
             scriptUri: this.props.scriptUri,
@@ -46,7 +39,7 @@ export default class Geometry extends React.Component<GeometryProps, ComponentSt
       ]).then(([
         Geometry
       ]) => {
-        this.createGeometry(Geometry)
+        this.createGeometry(Geometry);
         if (this.props.onLoad) {
           this.props.onLoad(this.state.instance);
         }
@@ -64,11 +57,11 @@ export default class Geometry extends React.Component<GeometryProps, ComponentSt
       this.props.registerGeometry(instance);
     }
 
-    private componentWillReceiveProps(nextProps) {
-        Object.keys(this.state.boundProperties).forEach((key) => {
-            if (this.state.instance.get(key)) {
-                this.state.instance.set(key, nextProps.boundProperties[key]);
-            }
-        });
-    }
+    // private componentWillReceiveProps(nextProps: GeometryProps) {
+    //     Object.keys(nextProps.geometryProperties).forEach((key) => {
+    //         if (this.state.instance.get(key)) {
+    //             this.state.instance.set(key, nextProps.geometryProperties[key]);
+    //         }
+    //     });
+    // }
 }

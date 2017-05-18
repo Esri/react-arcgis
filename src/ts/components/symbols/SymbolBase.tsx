@@ -3,9 +3,6 @@ import * as React from 'react';
 
 export interface SymbolProps {
     scriptUri: string;
-    boundProperties: {
-      [propName: string]: any;
-    };
     graphic?: __esri.Graphic;
     symbolProperties?: {
       [propName: string]: any;
@@ -16,9 +13,6 @@ export interface SymbolProps {
 }
 
 interface ComponentState {
-    boundProperties: {
-      [propName: string]: any;
-    }
     scriptUri: string;
     graphic: __esri.Graphic;
     instance: __esri.Symbol;
@@ -28,7 +22,6 @@ export default class Symbol extends React.Component<SymbolProps, ComponentState>
     constructor(props) {
         super(props);
         this.state = {
-            boundProperties: this.props.boundProperties,
             graphic: this.props.graphic,
             instance: null,
             scriptUri: this.props.scriptUri,
@@ -63,10 +56,10 @@ export default class Symbol extends React.Component<SymbolProps, ComponentState>
       this.props.registerSymbol(instance);
     }
 
-    private componentWillReceiveProps(nextProps) {
-        Object.keys(this.state.boundProperties).forEach((key) => {
+    private componentWillReceiveProps(nextProps: SymbolProps) {
+        Object.keys(nextProps.symbolProperties).forEach((key) => {
             if (this.state.instance.get(key)) {
-                this.state.instance.set(key, nextProps.boundProperties[key]);
+                this.state.instance.set(key, nextProps.symbolProperties[key]);
             }
         });
     }
