@@ -245,7 +245,7 @@ export default (props) => (
 
 In some situations, you may want to control the state of the map depending on actions taken within your application. One good example of this would be if you are creating a custom dashboard or similar. 
 
-The easiest way to do this is by using the watchers included on the instance returned from a `<Map />`, `<Scene />`, `<WebMap />` or `<WebScene />` to listen for changes to a particular property then updating state of your application accordingly. When you want to change the state of the map, you can update its properties through the instance in response to some UI event or similar in your application.
+The easiest way to do this is by using the watchers included on the instance returned from a `<Map />`, `<Scene />`, `<WebMap />` or `<WebScene />` to listen for changes to a particular property then update state of your application accordingly. When you want to change the state of the map, you can update its properties through the instance in response to some UI event or similar in your application.
 
 Experienced React users will recognize a problem here: we have essentially set up a two-way binding situation between our React application and the ArcGIS API. There is no single source of truth with this method.
 
@@ -387,5 +387,5 @@ In most cases, it may not be worth introducing this level of complexity in order
 
 Hopefully this package helps you incorporate Esri's awesome ArcGIS API for JavaScript into your ReactJS applications!
 
-Happy coding! :]
+Happy coding! :] <br />
 Nick
