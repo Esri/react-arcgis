@@ -2,6 +2,7 @@ import { esriPromise } from 'esri-promise';
 import * as React from 'react';
 
 export interface GraphicProps {
+    children?: any[];
     map?: __esri.Map;
     view?: __esri.SceneView | __esri.MapView;
     layer?: __esri.GraphicsLayer;
