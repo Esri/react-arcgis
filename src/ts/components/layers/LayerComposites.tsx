@@ -21,65 +21,65 @@ import {
 } from './LayerInterfaces';
 
 export const CSVLayer = (props: CSVLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/CSVLayer' />
+    <Layer {...props} scriptUri="esri/layers/CSVLayer" layerProperties={{...props.layerProperties}} />
 );
 
 export const ElevationLayer = (props: ElevationLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/ElevationLayer' />
+    <Layer {...props} scriptUri="esri/layers/ElevationLayer" layerProperties={{...props.layerProperties}} />
 );
 
 export const FeatureLayer = (props: FeatureLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/FeatureLayer' />
+    <Layer {...props} scriptUri="esri/layers/FeatureLayer" layerProperties={{...props.layerProperties}} />
 );
 
 export const GeoRSSLayer = (props: GeoRSSLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/GeoRSSLayer' />
+    <Layer {...props} scriptUri="esri/layers/GeoRSSLayer" layerProperties={{...props.layerProperties}} />
 );
 
 export const GraphicsLayer = (props: GraphicsLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/GraphicsLayer' />
+    <Layer {...props} scriptUri="esri/layers/GraphicsLayer" layerProperties={{...props.layerProperties}} />
 );
 
 export const GroupLayer = (props: GroupLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/GroupLayer' />
+    <Layer {...props} scriptUri="esri/layers/GroupLayer" layerProperties={{...props.layerProperties}} />
 );
 
 export const ImageryLayer = (props: ImageryLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/ImageryLayer' />
+    <Layer {...props} scriptUri="esri/layers/ImageryLayer" layerProperties={{...props.layerProperties}} />
 );
 
 export const IntegratedMeshLayer = (props: IntegratedMeshLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/IntegratedMeshLayer' />
+    <Layer {...props} scriptUri="esri/layers/IntegratedMeshLayer" layerProperties={{...props.layerProperties}} />
 );
 
 export const MapImageLayer = (props: MapImageLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/MapImageLayer' />
+    <Layer {...props} scriptUri="esri/layers/MapImageLayer" layerProperties={{...props.layerProperties}} />
 );
 
 export const OpenStreetMapLayer = (props: OpenStreetMapLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/OpenStreetMapLayer' />
+    <Layer {...props} scriptUri="esri/layers/OpenStreetMapLayer" />
 );
 
 export const PointCloudLayer = (props: PointCloudLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/PointCloudLayer' />
+    <Layer {...props} scriptUri="esri/layers/PointCloudLayer" />
 );
 
 export const SceneLayer = (props: SceneLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/SceneLayer' />
+    <Layer {...props} scriptUri="esri/layers/SceneLayer" />
 );
 
 export const StreamLayer = (props: StreamLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/StreamLayer' />
+    <Layer {...props} scriptUri="esri/layers/StreamLayer" />
 );
 
 export const TileLayer = (props: TileLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/TileLayer' />
+    <Layer {...props} scriptUri="esri/layers/TileLayer" />
 );
 
 export const VectorTileLayer = (props: VectorTileLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/VectorTileLayer' />
+    <Layer {...props} scriptUri="esri/layers/VectorTileLayer" />
 );
 
 export const WebTileLayer = (props: WebTileLayerProps) => (
-    <Layer {...props} scriptUri='esri/layers/WebTileLayer' />
+    <Layer {...props} scriptUri="esri/layers/WebTileLayer" />
 );

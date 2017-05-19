@@ -105,4 +105,14 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
         this.state.view.graphics.remove(this.state.instance);
       }
     }
+
+    private componentWillReceiveProps(nextProps: GraphicProps) {
+        if (nextProps.graphicProperties) {
+          Object.keys(nextProps.graphicProperties).forEach((key) => {
+              if (this.state.instance.get(key)) {
+                  this.state.instance.set(key, nextProps.graphicProperties[key]);
+              }
+          });
+        }
+    }
 }

@@ -39,7 +39,7 @@ export default class Geometry extends React.Component<GeometryProps, ComponentSt
       ]).then(([
         Geometry
       ]) => {
-        this.createGeometry(Geometry)
+        this.createGeometry(Geometry);
         if (this.props.onLoad) {
           this.props.onLoad(this.state.instance);
         }
@@ -56,4 +56,12 @@ export default class Geometry extends React.Component<GeometryProps, ComponentSt
       this.setState({ instance });
       this.props.registerGeometry(instance);
     }
+
+    // private componentWillReceiveProps(nextProps: GeometryProps) {
+    //     Object.keys(nextProps.geometryProperties).forEach((key) => {
+    //         if (this.state.instance.get(key)) {
+    //             this.state.instance.set(key, nextProps.geometryProperties[key]);
+    //         }
+    //     });
+    // }
 }

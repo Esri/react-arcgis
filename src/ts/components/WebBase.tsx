@@ -1,14 +1,19 @@
+import { Promise } from 'es6-promise';
 import { esriPromise } from 'esri-promise';
 import * as React from 'react';
 import ArcContainer from './ArcContainer';
 
 export interface BaseProps {
     className?: string;
+    id: string;
     style?: {
-        [propName: string]: any
+        [propName: string]: any;
     };
-    mapProperties?: __esri.MapProperties;
+    mapProperties?: __esri.WebMapProperties | __esri.WebSceneProperties;
     viewProperties?: __esri.MapViewProperties | __esri.SceneViewProperties;
+    boundProperties?: {
+        [propName: string]: any;
+    };
     onClick?: (e: EventProperties) => any;
     onDoubleClick?: (e: EventProperties) => any;
     onDrag?: (e: EventProperties) => any;
@@ -26,7 +31,7 @@ export interface BaseProps {
     onFail?: (e: any) => any;
     loadComponent?: any;
     failComponent?: any;
-}
+};
 
 interface ArcProps extends BaseProps {
     scriptUri: string[];
@@ -36,9 +41,8 @@ interface EventProperties {
     [propName: string]: any;
 }
 
-
 interface ComponentState {
-    map: __esri.Map;
+    map: __esri.WebMap;
     mapContainerId: string;
     mapProperties: __esri.MapProperties;
     view: __esri.MapView | __esri.SceneView;
@@ -62,7 +66,7 @@ const eventMap = {
     onResize: 'resize'
 };
 
-export class ArcView extends React.Component<ArcProps, ComponentState> {
+export class WebView extends React.Component<ArcProps, ComponentState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -72,8 +76,9 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             status: 'loading',
             view: null,
             viewProperties: this.props.viewProperties
-        }
-        this.renderMap = this.renderMap.bind(this);
+        };
+        this.loadMap = this.loadMap.bind(this);
+        this.handleErr = this.handleErr.bind(this);
     }
 
     public render() {
@@ -122,48 +127,50 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
     }
 
     private componentDidMount() {
-        esriPromise(this.props.scriptUri)
-        .then(([
-            Map, View
-        ]) => {
-            this.renderMap(Map, View)
-                .then(
-                    () => {
-                        this.setState({ status: 'loaded' });
-                        if (this.props.onLoad) {
-                            this.props.onLoad(this.state.map, this.state.view);
-                        }
-                    },
-                    (e) => {
-                        throw e;
-                    });
-        }).catch((e) => {
-            this.setState({ status: 'failed' });
-            if (this.props.onFail) {
-                this.props.onFail(e);
-            }
-        });
+        esriPromise(this.props.scriptUri.concat(['dojo/promise/all']))
+            .then(
+                ([WebConstructor, ViewConstructor, all]) => {
+                    this.loadMap(WebConstructor, ViewConstructor, all);
+                }
+            ).catch(this.handleErr);
     }
 
-    private renderMap(Map: __esri.MapConstructor, View: __esri.ViewConstructor) {
-        const map: __esri.Map = new Map(this.props.mapProperties);  // Make the map
-        const viewProperties: __esri.ViewProperties | __esri.MapProperties = {
-            map,
-            container: this.state.mapContainerId,
-            ...this.props.viewProperties
-        }
-        const view: __esri.View = new View(viewProperties);  // Make the view
-        const typedView = view as __esri.MapView | __esri.SceneView;
-        Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
-            if (this.props[key]) {
-                typedView.on(eventMap[key], this.props[key]);
+    private loadMap(WebConstructor: __esri.WebMapConstructor, ViewConstructor: __esri.MapViewConstructor, all: dojo.promise.All) {
+        const map: __esri.WebMap | __esri.WebScene = new WebConstructor({
+            portalItem: {
+                id: this.props.id
             }
         });
-        this.setState({
-            map,
-            view: typedView
-        });
-        return view;
+        map.load()
+            .then(() => map.basemap.load())
+            .then(() => {
+                const allLayers = map.allLayers;
+                const promises = allLayers.map((layer) => layer.load());
+                return all(promises.toArray());
+            })
+            .then((layers) => {
+                const view = new ViewConstructor({
+                    container: this.state.mapContainerId,
+                    map
+                });
+                Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
+                    if (this.props[key]) {
+                        view.on(eventMap[key], this.props[key]);
+                    }
+                });
+                this.setState({
+                    status: 'loaded',
+                    map,
+                    view
+                });
+                if (this.props.onLoad) {
+                    this.props.onLoad(map, view);
+                }
+            }).otherwise(this.handleErr);
+    }
+
+    private handleErr(err) {
+        this.setState({ status: 'failed' });
     }
 
     private componentWillReceiveProps(nextProps: BaseProps) {
@@ -180,4 +187,6 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             }
         });
     }
-}
+};
+
+

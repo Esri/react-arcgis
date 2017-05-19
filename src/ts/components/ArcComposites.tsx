@@ -22,21 +22,6 @@ export const Map = (props: MapProps) => (
       zoom: 6,
       ...props.viewProperties
     }}
-    viewWatchables = {[
-      'center',
-      'constraints',
-      'extent',
-      'resizeAlign',
-      'rotation',
-      'scale',
-      'zoom'
-    ]}
-    onViewPropertyChange = {
-      ( props.onViewPropertyChange ? props.onViewPropertyChange : () => null )
-    }
-    onMapPropertyChange = {
-      ( props.onMapPropertyChange ? props.onMapPropertyChange : () => null )
-    }
   />
 );
 
@@ -54,24 +39,5 @@ export const Scene = (props: SceneProps) => (
       scale: 500000,
       ...props.viewProperties
     }}
-    viewWatchables = {[
-      'camera',
-      'center',
-      'clippingArea',
-      'constraints',
-      'environment',
-      'extent',
-      'qualityProfile',
-      'scale',
-      'viewingMode',
-      'viewpoint',
-      'zoom'
-    ]}
-    onViewPropertyChange = {
-      ( props.onViewPropertyChange ? props.onViewPropertyChange : () => null )
-    }
-    onMapPropertyChange = {
-      ( props.onMapPropertyChange ? props.onMapPropertyChange : () => null )
-    }
   />
 );

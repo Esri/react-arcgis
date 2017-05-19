@@ -55,4 +55,12 @@ export default class Symbol extends React.Component<SymbolProps, ComponentState>
       this.setState({ instance });
       this.props.registerSymbol(instance);
     }
-}
+
+    private componentWillReceiveProps(nextProps: SymbolProps) {
+        Object.keys(nextProps.symbolProperties).forEach((key) => {
+            if (this.state.instance.get(key)) {
+                this.state.instance.set(key, nextProps.symbolProperties[key]);
+            }
+        });
+    }
+};

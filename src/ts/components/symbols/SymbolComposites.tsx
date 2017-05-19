@@ -11,25 +11,25 @@ import {
 } from './SymbolInterfaces';
 
 export const Font = (props: FontProps) => (
-    <Symbol {...props} scriptUri="esri/symbols/Font" />
+    <Symbol {...props} scriptUri="esri/symbols/Font" symbolProperties={{...props.symbolProperties}} />
 );
 
 export const PictureFillSymbol = (props: PictureFillSymbolProps) => (
-    <Symbol {...props} scriptUri="esri/symbols/PictureFillSymbol" />
+    <Symbol {...props} scriptUri="esri/symbols/PictureFillSymbol" symbolProperties={{...props.symbolProperties}} />
 );
 
 export const PictureMarkerSymbol = (props: PictureMarkerSymbolProps) => (
-    <Symbol {...props} scriptUri="esri/symbols/PictureMarkerSymbol" />
+    <Symbol {...props} scriptUri="esri/symbols/PictureMarkerSymbol" symbolProperties={{...props.symbolProperties}} />
 );
 
 export const SimpleFillSymbol = (props: SimpleFillSymbolProps) => (
-    <Symbol {...props} scriptUri="esri/symbols/SimpleFillSymbol" />
+    <Symbol {...props} scriptUri="esri/symbols/SimpleFillSymbol" symbolProperties={{...props.symbolProperties}} />
 );
 
 export const SimpleLineSymbol = (props: SimpleLineSymbolProps) => (
-    <Symbol {...props} scriptUri="esri/symbols/SimpleLineSymbol" />
+    <Symbol {...props} scriptUri="esri/symbols/SimpleLineSymbol" symbolProperties={{...props.symbolProperties}} />
 );
 
 export const SimpleMarkerSymbol = (props: SimpleMarkerSymbolProps) => (
-    <Symbol {...props} scriptUri="esri/symbols/SimpleMarkerSymbol" />
+    <Symbol {...props} scriptUri="esri/symbols/SimpleMarkerSymbol" symbolProperties={{...props.symbolProperties}} />
 );

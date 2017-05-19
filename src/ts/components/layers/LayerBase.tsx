@@ -78,4 +78,12 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
       this.setState({ instance });
       this.state.map.add(instance);
     }
-}
+
+    private componentWillReceiveProps(nextProps: LayerProps) {
+        Object.keys(nextProps.layerProperties).forEach((key) => {
+            if (this.state.instance.get(key)) {
+                this.state.instance.set(key, nextProps.layerProperties[key]);
+            }
+        });
+    }
+};
