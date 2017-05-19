@@ -19,10 +19,10 @@ module.exports = {
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
-    // externals: {
-    //     'react': 'commonjs react',
-    //     'esri-promise': 'commonjs esri-promise'
-    // },
+    externals: {
+        'react': 'commonjs react',
+        'esri-promise': 'commonjs esri-promise'
+    },
 
     devtool: 'source-map',
 

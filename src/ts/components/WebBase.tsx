@@ -4,6 +4,7 @@ import * as React from 'react';
 import ArcContainer from './ArcContainer';
 
 export interface BaseProps {
+    className?: string;
     id: string;
     style?: {
         [propName: string]: any;
@@ -88,7 +89,8 @@ export class WebView extends React.Component<ArcProps, ComponentState> {
             top: '50%',
             transform: 'translate(-50%, -50%)'
         };
-        const mapStyle = { position: 'relative', width: '100%', height: '100%', ...this.props.style };
+        const mapStyle = this.props.className ? this.props.style : { position: 'relative', width: '100%', height: '100%', ...this.props.style };
+        const className = this.props.className ? this.props.className : null;
         const loadElement = (this.props.loadComponent ? <this.props.loadComponent /> : <h3 style={centerStyle}>Loading..</h3>);
         const failElement = (
             this.props.failComponent ? <this.props.failComponent /> :
@@ -104,21 +106,21 @@ export class WebView extends React.Component<ArcProps, ComponentState> {
                 );
             });
             return (
-                <div style={mapStyle}>
+                <div style={mapStyle} className={className}>
                     <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
                     {childrenWithProps}
                 </div>
             );
         } else if (this.state.status === 'loading') {
             return (
-                <div style={mapStyle}>
+                <div style={mapStyle} className={className}>
                     <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
                     {loadElement}
                 </div>
             );
         }
         return (
-            <div style={mapStyle}>
+            <div style={mapStyle} className={className}>
                 {failElement}
             </div>
         );
