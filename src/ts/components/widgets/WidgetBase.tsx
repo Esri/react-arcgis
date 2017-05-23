@@ -11,6 +11,7 @@ export interface WidgetProps {
     };
     onLoad?: (instance: __esri.Widget) => any;
     onFail?: (e: any) => any;
+    [propName: string]: any;
 }
 
 interface ComponentState {
@@ -61,6 +62,11 @@ export default class Widget extends React.Component<WidgetProps, ComponentState>
       const widgetProperties = { view: this.state.view, ...this.props.widgetProperties };
       const position = this.props.position ? this.props.position : 'manual';
       const instance = new Widget(widgetProperties);
+      Object.keys(this.props.eventMap).forEach((key) => {
+        if (this.props[key]) {
+          instance.on(this.props.eventMap[key], this.props[key]);
+        }
+      });
       this.setState({ instance });
       this.state.view.ui.add(instance, { position });
     }

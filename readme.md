@@ -9,6 +9,27 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 ## Recently added stuff:
 
+**1.1.0**
+
+- You can now add callbacks to any of the widget events available through the ArcGIS JS API directly in the JSX. For example:
+
+```
+    render() {
+        return (
+            <WebScene
+                className="half-map"
+                id="f8aa0c25485a40a1ada1e4b600522681"
+                onDoubleClick={() => { console.log('double-clicked on the map!')}}
+            >
+                <BasemapToggle
+                    position="top-right"
+                    onToggle={() => {console.log('toggled the basemap!')}}
+                />
+            </WebScene>
+        );
+    }
+```
+
 **1.0.0**
 
 - `onMapStateChange` and `onViewStateChange` are deprecated and have been removed! 

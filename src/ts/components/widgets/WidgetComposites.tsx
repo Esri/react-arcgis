@@ -24,43 +24,104 @@ import {
 } from './WidgetInterfaces';
 
 export const Attribution = (props: AttributionProps) => (
-  <Widget {...props} scriptUri="esri/widgets/Attribution" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/Attribution"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{}}
+  />
 );
 
 export const BasemapGallery = (props: BasemapGalleryProps) => (
-  <Widget {...props} scriptUri="esri/widgets/BasemapGallery" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/BasemapGallery"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{}}
+  />
 );
 
 export const BasemapToggle = (props: BasemapToggleProps) => (
-  <Widget {...props} scriptUri="esri/widgets/BasemapToggle" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/BasemapToggle"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{
+        onToggle: 'toggle'
+    }}
+  />
 );
 
 export const ColorSlider = (props: ColorSliderProps) => (
-  <Widget {...props} scriptUri="esri/widgets/ColorSlider" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/ColorSlider"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{
+        onDataChange: 'data-change',
+        onDataValueChange: 'data-value-change',
+        onHandleValueChange: 'handle-value-change'
+    }}
+  />
 );
 
 export const Compass = (props: CompassProps) => (
-  <Widget {...props} scriptUri="esri/widgets/Compass" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/Compass"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{}}
+  />
 );
 
 export const Expand = (props: ExpandProps) => (
-  <Widget {...props} scriptUri="esri/widgets/Expand" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/Expand"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{}}
+  />
 );
 
 export const Home = (props: HomeProps) => (
-  <Widget {...props} scriptUri="esri/widgets/Home" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/Home"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{}}
+  />
 );
 
 export const LayerList = (props: LayerListProps) => (
-  <Widget {...props} scriptUri="esri/widgets/LayerList" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/LayerList"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{
+      onTriggerAction: 'trigger-action'
+    }}
+  />
 );
 
 export const Legend = (props: LegendProps) => (
-  <Widget {...props} scriptUri="esri/widgets/Legend" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/Legend"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{}}
+  />
 );
 
 export const Locate = (props: LocateProps) => (
-  <Widget {...props} scriptUri="esri/widgets/Locate" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/Locate"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{
+      onLocate: 'locate',
+      onLocateError: 'locate-error'
+    }}
+  />
 );
 
 export const NavigationToggle = (props: NavigationToggleProps) => (
@@ -68,33 +129,92 @@ export const NavigationToggle = (props: NavigationToggleProps) => (
 );
 
 export const Popup = (props: PopupProps) => (
-  <Widget {...props} scriptUri="esri/widgets/Popup" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/Popup"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{
+      onTriggerAction: 'trigger-action'
+    }}
+  />
 );
 
 export const Print = (props: PrintProps) => (
-  <Widget {...props} scriptUri="esri/widgets/Print" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/Print"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{}}
+  />
 );
 
 export const ScaleBar = (props: ScaleBarProps) => (
-  <Widget {...props} scriptUri="esri/widgets/ScaleBar" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/ScaleBar"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{}}
+  />
 );
 
 export const Search = (props: SearchProps) => (
-  <Widget {...props} scriptUri="esri/widgets/Search" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/Search"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{
+        onSearchClear: 'search-clear',
+        onSearchComplete: 'search-complete',
+        onSearchStart: 'search-start',
+        onSelectResult: 'select-result',
+        onSuggestComplete: 'suggest-complete',
+        onSuggestStart: 'suggest-start'
+    }}
+  />
 );
 
 export const SizeSlider = (props: SizeSliderProps) => (
-  <Widget {...props} scriptUri="esri/widgets/SizeSlider" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/SizeSlider"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{
+      onDataChange: 'data-change',
+      onDataValueChange: 'data-value-change',
+      onHandleValueChange: 'handle-value-change'
+    }}
+  />
 );
 
 export const Track = (props: TrackProps) => (
-  <Widget {...props} scriptUri="esri/widgets/Track" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props} scriptUri="esri/widgets/Track"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{
+      onTrack: 'track',
+      onTrackError: 'track-error'
+    }}
+  />
 );
 
 export const UnivariateColorSizeSlider = (props: UnivariateColorSizeSliderProps) => (
-  <Widget {...props} scriptUri="esri/widgets/UnvariateColorSizeSlider" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/UnvariateColorSizeSlider"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{
+      onDataChange: 'data-change',
+      onDataValueChange: 'data-value-change',
+      onHandleValueChange: 'handle-value-change'
+    }}
+  />
 );
 
 export const Zoom = (props: ZoomProps) => (
-  <Widget {...props} scriptUri="esri/widgets/Zoom" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    scriptUri="esri/widgets/Zoom"
+    widgetProperties={{...props.widgetProperties}}
+    eventMap={{}}
+  />
 );
