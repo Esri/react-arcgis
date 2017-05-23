@@ -6,6 +6,8 @@ export interface LayerCompositeProps {
     };
     onLoad?: (instance: __esri.Layer) => any;
     onFail?: (e: any) => any;
+    onLayerviewCreate?: (e: any) => any;
+    onLayerviewDestroy?: (e: any) => any;
 }
 
 export interface CSVLayerProps extends LayerCompositeProps {

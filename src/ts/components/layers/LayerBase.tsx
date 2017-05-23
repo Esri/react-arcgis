@@ -3,6 +3,7 @@ import * as React from 'react';
 
 export interface LayerProps {
     children?: any;
+    addLocation: string[];
     scriptUri: string;
     map?: __esri.Map;
     view?: __esri.SceneView | __esri.MapView;
@@ -11,6 +12,11 @@ export interface LayerProps {
     };
     onLoad?: (instance: __esri.Layer) => any;
     onFail?: (e: any) => any;
+    onLayerviewCreate?: (e: any) => any;
+    onLayerviewDestroy?: (e: any) => any;
+    eventMap: {
+      [propName: string]: string;
+    };
 }
 
 interface ComponentState {
@@ -30,7 +36,7 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
             scriptUri: this.props.scriptUri,
             status: 'loading',
             view: this.props.view,
-        }
+        };
         this.renderLayer = this.renderLayer.bind(this);
     }
 
@@ -57,7 +63,7 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
       ]).then(([
         Layer
       ]) => {
-        this.renderLayer(Layer)
+        this.renderLayer(Layer);
         this.setState({ status: 'loaded' });
         if (this.props.onLoad) {
           this.props.onLoad(this.state.instance);
@@ -76,8 +82,14 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
 
     private renderLayer(Layer: __esri.LayerConstructor) {
       const instance = new Layer(this.props.layerProperties);
+      Object.keys(this.props.eventMap).forEach((key) => {
+        if (this.props[key]) {
+          instance.on(this.props.eventMap[key], this.props[key]);
+        }
+      });
       this.setState({ instance });
-      this.state.map.add(instance);
+      const parent = this.props.addLocation.reduce((p, c) => p[c], this.state) as any;
+      parent.add(instance);
     }
 
     private componentWillReceiveProps(nextProps: LayerProps) {
