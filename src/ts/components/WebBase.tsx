@@ -4,7 +4,7 @@ import * as React from 'react';
 import ArcContainer from './ArcContainer';
 
 export interface BaseProps {
-    children?: any[];
+    children?: any;
     className?: string;
     id: string;
     style?: {
