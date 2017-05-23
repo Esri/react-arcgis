@@ -13,7 +13,7 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 - You can now add callbacks to any of the widget events available through the ArcGIS JS API directly in the JSX. For example:
 
-```
+```js
     render() {
         return (
             <WebScene
