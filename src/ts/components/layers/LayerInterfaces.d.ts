@@ -1,4 +1,5 @@
 export interface LayerCompositeProps {
+    children?: any;
     map?: __esri.Map;
     view?: __esri.SceneView | __esri.MapView;
     layerProperties?: {
