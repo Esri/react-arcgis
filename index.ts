@@ -1,4 +1,4 @@
-import * as Views from './src/ts/components/ArcComposites';
+import * as MapViews from './src/ts/components/MapComposites';
 import * as WebViews from './src/ts/components/WebComposites';
 import * as GeometryImport from './src/ts/components/geometry/GeometryComposites';
 import GraphicImport from './src/ts/components/graphics/Graphic';
@@ -10,8 +10,8 @@ const ReactArcGIS = {
     Geometry: GeometryImport,
     Graphic: GraphicImport,
     Layers: LayersImport,
-    Map: Views.Map,
-    Scene: Views.Scene,
+    Map: MapViews.Map,
+    Scene: MapViews.Scene,
     Symbols: SymbolsImport,
     WebMap: WebViews.WebMap,
     WebScene: WebViews.WebScene,
