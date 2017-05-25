@@ -9,6 +9,10 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 ## Recently added stuff:
 
+**1.2.0**
+
+- WebBase is now simply and extension of ArcBase (this reduces the file-size of the library slightly and has no effect on the external API)
+
 **1.1.0**
 
 - You can now add callbacks to any of the widget events available through the ArcGIS JS API directly in the JSX. For example:
