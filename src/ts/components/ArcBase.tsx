@@ -1,8 +1,10 @@
+import { Promise } from 'es6-promise';
 import { esriPromise } from 'esri-promise';
 import * as React from 'react';
 import ArcContainer from './ArcContainer';
 
 export interface BaseProps {
+    id?: string;
     children?: any;
     className?: string;
     style?: {
@@ -30,6 +32,7 @@ export interface BaseProps {
 }
 
 interface ArcProps extends BaseProps {
+    loadMap: (modules: any[], containerId: string) => Promise<{ map: any, view: any }>;
     scriptUri: string[];
 }
 
@@ -73,8 +76,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             status: 'loading',
             view: null,
             viewProperties: this.props.viewProperties
-        }
-        this.renderMap = this.renderMap.bind(this);
+        };
     }
 
     public render() {
@@ -124,15 +126,17 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
 
     private componentDidMount() {
         esriPromise(this.props.scriptUri)
-        .then(([
-            Map, View
-        ]) => {
-            this.renderMap(Map, View)
+        .then((modules) => {
+            this.props.loadMap(modules, this.state.mapContainerId)
                 .then(
-                    () => {
-                        this.setState({ status: 'loaded' });
+                    ({ map, view }) => {
+                        this.setState({
+                            map,
+                            view,
+                            status: 'loaded'
+                        });
                         if (this.props.onLoad) {
-                            this.props.onLoad(this.state.map, this.state.view);
+                            this.props.onLoad(map, view);
                         }
                     },
                     (e) => {
@@ -144,27 +148,6 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
                 this.props.onFail(e);
             }
         });
-    }
-
-    private renderMap(Map: __esri.MapConstructor, View: __esri.ViewConstructor) {
-        const map: __esri.Map = new Map(this.props.mapProperties);  // Make the map
-        const viewProperties: __esri.ViewProperties | __esri.MapProperties = {
-            map,
-            container: this.state.mapContainerId,
-            ...this.props.viewProperties
-        }
-        const view: __esri.View = new View(viewProperties);  // Make the view
-        const typedView = view as __esri.MapView | __esri.SceneView;
-        Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
-            if (this.props[key]) {
-                typedView.on(eventMap[key], this.props[key]);
-            }
-        });
-        this.setState({
-            map,
-            view: typedView
-        });
-        return view;
     }
 
     private componentWillReceiveProps(nextProps: BaseProps) {
