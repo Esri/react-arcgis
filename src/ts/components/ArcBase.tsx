@@ -124,7 +124,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         );
     }
 
-    private componentDidMount() {
+    componentDidMount() {
         esriPromise(this.props.scriptUri)
         .then((modules) => {
             this.props.loadMap(modules, this.state.mapContainerId)
@@ -150,7 +150,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         });
     }
 
-    private componentWillReceiveProps(nextProps: BaseProps) {
+    componentWillReceiveProps(nextProps: BaseProps) {
         Object.keys(nextProps.mapProperties).forEach((key) => {
             if (this.state.map.get(key) && this.state.map.get(key) !== nextProps.mapProperties[key]) {
                 this.state.map.set(key, nextProps.mapProperties[key]);

@@ -788,6 +788,9 @@ var Layer = (function (_super) {
         }
         return null;
     };
+    Layer.prototype.componentWillUnmount = function () {
+        this.state.map.remove(this.state.instance);
+    };
     Layer.prototype.componentDidMount = function () {
         var _this = this;
         esri_promise_1.esriPromise([
@@ -806,8 +809,13 @@ var Layer = (function (_super) {
             }
         });
     };
-    Layer.prototype.componentWillUnmount = function () {
-        this.state.map.remove(this.state.instance);
+    Layer.prototype.componentWillReceiveProps = function (nextProps) {
+        var _this = this;
+        Object.keys(nextProps.layerProperties).forEach(function (key) {
+            if (_this.state.instance.get(key)) {
+                _this.state.instance.set(key, nextProps.layerProperties[key]);
+            }
+        });
     };
     Layer.prototype.renderLayer = function (Layer) {
         var _this = this;
@@ -820,14 +828,6 @@ var Layer = (function (_super) {
         this.setState({ instance: instance });
         var parent = this.props.addLocation.reduce(function (p, c) { return p[c]; }, this.state);
         parent.add(instance);
-    };
-    Layer.prototype.componentWillReceiveProps = function (nextProps) {
-        var _this = this;
-        Object.keys(nextProps.layerProperties).forEach(function (key) {
-            if (_this.state.instance.get(key)) {
-                _this.state.instance.set(key, nextProps.layerProperties[key]);
-            }
-        });
     };
     return Layer;
 }(React.Component));
@@ -2327,14 +2327,6 @@ var Graphic = (function (_super) {
             }
         }
     };
-    Graphic.prototype.registerSymbol = function (symbol) {
-        this.setState({ symbol: symbol });
-        this.renderGraphic();
-    };
-    Graphic.prototype.registerGeometry = function (geometry) {
-        this.setState({ geometry: geometry });
-        this.renderGraphic();
-    };
     Graphic.prototype.componentDidMount = function () {
         var _this = this;
         esri_promise_1.esriPromise([
@@ -2366,6 +2358,14 @@ var Graphic = (function (_super) {
                 }
             });
         }
+    };
+    Graphic.prototype.registerSymbol = function (symbol) {
+        this.setState({ symbol: symbol });
+        this.renderGraphic();
+    };
+    Graphic.prototype.registerGeometry = function (geometry) {
+        this.setState({ geometry: geometry });
+        this.renderGraphic();
     };
     return Graphic;
 }(React.Component));
@@ -2423,11 +2423,6 @@ var Symbol = (function (_super) {
             }
         });
     };
-    Symbol.prototype.createSymbol = function (Symbol) {
-        var instance = new Symbol(this.props.symbolProperties);
-        this.setState({ instance: instance });
-        this.props.registerSymbol(instance);
-    };
     Symbol.prototype.componentWillReceiveProps = function (nextProps) {
         var _this = this;
         Object.keys(nextProps.symbolProperties).forEach(function (key) {
@@ -2435,6 +2430,11 @@ var Symbol = (function (_super) {
                 _this.state.instance.set(key, nextProps.symbolProperties[key]);
             }
         });
+    };
+    Symbol.prototype.createSymbol = function (Symbol) {
+        var instance = new Symbol(this.props.symbolProperties);
+        this.setState({ instance: instance });
+        this.props.registerSymbol(instance);
     };
     return Symbol;
 }(React.Component));

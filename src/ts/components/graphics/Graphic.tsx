@@ -74,17 +74,7 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
       }
     }
 
-    public registerSymbol(symbol: __esri.Symbol) {
-      this.setState({ symbol });
-      this.renderGraphic();
-    }
-
-    public registerGeometry(geometry: __esri.Geometry) {
-      this.setState({ geometry });
-      this.renderGraphic();
-    }
-
-    private componentDidMount() {
+    public componentDidMount() {
       esriPromise([
         'esri/Graphic'
       ]).then(([
@@ -99,7 +89,7 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
       });
     }
 
-    private componentWillUnmount() {
+    public componentWillUnmount() {
       if (this.state.layer) {
         this.state.layer.graphics.remove(this.state.instance);
       } else if (this.state.view) {
@@ -107,7 +97,7 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
       }
     }
 
-    private componentWillReceiveProps(nextProps: GraphicProps) {
+    public componentWillReceiveProps(nextProps: GraphicProps) {
         if (nextProps.graphicProperties) {
           Object.keys(nextProps.graphicProperties).forEach((key) => {
               if (this.state.instance.get(key)) {
@@ -115,5 +105,15 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
               }
           });
         }
+    }
+
+    public registerSymbol(symbol: __esri.Symbol) {
+      this.setState({ symbol });
+      this.renderGraphic();
+    }
+
+    public registerGeometry(geometry: __esri.Geometry) {
+      this.setState({ geometry });
+      this.renderGraphic();
     }
 }

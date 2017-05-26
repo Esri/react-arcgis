@@ -37,7 +37,7 @@ export default class Widget extends React.Component<WidgetProps, ComponentState>
         return null;
     }
 
-    private componentDidMount() {
+    componentDidMount() {
       esriPromise([
         this.props.scriptUri
       ]).then(([
@@ -54,7 +54,7 @@ export default class Widget extends React.Component<WidgetProps, ComponentState>
       });
     }
 
-    private componentWillUnmount() {
+    componentWillUnmount() {
       this.state.view.ui.remove(this.state.instance);
     }
 
@@ -71,7 +71,7 @@ export default class Widget extends React.Component<WidgetProps, ComponentState>
       this.state.view.ui.add(instance, { position });
     }
 
-    private componentWillReceiveProps(nextProps: WidgetProps) {
+    componentWillReceiveProps(nextProps: WidgetProps) {
         Object.keys(nextProps.widgetProperties).forEach((key) => {
             if (this.state.instance.get(key)) {
                 this.state.instance.set(key, nextProps.widgetProperties[key]);

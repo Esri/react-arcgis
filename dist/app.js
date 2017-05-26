@@ -4981,6 +4981,9 @@ var Layer = (function (_super) {
         }
         return null;
     };
+    Layer.prototype.componentWillUnmount = function () {
+        this.state.map.remove(this.state.instance);
+    };
     Layer.prototype.componentDidMount = function () {
         var _this = this;
         esri_promise_1.esriPromise([
@@ -4999,8 +5002,13 @@ var Layer = (function (_super) {
             }
         });
     };
-    Layer.prototype.componentWillUnmount = function () {
-        this.state.map.remove(this.state.instance);
+    Layer.prototype.componentWillReceiveProps = function (nextProps) {
+        var _this = this;
+        Object.keys(nextProps.layerProperties).forEach(function (key) {
+            if (_this.state.instance.get(key)) {
+                _this.state.instance.set(key, nextProps.layerProperties[key]);
+            }
+        });
     };
     Layer.prototype.renderLayer = function (Layer) {
         var _this = this;
@@ -5013,14 +5021,6 @@ var Layer = (function (_super) {
         this.setState({ instance: instance });
         var parent = this.props.addLocation.reduce(function (p, c) { return p[c]; }, this.state);
         parent.add(instance);
-    };
-    Layer.prototype.componentWillReceiveProps = function (nextProps) {
-        var _this = this;
-        Object.keys(nextProps.layerProperties).forEach(function (key) {
-            if (_this.state.instance.get(key)) {
-                _this.state.instance.set(key, nextProps.layerProperties[key]);
-            }
-        });
     };
     return Layer;
 }(React.Component));

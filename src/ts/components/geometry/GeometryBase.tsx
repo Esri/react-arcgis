@@ -33,7 +33,7 @@ export default class Geometry extends React.Component<GeometryProps, ComponentSt
         return null;
     }
 
-    private componentDidMount() {
+    public componentDidMount() {
       esriPromise([
         this.props.scriptUri
       ]).then(([

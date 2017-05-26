@@ -12,7 +12,7 @@ export default class ArcContainer extends React.Component<IArcContainerProps, un
         return <div id={this.props.id} style={this.props.style}></div>;
     }
 
-    private shouldComponentUpdate() {
+    shouldComponentUpdate() {
         return false;
     }
 }

@@ -57,7 +57,11 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
       return null;
     }
 
-    private componentDidMount() {
+    public componentWillUnmount() {
+      this.state.map.remove(this.state.instance);
+    }
+
+    public componentDidMount() {
       esriPromise([
         this.props.scriptUri
       ]).then(([
@@ -76,8 +80,12 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
       });
     }
 
-    private componentWillUnmount() {
-      this.state.map.remove(this.state.instance);
+    public componentWillReceiveProps(nextProps: LayerProps) {
+        Object.keys(nextProps.layerProperties).forEach((key) => {
+            if (this.state.instance.get(key)) {
+                this.state.instance.set(key, nextProps.layerProperties[key]);
+            }
+        });
     }
 
     private renderLayer(Layer: __esri.LayerConstructor) {
@@ -90,13 +98,5 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
       this.setState({ instance });
       const parent = this.props.addLocation.reduce((p, c) => p[c], this.state) as any;
       parent.add(instance);
-    }
-
-    private componentWillReceiveProps(nextProps: LayerProps) {
-        Object.keys(nextProps.layerProperties).forEach((key) => {
-            if (this.state.instance.get(key)) {
-                this.state.instance.set(key, nextProps.layerProperties[key]);
-            }
-        });
     }
 };
