@@ -8,3 +8,5 @@ src/**/*.js.map
 src/index.html
 src/ts/app.tsx
 src/ts/Test.tsx
+.nyc_output
+coverage
