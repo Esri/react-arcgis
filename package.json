@@ -1,11 +1,12 @@
 {
   "name": "react-arcgis",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "React component library for Esri ArcGIS JavaScript API",
   "main": "app.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js",
-    "start": "webpack-dev-server --hot"
+    "start": "webpack-dev-server --hot",
+    "test": "nyc mocha"
   },
   "repository": {
     "type": "git",
@@ -25,19 +26,26 @@
   },
   "homepage": "https://github.com/nicksenger/react-arcgis#readme",
   "devDependencies": {
+    "@types/mocha": "^2.2.41",
     "awesome-typescript-loader": "^3.1.2",
     "calcite-web": "github:esri/calcite-web#v1.0.0-rc.2",
+    "chai": "^4.0.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.4",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "html-webpack-plugin": "^2.28.0",
+    "mocha": "^3.4.2",
+    "mock-require": "^2.0.2",
     "node-sass": "^4.5.0",
+    "nyc": "^10.3.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "sass-loader": "^6.0.3",
+    "sinon": "^2.3.2",
     "source-map-loader": "^0.1.6",
     "style-loader": "^0.13.2",
+    "ts-node": "^3.0.4",
     "tslint-react": "^2.5.0",
     "typescript": "^2.3.2",
     "webpack": "^2.2.1",
