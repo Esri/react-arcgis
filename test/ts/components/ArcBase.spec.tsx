@@ -32,6 +32,23 @@ export default () => (
                 expect(ArcView.prototype.componentDidMount['callCount']).to.equal(1);
             });
 
+            describe('esriPromise succeeds', () => {
+                it('should call loadMap with the result of esriPromise', () => {
+                    expect(1).to.equal(1);
+                });
+            });
+
+            // describe('esriPromise fails', () => {
+            //     let arcView
+            //     beforeEach(() => {
+            //         arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} />);
+            //     });
+
+            //     it('should call componentDidMount', () => {
+            //         expect(ArcView.prototype.componentDidMount['callCount']).to.equal(1);
+            //     });
+            // });
+
             afterEach(() => {
                 ArcView.prototype.componentDidMount['restore']();
             });

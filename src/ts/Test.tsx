@@ -38,7 +38,3 @@ export default class TestComponent extends React.Component<null, ComponentState>
         );
     }
 }
-
-export function foo() {
-    return 'not bar';
-}
