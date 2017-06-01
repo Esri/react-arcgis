@@ -1,7 +1,9 @@
 import * as mock from 'mock-require';
 
+mock('../src/ts/Test', './doubles/doubleTrouble');
 import SampleTests from './ts/test';
 SampleTests();
+mock.stop('../src/ts/Test');
 
 import ArcBaseTests from './ts/components/ArcBase.spec';
 ArcBaseTests();

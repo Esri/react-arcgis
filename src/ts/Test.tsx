@@ -1,5 +1,4 @@
 import * as React from 'react';
-import '../css/index.scss';
 import { Map, Scene } from './components/MapComposites';
 import { WebMap, WebScene } from './components/WebComposites';
 import { BasemapToggle } from './components/widgets/WidgetComposites';
@@ -9,7 +8,6 @@ interface ComponentState {
 }
 
 export default class TestComponent extends React.Component<null, ComponentState>{
-
     public render() {
         return (
             <div>
@@ -41,3 +39,6 @@ export default class TestComponent extends React.Component<null, ComponentState>
     }
 }
 
+export function foo() {
+    return 'not bar';
+}
