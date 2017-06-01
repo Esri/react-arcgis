@@ -1,4 +1,10 @@
+import { JSDOM } from 'jsdom';
 import * as mock from 'mock-require';
+
+const dom = new JSDOM('<html><body></body></html>');
+global['window'] = dom.window;
+global['navigator'] = dom.window.navigator;
+global['document'] = dom.window.document;
 
 mock('../src/ts/Test', './doubles/doubleTrouble');
 import SampleTests from './ts/test';
