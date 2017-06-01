@@ -5,7 +5,7 @@ import * as sinon from 'sinon';
 import * as WidgetComposites from '../../../../src/ts/components/widgets/WidgetComposites';
 
 export default () => (
-    describe('The widget composites', () => {
+    describe('The Widget composites', () => {
         let widget;
         Object.keys(WidgetComposites).forEach((widgetName) => {
             it(`${widgetName} widget should exist`, () => {

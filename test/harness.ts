@@ -23,3 +23,9 @@ WidgetBaseTests();
 
 import WidgetCompositeTests from './ts/components/widgets/WidgetComposites.spec';
 WidgetCompositeTests();
+
+import SymbolBaseTests from './ts/components/symbols/SymbolBase.spec';
+SymbolBaseTests();
+
+import SymbolCompositeTests from './ts/components/symbols/SymbolComposites.spec';
+SymbolCompositeTests();
