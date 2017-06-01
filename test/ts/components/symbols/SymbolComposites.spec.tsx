@@ -6,13 +6,20 @@ import * as SymbolComposites from '../../../../src/ts/components/symbols/SymbolC
 
 export default () => (
     describe('The Symbol composites', () => {
-        let symbol;
         Object.keys(SymbolComposites).forEach((symbolName) => {
-            it(`${symbolName} symbol should exist`, () => {
-                const SymbolElement = SymbolComposites[symbolName]
-                symbol = shallow(<SymbolElement />);
-                expect(symbol).to.exist;
+
+            describe(symbolName, () => {
+                const SymbolElement = SymbolComposites[symbolName];
+                let symbol;
+                beforeEach(() => {
+                    symbol = shallow(<SymbolElement />);
+                });
+
+                it('should exist', () => {
+                    expect(symbol).to.exist;
+                });
             });
+
         });
     })
 );

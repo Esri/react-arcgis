@@ -38,3 +38,9 @@ LayerCompositeTests();
 
 import GraphicTests from './ts/components/graphics/Graphic.spec';
 GraphicTests();
+
+import GeometryBaseTests from './ts/components/geometry/GeometryBase.spec';
+GeometryBaseTests();
+
+import GeometryCompositeTests from './ts/components/geometry/GeometryComposites.spec';
+GeometryCompositeTests();

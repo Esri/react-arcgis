@@ -6,13 +6,20 @@ import * as LayerComposites from '../../../../src/ts/components/layers/LayerComp
 
 export default () => (
     describe('The Layer composites', () => {
-        let layer;
         Object.keys(LayerComposites).forEach((layerName) => {
-            it(`${layerName} layer should exist`, () => {
-                const LayerElement = LayerComposites[layerName]
-                layer = shallow(<LayerElement />);
-                expect(layer).to.exist;
+
+            describe(layerName, () => {
+                const LayerElement = LayerComposites[layerName];
+                let layer;
+                beforeEach(() => {
+                    layer = shallow(<LayerElement />);
+                });
+
+                it('should exist', () => {
+                    expect(layer).to.exist;
+                });
             });
+
         });
     })
 );

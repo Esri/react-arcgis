@@ -6,13 +6,20 @@ import * as WidgetComposites from '../../../../src/ts/components/widgets/WidgetC
 
 export default () => (
     describe('The Widget composites', () => {
-        let widget;
         Object.keys(WidgetComposites).forEach((widgetName) => {
-            it(`${widgetName} widget should exist`, () => {
-                const WidgetElement = WidgetComposites[widgetName]
-                widget = shallow(<WidgetElement />);
-                expect(widget).to.exist;
+
+            describe(widgetName, () => {
+                const WidgetElement = WidgetComposites[widgetName];
+                let widget;
+                beforeEach(() => {
+                    widget = shallow(<WidgetElement />);
+                });
+
+                it('should exist', () => {
+                    expect(widget).to.exist;
+                });
             });
+
         });
     })
 );
