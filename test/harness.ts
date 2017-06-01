@@ -29,3 +29,9 @@ SymbolBaseTests();
 
 import SymbolCompositeTests from './ts/components/symbols/SymbolComposites.spec';
 SymbolCompositeTests();
+
+import LayerBaseTests from './ts/components/layers/LayerBase.spec';
+LayerBaseTests();
+
+import LayerCompositeTests from './ts/components/layers/LayerComposites.spec';
+LayerCompositeTests();
