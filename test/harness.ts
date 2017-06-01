@@ -35,3 +35,6 @@ LayerBaseTests();
 
 import LayerCompositeTests from './ts/components/layers/LayerComposites.spec';
 LayerCompositeTests();
+
+import GraphicTests from './ts/components/graphics/Graphic.spec';
+GraphicTests();

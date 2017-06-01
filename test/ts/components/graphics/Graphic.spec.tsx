@@ -2,17 +2,17 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import * as sinon from 'sinon';
-import Widget from '../../../../src/ts/components/widgets/WidgetBase';
+import Graphic from '../../../../src/ts/components/graphics/Graphic';
 
 export default () => (
-    describe('WidgetBase', () => {
-        let widget;
+    describe('Graphic', () => {
+        let graphic;
         beforeEach(() => {
-            widget = shallow(<Widget scriptUri="foobar" />);
+            graphic = shallow(<Graphic />);
         });
 
         it('should exist', () => {
-            expect(widget).to.exist;
+            expect(graphic).to.exist;
         });
     })
 );
