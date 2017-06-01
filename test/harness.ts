@@ -17,3 +17,9 @@ SceneTests();
 import { WebMapTests, WebSceneTests } from './ts/components/WebComposites.spec';
 WebMapTests();
 WebSceneTests();
+
+import WidgetBaseTests from './ts/components/widgets/WidgetBase.spec';
+WidgetBaseTests();
+
+import WidgetCompositeTests from './ts/components/widgets/WidgetComposites.spec';
+WidgetCompositeTests();
