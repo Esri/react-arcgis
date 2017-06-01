@@ -8,6 +8,12 @@
     "start": "webpack-dev-server --hot",
     "test": "nyc mocha"
   },
+  "nyc": {
+    "extension": [
+      ".tsx",
+      ".ts"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nicksenger/react-arcgis.git"
@@ -32,6 +38,7 @@
     "chai": "^4.0.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.4",
+    "enzyme": "^2.8.2",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "html-webpack-plugin": "^2.28.0",
@@ -40,7 +47,9 @@
     "node-sass": "^4.5.0",
     "nyc": "^10.3.2",
     "react": "^15.4.2",
+    "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.4.2",
+    "react-test-renderer": "^15.5.4",
     "sass-loader": "^6.0.3",
     "sinon": "^2.3.2",
     "source-map-loader": "^0.1.6",
