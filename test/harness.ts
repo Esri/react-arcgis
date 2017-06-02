@@ -1,9 +1,17 @@
+import { JSDOM } from 'jsdom';
 import * as mock from 'mock-require';
 
-mock('../src/ts/Test', './doubles/doubleTrouble');
+const dom = new JSDOM('<html><body></body></html>');
+global['window'] = dom.window;
+global['navigator'] = dom.window.navigator;
+global['document'] = dom.window.document;
+global['asyncSuccess'] = true;
+
+mock('esri-promise', './doubles/esriPromise');
+mock('../src/ts/mockTest', './doubles/doubleTrouble');
+
 import SampleTests from './ts/test';
 SampleTests();
-mock.stop('../src/ts/Test');
 
 import ArcBaseTests from './ts/components/ArcBase.spec';
 ArcBaseTests();

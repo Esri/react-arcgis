@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { ArcView } from '../../src/ts/components/ArcBase';
-import { foo } from '../../src/ts/Test';
+import { foo } from '../../src/ts/mockTest';
 
 export default () => (
     describe('The test suite', () => {
