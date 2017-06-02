@@ -104,21 +104,21 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
                 );
             });
             return (
-                <div style={mapStyle} className={className}>
+                <div id="base-container" style={mapStyle} className={className}>
                     <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
                     {childrenWithProps}
                 </div>
             );
         } else if (this.state.status === 'loading') {
             return (
-                <div style={mapStyle} className={className}>
+                <div id="base-container" style={mapStyle} className={className}>
                     <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
                     {loadElement}
                 </div>
             );
         }
         return (
-            <div style={mapStyle} className={className}>
+            <div id="base-container" style={mapStyle} className={className}>
                 {failElement}
             </div>
         );
