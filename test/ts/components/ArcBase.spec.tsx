@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
+import { Promise } from 'es6-promise';
 import * as React from 'react';
 import * as sinon from 'sinon';
 import { ArcView } from '../../../src/ts/components/ArcBase';
@@ -74,14 +75,7 @@ export default () => (
                 describe('the loadMap method succeeds', () => {
                     let loadMap;
                     beforeEach(() => {
-                        loadMap = () => ({
-                            then(callback, errback) {
-                                callback({
-                                    map: 'foo',
-                                    view: 'bar'
-                                });
-                            }
-                        });
+                        loadMap = () => (Promise.resolve({ map: 'foo', view: 'bar' }));
                         arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} />);
                     });
 
@@ -237,11 +231,7 @@ export default () => (
                 describe('the loadMap method fails', () => {
                     let loadMap;
                     beforeEach(() => {
-                        loadMap = () => ({
-                            then(callback, errback) {
-                                errback(new Error('failed'));
-                            }
-                        });
+                        loadMap = () => (Promise.reject(new Error('failed')));
                         arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} />);
                     });
 

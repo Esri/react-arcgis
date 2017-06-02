@@ -30,7 +30,7 @@ const eventMap = {
 export const MapBase = (props: MapBaseProps) => (
   <ArcView
     {...props}
-    loadMap = {
+    loadMap={
       ([Map, View], containerId) => {
         const mapData = new Promise((resolve, reject) => {
             const map: __esri.Map = new Map(props.mapProperties);  // Make the map
@@ -38,7 +38,7 @@ export const MapBase = (props: MapBaseProps) => (
                 map,
                 container: containerId,
                 ...props.viewProperties
-            }
+            };
             const view: __esri.View = new View(viewProperties);  // Make the view
             const typedView = view as __esri.MapView | __esri.SceneView;
             Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
