@@ -47,6 +47,16 @@ export default () => (
                 expect(ArcView.prototype.componentDidMount['callCount']).to.equal(1);
             });
 
+            describe('the user has included a custom className', () => {
+                beforeEach(() => {
+                    arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} className="foobar" />);
+                });
+
+                it('should give that className to the container div', () => {
+                    expect(arcView.find('#base-container').hasClass('foobar')).to.be.true;
+                });
+            });
+
             describe('esriPromise succeeds', () => {
                 beforeEach(() => {
                     global['asyncSuccess'] = true;
@@ -88,6 +98,27 @@ export default () => (
                             expect(arcView.instance().state.view).to.equal('bar');
                             done();
                         }, 1);
+                    });
+
+                    describe('the user has included a child component', () => {
+                        const ChildComponent = (props) => <h3 id="child">{props.map}{props.view}</h3>;
+                        beforeEach(() => {
+                            arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']}><ChildComponent /></ArcView>);
+                        });
+
+                        it('should render the child component', (done) => {
+                            setTimeout(() => {
+                                expect(arcView.find('#child')).to.have.length(1);
+                                done();
+                            }, 1);
+                        });
+
+                        it('should give map and view props to the child component', (done) => {
+                            setTimeout(() => {
+                                expect(arcView.find('#child').text()).to.equal('foobar');
+                                done();
+                            }, 1);
+                        });
                     });
 
                     describe('the user has included an onLoad callback', () => {
