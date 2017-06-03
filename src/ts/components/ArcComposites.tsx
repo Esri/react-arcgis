@@ -90,7 +90,6 @@ export const WebBase = (props: WebBaseProps) => (
                         });
                         Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
                             if (props[key]) {
-                                console.log(view);
                                 view.on(eventMap[key], props[key]);
                             }
                         });
