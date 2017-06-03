@@ -59,8 +59,11 @@ export default () => (
             });
 
             describe('esriPromise succeeds', () => {
-                beforeEach(() => {
+                before(() => {
                     global['asyncSuccess'] = true;
+                });
+
+                beforeEach(() => {
                     arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} />);
                 });
 
@@ -241,6 +244,10 @@ export default () => (
                             done();
                         }, 1);
                     });
+                });
+
+                after(() => {
+                    global['asyncSuccess'] = false;
                 });
             });
 
