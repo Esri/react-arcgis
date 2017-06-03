@@ -104,21 +104,21 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
                 );
             });
             return (
-                <div style={mapStyle} className={className}>
+                <div id="base-container" style={mapStyle} className={className}>
                     <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
                     {childrenWithProps}
                 </div>
             );
         } else if (this.state.status === 'loading') {
             return (
-                <div style={mapStyle} className={className}>
+                <div id="base-container" style={mapStyle} className={className}>
                     <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
                     {loadElement}
                 </div>
             );
         }
         return (
-            <div style={mapStyle} className={className}>
+            <div id="base-container" style={mapStyle} className={className}>
                 {failElement}
             </div>
         );
@@ -126,7 +126,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
 
     componentDidMount() {
         esriPromise(this.props.scriptUri)
-        .then((modules) => {
+        .then((modules) => (
             this.props.loadMap(modules, this.state.mapContainerId)
                 .then(
                     ({ map, view }) => {
@@ -138,11 +138,11 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
                         if (this.props.onLoad) {
                             this.props.onLoad(map, view);
                         }
-                    },
-                    (e) => {
-                        throw e;
-                    });
-        }).catch((e) => {
+                    })
+                .catch((e) => {
+                    throw e;
+                })
+        )).catch((e) => {
             this.setState({ status: 'failed' });
             if (this.props.onFail) {
                 this.props.onFail(e);

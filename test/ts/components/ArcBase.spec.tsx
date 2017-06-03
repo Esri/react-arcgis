@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
+import { Promise } from 'es6-promise';
 import * as React from 'react';
 import * as sinon from 'sinon';
 import { ArcView } from '../../../src/ts/components/ArcBase';
@@ -47,9 +48,22 @@ export default () => (
                 expect(ArcView.prototype.componentDidMount['callCount']).to.equal(1);
             });
 
-            describe('esriPromise succeeds', () => {
+            describe('the user has included a custom className', () => {
                 beforeEach(() => {
+                    arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} className="foobar" />);
+                });
+
+                it('should give that className to the container div', () => {
+                    expect(arcView.find('#base-container').hasClass('foobar')).to.be.true;
+                });
+            });
+
+            describe('esriPromise succeeds', () => {
+                before(() => {
                     global['asyncSuccess'] = true;
+                });
+
+                beforeEach(() => {
                     arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} />);
                 });
 
@@ -64,14 +78,7 @@ export default () => (
                 describe('the loadMap method succeeds', () => {
                     let loadMap;
                     beforeEach(() => {
-                        loadMap = () => ({
-                            then(callback, errback) {
-                                callback({
-                                    map: 'foo',
-                                    view: 'bar'
-                                });
-                            }
-                        });
+                        loadMap = () => (Promise.resolve({ map: 'foo', view: 'bar' }));
                         arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} />);
                     });
 
@@ -88,6 +95,27 @@ export default () => (
                             expect(arcView.instance().state.view).to.equal('bar');
                             done();
                         }, 1);
+                    });
+
+                    describe('the user has included a child component', () => {
+                        const ChildComponent = (props) => <h3 id="child">{props.map}{props.view}</h3>;
+                        beforeEach(() => {
+                            arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']}><ChildComponent /></ArcView>);
+                        });
+
+                        it('should render the child component', (done) => {
+                            setTimeout(() => {
+                                expect(arcView.find('#child')).to.have.length(1);
+                                done();
+                            }, 1);
+                        });
+
+                        it('should give map and view props to the child component', (done) => {
+                            setTimeout(() => {
+                                expect(arcView.find('#child').text()).to.equal('foobar');
+                                done();
+                            }, 1);
+                        });
                     });
 
                     describe('the user has included an onLoad callback', () => {
@@ -206,11 +234,7 @@ export default () => (
                 describe('the loadMap method fails', () => {
                     let loadMap;
                     beforeEach(() => {
-                        loadMap = () => ({
-                            then(callback, errback) {
-                                errback(new Error('failed'));
-                            }
-                        });
+                        loadMap = () => (Promise.reject(new Error('failed')));
                         arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} />);
                     });
 
@@ -220,6 +244,10 @@ export default () => (
                             done();
                         }, 1);
                     });
+                });
+
+                after(() => {
+                    global['asyncSuccess'] = false;
                 });
             });
 

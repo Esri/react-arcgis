@@ -30,27 +30,31 @@ const eventMap = {
 export const MapBase = (props: MapBaseProps) => (
   <ArcView
     {...props}
-    loadMap = {
+    loadMap={
       ([Map, View], containerId) => {
         const mapData = new Promise((resolve, reject) => {
-            const map: __esri.Map = new Map(props.mapProperties);  // Make the map
-            const viewProperties: __esri.ViewProperties | __esri.MapProperties = {
-                map,
-                container: containerId,
-                ...props.viewProperties
-            }
-            const view: __esri.View = new View(viewProperties);  // Make the view
-            const typedView = view as __esri.MapView | __esri.SceneView;
-            Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
-                if (props[key]) {
-                    typedView.on(eventMap[key], props[key]);
-                }
-            });
-            view.then(() => {
-                resolve({ map, view });
-            }, (err) => {
+            try {
+                const map: __esri.Map = new Map(props.mapProperties);  // Make the map
+                const viewProperties: __esri.ViewProperties | __esri.MapProperties = {
+                    map,
+                    container: containerId,
+                    ...props.viewProperties
+                };
+                const view: __esri.View = new View(viewProperties);  // Make the view
+                const typedView = view as __esri.MapView | __esri.SceneView;
+                Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
+                    if (props[key]) {
+                        typedView.on(eventMap[key], props[key]);
+                    }
+                });
+                view.then(() => {
+                    resolve({ map, view });
+                }, (err) => {
+                    reject(err);
+                });
+            } catch (err) {
                 reject(err);
-            });
+            }
         });
         return mapData;
       }
@@ -64,32 +68,39 @@ export const WebBase = (props: WebBaseProps) => (
     loadMap = {
       ([WebConstructor, ViewConstructor, all], containerId) => {
         const mapData = new Promise((resolve, reject) => {
-            const map: __esri.WebMap | __esri.WebScene = new WebConstructor({
-                portalItem: {
-                    id: props.id
-                }
-            });
-            map.load()
-                .then(() => map.basemap.load())
-                .then(() => {
-                    const allLayers = map.allLayers;
-                    const promises = allLayers.map((layer) => layer.load());
-                    return all(promises.toArray());
-                })
-                .then((layers) => {
-                    const view = new ViewConstructor({
-                        container: containerId,
-                        map
-                    });
-                    Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
-                        if (props[key]) {
-                            view.on(eventMap[key], props[key]);
-                        }
-                    });
-                    resolve({ map, view });
-                }).otherwise((err) => {
-                    reject(err);
+            try {
+                const map: __esri.WebMap | __esri.WebScene = new WebConstructor({
+                    portalItem: {
+                        id: props.id
+                    }
                 });
+                map.load()
+                    .then(() => {
+                        return map.basemap.load();
+                    })
+                    .then(() => {
+                        const allLayers = map.allLayers;
+                        const promises = allLayers.map((layer) => layer.load());
+                        return all(promises.toArray());
+                    })
+                    .then((layers) => {
+                        const view = new ViewConstructor({
+                            container: containerId,
+                            map
+                        });
+                        Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
+                            if (props[key]) {
+                                console.log(view);
+                                view.on(eventMap[key], props[key]);
+                            }
+                        });
+                        resolve({ map, view });
+                    }).otherwise((err) => {
+                        reject(err);
+                    });
+            } catch (err) {
+                reject(err);
+            }
         });
         return mapData;
       }
