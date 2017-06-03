@@ -175,10 +175,10 @@ export default () => (
                                     loadMap={loadMap} scriptUri={['foo', 'bar']}
                                     mapProperties={{
                                         foo: 'bar'
-                                    }}
+                                    } as __esri.MapProperties}
                                     viewProperties={{
                                         foo: 'bar'
-                                    }}
+                                    } as __esri.ViewProperties}
                                 />
                             );
                         });

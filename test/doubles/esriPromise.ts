@@ -89,6 +89,10 @@ export function esriPromise(modules) {
                 },
                 () => null
             ])
+        } else if (global['generateGeometry']) {
+            return Promise.resolve([
+                class Geometry {}
+            ]);
         }
         return Promise.resolve('success');
     }
