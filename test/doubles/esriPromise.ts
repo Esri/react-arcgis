@@ -121,6 +121,19 @@ export function esriPromise(modules) {
                     add() {}
                 }
             ]);
+        } else if (global['generateLayer']) {
+            return Promise.resolve([
+                class Layer extends GetterSetter {
+                    foo: string;
+
+                    constructor() {
+                        super();
+                        this.foo = 'bar';
+                    }
+
+                    on() {}
+                }
+            ])
         }
         return Promise.resolve('success');
     }
