@@ -71,7 +71,7 @@ export const MapBaseTests = () => (
                     after(() => {
                         global['asyncSuccess'] = false;
                         global['generateMap'] = false;
-                    })
+                    });
                 });
 
                 describe('loadMap returns a map which fails to load', () => {

@@ -1,5 +1,20 @@
 import { Promise } from 'es6-promise';
 
+class GetterSetter {
+    public set(key, value) {
+        if (this[key]) {
+            this[key] = value;
+        }
+    }
+
+    public get(key) {
+        if (this[key]) {
+            return this[key];
+        }
+        return undefined;
+    }
+};
+
 export function esriPromise(modules) {
     if (global['asyncSuccess']) {
         if (global['generateMap']) {
@@ -92,6 +107,19 @@ export function esriPromise(modules) {
         } else if (global['generateGeometry']) {
             return Promise.resolve([
                 class Geometry {}
+            ]);
+        } else if (global['generateGraphic']) {
+            return Promise.resolve([
+                class Graphic extends GetterSetter {
+                    foo: string;
+
+                    constructor() {
+                        super();
+                        this.foo = 'bar';
+                    }
+
+                    add() {}
+                }
             ]);
         }
         return Promise.resolve('success');
