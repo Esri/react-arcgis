@@ -32,7 +32,7 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
             map: this.props.map,
             symbol: null,
             view: this.props.view,
-        }
+        };
         this.renderGraphic = this.renderGraphic.bind(this);
         this.registerSymbol = this.registerSymbol.bind(this);
         this.registerGeometry = this.registerGeometry.bind(this);
