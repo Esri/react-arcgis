@@ -65,7 +65,8 @@ export function esriPromise(modules) {
                             }
                         }
                         this.allLayers = {
-                            map() {
+                            map(callback) {
+                                callback({ load() {} });
                                 return {
                                     toArray() {
                                         return null;
