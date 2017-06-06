@@ -36,18 +36,20 @@ export default () => (
 
                 beforeEach(() => {
                     widget = mount(<Widget scriptUri="foobar" view={{ ui: { add: sinon.stub() } } as any} eventMap={{ foo: 'bar' }} />);
-                    sinon.spy(widget.instance().renderWidget);
+                    sinon.spy(widget.instance(), 'renderWidget');
                 });
 
-                it('should call renderWidget', () => {
+                it('should call renderWidget', (done) => {
                     setTimeout(() => {
                         expect(widget.instance().renderWidget.callCount).to.equal(1);
+                        done();
                     }, 1);
                 });
 
-                it('should add itself to the view', () => {
+                it('should add itself to the view', (done) => {
                     setTimeout(() => {
                         expect(widget.instance().state.view.ui.add.callCount).to.equal(1);
+                        done();
                     }, 1);
                 });
 
@@ -64,8 +66,8 @@ export default () => (
                         );
                     });
 
-                    it('should add to the view with the desired position', () => {
-                        setTimeout((done) => {
+                    it('should add to the view with the desired position', (done) => {
+                        setTimeout(() => {
                             expect(widget.props().view.ui.add.callCount).to.equal(1);
                             done();
                         }, 1);
@@ -77,9 +79,10 @@ export default () => (
                         widget = mount(<Widget scriptUri="foobar" view={{ ui: { add: sinon.stub() } } as any} eventMap={{ foo: 'bar' }} foo={() => null} />);
                     });
 
-                    it('should call the instance on() function with the event name', () => {
+                    it('should call the instance on() function with the event name', (done) => {
                         setTimeout(() => {
-                            expect(widget.instance().on.callCount).to.equal(1);
+                            expect(widget.instance().state.instance.on.callCount).to.equal(1);
+                            done();
                         }, 1);
                     });
                 });
@@ -150,10 +153,11 @@ export default () => (
                         );
                     });
 
-                    it('should remove itself from the view', () => {
+                    it('should remove itself from the view', (done) => {
                         setTimeout(() => {
                             widget.instance().componentWillUnmount();
-                            expect(widget.props().remove.callCount).to.equal(1);
+                            expect(widget.props().view.ui.remove.callCount).to.equal(1);
+                            done();
                         }, 1);
                     });
                 });
@@ -169,9 +173,15 @@ export default () => (
                     global['asyncSuccess'] = false;
                 });
 
-                it('should not call renderWidget', () => {
+                beforeEach(() => {
+                    widget = mount(<Widget scriptUri="foobar" view={{ ui: { add: sinon.stub() } } as any} eventMap={{ foo: 'bar' }} />);
+                    sinon.spy(widget.instance(), 'renderWidget');
+                });
+
+                it('should not call renderWidget', (done) => {
                     setTimeout(() => {
-                        expect(widget.instance().renderWidget.callCount).to.equal(1);
+                        expect(widget.instance().renderWidget.callCount).to.equal(0);
+                        done();
                     }, 1);
                 });
 
