@@ -134,6 +134,17 @@ export function esriPromise(modules) {
                     on() {}
                 }
             ])
+        } else if (global['generateSymbol']) {
+            return Promise.resolve([
+                class Symbol extends GetterSetter {
+                    foo: string;
+
+                    constructor(){
+                        super();
+                        this.foo = 'bar';
+                    }
+                }
+            ]);
         }
         return Promise.resolve('success');
     }
