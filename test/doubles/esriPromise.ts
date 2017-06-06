@@ -1,4 +1,5 @@
 import { Promise } from 'es6-promise';
+import * as sinon from 'sinon';
 
 class GetterSetter {
     public set(key, value) {
@@ -139,10 +140,24 @@ export function esriPromise(modules) {
                 class Symbol extends GetterSetter {
                     foo: string;
 
-                    constructor(){
+                    constructor() {
                         super();
                         this.foo = 'bar';
                     }
+                }
+            ]);
+        } else if (global['generateWidget']) {
+            return Promise.resolve([
+                class Widget extends GetterSetter {
+                    foo: string;
+                    on: any;
+
+                    constructor() {
+                        super();
+                        this.foo = 'bar';
+                        this.on = sinon.stub();
+                    }
+
                 }
             ]);
         }
