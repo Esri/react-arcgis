@@ -28,6 +28,7 @@ export default class TestComponent extends React.Component<null, ComponentState>
                             url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/OsoLandslide/OsoLandslide_After_3DTerrain/ImageServer'
                         }}
                     />
+                    <BasemapToggle position="top-right" />
                 </Scene>
                 <WebMap
                     id="6627e1dd5f594160ac60f9dfc411673f"

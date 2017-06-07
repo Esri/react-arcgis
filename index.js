@@ -7,7 +7,7 @@
 		exports["react-arcgis"] = factory(require("react"), require("esri-promise"));
 	else
 		root["react-arcgis"] = factory(root["react"], root["esri-promise"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_14__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_13__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -280,40 +280,31 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var esri_promise_1 = __webpack_require__(14);
+var esri_promise_1 = __webpack_require__(13);
 var React = __webpack_require__(4);
-var Widget = (function (_super) {
-    __extends(Widget, _super);
-    function Widget(props) {
+var Symbol = (function (_super) {
+    __extends(Symbol, _super);
+    function Symbol(props) {
         var _this = _super.call(this, props) || this;
         _this.state = {
+            graphic: _this.props.graphic,
             instance: null,
-            map: _this.props.map,
             scriptUri: _this.props.scriptUri,
-            view: _this.props.view,
         };
-        _this.renderWidget = _this.renderWidget.bind(_this);
+        _this.createSymbol = _this.createSymbol.bind(_this);
         return _this;
     }
-    Widget.prototype.render = function () {
+    Symbol.prototype.render = function () {
         return null;
     };
-    Widget.prototype.componentDidMount = function () {
+    Symbol.prototype.componentDidMount = function () {
         var _this = this;
         esri_promise_1.esriPromise([
             this.props.scriptUri
         ]).then(function (_a) {
-            var Widget = _a[0];
-            _this.renderWidget(Widget);
+            var Symbol = _a[0];
+            _this.createSymbol(Symbol);
             if (_this.props.onLoad) {
                 _this.props.onLoad(_this.state.instance);
             }
@@ -323,33 +314,22 @@ var Widget = (function (_super) {
             }
         });
     };
-    Widget.prototype.componentWillUnmount = function () {
-        this.state.view.ui.remove(this.state.instance);
-    };
-    Widget.prototype.renderWidget = function (Widget) {
+    Symbol.prototype.componentWillReceiveProps = function (nextProps) {
         var _this = this;
-        var widgetProperties = __assign({ view: this.state.view }, this.props.widgetProperties);
-        var position = this.props.position ? this.props.position : 'manual';
-        var instance = new Widget(widgetProperties);
-        Object.keys(this.props.eventMap).forEach(function (key) {
-            if (_this.props[key]) {
-                instance.on(_this.props.eventMap[key], _this.props[key]);
-            }
-        });
-        this.setState({ instance: instance });
-        this.state.view.ui.add(instance, { position: position });
-    };
-    Widget.prototype.componentWillReceiveProps = function (nextProps) {
-        var _this = this;
-        Object.keys(nextProps.widgetProperties).forEach(function (key) {
+        Object.keys(nextProps.symbolProperties).forEach(function (key) {
             if (_this.state.instance.get(key)) {
-                _this.state.instance.set(key, nextProps.widgetProperties[key]);
+                _this.state.instance.set(key, nextProps.symbolProperties[key]);
             }
         });
     };
-    return Widget;
+    Symbol.prototype.createSymbol = function (Symbol) {
+        var instance = new Symbol(this.props.symbolProperties);
+        this.setState({ instance: instance });
+        this.props.registerSymbol(instance);
+    };
+    return Symbol;
 }(React.Component));
-exports.default = Widget;
+exports.default = Symbol;
 ;
 
 
@@ -370,62 +350,18 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(4);
-var WidgetBase_1 = __webpack_require__(100);
-exports.Attribution = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Attribution", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
-exports.BasemapGallery = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/BasemapGallery", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
-exports.BasemapToggle = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/BasemapToggle", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
-        onToggle: 'toggle'
-    } }))); };
-exports.ColorSlider = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/ColorSlider", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
-        onDataChange: 'data-change',
-        onDataValueChange: 'data-value-change',
-        onHandleValueChange: 'handle-value-change'
-    } }))); };
-exports.Compass = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Compass", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
-exports.Expand = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Expand", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
-exports.Home = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Home", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
-exports.LayerList = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/LayerList", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
-        onTriggerAction: 'trigger-action'
-    } }))); };
-exports.Legend = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Legend", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
-exports.Locate = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Locate", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
-        onLocate: 'locate',
-        onLocateError: 'locate-error'
-    } }))); };
-exports.NavigationToggle = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/NavigationToggle", widgetProperties: __assign({}, props.widgetProperties) }))); };
-exports.Popup = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Popup", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
-        onTriggerAction: 'trigger-action'
-    } }))); };
-exports.Print = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Print", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
-exports.ScaleBar = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/ScaleBar", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
-exports.Search = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Search", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
-        onSearchClear: 'search-clear',
-        onSearchComplete: 'search-complete',
-        onSearchStart: 'search-start',
-        onSelectResult: 'select-result',
-        onSuggestComplete: 'suggest-complete',
-        onSuggestStart: 'suggest-start'
-    } }))); };
-exports.SizeSlider = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/SizeSlider", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
-        onDataChange: 'data-change',
-        onDataValueChange: 'data-value-change',
-        onHandleValueChange: 'handle-value-change'
-    } }))); };
-exports.Track = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Track", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
-        onTrack: 'track',
-        onTrackError: 'track-error'
-    } }))); };
-exports.UnivariateColorSizeSlider = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/UnvariateColorSizeSlider", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
-        onDataChange: 'data-change',
-        onDataValueChange: 'data-value-change',
-        onHandleValueChange: 'handle-value-change'
-    } }))); };
-exports.Zoom = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Zoom", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
+var SymbolBase_1 = __webpack_require__(100);
+exports.Font = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { scriptUri: "esri/symbols/Font", symbolProperties: __assign({}, props.symbolProperties) }))); };
+exports.PictureFillSymbol = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { scriptUri: "esri/symbols/PictureFillSymbol", symbolProperties: __assign({}, props.symbolProperties) }))); };
+exports.PictureMarkerSymbol = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { scriptUri: "esri/symbols/PictureMarkerSymbol", symbolProperties: __assign({}, props.symbolProperties) }))); };
+exports.SimpleFillSymbol = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { scriptUri: "esri/symbols/SimpleFillSymbol", symbolProperties: __assign({}, props.symbolProperties) }))); };
+exports.SimpleLineSymbol = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { scriptUri: "esri/symbols/SimpleLineSymbol", symbolProperties: __assign({}, props.symbolProperties) }))); };
+exports.SimpleMarkerSymbol = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { scriptUri: "esri/symbols/SimpleMarkerSymbol", symbolProperties: __assign({}, props.symbolProperties) }))); };
 
 
 /***/ }),
 
-/***/ 14:
+/***/ 13:
 /***/ (function(module, exports) {
 
 module.exports = require("esri-promise");
@@ -435,7 +371,7 @@ module.exports = require("esri-promise");
 /***/ 203:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(92);
+module.exports = __webpack_require__(94);
 
 
 /***/ }),
@@ -454,7 +390,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var es6_promise_1 = __webpack_require__(41);
+var es6_promise_1 = __webpack_require__(43);
 var React = __webpack_require__(4);
 var ArcBase_1 = __webpack_require__(35);
 var eventMap = {
@@ -475,52 +411,64 @@ var eventMap = {
 exports.MapBase = function (props) { return (React.createElement(ArcBase_1.ArcView, __assign({}, props, { loadMap: function (_a, containerId) {
         var Map = _a[0], View = _a[1];
         var mapData = new es6_promise_1.Promise(function (resolve, reject) {
-            var map = new Map(props.mapProperties); // Make the map
-            var viewProperties = __assign({ map: map, container: containerId }, props.viewProperties);
-            var view = new View(viewProperties); // Make the view
-            var typedView = view;
-            Object.keys(eventMap).forEach(function (key) {
-                if (props[key]) {
-                    typedView.on(eventMap[key], props[key]);
-                }
-            });
-            view.then(function () {
-                resolve({ map: map, view: view });
-            }, function (err) {
+            try {
+                var map_1 = new Map(props.mapProperties); // Make the map
+                var viewProperties = __assign({ map: map_1, container: containerId }, props.viewProperties);
+                var view_1 = new View(viewProperties); // Make the view
+                var typedView_1 = view_1;
+                Object.keys(eventMap).forEach(function (key) {
+                    if (props[key]) {
+                        typedView_1.on(eventMap[key], props[key]);
+                    }
+                });
+                view_1.then(function () {
+                    resolve({ map: map_1, view: view_1 });
+                }, function (err) {
+                    reject(err);
+                });
+            }
+            catch (err) {
                 reject(err);
-            });
+            }
         });
         return mapData;
     } }))); };
 exports.WebBase = function (props) { return (React.createElement(ArcBase_1.ArcView, __assign({}, props, { loadMap: function (_a, containerId) {
         var WebConstructor = _a[0], ViewConstructor = _a[1], all = _a[2];
         var mapData = new es6_promise_1.Promise(function (resolve, reject) {
-            var map = new WebConstructor({
-                portalItem: {
-                    id: props.id
-                }
-            });
-            map.load()
-                .then(function () { return map.basemap.load(); })
-                .then(function () {
-                var allLayers = map.allLayers;
-                var promises = allLayers.map(function (layer) { return layer.load(); });
-                return all(promises.toArray());
-            })
-                .then(function (layers) {
-                var view = new ViewConstructor({
-                    container: containerId,
-                    map: map
-                });
-                Object.keys(eventMap).forEach(function (key) {
-                    if (props[key]) {
-                        view.on(eventMap[key], props[key]);
+            try {
+                var map_2 = new WebConstructor({
+                    portalItem: {
+                        id: props.id
                     }
                 });
-                resolve({ map: map, view: view });
-            }).otherwise(function (err) {
+                map_2.load()
+                    .then(function () {
+                    return map_2.basemap.load();
+                })
+                    .then(function () {
+                    var allLayers = map_2.allLayers;
+                    var promises = allLayers.map(function (layer) { return layer.load(); });
+                    return all(promises.toArray());
+                })
+                    .then(function (layers) {
+                    var view = new ViewConstructor({
+                        container: containerId,
+                        map: map_2
+                    });
+                    Object.keys(eventMap).forEach(function (key) {
+                        if (props[key]) {
+                            view.on(eventMap[key], props[key]);
+                        }
+                    });
+                    resolve({ map: map_2, view: view });
+                }).otherwise(function (err) {
+                    reject(err);
+                });
+            }
+            catch (err) {
                 reject(err);
-            });
+            }
         });
         return mapData;
     } }))); };
@@ -552,7 +500,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var esri_promise_1 = __webpack_require__(14);
+var esri_promise_1 = __webpack_require__(13);
 var React = __webpack_require__(4);
 var ArcContainer_1 = __webpack_require__(36);
 var eventMap = {
@@ -595,9 +543,9 @@ var ArcView = (function (_super) {
         };
         var mapStyle = this.props.className ? this.props.style : __assign({ position: 'relative', width: '100%', height: '100%' }, this.props.style);
         var className = this.props.className ? this.props.className : null;
-        var loadElement = (this.props.loadComponent ? React.createElement(this.props.loadComponent, null) : React.createElement("h3", { style: centerStyle }, "Loading.."));
+        var loadElement = (this.props.loadComponent ? React.createElement(this.props.loadComponent, null) : React.createElement("h3", { id: "react-arcgis-loading-text", style: centerStyle }, "Loading.."));
         var failElement = (this.props.failComponent ? React.createElement(this.props.failComponent, null) :
-            React.createElement("h3", { style: centerStyle }, "The ArcGIS API failed to load."));
+            React.createElement("h3", { id: "react-arcgis-fail-text", style: centerStyle }, "The ArcGIS API failed to load."));
         if (this.state.status === 'loaded') {
             var childrenWithProps = React.Children.map(this.props.children, function (child) {
                 var childEl = child;
@@ -606,36 +554,35 @@ var ArcView = (function (_super) {
                     view: _this.state.view
                 });
             });
-            return (React.createElement("div", { style: mapStyle, className: className },
+            return (React.createElement("div", { id: "base-container", style: mapStyle, className: className },
                 React.createElement(ArcContainer_1.default, { id: this.state.mapContainerId, style: { width: '100%', height: '100%' } }),
                 childrenWithProps));
         }
         else if (this.state.status === 'loading') {
-            return (React.createElement("div", { style: mapStyle, className: className },
+            return (React.createElement("div", { id: "base-container", style: mapStyle, className: className },
                 React.createElement(ArcContainer_1.default, { id: this.state.mapContainerId, style: { width: '100%', height: '100%' } }),
                 loadElement));
         }
-        return (React.createElement("div", { style: mapStyle, className: className }, failElement));
+        return (React.createElement("div", { id: "base-container", style: mapStyle, className: className }, failElement));
     };
     ArcView.prototype.componentDidMount = function () {
         var _this = this;
         esri_promise_1.esriPromise(this.props.scriptUri)
-            .then(function (modules) {
-            _this.props.loadMap(modules, _this.state.mapContainerId)
-                .then(function (_a) {
-                var map = _a.map, view = _a.view;
-                _this.setState({
-                    map: map,
-                    view: view,
-                    status: 'loaded'
-                });
-                if (_this.props.onLoad) {
-                    _this.props.onLoad(map, view);
-                }
-            }, function (e) {
-                throw e;
+            .then(function (modules) { return (_this.props.loadMap(modules, _this.state.mapContainerId)
+            .then(function (_a) {
+            var map = _a.map, view = _a.view;
+            _this.setState({
+                map: map,
+                view: view,
+                status: 'loaded'
             });
-        }).catch(function (e) {
+            if (_this.props.onLoad) {
+                _this.props.onLoad(map, view);
+            }
+        })
+            .catch(function (e) {
+            throw e;
+        })); }).catch(function (e) {
             _this.setState({ status: 'failed' });
             if (_this.props.onFail) {
                 _this.props.onFail(e);
@@ -759,7 +706,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var esri_promise_1 = __webpack_require__(14);
+var esri_promise_1 = __webpack_require__(13);
 var React = __webpack_require__(4);
 var Layer = (function (_super) {
     __extends(Layer, _super);
@@ -931,6 +878,166 @@ exports.WebTileLayer = function (props) { return (React.createElement(LayerBase_
 /***/ 41:
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var esri_promise_1 = __webpack_require__(13);
+var React = __webpack_require__(4);
+var Widget = (function (_super) {
+    __extends(Widget, _super);
+    function Widget(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            instance: null,
+            map: _this.props.map,
+            scriptUri: _this.props.scriptUri,
+            view: _this.props.view,
+        };
+        _this.renderWidget = _this.renderWidget.bind(_this);
+        return _this;
+    }
+    Widget.prototype.render = function () {
+        return null;
+    };
+    Widget.prototype.componentDidMount = function () {
+        var _this = this;
+        esri_promise_1.esriPromise([
+            this.props.scriptUri
+        ]).then(function (_a) {
+            var Widget = _a[0];
+            _this.renderWidget(Widget);
+            if (_this.props.onLoad) {
+                _this.props.onLoad(_this.state.instance);
+            }
+        }).catch(function (e) {
+            if (_this.props.onFail) {
+                _this.props.onFail(e);
+            }
+        });
+    };
+    Widget.prototype.componentWillUnmount = function () {
+        this.state.view.ui.remove(this.state.instance);
+    };
+    Widget.prototype.renderWidget = function (Widget) {
+        var _this = this;
+        var widgetProperties = __assign({ view: this.state.view }, this.props.widgetProperties);
+        var position = this.props.position ? this.props.position : 'manual';
+        var instance = new Widget(widgetProperties);
+        Object.keys(this.props.eventMap).forEach(function (key) {
+            if (_this.props[key]) {
+                instance.on(_this.props.eventMap[key], _this.props[key]);
+            }
+        });
+        this.setState({ instance: instance });
+        this.state.view.ui.add(instance, { position: position });
+    };
+    Widget.prototype.componentWillReceiveProps = function (nextProps) {
+        var _this = this;
+        Object.keys(nextProps.widgetProperties).forEach(function (key) {
+            if (_this.state.instance.get(key)) {
+                _this.state.instance.set(key, nextProps.widgetProperties[key]);
+            }
+        });
+    };
+    return Widget;
+}(React.Component));
+exports.default = Widget;
+;
+
+
+/***/ }),
+
+/***/ 42:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(4);
+var WidgetBase_1 = __webpack_require__(41);
+exports.Attribution = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Attribution", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
+exports.BasemapGallery = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/BasemapGallery", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
+exports.BasemapToggle = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/BasemapToggle", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
+        onToggle: 'toggle'
+    } }))); };
+exports.ColorSlider = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/ColorSlider", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
+        onDataChange: 'data-change',
+        onDataValueChange: 'data-value-change',
+        onHandleValueChange: 'handle-value-change'
+    } }))); };
+exports.Compass = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Compass", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
+exports.Expand = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Expand", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
+exports.Home = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Home", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
+exports.LayerList = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/LayerList", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
+        onTriggerAction: 'trigger-action'
+    } }))); };
+exports.Legend = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Legend", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
+exports.Locate = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Locate", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
+        onLocate: 'locate',
+        onLocateError: 'locate-error'
+    } }))); };
+exports.NavigationToggle = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/NavigationToggle", widgetProperties: __assign({}, props.widgetProperties) }))); };
+exports.Popup = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Popup", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
+        onTriggerAction: 'trigger-action'
+    } }))); };
+exports.Print = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Print", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
+exports.ScaleBar = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/ScaleBar", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
+exports.Search = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Search", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
+        onSearchClear: 'search-clear',
+        onSearchComplete: 'search-complete',
+        onSearchStart: 'search-start',
+        onSelectResult: 'select-result',
+        onSuggestComplete: 'suggest-complete',
+        onSuggestStart: 'suggest-start'
+    } }))); };
+exports.SizeSlider = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/SizeSlider", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
+        onDataChange: 'data-change',
+        onDataValueChange: 'data-value-change',
+        onHandleValueChange: 'handle-value-change'
+    } }))); };
+exports.Track = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Track", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
+        onTrack: 'track',
+        onTrackError: 'track-error'
+    } }))); };
+exports.UnivariateColorSizeSlider = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/UnvariateColorSizeSlider", widgetProperties: __assign({}, props.widgetProperties), eventMap: {
+        onDataChange: 'data-change',
+        onDataValueChange: 'data-value-change',
+        onHandleValueChange: 'handle-value-change'
+    } }))); };
+exports.Zoom = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { scriptUri: "esri/widgets/Zoom", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
+
+
+/***/ }),
+
+/***/ 43:
+/***/ (function(module, exports, __webpack_require__) {
+
 /* WEBPACK VAR INJECTION */(function(process, global) {var require;/*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
  * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
@@ -1067,7 +1174,7 @@ function flush() {
 function attemptVertx() {
   try {
     var r = require;
-    var vertx = __webpack_require__(61);
+    var vertx = __webpack_require__(63);
     vertxNext = vertx.runOnLoop || vertx.runOnContext;
     return useVertxTimer();
   } catch (e) {
@@ -2089,11 +2196,11 @@ return Promise;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(60)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(62)))
 
 /***/ }),
 
-/***/ 60:
+/***/ 62:
 /***/ (function(module, exports) {
 
 var g;
@@ -2121,14 +2228,14 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 61:
+/***/ 63:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 92:
+/***/ 94:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2136,11 +2243,11 @@ module.exports = g;
 Object.defineProperty(exports, "__esModule", { value: true });
 var MapViews = __webpack_require__(37);
 var WebViews = __webpack_require__(38);
-var GeometryImport = __webpack_require__(96);
-var Graphic_1 = __webpack_require__(97);
+var GeometryImport = __webpack_require__(98);
+var Graphic_1 = __webpack_require__(99);
 var LayersImport = __webpack_require__(40);
-var SymbolsImport = __webpack_require__(99);
-var WidgetsImport = __webpack_require__(101);
+var SymbolsImport = __webpack_require__(101);
+var WidgetsImport = __webpack_require__(42);
 var ReactArcGIS = {
     Geometry: GeometryImport,
     Graphic: Graphic_1.default,
@@ -2166,7 +2273,7 @@ exports.Widgets = WidgetsImport;
 
 /***/ }),
 
-/***/ 95:
+/***/ 97:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2182,7 +2289,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var esri_promise_1 = __webpack_require__(14);
+var esri_promise_1 = __webpack_require__(13);
 var React = __webpack_require__(4);
 var Geometry = (function (_super) {
     __extends(Geometry, _super);
@@ -2227,7 +2334,7 @@ exports.default = Geometry;
 
 /***/ }),
 
-/***/ 96:
+/***/ 98:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2242,7 +2349,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(4);
-var GeometryBase_1 = __webpack_require__(95);
+var GeometryBase_1 = __webpack_require__(97);
 exports.Circle = function (props) { return (React.createElement(GeometryBase_1.default, __assign({}, props, { scriptUri: "esri/geometry/Circle", geometryProperties: __assign({}, props.geometryProperties) }))); };
 exports.Extent = function (props) { return (React.createElement(GeometryBase_1.default, __assign({}, props, { scriptUri: "esri/geometry/Extent", geometryProperties: __assign({}, props.geometryProperties) }))); };
 exports.Multipoint = function (props) { return (React.createElement(GeometryBase_1.default, __assign({}, props, { scriptUri: "esri/geometry/Multipoint", geometryProperties: __assign({}, props.geometryProperties) }))); };
@@ -2255,7 +2362,7 @@ exports.SpatialReference = function (props) { return (React.createElement(Geomet
 
 /***/ }),
 
-/***/ 97:
+/***/ 99:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2279,7 +2386,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var esri_promise_1 = __webpack_require__(14);
+var esri_promise_1 = __webpack_require__(13);
 var React = __webpack_require__(4);
 var Graphic = (function (_super) {
     __extends(Graphic, _super);
@@ -2370,102 +2477,6 @@ var Graphic = (function (_super) {
     return Graphic;
 }(React.Component));
 exports.default = Graphic;
-
-
-/***/ }),
-
-/***/ 98:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var esri_promise_1 = __webpack_require__(14);
-var React = __webpack_require__(4);
-var Symbol = (function (_super) {
-    __extends(Symbol, _super);
-    function Symbol(props) {
-        var _this = _super.call(this, props) || this;
-        _this.state = {
-            graphic: _this.props.graphic,
-            instance: null,
-            scriptUri: _this.props.scriptUri,
-        };
-        _this.createSymbol = _this.createSymbol.bind(_this);
-        return _this;
-    }
-    Symbol.prototype.render = function () {
-        return null;
-    };
-    Symbol.prototype.componentDidMount = function () {
-        var _this = this;
-        esri_promise_1.esriPromise([
-            this.props.scriptUri
-        ]).then(function (_a) {
-            var Symbol = _a[0];
-            _this.createSymbol(Symbol);
-            if (_this.props.onLoad) {
-                _this.props.onLoad(_this.state.instance);
-            }
-        }).catch(function (e) {
-            if (_this.props.onFail) {
-                _this.props.onFail(e);
-            }
-        });
-    };
-    Symbol.prototype.componentWillReceiveProps = function (nextProps) {
-        var _this = this;
-        Object.keys(nextProps.symbolProperties).forEach(function (key) {
-            if (_this.state.instance.get(key)) {
-                _this.state.instance.set(key, nextProps.symbolProperties[key]);
-            }
-        });
-    };
-    Symbol.prototype.createSymbol = function (Symbol) {
-        var instance = new Symbol(this.props.symbolProperties);
-        this.setState({ instance: instance });
-        this.props.registerSymbol(instance);
-    };
-    return Symbol;
-}(React.Component));
-exports.default = Symbol;
-;
-
-
-/***/ }),
-
-/***/ 99:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(4);
-var SymbolBase_1 = __webpack_require__(98);
-exports.Font = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { scriptUri: "esri/symbols/Font", symbolProperties: __assign({}, props.symbolProperties) }))); };
-exports.PictureFillSymbol = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { scriptUri: "esri/symbols/PictureFillSymbol", symbolProperties: __assign({}, props.symbolProperties) }))); };
-exports.PictureMarkerSymbol = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { scriptUri: "esri/symbols/PictureMarkerSymbol", symbolProperties: __assign({}, props.symbolProperties) }))); };
-exports.SimpleFillSymbol = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { scriptUri: "esri/symbols/SimpleFillSymbol", symbolProperties: __assign({}, props.symbolProperties) }))); };
-exports.SimpleLineSymbol = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { scriptUri: "esri/symbols/SimpleLineSymbol", symbolProperties: __assign({}, props.symbolProperties) }))); };
-exports.SimpleMarkerSymbol = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { scriptUri: "esri/symbols/SimpleMarkerSymbol", symbolProperties: __assign({}, props.symbolProperties) }))); };
 
 
 /***/ })
