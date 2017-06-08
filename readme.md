@@ -1,3 +1,5 @@
+![Version 1.2.3](https://img.shields.io/badge/npm-v1.2.3-blue.svg) ![100% Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
+
 # React-ArcGIS
 
 React-ArcGIS is a library of React components which use the ArcGIS API for JavaScript v.4.3. React-ArcGIS components will handle fetching of the required AMD scripts and render themselves when ready. (Please note that this fetching process will give window['require'] to the dojo loader)
