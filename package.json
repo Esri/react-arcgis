@@ -1,6 +1,6 @@
 {
   "name": "react-arcgis",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "React component library for Esri ArcGIS JavaScript API",
   "main": "app.js",
   "scripts": {
