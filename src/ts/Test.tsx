@@ -3,11 +3,29 @@ import { Map, Scene } from './components/MapComposites';
 import { WebMap, WebScene } from './components/WebComposites';
 import { BasemapToggle } from './components/widgets/WidgetComposites';
 import { ElevationLayer } from './components/layers/LayerComposites';
+import Popup from './components/popup/Popup';
 
 interface ComponentState {
+    popup: {
+        title: string;
+        content: string;
+        location: number[];
+    };
 }
 
-export default class TestComponent extends React.Component<null, ComponentState>{
+export default class TestComponent extends React.Component<null, ComponentState> {
+    constructor() {
+        super();
+        this.state = {
+            popup: {
+                content: 'This is a random popup that I made.',
+                location: [-121.83, 48.279],
+                title: 'My Popup'
+            }
+        };
+        this.handleButtonClick = this.handleButtonClick.bind(this);
+    }
+
     public render() {
         return (
             <div>
@@ -22,6 +40,9 @@ export default class TestComponent extends React.Component<null, ComponentState>
                         }
                     }}
                 >
+                    <Popup
+                        popupProperties={this.state.popup}
+                    />
                     <ElevationLayer
                         onLayerviewCreate={() => console.log('Created the elevation layer.')}
                         layerProperties={{
@@ -30,12 +51,19 @@ export default class TestComponent extends React.Component<null, ComponentState>
                     />
                     <BasemapToggle position="top-right" />
                 </Scene>
-                <WebMap
-                    id="6627e1dd5f594160ac60f9dfc411673f"
-                    className="half-map"
-                    onLoad={(map, view) => { console.log(map, view); }}
-                />
+                <button onClick={this.handleButtonClick}>
+                    Change the popup
+                </button>
             </div>
         );
+    }
+
+    private handleButtonClick() {
+        this.setState({
+            popup: {
+                ...this.state.popup,
+                title: 'My New Popup'
+            }
+        });
     }
 }
