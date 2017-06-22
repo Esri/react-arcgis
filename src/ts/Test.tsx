@@ -30,16 +30,16 @@ export default class TestComponent extends React.Component<null, ComponentState>
     public render() {
         return (
             <div>
-                <Scene
+                <Map
                     className="half-map"
-                    mapProperties={{ basemap: 'topo', ground: 'world-elevation' }}
+                    mapProperties={{ basemap: 'osm' }}
                     onClick={this.handleMapClick}
                 >
                     <Popup
                         popupProperties={this.state.popup}
                     />
                     <BasemapToggle position="top-right" />
-                </Scene>
+                </Map>
                 <button onClick={this.handleButtonClick}>
                     Change the popup
                 </button>
