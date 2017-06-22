@@ -10,7 +10,7 @@ export default () => (
         describe('as a shallow component', () => {
             let arcView;
             beforeEach(() => {
-                arcView = shallow(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} />);
+                arcView = shallow(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
             });
 
             it('should exist', () => {
@@ -24,7 +24,7 @@ export default () => (
             describe('the user has included a custom loading component', () => {
                 const customComponent = () => (<h3 id="custom-load-component" />);
                 beforeEach(() => {
-                    arcView = mount(<ArcView loadComponent={customComponent} loadMap={sinon.stub()} scriptUri={['foo', 'bar']} />);
+                    arcView = mount(<ArcView loadComponent={customComponent} loadMap={sinon.stub()} scriptUri={['foo', 'bar']} userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                 });
 
                 it('should not render the default loading component', () => {
@@ -41,7 +41,7 @@ export default () => (
             let arcView
             beforeEach(() => {
                 sinon.spy(ArcView.prototype, 'componentDidMount');
-                arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} />);
+                arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
             });
 
             it('should call componentDidMount', () => {
@@ -50,7 +50,7 @@ export default () => (
 
             describe('the user has included a custom className', () => {
                 beforeEach(() => {
-                    arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} className="foobar" />);
+                    arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} className="foobar" userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                 });
 
                 it('should give that className to the container div', () => {
@@ -64,7 +64,7 @@ export default () => (
                 });
 
                 beforeEach(() => {
-                    arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} />);
+                    arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                 });
 
                 it('should call loadMap with the result of esriPromise', (done) => {
@@ -79,7 +79,7 @@ export default () => (
                     let loadMap;
                     beforeEach(() => {
                         loadMap = () => (Promise.resolve({ map: 'foo', view: 'bar' }));
-                        arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} />);
+                        arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                     });
 
                     it('should not display the failed state for the application', (done) => {
@@ -100,7 +100,7 @@ export default () => (
                     describe('the user has included a child component', () => {
                         const ChildComponent = (props) => <h3 id="child">{props.map}{props.view}</h3>;
                         beforeEach(() => {
-                            arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']}><ChildComponent /></ArcView>);
+                            arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} userDefinedMapProperties={{}} userDefinedViewProperties={{}} ><ChildComponent /></ArcView>);
                         });
 
                         it('should render the child component', (done) => {
@@ -121,7 +121,7 @@ export default () => (
                     describe('the user has included an onLoad callback', () => {
                         const onLoad = sinon.stub();
                         beforeEach(() => {
-                            arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} onLoad={onLoad} />);
+                            arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} onLoad={onLoad} userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                         });
 
                         it('should call onLoad with a reference to the map and view', (done) => {
@@ -173,10 +173,10 @@ export default () => (
                             arcView = mount(
                                 <ArcView
                                     loadMap={loadMap} scriptUri={['foo', 'bar']}
-                                    mapProperties={{
+                                    userDefinedMapProperties={{
                                         foo: 'bar'
                                     } as __esri.MapProperties}
-                                    viewProperties={{
+                                    userDefinedViewProperties={{
                                         foo: 'bar'
                                     } as __esri.ViewProperties}
                                 />
@@ -186,8 +186,9 @@ export default () => (
                         describe('the user updates the mapProperties with a valid key', () => {
                             it('should update the JS API accordingly', (done) => {
                                 setTimeout(() => {
-                                    arcView.setProps({ mapProperties: { foo: 'banana' } });
-                                    expect(arcView.props().mapProperties.foo).to.equal('banana');
+                                    console.log(arcView.instance().state);
+                                    arcView.setProps({ userDefinedMapProperties: { foo: 'banana' } });
+                                    expect(arcView.props().userDefinedMapProperties.foo).to.equal('banana');
                                     expect(arcView.instance().state.map.foo).to.equal('banana');
                                     done();
                                 }, 1);
@@ -197,8 +198,8 @@ export default () => (
                         describe('the user updates the mapProperties with an invalid key', () => {
                             it('should make no change to the JS API', (done) => {
                                 setTimeout(() => {
-                                    arcView.setProps({ mapProperties: { foo: 'bar', bar: 'foo' } });
-                                    expect(arcView.props().mapProperties.bar).to.equal('foo');
+                                    arcView.setProps({ userDefinedMapProperties: { foo: 'bar', bar: 'foo' } });
+                                    expect(arcView.props().userDefinedMapProperties.bar).to.equal('foo');
                                     expect(arcView.instance().state.map.foo).to.equal('bar');
                                     expect(arcView.instance().state.map.bar).to.not.exist;
                                     done();
@@ -209,8 +210,8 @@ export default () => (
                         describe('the user updates the viewProperties with a valid key', () => {
                             it('should update the JS API accordingly', (done) => {
                                 setTimeout(() => {
-                                    arcView.setProps({ viewProperties: { foo: 'banana' } });
-                                    expect(arcView.props().viewProperties.foo).to.equal('banana');
+                                    arcView.setProps({ userDefinedViewProperties: { foo: 'banana' } });
+                                    expect(arcView.props().userDefinedViewProperties.foo).to.equal('banana');
                                     expect(arcView.instance().state.view.foo).to.equal('banana');
                                     done();
                                 }, 1);
@@ -220,8 +221,8 @@ export default () => (
                         describe('the user updates the mapProperties with an invalid key', () => {
                             it('should make no change to the JS API', (done) => {
                                 setTimeout(() => {
-                                    arcView.setProps({ viewProperties: { foo: 'bar', bar: 'foo' } });
-                                    expect(arcView.props().viewProperties.bar).to.equal('foo');
+                                    arcView.setProps({ userDefinedViewProperties: { foo: 'bar', bar: 'foo' } });
+                                    expect(arcView.props().userDefinedViewProperties.bar).to.equal('foo');
                                     expect(arcView.instance().state.view.foo).to.equal('bar');
                                     expect(arcView.instance().state.view.bar).to.not.exist;
                                     done();
@@ -235,7 +236,7 @@ export default () => (
                     let loadMap;
                     beforeEach(() => {
                         loadMap = () => (Promise.reject(new Error('failed')));
-                        arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} />);
+                        arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                     });
 
                     it ('should display the failed state for the application', (done) => {
@@ -254,7 +255,7 @@ export default () => (
             describe('esriPromise fails', () => {
                 beforeEach(() => {
                     global['asyncSuccess'] = false;
-                    arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} />);
+                    arcView = mount(<ArcView loadMap={sinon.stub()} scriptUri={['foo', 'bar']} userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                 });
 
                 it('should not call loadMap', (done) => {
@@ -274,7 +275,7 @@ export default () => (
                 describe('the user has included a custom fail component', () => {
                     const failComponent = () => (<h3 id="custom-fail-component" />);
                     beforeEach(() => {
-                        arcView = mount(<ArcView failComponent={failComponent} loadMap={sinon.stub()} scriptUri={['foo', 'bar']} />);
+                        arcView = mount(<ArcView failComponent={failComponent} loadMap={sinon.stub()} scriptUri={['foo', 'bar']} userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                     });
 
                     it('should not display the default failed state for the application', (done) => {
@@ -294,7 +295,7 @@ export default () => (
 
                 describe('the user has included a custom fail callback', () => {
                     beforeEach(() => {
-                        arcView = mount(<ArcView onFail={sinon.stub()} loadMap={sinon.stub()} scriptUri={['foo', 'bar']} />);
+                        arcView = mount(<ArcView onFail={sinon.stub()} loadMap={sinon.stub()} scriptUri={['foo', 'bar']} userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                     });
 
                     it('should call the failure callback', (done) => {

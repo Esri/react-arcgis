@@ -154,14 +154,14 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
 
     public componentWillReceiveProps(nextProps: ArcProps) {
         Object.keys(nextProps.userDefinedMapProperties).forEach((key) => {
-            if (this.state.map.get(key) && this.state.map.get(key) !== nextProps.mapProperties[key]) {
-                this.state.map.set(key, nextProps.mapProperties[key]);
+            if (this.state.map.get(key) && this.state.map.get(key) !== nextProps.userDefinedMapProperties[key]) {
+                this.state.map.set(key, nextProps.userDefinedMapProperties[key]);
             }
         });
         Object.keys(nextProps.userDefinedViewProperties).forEach((key) => {
-            if (this.state.view.get(key) && this.state.view.get(key) !== nextProps.viewProperties[key]) {
+            if (this.state.view.get(key) && this.state.view.get(key) !== nextProps.userDefinedViewProperties[key]) {
                 const changes = {};
-                changes[key] = nextProps.viewProperties[key];
+                changes[key] = nextProps.userDefinedViewProperties[key];
                 this.state.view.set(changes);
             }
         });
