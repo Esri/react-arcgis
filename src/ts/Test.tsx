@@ -32,7 +32,6 @@ export default class TestComponent extends React.Component<null, ComponentState>
             <div>
                 <Map
                     className="half-map"
-                    dataFlow="oneTime"
                     mapProperties={{ basemap: 'osm' }}
                     viewProperties={{
                         center: [-122.4443, 49.2529]
