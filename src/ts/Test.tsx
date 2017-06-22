@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Map, Scene } from './components/MapComposites';
 import { WebMap, WebScene } from './components/WebComposites';
-import { BasemapToggle } from './components/widgets/WidgetComposites';
+import { BasemapToggle, Search } from './components/widgets/WidgetComposites';
 import { ElevationLayer } from './components/layers/LayerComposites';
 import Popup from './components/popup/Popup';
 
@@ -32,13 +32,18 @@ export default class TestComponent extends React.Component<null, ComponentState>
             <div>
                 <Map
                     className="half-map"
+                    dataFlow="oneTime"
                     mapProperties={{ basemap: 'osm' }}
+                    viewProperties={{
+                        center: [-122.4443, 49.2529]
+                    }}
                     onClick={this.handleMapClick}
                 >
                     <Popup
                         popupProperties={this.state.popup}
                     />
                     <BasemapToggle position="top-right" />
+                    <Search position="top-right" />
                 </Map>
                 <button onClick={this.handleButtonClick}>
                     Change the popup
