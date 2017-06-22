@@ -19,11 +19,12 @@ export default class TestComponent extends React.Component<null, ComponentState>
         this.state = {
             popup: {
                 content: 'This is a random popup that I made.',
-                location: [-121.83, 48.279],
+                location: [-122.4443, 47.2529],
                 title: 'My Popup'
             }
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.handleMapClick = this.handleMapClick.bind(this);
     }
 
     public render() {
@@ -32,22 +33,10 @@ export default class TestComponent extends React.Component<null, ComponentState>
                 <Scene
                     className="half-map"
                     mapProperties={{ basemap: 'topo', ground: 'world-elevation' }}
-                    viewProperties={{
-                        camera: {
-                            heading: 300,
-                            position: [-121.83, 48.279, 1346],
-                            tilt: 60
-                        }
-                    }}
+                    onClick={this.handleMapClick}
                 >
                     <Popup
                         popupProperties={this.state.popup}
-                    />
-                    <ElevationLayer
-                        onLayerviewCreate={() => console.log('Created the elevation layer.')}
-                        layerProperties={{
-                            url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/OsoLandslide/OsoLandslide_After_3DTerrain/ImageServer'
-                        }}
                     />
                     <BasemapToggle position="top-right" />
                 </Scene>
@@ -62,8 +51,21 @@ export default class TestComponent extends React.Component<null, ComponentState>
         this.setState({
             popup: {
                 ...this.state.popup,
+                content: 'This is another random popup.',
                 title: 'My New Popup'
             }
         });
+    }
+
+    private handleMapClick(e) {
+        setTimeout(() => {
+            this.setState({
+                popup: {
+                    content: 'yay!',
+                    location: e.mapPoint,
+                    title: 'Popups everywhere'
+                }
+            });
+        }, 100);
     }
 }

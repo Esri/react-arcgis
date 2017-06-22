@@ -46,6 +46,16 @@ export default class Popup extends React.Component<PopupProps, ComponentState> {
     public componentWillUnmount() {
         if (this.state.mounted) {
             this.state.view.popup.close();
+            this.setState({
+                mounted: false
+            });
+        }
+    }
+
+    public componentWillReceiveProps(nextProps) {
+        if (nextProps.popupProperties && this.state.mounted && nextProps.popupProperties !== this.props.popupProperties) {
+            this.state.view.popup.close();
+            this.state.view.popup.open(nextProps.popupProperties);
         }
     }
 }

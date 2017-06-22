@@ -14,15 +14,17 @@ export const Map = (props: MapProps) => (
   <MapBase
     scriptUri={['esri/Map', 'esri/views/MapView']}
     {...props}
-    mapProperties = {{
+    mapProperties={{
       basemap: 'streets-vector',
       ...props.mapProperties
     }}
-    viewProperties = {{
+    viewProperties={{
       center: [-122.4443, 47.2529],
       zoom: 6,
       ...props.viewProperties
     }}
+    userDefinedMapProperties={{...props.mapProperties}}
+    userDefinedViewProperties={{...props.viewProperties}}
   />
 );
 
@@ -30,15 +32,17 @@ export const Scene = (props: SceneProps) => (
   <MapBase
     scriptUri={['esri/Map', 'esri/views/SceneView']}
     {...props}
-    mapProperties = {{
+    mapProperties={{
       basemap: 'satellite',
       ground: 'world-elevation',
       ...props.mapProperties
     }}
-    viewProperties = {{
+    viewProperties={{
       center: [-122.4443, 47.2529],
       scale: 500000,
       ...props.viewProperties
     }}
+    userDefinedMapProperties={{...props.mapProperties}}
+    userDefinedViewProperties={{...props.viewProperties}}
   />
 );

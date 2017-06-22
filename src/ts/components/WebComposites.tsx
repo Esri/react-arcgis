@@ -16,8 +16,10 @@ export const WebMap = (props: MapProps) => (
     <WebBase
         scriptUri={['esri/WebMap', 'esri/views/MapView', 'dojo/promise/all']}
         {...props}
-        viewProperties = {{...props.viewProperties}}
-        mapProperties = {{...props.mapProperties}}
+        viewProperties={props.viewProperties}
+        mapProperties={props.mapProperties}
+        userDefinedMapProperties={{...props.mapProperties}}
+        userDefinedViewProperties={{...props.viewProperties}}
     />
 );
 
@@ -25,7 +27,9 @@ export const WebScene = (props: SceneProps) => (
     <WebBase
         scriptUri={['esri/WebScene', 'esri/views/SceneView', 'dojo/promise/all']}
         {...props}
-        viewProperties = {{...props.viewProperties}}
-        mapProperties = {{...props.mapProperties}}
+        viewProperties={props.viewProperties}
+        mapProperties={props.mapProperties}
+        userDefinedMapProperties={{...props.mapProperties}}
+        userDefinedViewProperties={{...props.viewProperties}}
     />
 );

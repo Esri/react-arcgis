@@ -4,11 +4,15 @@ import { ArcView, BaseProps } from './ArcBase';
 
 interface MapBaseProps extends BaseProps {
   scriptUri: string[];
+  userDefinedMapProperties: __esri.MapProperties;
+  userDefinedViewProperties: __esri.MapViewProperties | __esri.SceneViewProperties;
 }
 
 interface WebBaseProps extends BaseProps {
   scriptUri: string[];
   id: string;
+  userDefinedMapProperties: __esri.MapProperties;
+  userDefinedViewProperties: __esri.MapViewProperties | __esri.SceneViewProperties;
 }
 
 const eventMap = {
