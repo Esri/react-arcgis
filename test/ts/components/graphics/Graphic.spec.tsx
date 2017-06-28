@@ -83,7 +83,7 @@ export default () => (
                     });
 
                     beforeEach(() => {
-                        graphic = mount(<Graphic />);
+                        graphic = mount(<Graphic dataFlow="oneWay" />);
                         graphic.instance().registerGeometry('foobar');
                         graphic.instance().registerSymbol('foobar');
                     });

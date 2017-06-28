@@ -10,7 +10,7 @@ export default () => (
 
         describe('as a shallow component', () => {
             beforeEach(() => {
-                widget = shallow(<Widget scriptUri="foobar" />);
+                widget = shallow(<Widget scriptUri="foobar" dataFlow="oneTime" />);
             });
 
             it('should exist', () => {
@@ -21,7 +21,7 @@ export default () => (
         describe('as a mounted component', () => {
             beforeEach(() => {
                 sinon.spy(Widget.prototype, 'componentDidMount');
-                widget = mount(<Widget scriptUri="foobar" />);
+                widget = mount(<Widget scriptUri="foobar" dataFlow="oneTime" />);
             });
 
             it('should call componentDidMount', () => {
@@ -35,7 +35,7 @@ export default () => (
                 });
 
                 beforeEach(() => {
-                    widget = mount(<Widget scriptUri="foobar" view={{ ui: { add: sinon.stub() } } as any} eventMap={{ foo: 'bar' }} />);
+                    widget = mount(<Widget scriptUri="foobar" view={{ ui: { add: sinon.stub() } } as any} eventMap={{ foo: 'bar' }} dataFlow="oneTime" />);
                     sinon.spy(widget.instance(), 'renderWidget');
                 });
 
@@ -57,6 +57,7 @@ export default () => (
                     beforeEach(() => {
                         widget = mount(
                             <Widget
+                                dataFlow="oneTime"
                                 scriptUri="foobar"
                                 view={{ ui: { add: sinon.stub() } } as any}
                                 eventMap={{ foo: 'bar' }}
@@ -76,7 +77,7 @@ export default () => (
 
                 describe('the user provides a callback for a widget event', () => {
                     beforeEach(() => {
-                        widget = mount(<Widget scriptUri="foobar" view={{ ui: { add: sinon.stub() } } as any} eventMap={{ foo: 'bar' }} foo={() => null} />);
+                        widget = mount(<Widget scriptUri="foobar" view={{ ui: { add: sinon.stub() } } as any} eventMap={{ foo: 'bar' }} foo={() => null} dataFlow="oneTime" />);
                     });
 
                     it('should call the instance on() function with the event name', (done) => {
@@ -95,6 +96,7 @@ export default () => (
                                 view={{ ui: { add: sinon.stub() } } as any}
                                 eventMap={{ foo: 'bar' }}
                                 widgetProperties={{ foo: 'bar' }}
+                                dataFlow="oneTime"
                             />
                         );
                     });
@@ -130,6 +132,7 @@ export default () => (
                                 view={{ ui: { add: sinon.stub() } } as any}
                                 eventMap={{ foo: 'bar' }}
                                 onLoad={sinon.stub()}
+                                dataFlow="oneTime"
                             />
                         );
                     });
@@ -149,6 +152,7 @@ export default () => (
                                 scriptUri="foobar"
                                 view={{ ui: { add: sinon.stub(), remove: sinon.stub() } } as any}
                                 eventMap={{ foo: 'bar' }}
+                                dataFlow="oneTime"
                             />
                         );
                     });
@@ -174,7 +178,7 @@ export default () => (
                 });
 
                 beforeEach(() => {
-                    widget = mount(<Widget scriptUri="foobar" view={{ ui: { add: sinon.stub() } } as any} eventMap={{ foo: 'bar' }} />);
+                    widget = mount(<Widget scriptUri="foobar" view={{ ui: { add: sinon.stub() } } as any} eventMap={{ foo: 'bar' }} dataFlow="oneTime" />);
                     sinon.spy(widget.instance(), 'renderWidget');
                 });
 
@@ -193,6 +197,7 @@ export default () => (
                                 view={{ ui: { add: sinon.stub() } } as any}
                                 eventMap={{ foo: 'bar' }}
                                 onFail={sinon.stub()}
+                                dataFlow="oneTime"
                             />
                         );
                     });

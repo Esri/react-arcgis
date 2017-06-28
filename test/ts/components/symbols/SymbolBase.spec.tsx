@@ -10,7 +10,7 @@ export default () => (
 
         describe('as a shallow component', () => {
             beforeEach(() => {
-                symbol = shallow(<Symbol scriptUri="foobar" />);
+                symbol = shallow(<Symbol scriptUri="foobar" dataFlow="oneTime" />);
             });
 
             it('should exist', () => {
@@ -21,7 +21,7 @@ export default () => (
         describe('as a mounted component', () => {
             beforeEach(() => {
                 sinon.spy(Symbol.prototype, 'componentDidMount');
-                symbol = mount(<Symbol scriptUri="foobar" />);
+                symbol = mount(<Symbol scriptUri="foobar" dataFlow="oneTime" />);
             });
 
             it('should call componentDidMount', () => {
@@ -35,7 +35,7 @@ export default () => (
                 });
 
                 beforeEach(() => {
-                    symbol = mount(<Symbol scriptUri="foobar" registerSymbol={sinon.stub()} />);
+                    symbol = mount(<Symbol scriptUri="foobar" registerSymbol={sinon.stub()} dataFlow="oneTime" />);
                     sinon.spy(symbol.instance(), 'createSymbol');
                 });
 
@@ -54,7 +54,7 @@ export default () => (
 
                 describe('the user has included an onLoad callback', () => {
                     beforeEach(() => {
-                        symbol = mount(<Symbol scriptUri="foobar" registerSymbol={sinon.stub()} onLoad={sinon.stub()} />);
+                        symbol = mount(<Symbol scriptUri="foobar" registerSymbol={sinon.stub()} onLoad={sinon.stub()} dataFlow="oneTime" />);
                     });
 
                     it('should call onLoad', (done) => {
@@ -73,6 +73,7 @@ export default () => (
                                 registerSymbol={sinon.stub()}
                                 onLoad={sinon.stub()}
                                 symbolProperties={{ foo: 'bar' }}
+                                dataFlow="oneWay"
                             />
                         );
                     });
@@ -113,7 +114,7 @@ export default () => (
                 });
 
                 beforeEach(() => {
-                    symbol = mount(<Symbol scriptUri="foobar" />);
+                    symbol = mount(<Symbol scriptUri="foobar" dataFlow="oneTime" />);
                     sinon.spy(symbol.instance(), 'createSymbol');
                 });
 
@@ -125,7 +126,7 @@ export default () => (
 
                 describe('the user has included an onFail callback', () => {
                     beforeEach(() => {
-                        symbol = mount(<Symbol scriptUri="foobar" onFail={sinon.stub()} />);
+                        symbol = mount(<Symbol scriptUri="foobar" onFail={sinon.stub()} dataFlow="oneTime" />);
                     });
 
                     it('should call onFail', (done) => {

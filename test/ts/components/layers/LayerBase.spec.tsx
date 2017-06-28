@@ -9,7 +9,7 @@ export default () => (
         let layer;
         describe('as a shallow component', () => {
             beforeEach(() => {
-                layer = shallow(<Layer eventMap={{ foo: 'bar' }} addLocation={['foo', 'bar']} scriptUri="foobar" />);
+                layer = shallow(<Layer eventMap={{ foo: 'bar' }} addLocation={['foo', 'bar']} scriptUri="foobar" dataFlow="oneTime" />);
             });
 
             it('should exist', () => {
@@ -20,7 +20,7 @@ export default () => (
         describe('as a mounted component', () => {
             beforeEach(() => {
                 sinon.spy(Layer.prototype, 'componentDidMount');
-                layer = mount(<Layer scriptUri="foobar" addLocation={['foo', 'bar']} eventMap={{ foo: 'bar' }} />);
+                layer = mount(<Layer scriptUri="foobar" addLocation={['foo', 'bar']} eventMap={{ foo: 'bar' }} dataFlow="oneTime" />);
             });
 
             it('should call componentDidMount', () => {
@@ -34,7 +34,7 @@ export default () => (
                 });
 
                 beforeEach(() => {
-                    layer = mount(<Layer scriptUri="foobar" addLocation={['foo', 'bar']} eventMap={{ foo: 'bar' }} />);
+                    layer = mount(<Layer scriptUri="foobar" addLocation={['foo', 'bar']} eventMap={{ foo: 'bar' }} dataFlow="oneTime" />);
                     layer.instance().setState({ foo: { bar: { add: () => null } } });
                     sinon.spy(layer.instance(), 'renderLayer');
                 });
@@ -54,6 +54,7 @@ export default () => (
                                     addLocation={['foo', 'bar']}
                                     eventMap={{ foo: 'bar' }}
                                     layerProperties={{ foo: 'bar' }}
+                                    dataFlow="oneWay"
                                 />
                             );
                             layer.instance().setState({ foo: { bar: { add: () => null } } });
@@ -77,6 +78,7 @@ export default () => (
                                     addLocation={['foo', 'bar']}
                                     eventMap={{ foo: 'bar' }}
                                     layerProperties={{ foo: 'bar' }}
+                                    dataFlow="oneWay"
                                 />
                             );
                             layer.instance().setState({ foo: { bar: { add: () => null } } });
@@ -105,6 +107,7 @@ export default () => (
                                     eventMap={{ onLayerviewCreate: 'bar' }}
                                     map={map as any}
                                     onLayerviewCreate={sinon.stub()}
+                                    dataFlow="oneTime"
                                 />
                             );
                             layer.instance().setState({ foo: { bar: { add: () => null } } });
@@ -130,6 +133,7 @@ export default () => (
                                 scriptUri="foobar"
                                 addLocation={['foo', 'bar']}
                                 eventMap={{ foo: 'bar' }}
+                                dataFlow="oneTime"
                             >
                                 <Child />
                             </Layer>
@@ -160,6 +164,7 @@ export default () => (
                                 addLocation={['foo', 'bar']}
                                 eventMap={{ foo: 'bar' }}
                                 onLoad={sinon.stub()}
+                                dataFlow="oneTime"
                             />
                         );
                         layer.instance().setState({ foo: { bar: { add: () => null } } });
@@ -185,7 +190,7 @@ export default () => (
                 });
 
                 beforeEach(() => {
-                    layer = mount(<Layer scriptUri="foobar" addLocation={['foo', 'bar']} eventMap={{ foo: 'bar' }} />);
+                    layer = mount(<Layer scriptUri="foobar" addLocation={['foo', 'bar']} eventMap={{ foo: 'bar' }} dataFlow="oneTime" />);
                 });
 
                 it('should not call renderLayer', () => {
@@ -197,7 +202,7 @@ export default () => (
 
                 describe('the user included an onFail callback', () => {
                     beforeEach(() => {
-                        layer = mount(<Layer scriptUri="foobar" addLocation={['foo', 'bar']} eventMap={{ foo: 'bar' }} onFail={sinon.stub()} />);
+                        layer = mount(<Layer scriptUri="foobar" addLocation={['foo', 'bar']} eventMap={{ foo: 'bar' }} onFail={sinon.stub()} dataFlow="oneTime" />);
                     });
 
                     it('should call onFail', (done) => {

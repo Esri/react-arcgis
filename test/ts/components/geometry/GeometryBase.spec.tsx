@@ -9,7 +9,7 @@ export default () => (
         describe('as a shallow component', () => {
             let geometry;
             beforeEach(() => {
-                geometry = shallow(<Geometry scriptUri="foobar" />);
+                geometry = shallow(<Geometry scriptUri="foobar" dataFlow="oneTime" />);
             });
 
             it('should exist', () => {
@@ -21,7 +21,7 @@ export default () => (
             let geometry;
             beforeEach(() => {
                 sinon.spy(Geometry.prototype, 'componentDidMount');
-                geometry = mount(<Geometry scriptUri="foobar" />);
+                geometry = mount(<Geometry scriptUri="foobar" dataFlow="oneTime" />);
             });
 
             it('should call componentDidMount', () => {
@@ -34,7 +34,7 @@ export default () => (
                 });
 
                 beforeEach(() => {
-                    geometry = mount(<Geometry scriptUri="foobar" />);
+                    geometry = mount(<Geometry scriptUri="foobar" dataFlow="oneTime" />);
                 });
 
                 it('should call createGeometry', (done) => {
@@ -54,7 +54,7 @@ export default () => (
 
                     beforeEach(() => {
                         onLoad = sinon.stub();
-                        geometry = mount(<Geometry onLoad={onLoad} scriptUri="foobar" registerGeometry={() => null} />);
+                        geometry = mount(<Geometry onLoad={onLoad} scriptUri="foobar" registerGeometry={() => null} dataFlow="oneTime" />);
                     })
 
                     it('should call onLoad', (done) => {
@@ -80,7 +80,7 @@ export default () => (
                 });
 
                 beforeEach(() => {
-                    geometry = mount(<Geometry scriptUri="foobar" />);
+                    geometry = mount(<Geometry scriptUri="foobar" dataFlow="oneTime" />);
                 });
 
                 it('should not call createGeometry', (done) => {
@@ -96,7 +96,7 @@ export default () => (
 
                     beforeEach(() => {
                         onFail = sinon.stub();
-                        geometry = mount(<Geometry scriptUri="foobar" onFail={onFail} />);
+                        geometry = mount(<Geometry scriptUri="foobar" onFail={onFail} dataFlow="oneTime" />);
                     });
 
                     it('should call onFail', (done) => {
