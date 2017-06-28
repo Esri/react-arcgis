@@ -23,6 +23,7 @@ import {
 export const CSVLayer = (props: CSVLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/CSVLayer"
         layerProperties={{...props.layerProperties}}
         addLocation={['map']}
@@ -36,6 +37,7 @@ export const CSVLayer = (props: CSVLayerProps) => (
 export const ElevationLayer = (props: ElevationLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/ElevationLayer"
         layerProperties={{...props.layerProperties}}
         addLocation={['map', 'ground', 'layers']}
@@ -49,6 +51,7 @@ export const ElevationLayer = (props: ElevationLayerProps) => (
 export const FeatureLayer = (props: FeatureLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/FeatureLayer"
         layerProperties={{...props.layerProperties}}
         addLocation={['map']}
@@ -62,6 +65,7 @@ export const FeatureLayer = (props: FeatureLayerProps) => (
 export const GeoRSSLayer = (props: GeoRSSLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/GeoRSSLayer"
         layerProperties={{...props.layerProperties}}
         addLocation={['map']}
@@ -75,6 +79,7 @@ export const GeoRSSLayer = (props: GeoRSSLayerProps) => (
 export const GraphicsLayer = (props: GraphicsLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/GraphicsLayer"
         layerProperties={{...props.layerProperties}}
         addLocation={['map']}
@@ -88,6 +93,7 @@ export const GraphicsLayer = (props: GraphicsLayerProps) => (
 export const GroupLayer = (props: GroupLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/GroupLayer"
         layerProperties={{...props.layerProperties}}
         addLocation={['map']}
@@ -101,6 +107,7 @@ export const GroupLayer = (props: GroupLayerProps) => (
 export const ImageryLayer = (props: ImageryLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/ImageryLayer"
         layerProperties={{...props.layerProperties}}
         addLocation={['map']}
@@ -114,6 +121,7 @@ export const ImageryLayer = (props: ImageryLayerProps) => (
 export const IntegratedMeshLayer = (props: IntegratedMeshLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/IntegratedMeshLayer"
         layerProperties={{...props.layerProperties}}
         addLocation={['map']}
@@ -127,6 +135,7 @@ export const IntegratedMeshLayer = (props: IntegratedMeshLayerProps) => (
 export const MapImageLayer = (props: MapImageLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/MapImageLayer"
         layerProperties={{...props.layerProperties}}
         addLocation={['map']}
@@ -140,6 +149,7 @@ export const MapImageLayer = (props: MapImageLayerProps) => (
 export const OpenStreetMapLayer = (props: OpenStreetMapLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/OpenStreetMapLayer"
         addLocation={['map']}
         eventMap={{
@@ -152,6 +162,7 @@ export const OpenStreetMapLayer = (props: OpenStreetMapLayerProps) => (
 export const PointCloudLayer = (props: PointCloudLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/PointCloudLayer"
         addLocation={['map']}
         eventMap={{
@@ -164,6 +175,7 @@ export const PointCloudLayer = (props: PointCloudLayerProps) => (
 export const SceneLayer = (props: SceneLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/SceneLayer"
         addLocation={['map']}
         eventMap={{
@@ -176,6 +188,7 @@ export const SceneLayer = (props: SceneLayerProps) => (
 export const StreamLayer = (props: StreamLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/StreamLayer"
         addLocation={['map']}
         eventMap={{
@@ -188,6 +201,7 @@ export const StreamLayer = (props: StreamLayerProps) => (
 export const TileLayer = (props: TileLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/TileLayer"
         addLocation={['map']}
         eventMap={{
@@ -200,6 +214,7 @@ export const TileLayer = (props: TileLayerProps) => (
 export const VectorTileLayer = (props: VectorTileLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/VectorTileLayer"
         addLocation={['map']}
         eventMap={{
@@ -212,6 +227,7 @@ export const VectorTileLayer = (props: VectorTileLayerProps) => (
 export const WebTileLayer = (props: WebTileLayerProps) => (
     <Layer
         {...props}
+        dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
         scriptUri="esri/layers/WebTileLayer"
         addLocation={['map']}
         eventMap={{

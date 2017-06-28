@@ -1,4 +1,5 @@
 export interface SymbolCompositeProps {
+    dataFlow?: 'oneWay' | 'oneTime';
     graphic?: __esri.Graphic;
     symbolProperties?: {
       [propName: string]: any;

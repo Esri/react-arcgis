@@ -4,12 +4,12 @@ import { WebBase } from './ArcComposites';
 
 interface MapProps extends BaseProps {
     id: string;
-    viewProperties?: __esri.WebMapProperties;
+    viewProperties?: __esri.MapViewProperties;
 }
 
 interface SceneProps extends BaseProps {
     id: string;
-    viewProperties?: __esri.WebSceneProperties;
+    viewProperties?: __esri.SceneViewProperties;
 }
 
 export const WebMap = (props: MapProps) => (

@@ -34,7 +34,7 @@ export interface BaseProps {
 
 interface ArcProps extends BaseProps {
     dataFlow: 'oneWay' | 'oneTime';
-    loadMap: (modules: any[], containerId: string) => Promise<{ map: any, view: any }>;
+    loadMap: (modules: any[], containerId: string) => Promise<any>;
     userDefinedMapProperties: __esri.MapProperties;
     userDefinedViewProperties: __esri.ViewProperties;
     scriptUri: string[];

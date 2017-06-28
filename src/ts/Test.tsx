@@ -32,9 +32,9 @@ export default class TestComponent extends React.Component<null, ComponentState>
             <div>
                 <Map
                     className="half-map"
-                    mapProperties={{ basemap: 'osm' }}
+                    mapProperties={{ basemap: 'osm' as __esri.BasemapProperties }}
                     viewProperties={{
-                        center: [-122.4443, 49.2529]
+                        center: [-122.4443, 49.2529] as __esri.PointProperties
                     }}
                     onClick={this.handleMapClick}
                 >
