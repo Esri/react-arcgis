@@ -44,7 +44,7 @@ ReactDOM.render(
   document.getElementById('container')
 );
 ```
-![scene](https://user-images.githubusercontent.com/16542714/27750977-088b94ac-5d8f-11e7-997a-088a3c717cf6.jpg)
+<div style="text-align:center"><img src="https://user-images.githubusercontent.com/16542714/27750977-088b94ac-5d8f-11e7-997a-088a3c717cf6.jpg" alt="scene" /></div>
 
 You can also add webmaps and webscenes from ArcGIS Online:
 
