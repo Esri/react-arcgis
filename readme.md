@@ -13,7 +13,8 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 **2.0.0**
 
-- All components in the library now accept a `dataFlow` prop, which dictates whether or not the React state controls the component.
+- All components in the library now accept a `dataFlow` prop, which dictates whether or not React's state controls that of the component (see Advanced Usage).
+- The library now loads the ArcGIS JavaScript API version 4.4 by default.
 
 
 ## Basic Usage:
