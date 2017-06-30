@@ -1,4 +1,4 @@
-![Version 1.2.4](https://img.shields.io/badge/npm-v1.2.4-blue.svg) ![100% Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
+![Version 1.2.4](https://img.shields.io/badge/npm-v1.2.4-blue.svg) ![94.71% Code Coverage](https://img.shields.io/badge/coverage-94.71%25-brightgreen.svg)
 
 # React-ArcGIS
 

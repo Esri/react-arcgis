@@ -51,13 +51,6 @@ export default class Geometry extends React.Component<GeometryProps, ComponentSt
       });
     }
 
-
-    private createGeometry(Geometry: __esri.GeometryConstructor) {
-      const instance = new Geometry(this.props.geometryProperties);
-      this.setState({ instance });
-      this.props.registerGeometry(instance);
-    }
-
     public componentWillReceiveProps(nextProps: GeometryProps) {
       if (this.props.dataFlow === 'oneWay') {
         Object.keys(nextProps.geometryProperties).forEach((key) => {
@@ -66,5 +59,11 @@ export default class Geometry extends React.Component<GeometryProps, ComponentSt
             }
         });
       }
+    }
+
+    private createGeometry(Geometry: __esri.GeometryConstructor) {
+      const instance = new Geometry(this.props.geometryProperties);
+      this.setState({ instance });
+      this.props.registerGeometry(instance);
     }
 }

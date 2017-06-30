@@ -11,12 +11,25 @@ export default () => (
             describe(layerName, () => {
                 const LayerElement = LayerComposites[layerName];
                 let layer;
-                beforeEach(() => {
-                    layer = shallow(<LayerElement />);
+
+                describe('the dataFlow is set to oneTime', () => {
+                    beforeEach(() => {
+                        layer = shallow(<LayerElement />);
+                    });
+
+                    it('should exist', () => {
+                        expect(layer).to.exist;
+                    });
                 });
 
-                it('should exist', () => {
-                    expect(layer).to.exist;
+                describe('the dataFlow is set to oneWay', () => {
+                    beforeEach(() => {
+                        layer = shallow(<LayerElement dataFlow="oneWay" />);
+                    });
+
+                    it('should exist', () => {
+                        expect(layer).to.exist;
+                    });
                 });
             });
 

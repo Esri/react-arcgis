@@ -45,6 +45,52 @@ export default () => (
                     }, 1);
                 });
 
+                describe('the user set the dataFlow to oneWay', () => {
+                    before(() => {
+                        global['generateGeometry'] = true;
+                    });
+
+                    beforeEach(() => {
+                        geometry = mount(<Geometry scriptUri="foobar" registerGeometry={() => null} dataFlow="oneWay" geometryProperties={{ foo: 'bar' }} />);
+                    });
+
+                    it('should update changed properties', (done) => {
+                        setTimeout(() => {
+                            geometry.setProps({ geometryProperties: { foo: 'banana' } });
+                            expect(geometry.props().geometryProperties.foo).to.equal('banana');
+                            expect(geometry.instance().state.instance.foo).to.equal('banana');
+                            done();
+                        }, 1);
+                    });
+
+                    after(() => {
+                        global['generateGeometry'] = false;
+                    });
+                });
+
+                describe('the user set the dataFlow to oneTime', () => {
+                    before(() => {
+                        global['generateGeometry'] = true;
+                    });
+
+                    beforeEach(() => {
+                        geometry = mount(<Geometry scriptUri="foobar" registerGeometry={() => null} dataFlow="oneTime" geometryProperties={{ foo: 'bar' }} />);
+                    });
+
+                    it('should not update changed properties', (done) => {
+                        setTimeout(() => {
+                            geometry.setProps({ geometryProperties: { foo: 'banana' } });
+                            expect(geometry.props().geometryProperties.foo).to.equal('banana');
+                            expect(geometry.instance().state.instance.foo).to.equal('bar');
+                            done();
+                        }, 1);
+                    });
+
+                    after(() => {
+                        global['generateGeometry'] = false;
+                    });
+                });
+
                 describe('the user included an onLoad callback' ,() => {
                     let onLoad;
 
