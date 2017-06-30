@@ -1,5 +1,6 @@
 export interface LayerCompositeProps {
     children?: any;
+    dataFlow?: 'oneWay' | 'oneTime';
     map?: __esri.Map;
     view?: __esri.SceneView | __esri.MapView;
     layerProperties?: {

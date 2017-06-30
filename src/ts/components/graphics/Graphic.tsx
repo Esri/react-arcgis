@@ -2,6 +2,7 @@ import { esriPromise } from 'esri-promise';
 import * as React from 'react';
 
 export interface GraphicProps {
+    dataFlow?: 'oneWay' | 'oneTime';
     children?: any;
     map?: __esri.Map;
     view?: __esri.SceneView | __esri.MapView;
@@ -98,7 +99,7 @@ export default class Graphic extends React.Component<GraphicProps, ComponentStat
     }
 
     public componentWillReceiveProps(nextProps: GraphicProps) {
-        if (nextProps.graphicProperties) {
+        if (nextProps.graphicProperties && this.props.dataFlow === 'oneWay') {
           Object.keys(nextProps.graphicProperties).forEach((key) => {
               if (this.state.instance.get(key)) {
                   this.state.instance.set(key, nextProps.graphicProperties[key]);

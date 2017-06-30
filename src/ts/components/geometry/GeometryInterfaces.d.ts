@@ -1,11 +1,12 @@
 interface GeometryCompositeProps {
-    graphic?: __esri.Graphic;
-    geometryProperties?: {
-      [propName: string]: any;
-    };
-    registerGeometry?: (intance: __esri.Geometry) => any;
-    onLoad?: (instance: __esri.Geometry) => any;
-    onFail?: (e: any) => any;
+  dataFlow?: 'oneWay' | 'oneTime';
+  graphic?: __esri.Graphic;
+  geometryProperties?: {
+    [propName: string]: any;
+  };
+  registerGeometry?: (intance: __esri.Geometry) => any;
+  onLoad?: (instance: __esri.Geometry) => any;
+  onFail?: (e: any) => any;
 }
 
 export interface CircleProps extends GeometryCompositeProps {

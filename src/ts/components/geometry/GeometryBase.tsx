@@ -2,20 +2,21 @@ import { esriPromise } from 'esri-promise';
 import * as React from 'react';
 
 export interface GeometryProps {
-    scriptUri: string;
-    graphic?: __esri.Graphic;
-    geometryProperties?: {
-      [propName: string]: any;
-    };
-    registerGeometry?: (intance: __esri.Geometry) => any;
-    onLoad?: (instance: __esri.Geometry) => any;
-    onFail?: (e: any) => any;
+  dataFlow: 'oneWay' | 'oneTime';
+  scriptUri: string;
+  graphic?: __esri.Graphic;
+  geometryProperties?: {
+    [propName: string]: any;
+  };
+  registerGeometry?: (intance: __esri.Geometry) => any;
+  onLoad?: (instance: __esri.Geometry) => any;
+  onFail?: (e: any) => any;
 }
 
 interface ComponentState {
-    scriptUri: string;
-    graphic: __esri.Graphic;
-    instance: __esri.Geometry;
+  scriptUri: string;
+  graphic: __esri.Graphic;
+  instance: __esri.Geometry;
 }
 
 export default class Geometry extends React.Component<GeometryProps, ComponentState> {
@@ -50,18 +51,19 @@ export default class Geometry extends React.Component<GeometryProps, ComponentSt
       });
     }
 
+    public componentWillReceiveProps(nextProps: GeometryProps) {
+      if (this.props.dataFlow === 'oneWay') {
+        Object.keys(nextProps.geometryProperties).forEach((key) => {
+            if (this.state.instance.get(key)) {
+                this.state.instance.set(key, nextProps.geometryProperties[key]);
+            }
+        });
+      }
+    }
 
     private createGeometry(Geometry: __esri.GeometryConstructor) {
       const instance = new Geometry(this.props.geometryProperties);
       this.setState({ instance });
       this.props.registerGeometry(instance);
     }
-
-    // private componentWillReceiveProps(nextProps: GeometryProps) {
-    //     Object.keys(nextProps.geometryProperties).forEach((key) => {
-    //         if (this.state.instance.get(key)) {
-    //             this.state.instance.set(key, nextProps.geometryProperties[key]);
-    //         }
-    //     });
-    // }
 }

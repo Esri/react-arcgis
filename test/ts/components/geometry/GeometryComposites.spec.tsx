@@ -11,12 +11,25 @@ export default () => (
             describe(geometryName, () => {
                 const GeometryElement = GeometryComposites[geometryName]
                 let geometry;
-                beforeEach(() => {
-                    geometry = shallow(<GeometryElement />);
+
+                describe('the dataFlow is set to oneTime', () => {
+                    beforeEach(() => {
+                        geometry = shallow(<GeometryElement />);
+                    });
+
+                    it('should exist', () => {
+                        expect(geometry).to.exist;
+                    });
                 });
 
-                it('should exist', () => {
-                    expect(geometry).to.exist;
+                describe('the dataFlow is set to oneWay', () => {
+                    beforeEach(() => {
+                        geometry = shallow(<GeometryElement dataFlow="oneWay" />);
+                    });
+
+                    it('should exist', () => {
+                        expect(geometry).to.exist;
+                    });
                 });
             });
 

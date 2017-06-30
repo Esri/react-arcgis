@@ -9,7 +9,7 @@ export default () => (
         describe('as a shallow component', () => {
             let geometry;
             beforeEach(() => {
-                geometry = shallow(<Geometry scriptUri="foobar" />);
+                geometry = shallow(<Geometry scriptUri="foobar" dataFlow="oneTime" />);
             });
 
             it('should exist', () => {
@@ -21,7 +21,7 @@ export default () => (
             let geometry;
             beforeEach(() => {
                 sinon.spy(Geometry.prototype, 'componentDidMount');
-                geometry = mount(<Geometry scriptUri="foobar" />);
+                geometry = mount(<Geometry scriptUri="foobar" dataFlow="oneTime" />);
             });
 
             it('should call componentDidMount', () => {
@@ -34,7 +34,7 @@ export default () => (
                 });
 
                 beforeEach(() => {
-                    geometry = mount(<Geometry scriptUri="foobar" />);
+                    geometry = mount(<Geometry scriptUri="foobar" dataFlow="oneTime" />);
                 });
 
                 it('should call createGeometry', (done) => {
@@ -43,6 +43,52 @@ export default () => (
                         expect(geometry.instance().createGeometry.callCount).to.equal(1);
                         done();
                     }, 1);
+                });
+
+                describe('the user set the dataFlow to oneWay', () => {
+                    before(() => {
+                        global['generateGeometry'] = true;
+                    });
+
+                    beforeEach(() => {
+                        geometry = mount(<Geometry scriptUri="foobar" registerGeometry={() => null} dataFlow="oneWay" geometryProperties={{ foo: 'bar' }} />);
+                    });
+
+                    it('should update changed properties', (done) => {
+                        setTimeout(() => {
+                            geometry.setProps({ geometryProperties: { foo: 'banana' } });
+                            expect(geometry.props().geometryProperties.foo).to.equal('banana');
+                            expect(geometry.instance().state.instance.foo).to.equal('banana');
+                            done();
+                        }, 1);
+                    });
+
+                    after(() => {
+                        global['generateGeometry'] = false;
+                    });
+                });
+
+                describe('the user set the dataFlow to oneTime', () => {
+                    before(() => {
+                        global['generateGeometry'] = true;
+                    });
+
+                    beforeEach(() => {
+                        geometry = mount(<Geometry scriptUri="foobar" registerGeometry={() => null} dataFlow="oneTime" geometryProperties={{ foo: 'bar' }} />);
+                    });
+
+                    it('should not update changed properties', (done) => {
+                        setTimeout(() => {
+                            geometry.setProps({ geometryProperties: { foo: 'banana' } });
+                            expect(geometry.props().geometryProperties.foo).to.equal('banana');
+                            expect(geometry.instance().state.instance.foo).to.equal('bar');
+                            done();
+                        }, 1);
+                    });
+
+                    after(() => {
+                        global['generateGeometry'] = false;
+                    });
                 });
 
                 describe('the user included an onLoad callback' ,() => {
@@ -54,7 +100,7 @@ export default () => (
 
                     beforeEach(() => {
                         onLoad = sinon.stub();
-                        geometry = mount(<Geometry onLoad={onLoad} scriptUri="foobar" registerGeometry={() => null} />);
+                        geometry = mount(<Geometry onLoad={onLoad} scriptUri="foobar" registerGeometry={() => null} dataFlow="oneTime" />);
                     })
 
                     it('should call onLoad', (done) => {
@@ -80,7 +126,7 @@ export default () => (
                 });
 
                 beforeEach(() => {
-                    geometry = mount(<Geometry scriptUri="foobar" />);
+                    geometry = mount(<Geometry scriptUri="foobar" dataFlow="oneTime" />);
                 });
 
                 it('should not call createGeometry', (done) => {
@@ -96,7 +142,7 @@ export default () => (
 
                     beforeEach(() => {
                         onFail = sinon.stub();
-                        geometry = mount(<Geometry scriptUri="foobar" onFail={onFail} />);
+                        geometry = mount(<Geometry scriptUri="foobar" onFail={onFail} dataFlow="oneTime" />);
                     });
 
                     it('should call onFail', (done) => {

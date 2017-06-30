@@ -10,7 +10,7 @@ export const MapBaseTests = () => (
         let mapBase;
         describe('as a shallow component', () => {
             beforeEach(() => {
-                mapBase = shallow(<MapBase scriptUri={['foo', 'bar']} />);
+                mapBase = shallow(<MapBase scriptUri={['foo', 'bar']} dataFlow="oneTime" userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
             });
 
             it('should exist', () => {
@@ -21,7 +21,7 @@ export const MapBaseTests = () => (
         describe('as a mounted component', () => {
             beforeEach(() => {
                 sinon.spy(ArcView.prototype, 'componentDidMount');
-                mapBase = mount(<MapBase scriptUri={['foo', 'bar']} />);
+                mapBase = mount(<MapBase scriptUri={['foo', 'bar']} dataFlow="oneTime" userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
             });
 
             it('should call componentDidMount', () => {
@@ -36,7 +36,7 @@ export const MapBaseTests = () => (
                     });
 
                     beforeEach(() => {
-                        mapBase = mount(<MapBase scriptUri={['foo', 'bar']} />);
+                        mapBase = mount(<MapBase scriptUri={['foo', 'bar']} dataFlow="oneTime" userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                     });
 
                     it('should display the loaded state of the application', (done) => {
@@ -50,7 +50,7 @@ export const MapBaseTests = () => (
                     describe('the user has included custom event handlers', () => {
                         const handler = () => 'foobar';
                         beforeEach(() => {
-                            mapBase = mount(<MapBase scriptUri={['foo', 'bar']} onMouseWheel={handler} />);
+                            mapBase = mount(<MapBase scriptUri={['foo', 'bar']} dataFlow="oneTime" userDefinedMapProperties={{}} userDefinedViewProperties={{}} onMouseWheel={handler} />);
                         });
 
                         it('should display the loaded state of the application', (done) => {
@@ -82,7 +82,7 @@ export const MapBaseTests = () => (
                     });
 
                     beforeEach(() => {
-                        mapBase = mount(<MapBase scriptUri={['foo', 'bar']} />);
+                        mapBase = mount(<MapBase scriptUri={['foo', 'bar']} dataFlow="oneTime" userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                     });
 
                     it('should display the failed state of the application', (done) => {
@@ -107,7 +107,7 @@ export const MapBaseTests = () => (
                     });
 
                     beforeEach(() => {
-                        mapBase = mount(<MapBase scriptUri={['foo', 'bar']} />);
+                        mapBase = mount(<MapBase scriptUri={['foo', 'bar']} dataFlow="oneTime" userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                     });
 
                     it('should display the failed state for the application', (done) => {
@@ -136,7 +136,7 @@ export const WebBaseTests = () => (
         let webBase;
         describe('as a shallow component', () => {
             beforeEach(() => {
-                webBase = shallow(<WebBase id="foobar" scriptUri={['foo', 'bar']} />);
+                webBase = shallow(<WebBase id="foobar" scriptUri={['foo', 'bar']} dataFlow="oneTime" userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
             });
 
             it('should exist', () => {
@@ -147,7 +147,7 @@ export const WebBaseTests = () => (
         describe('as a mounted component', () => {
             beforeEach(() => {
                 sinon.spy(ArcView.prototype, 'componentDidMount');
-                webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} />);
+                webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} dataFlow="oneTime" userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
             });
 
             it('should call componentDidMount', () => {
@@ -161,7 +161,7 @@ export const WebBaseTests = () => (
                 });
 
                 beforeEach(() => {
-                    webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} />);
+                    webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} dataFlow="oneTime" userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                 });
 
                 it('should display the loaded state of the application', (done) => {
@@ -175,7 +175,7 @@ export const WebBaseTests = () => (
                 describe('the user has included custom event handlers', () => {
                     const handler = () => 'foobar';
                     beforeEach(() => {
-                        webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} onMouseWheel={handler} />);
+                        webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} onMouseWheel={handler} dataFlow="oneTime" userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                     });
 
                     it('should display the loaded state of the application', (done) => {
@@ -206,7 +206,7 @@ export const WebBaseTests = () => (
                 });
 
                 beforeEach(() => {
-                    webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} />);
+                    webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} dataFlow="oneTime" userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                 });
 
                 it('should display the failed state for the application', (done) => {
@@ -229,7 +229,7 @@ export const WebBaseTests = () => (
                 });
 
                 beforeEach(() => {
-                    webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} />);
+                    webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} dataFlow="oneTime" userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                 });
 
                 it('should display the failed state for the application', (done) => {

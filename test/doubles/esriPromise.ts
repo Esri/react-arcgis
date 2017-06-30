@@ -108,7 +108,14 @@ export function esriPromise(modules) {
             ])
         } else if (global['generateGeometry']) {
             return Promise.resolve([
-                class Geometry {}
+                class Geometry extends GetterSetter {
+                    foo: string;
+
+                    constructor() {
+                        super();
+                        this.foo = 'bar';
+                    }
+                }
             ]);
         } else if (global['generateGraphic']) {
             return Promise.resolve([

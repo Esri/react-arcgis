@@ -7,6 +7,7 @@ export interface BaseProps {
     id?: string;
     children?: any;
     className?: string;
+    dataFlow?: 'oneWay' | 'oneTime';
     style?: {
         [propName: string]: any
     };
@@ -32,7 +33,10 @@ export interface BaseProps {
 }
 
 interface ArcProps extends BaseProps {
-    loadMap: (modules: any[], containerId: string) => Promise<{ map: any, view: any }>;
+    dataFlow: 'oneWay' | 'oneTime';
+    loadMap: (modules: any[], containerId: string) => Promise<any>;
+    userDefinedMapProperties: __esri.MapProperties;
+    userDefinedViewProperties: __esri.ViewProperties;
     scriptUri: string[];
 }
 
@@ -124,7 +128,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         );
     }
 
-    componentDidMount() {
+    public componentDidMount() {
         esriPromise(this.props.scriptUri)
         .then((modules) => (
             this.props.loadMap(modules, this.state.mapContainerId)
@@ -150,18 +154,20 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         });
     }
 
-    componentWillReceiveProps(nextProps: BaseProps) {
-        Object.keys(nextProps.mapProperties).forEach((key) => {
-            if (this.state.map.get(key) && this.state.map.get(key) !== nextProps.mapProperties[key]) {
-                this.state.map.set(key, nextProps.mapProperties[key]);
-            }
-        });
-        Object.keys(nextProps.viewProperties).forEach((key) => {
-            if (this.state.view.get(key) && this.state.view.get(key) !== nextProps.viewProperties[key]) {
-                const changes = {};
-                changes[key] = nextProps.viewProperties[key];
-                this.state.view.set(changes);
-            }
-        });
+    public componentWillReceiveProps(nextProps: ArcProps) {
+        if (this.props.dataFlow === 'oneWay') {
+            Object.keys(nextProps.userDefinedMapProperties).forEach((key) => {
+                if (this.state.map.get(key) && this.state.map.get(key) !== nextProps.userDefinedMapProperties[key]) {
+                    this.state.map.set(key, nextProps.userDefinedMapProperties[key]);
+                }
+            });
+            Object.keys(nextProps.userDefinedViewProperties).forEach((key) => {
+                if (this.state.view.get(key) && this.state.view.get(key) !== nextProps.userDefinedViewProperties[key]) {
+                    const changes = {};
+                    changes[key] = nextProps.userDefinedViewProperties[key];
+                    this.state.view.set(changes);
+                }
+            });
+        }
     }
 }

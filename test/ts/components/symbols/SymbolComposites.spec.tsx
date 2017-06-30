@@ -11,12 +11,25 @@ export default () => (
             describe(symbolName, () => {
                 const SymbolElement = SymbolComposites[symbolName];
                 let symbol;
-                beforeEach(() => {
-                    symbol = shallow(<SymbolElement />);
+
+                describe('the dataFlow is set to oneTime', () => {
+                    beforeEach(() => {
+                        symbol = shallow(<SymbolElement />);
+                    });
+
+                    it('should exist', () => {
+                        expect(symbol).to.exist;
+                    });
                 });
 
-                it('should exist', () => {
-                    expect(symbol).to.exist;
+                describe('the dataFlow is set to oneWay', () => {
+                    beforeEach(() => {
+                        symbol = shallow(<SymbolElement dataFlow="oneWay" />);
+                    });
+
+                    it('should exist', () => {
+                        expect(symbol).to.exist;
+                    });
                 });
             });
 

@@ -26,6 +26,7 @@ import {
 export const Attribution = (props: AttributionProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/Attribution"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{}}
@@ -35,6 +36,7 @@ export const Attribution = (props: AttributionProps) => (
 export const BasemapGallery = (props: BasemapGalleryProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/BasemapGallery"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{}}
@@ -44,6 +46,7 @@ export const BasemapGallery = (props: BasemapGalleryProps) => (
 export const BasemapToggle = (props: BasemapToggleProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/BasemapToggle"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{
@@ -55,6 +58,7 @@ export const BasemapToggle = (props: BasemapToggleProps) => (
 export const ColorSlider = (props: ColorSliderProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/ColorSlider"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{
@@ -68,6 +72,7 @@ export const ColorSlider = (props: ColorSliderProps) => (
 export const Compass = (props: CompassProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/Compass"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{}}
@@ -77,6 +82,7 @@ export const Compass = (props: CompassProps) => (
 export const Expand = (props: ExpandProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/Expand"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{}}
@@ -86,6 +92,7 @@ export const Expand = (props: ExpandProps) => (
 export const Home = (props: HomeProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/Home"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{}}
@@ -95,6 +102,7 @@ export const Home = (props: HomeProps) => (
 export const LayerList = (props: LayerListProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/LayerList"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{
@@ -106,6 +114,7 @@ export const LayerList = (props: LayerListProps) => (
 export const Legend = (props: LegendProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/Legend"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{}}
@@ -115,6 +124,7 @@ export const Legend = (props: LegendProps) => (
 export const Locate = (props: LocateProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/Locate"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{
@@ -125,12 +135,18 @@ export const Locate = (props: LocateProps) => (
 );
 
 export const NavigationToggle = (props: NavigationToggleProps) => (
-  <Widget {...props} scriptUri="esri/widgets/NavigationToggle" widgetProperties={{...props.widgetProperties}} />
+  <Widget
+    {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
+    scriptUri="esri/widgets/NavigationToggle"
+    widgetProperties={{...props.widgetProperties}}
+  />
 );
 
 export const Popup = (props: PopupProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/Popup"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{
@@ -142,6 +158,7 @@ export const Popup = (props: PopupProps) => (
 export const Print = (props: PrintProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/Print"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{}}
@@ -151,6 +168,7 @@ export const Print = (props: PrintProps) => (
 export const ScaleBar = (props: ScaleBarProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/ScaleBar"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{}}
@@ -160,6 +178,7 @@ export const ScaleBar = (props: ScaleBarProps) => (
 export const Search = (props: SearchProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/Search"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{
@@ -176,6 +195,7 @@ export const Search = (props: SearchProps) => (
 export const SizeSlider = (props: SizeSliderProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/SizeSlider"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{
@@ -188,7 +208,9 @@ export const SizeSlider = (props: SizeSliderProps) => (
 
 export const Track = (props: TrackProps) => (
   <Widget
-    {...props} scriptUri="esri/widgets/Track"
+    {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
+    scriptUri="esri/widgets/Track"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{
       onTrack: 'track',
@@ -200,6 +222,7 @@ export const Track = (props: TrackProps) => (
 export const UnivariateColorSizeSlider = (props: UnivariateColorSizeSliderProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/UnvariateColorSizeSlider"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{
@@ -213,6 +236,7 @@ export const UnivariateColorSizeSlider = (props: UnivariateColorSizeSliderProps)
 export const Zoom = (props: ZoomProps) => (
   <Widget
     {...props}
+    dataFlow={ props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime' }
     scriptUri="esri/widgets/Zoom"
     widgetProperties={{...props.widgetProperties}}
     eventMap={{}}

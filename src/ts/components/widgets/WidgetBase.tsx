@@ -2,23 +2,24 @@ import { esriPromise } from 'esri-promise';
 import * as React from 'react';
 
 export interface WidgetProps {
-    scriptUri: string;
-    map?: __esri.Map;
-    view?: __esri.SceneView | __esri.MapView;
-    position?: string;
-    widgetProperties?: {
-      [propName: string]: any;
-    };
-    onLoad?: (instance: __esri.Widget) => any;
-    onFail?: (e: any) => any;
+  dataFlow: 'oneWay' | 'oneTime';
+  scriptUri: string;
+  map?: __esri.Map;
+  view?: __esri.SceneView | __esri.MapView;
+  position?: string;
+  widgetProperties?: {
     [propName: string]: any;
+  };
+  onLoad?: (instance: __esri.Widget) => any;
+  onFail?: (e: any) => any;
+  [propName: string]: any;
 }
 
 interface ComponentState {
-    scriptUri: string;
-    map: __esri.Map;
-    view: __esri.View;
-    instance: __esri.Widget;
+  scriptUri: string;
+  map: __esri.Map;
+  view: __esri.View;
+  instance: __esri.Widget;
 }
 
 export default class Widget extends React.Component<WidgetProps, ComponentState> {
@@ -61,7 +62,7 @@ export default class Widget extends React.Component<WidgetProps, ComponentState>
     private renderWidget(Widget: __esri.WidgetConstructor) {
       const widgetProperties = { view: this.state.view, ...this.props.widgetProperties };
       const position = this.props.position ? this.props.position : 'manual';
-      const instance = new Widget(widgetProperties);
+      const instance = new Widget(widgetProperties as __esri.WidgetProperties);
       Object.keys(this.props.eventMap).forEach((key) => {
         if (this.props[key]) {
           instance.on(this.props.eventMap[key], this.props[key]);

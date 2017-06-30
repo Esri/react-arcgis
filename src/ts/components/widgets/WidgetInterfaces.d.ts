@@ -1,4 +1,5 @@
 interface WidgetCompositeProps {
+    dataFlow?: 'oneWay' | 'oneTime'; 
     view?: __esri.SceneView | __esri.MapView;
     position?: string;
     onLoad?: (instance: __esri.Widget) => any;

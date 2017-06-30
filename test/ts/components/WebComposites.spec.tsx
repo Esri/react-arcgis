@@ -14,6 +14,16 @@ export const WebMapTests = () => (
         it('should exist', () => {
             expect(webMap).to.exist;
         });
+
+        describe('the user sets the mapProperties to oneWay', () => {
+            beforeEach(() => {
+                webMap = shallow(<WebMap id="foobar" dataFlow="oneWay"  />);
+            });
+
+            it('should give a Map instance with dataFlow set to oneWay', () => {
+                expect(webMap.instance().props.dataFlow).to.equal('oneWay');
+            });
+        });
     })
 );
 
@@ -26,6 +36,16 @@ export const WebSceneTests = () => (
 
         it('should exist', () => {
             expect(webScene).to.exist;
+        });
+
+        describe('the user sets the mapProperties to oneWay', () => {
+            beforeEach(() => {
+                webScene = shallow(<WebScene id="foobar" dataFlow="oneWay"  />);
+            });
+
+            it('should give a Map instance with dataFlow set to oneWay', () => {
+                expect(webScene.instance().props.dataFlow).to.equal('oneWay');
+            });
         });
     })
 );

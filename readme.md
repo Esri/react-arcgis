@@ -1,53 +1,21 @@
-![Version 1.2.4](https://img.shields.io/badge/npm-v1.2.4-blue.svg) ![100% Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
+![Version 2.0.0](https://img.shields.io/badge/npm-v2.0.0-blue.svg) ![94.71% Code Coverage](https://img.shields.io/badge/coverage-94.71%25-brightgreen.svg)
 
 # React-ArcGIS
 
-React-ArcGIS is a library of React components which use the ArcGIS API for JavaScript v.4.3. React-ArcGIS components will handle fetching of the required AMD scripts and render themselves when ready. (Please note that this fetching process will give window['require'] to the dojo loader)
+React-ArcGIS is a library of React components which use the ArcGIS API for JavaScript v.4.4. React-ArcGIS uses [esri-promise](https://www.npmjs.com/package/esri-promise) internally to load and interact with the AMD ArcGIS API for JavaScript, providing convenient react components for mapping applications.
 
 ## Installation:
 
-1. Run `npm i --save react-arcgis`
+1. Run `npm i react-arcgis`
 
 
-## Recently added stuff:
+## Recently added:
 
-**1.2.0**
+**2.0.0**
 
-- WebBase is now simply and extension of ArcBase (this reduces the file-size of the library slightly and has no effect on the external API)
+- All components in the library now accept a `dataFlow` prop, which dictates whether or not React's state controls that of the component (see Advanced Usage).
+- The library now loads the ArcGIS JavaScript API version 4.4 by default.
 
-**1.1.0**
-
-- You can now add callbacks to any of the widget events available through the ArcGIS JS API directly in the JSX. For example:
-
-```js
-    render() {
-        return (
-            <WebScene
-                className="half-map"
-                id="f8aa0c25485a40a1ada1e4b600522681"
-                onDoubleClick={() => { console.log('double-clicked on the map!')}}
-            >
-                <BasemapToggle
-                    position="top-right"
-                    onToggle={() => {console.log('toggled the basemap!')}}
-                />
-            </WebScene>
-        );
-    }
-```
-
-**1.0.0**
-
-- `onMapStateChange` and `onViewStateChange` are deprecated and have been removed! 
-- Changes to `viewProperties`, `mapProperties`, `widgetProperties`, and `symbolProperties` now flow one-way from your react appliaction into the ArcGIS JS API (see *Advanced Usage*)
-
-- You can now create `<WebMap />`s and `<WebScene />`s. The behavior is identical to `<Map />` and `<Scene />`, only the new web components take an `id` property which pulls a particular item from ArcGIS Online
-- You can pass a `className` property into `<Map />`, `<Scene />`, `<WebMap />` or `<WebScene />`
-
-**Older**
-
-- You can now add custom loader components to a `<Map />` or `<Scene />` through the `loadComponent` and `failComponent` props.
-- The loading component will be displayed until the `<Map />` or `<Scene />` is finished rendering.
 
 ## Basic Usage:
 
@@ -64,6 +32,8 @@ ReactDOM.render(
 );
 ```
 
+![map](https://user-images.githubusercontent.com/16542714/27751340-a9e440b4-5d90-11e7-84bc-6281f2a2f59b.jpg)
+
 Or, render a 3D web-scene:
 
 ```js
@@ -76,6 +46,7 @@ ReactDOM.render(
   document.getElementById('container')
 );
 ```
+![scene](https://user-images.githubusercontent.com/16542714/27750977-088b94ac-5d8f-11e7-997a-088a3c717cf6.jpg)
 
 You can also add webmaps and webscenes from ArcGIS Online:
 
@@ -92,6 +63,7 @@ ReactDOM.render(
   document.getElementById('container')
 );
 ```
+![webmap](https://user-images.githubusercontent.com/16542714/27751438-26e02b78-5d91-11e7-8e5d-9198cd390e57.jpg)
 
 If you want to change the style of the `Map` or `Scene`, pass a style object into the Map or Scene's props:
 
@@ -119,6 +91,7 @@ export default (props) => (
     />
 )
 ```
+![map-properties](https://user-images.githubusercontent.com/16542714/27751672-3e31bcc8-5d92-11e7-8e2b-3afab88c7154.jpg)
 
 These properties passed directly to the available properties on the corresponding [ArcGIS API classes](https://developers.arcgis.com/javascript/latest/api-reference/index.html):
 
@@ -161,6 +134,38 @@ export default (props) => (
     </Scene>
 )
 ```
+![widgets](https://user-images.githubusercontent.com/16542714/27752034-de1f6892-5d93-11e7-8e20-34d93441cf43.jpg)
+
+Render popups by nesting them in the `<Map />` or `<Scene />`:
+
+```js
+import * as React from 'react';
+import { Scene, Popup } from 'react-arcgis';
+
+const SearchWidget = Widgets.Search;
+const BasemapGallery = Widgets.BasemapGallery;
+
+export default (props) => (
+    <Scene
+        style={{ width: '100vw', height: '100vh' }}
+        mapProperties={{ basemap: 'satellite' }}
+        viewProperties={{
+            center: [-122.4443, 47.2529],
+            zoom: 6
+        }}
+    >
+        <Popup
+            popupProperties={{
+                content: 'This is a random popup that I made.',
+                location: [-122.4443, 47.2529],
+                title: 'My Popup'
+            }}
+        />
+    </Scene>
+)
+```
+
+![popup](https://user-images.githubusercontent.com/16542714/27751871-42c6bd64-5d93-11e7-928e-2ef546abf400.jpg)
 
 Render graphics by nesting  the desired `Symbol` and `Geometry` within a `<Graphic></Graphic>` tag:
 
@@ -202,6 +207,7 @@ export default (props) => (
     </Scene>
 )
 ```
+![bermuda-triangle](https://user-images.githubusercontent.com/16542714/27752141-5f000034-5d94-11e7-83bc-c88428f99053.jpg)
 
 You can also render graphics inside of a GraphicsLayer:
 
@@ -267,6 +273,25 @@ export default (props) => (
 
 ```
 
+You can now add callbacks to any of the components available directly in the JSX. These callbacks follow the camel-case of the corresponding event in the ArcGIS API for JavaScript. For example:
+
+```js
+    render() {
+        return (
+            <WebScene
+                className="half-map"
+                id="f8aa0c25485a40a1ada1e4b600522681"
+                onDoubleClick={() => { console.log('double-clicked on the map!')}}
+            >
+                <BasemapToggle
+                    position="top-right"
+                    onToggle={() => {console.log('toggled the basemap!')}}
+                />
+            </WebScene>
+        );
+    }
+```
+
 
 ## Advanced Usage:
 
@@ -274,10 +299,10 @@ In some situations, you may want to control the state of the map depending on ac
 
 The easiest way to do this is by using the watchers included on the instance returned from a `<Map />`, `<Scene />`, `<WebMap />` or `<WebScene />` to listen for changes to a particular property then update state of your application accordingly. When you want to change the state of the map, you can update its properties through the instance in response to some UI event or similar in your application.
 
-Experienced React users will recognize a problem here: we have essentially set up a two-way binding situation between our React application and the ArcGIS API. There is no single source of truth with this method.
+Experienced React users will recognize a problem here: we have essentially set up a two-way binding situation between our React application and the ArcGIS API. There is no single source of truth with this method, so the map and your application may fight over the state of the map if the developer is not careful.
 
 
-Alternatively, one can take full responsibility for the state of the map, and have its state flow unidirectionally from the React application. Here is a very simple example of a one-way react-arcgis component:
+Alternatively, one can take full responsibility for the state of the map, and have its state flow unidirectionally from the React application by setting `dataFlow="oneWay"` on the component. Here is a very simple example of a one-way react-arcgis component:
 
 ```js
 import * as React from 'react';
@@ -298,6 +323,7 @@ export default class TestComponent extends React.Component{
         return (
             <div style={{ width: '100vw', height: '100vh' }}>
                 <Map
+                    dataFlow="oneWay"
                     viewProperties={this.state.viewProperties}
                     onLoad={this.handleMapLoad}
                     onDrag={(e) => { e.stopPropagation() }}
@@ -345,6 +371,7 @@ export default class TestComponent extends React.Component{
         return (
             <div style={{ width: '100vw', height: '100vh' }}>
                 <Map
+                    dataFlow="oneWay"
                     viewProperties={this.state.viewProperties}
                     onLoad={this.handleMapLoad}
                     onDrag={this.handleDrag}
@@ -409,7 +436,7 @@ export default class TestComponent extends React.Component{
 }
 ```
 
-In most cases, it may not be worth introducing this level of complexity in order to enforce a unidirectional state-flow. In large and complex applications however, the predictability afforded by one-way data transfer may be worth considering.
+In most cases, it may not be worth introducing this level of complexity in order to enforce a unidirectional state-flow. In large and complex applications however, the fine-grained and predictable control of the map afforded by one-way data flow may be worth considering.
 
 
 Hopefully this package helps you incorporate Esri's awesome ArcGIS API for JavaScript into your ReactJS applications!

@@ -3,6 +3,7 @@ import * as React from 'react';
 
 export interface LayerProps {
     children?: any;
+    dataFlow: 'oneWay' | 'oneTime';
     addLocation: string[];
     scriptUri: string;
     map?: __esri.Map;
@@ -81,11 +82,13 @@ export default class Layer extends React.Component<LayerProps, ComponentState> {
     }
 
     public componentWillReceiveProps(nextProps: LayerProps) {
+      if (this.props.dataFlow === 'oneWay') {
         Object.keys(nextProps.layerProperties).forEach((key) => {
             if (this.state.instance.get(key)) {
                 this.state.instance.set(key, nextProps.layerProperties[key]);
             }
         });
+      }
     }
 
     private renderLayer(Layer: __esri.LayerConstructor) {

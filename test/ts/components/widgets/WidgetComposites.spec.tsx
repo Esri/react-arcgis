@@ -11,12 +11,25 @@ export default () => (
             describe(widgetName, () => {
                 const WidgetElement = WidgetComposites[widgetName];
                 let widget;
-                beforeEach(() => {
-                    widget = shallow(<WidgetElement />);
+
+                describe('the dataFlow is set to oneTime', () => {
+                    beforeEach(() => {
+                        widget = shallow(<WidgetElement widgetProperties={{ view: {} }}/>);
+                    });
+
+                    it('should exist', () => {
+                        expect(widget).to.exist;
+                    });
                 });
 
-                it('should exist', () => {
-                    expect(widget).to.exist;
+                describe('the dataFlow is set to oneWay', () => {
+                    beforeEach(() => {
+                        widget = shallow(<WidgetElement dataFlow="oneWay" />);
+                    });
+
+                    it('should exist', () => {
+                        expect(widget).to.exist;
+                    });
                 });
             });
 
