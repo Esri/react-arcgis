@@ -30,9 +30,9 @@ export default class TestComponent extends React.Component<null, ComponentState>
     public render() {
         return (
             <div>
-                <Map
+                <Scene
                     className="half-map"
-                    mapProperties={{ basemap: 'osm' as __esri.BasemapProperties }}
+                    mapProperties={{ basemap: 'satellite' as __esri.BasemapProperties }}
                     viewProperties={{
                         center: [-122.4443, 49.2529] as __esri.PointProperties
                     }}
@@ -43,7 +43,7 @@ export default class TestComponent extends React.Component<null, ComponentState>
                     />
                     <BasemapToggle position="top-right" />
                     <Search position="top-right" />
-                </Map>
+                </Scene>
                 <button onClick={this.handleButtonClick}>
                     Change the popup
                 </button>
