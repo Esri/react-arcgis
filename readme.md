@@ -32,6 +32,8 @@ ReactDOM.render(
 );
 ```
 
+![map](https://user-images.githubusercontent.com/16542714/27751340-a9e440b4-5d90-11e7-84bc-6281f2a2f59b.jpg)
+
 Or, render a 3D web-scene:
 
 ```js
@@ -61,6 +63,7 @@ ReactDOM.render(
   document.getElementById('container')
 );
 ```
+![webmap](https://user-images.githubusercontent.com/16542714/27751438-26e02b78-5d91-11e7-8e5d-9198cd390e57.jpg)
 
 If you want to change the style of the `Map` or `Scene`, pass a style object into the Map or Scene's props:
 
