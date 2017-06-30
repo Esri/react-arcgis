@@ -91,6 +91,7 @@ export default (props) => (
     />
 )
 ```
+![map-properties](https://user-images.githubusercontent.com/16542714/27751672-3e31bcc8-5d92-11e7-8e2b-3afab88c7154.jpg)
 
 These properties passed directly to the available properties on the corresponding [ArcGIS API classes](https://developers.arcgis.com/javascript/latest/api-reference/index.html):
 
@@ -133,6 +134,7 @@ export default (props) => (
     </Scene>
 )
 ```
+![widgets](https://user-images.githubusercontent.com/16542714/27752034-de1f6892-5d93-11e7-8e20-34d93441cf43.jpg)
 
 Render popups by nesting them in the `<Map />` or `<Scene />`:
 
@@ -162,6 +164,8 @@ export default (props) => (
     </Scene>
 )
 ```
+
+![popup](https://user-images.githubusercontent.com/16542714/27751871-42c6bd64-5d93-11e7-928e-2ef546abf400.jpg)
 
 Render graphics by nesting  the desired `Symbol` and `Geometry` within a `<Graphic></Graphic>` tag:
 
@@ -203,6 +207,7 @@ export default (props) => (
     </Scene>
 )
 ```
+![bermuda-triangle](https://user-images.githubusercontent.com/16542714/27752141-5f000034-5d94-11e7-83bc-c88428f99053.jpg)
 
 You can also render graphics inside of a GraphicsLayer:
 
