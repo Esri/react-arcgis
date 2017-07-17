@@ -1,4 +1,4 @@
-![Version 2.0.0](https://img.shields.io/badge/npm-v2.0.0-blue.svg) ![94.71% Code Coverage](https://img.shields.io/badge/coverage-94.71%25-brightgreen.svg)
+![Version 2.0.4](https://img.shields.io/badge/npm-v2.0.0-blue.svg) ![94.71% Code Coverage](https://img.shields.io/badge/coverage-94.71%25-brightgreen.svg)
 
 # React-ArcGIS
 
@@ -93,7 +93,7 @@ export default (props) => (
 ```
 ![map-properties](https://user-images.githubusercontent.com/16542714/27751672-3e31bcc8-5d92-11e7-8e2b-3afab88c7154.jpg)
 
-These properties passed directly to the available properties on the corresponding [ArcGIS API classes](https://developers.arcgis.com/javascript/latest/api-reference/index.html):
+These properties are passed directly to the available properties on the corresponding [ArcGIS API classes](https://developers.arcgis.com/javascript/latest/api-reference/index.html):
 
 ```js
 import * as React from 'react';
