@@ -5,3 +5,4 @@ src/**/*.js
 src/**/*.js.map
 .nyc_output
 coverage
+package-lock.json

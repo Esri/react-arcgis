@@ -65,6 +65,7 @@
     "@types/arcgis-js-api": "^4.3.1",
     "@types/react": "^15.0.33",
     "@types/react-dom": "^0.14.23",
+    "dojo-typings": "^1.11.7",
     "esri-promise": "^0.3.0"
   }
 }
