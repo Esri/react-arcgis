@@ -19,10 +19,10 @@ module.exports = {
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
-    // externals: {
-    //     'react': 'commonjs react',
-    //     'esri-promise': 'commonjs esri-promise'
-    // },
+    externals: {
+        'react': 'commonjs react',
+        'esri-promise': 'commonjs esri-promise'
+    },
 
     devtool: 'source-map',
 
@@ -50,9 +50,6 @@ module.exports = {
             template: 'src/index.html'
         }),
         new ExtractTextPlugin('bundle.css')
-        // new CopyWebpackPlugin([
-        //     { from: 'src/config', to: 'config' }
-        // ])
     ],
 
     devServer: {
