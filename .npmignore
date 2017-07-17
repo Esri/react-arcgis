@@ -10,4 +10,3 @@ src/ts/app.tsx
 src/ts/Test.tsx
 .nyc_output
 coverage
-package-lock.json
