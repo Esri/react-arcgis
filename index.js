@@ -7,7 +7,7 @@
 		exports["react-arcgis"] = factory(require("react"), require("esri-promise"));
 	else
 		root["react-arcgis"] = factory(root["react"], root["esri-promise"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_15__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_15__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -286,7 +286,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var esri_promise_1 = __webpack_require__(15);
-var React = __webpack_require__(4);
+var React = __webpack_require__(5);
 var Symbol = (function (_super) {
     __extends(Symbol, _super);
     function Symbol(props) {
@@ -355,7 +355,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(4);
+var React = __webpack_require__(5);
 var SymbolBase_1 = __webpack_require__(100);
 exports.Font = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: "esri/symbols/Font", symbolProperties: __assign({}, props.symbolProperties) }))); };
 exports.PictureFillSymbol = function (props) { return (React.createElement(SymbolBase_1.default, __assign({}, props, { dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: "esri/symbols/PictureFillSymbol", symbolProperties: __assign({}, props.symbolProperties) }))); };
@@ -392,7 +392,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var esri_promise_1 = __webpack_require__(15);
-var React = __webpack_require__(4);
+var React = __webpack_require__(5);
 var Widget = (function (_super) {
     __extends(Widget, _super);
     function Widget(props) {
@@ -471,7 +471,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(4);
+var React = __webpack_require__(5);
 var WidgetBase_1 = __webpack_require__(102);
 exports.Attribution = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: "esri/widgets/Attribution", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
 exports.BasemapGallery = function (props) { return (React.createElement(WidgetBase_1.default, __assign({}, props, { dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: "esri/widgets/BasemapGallery", widgetProperties: __assign({}, props.widgetProperties), eventMap: {} }))); };
@@ -537,7 +537,7 @@ module.exports = require("esri-promise");
 /***/ 206:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(91);
+module.exports = __webpack_require__(90);
 
 
 /***/ }),
@@ -556,8 +556,8 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var es6_promise_1 = __webpack_require__(39);
-var React = __webpack_require__(4);
+var es6_promise_1 = __webpack_require__(38);
+var React = __webpack_require__(5);
 var ArcBase_1 = __webpack_require__(35);
 var eventMap = {
     onClick: 'click',
@@ -618,10 +618,7 @@ exports.WebBase = function (props) { return (React.createElement(ArcBase_1.ArcVi
                     return all(promises.toArray());
                 })
                     .then(function (layers) {
-                    var view = new ViewConstructor({
-                        container: containerId,
-                        map: map_2
-                    });
+                    var view = new ViewConstructor(__assign({ container: containerId, map: map_2 }, props.viewProperties));
                     Object.keys(eventMap).forEach(function (key) {
                         if (props[key]) {
                             view.on(eventMap[key], props[key]);
@@ -667,7 +664,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var esri_promise_1 = __webpack_require__(15);
-var React = __webpack_require__(4);
+var React = __webpack_require__(5);
 var ArcContainer_1 = __webpack_require__(36);
 var eventMap = {
     onClick: 'click',
@@ -795,7 +792,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(4);
+var React = __webpack_require__(5);
 var ArcContainer = (function (_super) {
     __extends(ArcContainer, _super);
     function ArcContainer() {
@@ -828,81 +825,15 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(4);
+var React = __webpack_require__(5);
 var ArcComposites_1 = __webpack_require__(26);
-exports.Map = function (props) { return (React.createElement(ArcComposites_1.MapBase, __assign({ dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: ['esri/Map', 'esri/views/MapView'] }, props, { mapProperties: __assign({ basemap: 'streets-vector' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], zoom: 6 }, props.viewProperties), userDefinedMapProperties: __assign({}, props.mapProperties), userDefinedViewProperties: __assign({}, props.viewProperties) }))); };
-exports.Scene = function (props) { return (React.createElement(ArcComposites_1.MapBase, __assign({ dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: ['esri/Map', 'esri/views/SceneView'] }, props, { mapProperties: __assign({ basemap: 'satellite', ground: 'world-elevation' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], scale: 500000 }, props.viewProperties), userDefinedMapProperties: __assign({}, props.mapProperties), userDefinedViewProperties: __assign({}, props.viewProperties) }))); };
+exports.WebMap = function (props) { return (React.createElement(ArcComposites_1.WebBase, __assign({ dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: ['esri/WebMap', 'esri/views/MapView', 'dojo/promise/all'] }, props, { viewProperties: props.viewProperties, mapProperties: props.mapProperties, userDefinedMapProperties: __assign({}, props.mapProperties), userDefinedViewProperties: __assign({}, props.viewProperties) }))); };
+exports.WebScene = function (props) { return (React.createElement(ArcComposites_1.WebBase, __assign({ dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: ['esri/WebScene', 'esri/views/SceneView', 'dojo/promise/all'] }, props, { viewProperties: props.viewProperties, mapProperties: props.mapProperties, userDefinedMapProperties: __assign({}, props.mapProperties), userDefinedViewProperties: __assign({}, props.viewProperties) }))); };
 
 
 /***/ }),
 
 /***/ 38:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(4);
-;
-;
-;
-var Popup = (function (_super) {
-    __extends(Popup, _super);
-    function Popup(props) {
-        var _this = _super.call(this, props) || this;
-        _this.state = {
-            map: _this.props.map,
-            mounted: false,
-            view: _this.props.view,
-        };
-        return _this;
-    }
-    Popup.prototype.render = function () {
-        return null;
-    };
-    Popup.prototype.componentDidMount = function () {
-        if (this.props.popupProperties) {
-            this.state.view.popup.open(this.props.popupProperties);
-            this.setState({
-                mounted: true
-            });
-        }
-        else {
-            console.warn('React-arcgis attempted to display a popup without any content. Please include popupProperties in order to see the popup.');
-        }
-    };
-    Popup.prototype.componentWillUnmount = function () {
-        if (this.state.mounted) {
-            this.state.view.popup.close();
-            this.setState({
-                mounted: false
-            });
-        }
-    };
-    Popup.prototype.componentWillReceiveProps = function (nextProps) {
-        if (nextProps.popupProperties && this.state.mounted && nextProps.popupProperties !== this.props.popupProperties) {
-            this.state.view.popup.close();
-            this.state.view.popup.open(nextProps.popupProperties);
-        }
-    };
-    return Popup;
-}(React.Component));
-exports.default = Popup;
-
-
-/***/ }),
-
-/***/ 39:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, global) {var require;/*!
@@ -1042,7 +973,7 @@ function flush() {
 function attemptVertx() {
   try {
     var r = require;
-    var vertx = __webpack_require__(58);
+    var vertx = __webpack_require__(57);
     vertxNext = vertx.runOnLoop || vertx.runOnContext;
     return useVertxTimer();
   } catch (e) {
@@ -2062,18 +1993,18 @@ return Promise$2;
 })));
 
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(57)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(56)))
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /***/ (function(module, exports) {
 
 module.exports = require("react");
 
 /***/ }),
 
-/***/ 57:
+/***/ 56:
 /***/ (function(module, exports) {
 
 var g;
@@ -2101,27 +2032,27 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 58:
+/***/ 57:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 91:
+/***/ 90:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var MapViews = __webpack_require__(37);
-var WebViews = __webpack_require__(94);
-var GeometryImport = __webpack_require__(96);
-var Graphic_1 = __webpack_require__(97);
-var LayersImport = __webpack_require__(99);
+var MapViews = __webpack_require__(93);
+var WebViews = __webpack_require__(37);
+var GeometryImport = __webpack_require__(95);
+var Graphic_1 = __webpack_require__(96);
+var LayersImport = __webpack_require__(98);
 var SymbolsImport = __webpack_require__(101);
 var WidgetsImport = __webpack_require__(103);
-var Popup_1 = __webpack_require__(38);
+var Popup_1 = __webpack_require__(99);
 var ReactArcGIS = {
     Geometry: GeometryImport,
     Graphic: Graphic_1.default,
@@ -2149,7 +2080,7 @@ exports.Widgets = WidgetsImport;
 
 /***/ }),
 
-/***/ 94:
+/***/ 93:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2163,15 +2094,15 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(4);
+var React = __webpack_require__(5);
 var ArcComposites_1 = __webpack_require__(26);
-exports.WebMap = function (props) { return (React.createElement(ArcComposites_1.WebBase, __assign({ dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: ['esri/WebMap', 'esri/views/MapView', 'dojo/promise/all'] }, props, { viewProperties: props.viewProperties, mapProperties: props.mapProperties, userDefinedMapProperties: __assign({}, props.mapProperties), userDefinedViewProperties: __assign({}, props.viewProperties) }))); };
-exports.WebScene = function (props) { return (React.createElement(ArcComposites_1.WebBase, __assign({ dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: ['esri/WebScene', 'esri/views/SceneView', 'dojo/promise/all'] }, props, { viewProperties: props.viewProperties, mapProperties: props.mapProperties, userDefinedMapProperties: __assign({}, props.mapProperties), userDefinedViewProperties: __assign({}, props.viewProperties) }))); };
+exports.Map = function (props) { return (React.createElement(ArcComposites_1.MapBase, __assign({ dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: ['esri/Map', 'esri/views/MapView'] }, props, { mapProperties: __assign({ basemap: 'streets-vector' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], zoom: 6 }, props.viewProperties), userDefinedMapProperties: __assign({}, props.mapProperties), userDefinedViewProperties: __assign({}, props.viewProperties) }))); };
+exports.Scene = function (props) { return (React.createElement(ArcComposites_1.MapBase, __assign({ dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: ['esri/Map', 'esri/views/SceneView'] }, props, { mapProperties: __assign({ basemap: 'satellite', ground: 'world-elevation' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], scale: 500000 }, props.viewProperties), userDefinedMapProperties: __assign({}, props.mapProperties), userDefinedViewProperties: __assign({}, props.viewProperties) }))); };
 
 
 /***/ }),
 
-/***/ 95:
+/***/ 94:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2188,7 +2119,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var esri_promise_1 = __webpack_require__(15);
-var React = __webpack_require__(4);
+var React = __webpack_require__(5);
 var Geometry = (function (_super) {
     __extends(Geometry, _super);
     function Geometry(props) {
@@ -2242,7 +2173,7 @@ exports.default = Geometry;
 
 /***/ }),
 
-/***/ 96:
+/***/ 95:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2256,8 +2187,8 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(4);
-var GeometryBase_1 = __webpack_require__(95);
+var React = __webpack_require__(5);
+var GeometryBase_1 = __webpack_require__(94);
 exports.Circle = function (props) { return (React.createElement(GeometryBase_1.default, __assign({}, props, { dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: "esri/geometry/Circle", geometryProperties: __assign({}, props.geometryProperties) }))); };
 exports.Extent = function (props) { return (React.createElement(GeometryBase_1.default, __assign({}, props, { dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: "esri/geometry/Extent", geometryProperties: __assign({}, props.geometryProperties) }))); };
 exports.Multipoint = function (props) { return (React.createElement(GeometryBase_1.default, __assign({}, props, { dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: "esri/geometry/Multipoint", geometryProperties: __assign({}, props.geometryProperties) }))); };
@@ -2270,7 +2201,7 @@ exports.SpatialReference = function (props) { return (React.createElement(Geomet
 
 /***/ }),
 
-/***/ 97:
+/***/ 96:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2295,7 +2226,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var esri_promise_1 = __webpack_require__(15);
-var React = __webpack_require__(4);
+var React = __webpack_require__(5);
 var Graphic = (function (_super) {
     __extends(Graphic, _super);
     function Graphic(props) {
@@ -2389,7 +2320,7 @@ exports.default = Graphic;
 
 /***/ }),
 
-/***/ 98:
+/***/ 97:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2406,7 +2337,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var esri_promise_1 = __webpack_require__(15);
-var React = __webpack_require__(4);
+var React = __webpack_require__(5);
 var Layer = (function (_super) {
     __extends(Layer, _super);
     function Layer(props) {
@@ -2485,7 +2416,7 @@ exports.default = Layer;
 
 /***/ }),
 
-/***/ 99:
+/***/ 98:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2499,8 +2430,8 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(4);
-var LayerBase_1 = __webpack_require__(98);
+var React = __webpack_require__(5);
+var LayerBase_1 = __webpack_require__(97);
 exports.CSVLayer = function (props) { return (React.createElement(LayerBase_1.default, __assign({}, props, { dataFlow: props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime', scriptUri: "esri/layers/CSVLayer", layerProperties: __assign({}, props.layerProperties), addLocation: ['map'], eventMap: {
         onLayerviewCreate: 'layerview-create',
         onLayerviewDestroy: 'layerview-destroy'
@@ -2565,6 +2496,72 @@ exports.WebTileLayer = function (props) { return (React.createElement(LayerBase_
         onLayerviewCreate: 'layerview-create',
         onLayerviewDestroy: 'layerview-destroy'
     } }))); };
+
+
+/***/ }),
+
+/***/ 99:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(5);
+;
+;
+;
+var Popup = (function (_super) {
+    __extends(Popup, _super);
+    function Popup(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            map: _this.props.map,
+            mounted: false,
+            view: _this.props.view,
+        };
+        return _this;
+    }
+    Popup.prototype.render = function () {
+        return null;
+    };
+    Popup.prototype.componentDidMount = function () {
+        if (this.props.popupProperties) {
+            this.state.view.popup.open(this.props.popupProperties);
+            this.setState({
+                mounted: true
+            });
+        }
+        else {
+            console.warn('React-arcgis attempted to display a popup without any content. Please include popupProperties in order to see the popup.');
+        }
+    };
+    Popup.prototype.componentWillUnmount = function () {
+        if (this.state.mounted) {
+            this.state.view.popup.close();
+            this.setState({
+                mounted: false
+            });
+        }
+    };
+    Popup.prototype.componentWillReceiveProps = function (nextProps) {
+        if (nextProps.popupProperties && this.state.mounted && nextProps.popupProperties !== this.props.popupProperties) {
+            this.state.view.popup.close();
+            this.state.view.popup.open(nextProps.popupProperties);
+        }
+    };
+    return Popup;
+}(React.Component));
+exports.default = Popup;
 
 
 /***/ })

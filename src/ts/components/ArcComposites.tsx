@@ -92,7 +92,8 @@ export const WebBase = (props: WebBaseProps) => (
                     .then((layers) => {
                         const view = new ViewConstructor({
                             container: containerId,
-                            map
+                            map,
+                            ...props.viewProperties
                         });
                         Object.keys(eventMap).forEach((key) => {  // Set view events to any user defined callbacks
                             if (props[key]) {
