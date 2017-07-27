@@ -93,7 +93,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         };
         const mapStyle = this.props.className ? this.props.style : { position: 'relative', width: '100%', height: '100%', ...this.props.style };
         const className = this.props.className ? this.props.className : null;
-        const loadElement = (this.props.loadComponent ? <this.props.loadComponent /> : <h3 id="react-arcgis-loading-text" style={centerStyle as any}>Loading..</h3>);
+        const loadElement = (this.props.loadComponent ? this.props.loadComponent : <h3 id="react-arcgis-loading-text" style={centerStyle as any}>Loading..</h3>);
         const failElement = (
             this.props.failComponent ? <this.props.failComponent /> :
             <h3 id="react-arcgis-fail-text" style={centerStyle as any}>The ArcGIS API failed to load.</h3>

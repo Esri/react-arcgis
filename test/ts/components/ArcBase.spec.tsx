@@ -22,7 +22,7 @@ export default () => (
             });
 
             describe('the user has included a custom loading component', () => {
-                const customComponent = () => (<h3 id="custom-load-component" />);
+                const customComponent = <h3 id="custom-load-component" />;
                 beforeEach(() => {
                     arcView = mount(<ArcView dataFlow="oneTime" loadComponent={customComponent} loadMap={sinon.stub()} scriptUri={['foo', 'bar']} userDefinedMapProperties={{}} userDefinedViewProperties={{}} />);
                 });
