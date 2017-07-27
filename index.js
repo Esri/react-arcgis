@@ -706,7 +706,7 @@ var ArcView = (function (_super) {
         };
         var mapStyle = this.props.className ? this.props.style : __assign({ position: 'relative', width: '100%', height: '100%' }, this.props.style);
         var className = this.props.className ? this.props.className : null;
-        var loadElement = (this.props.loadComponent ? React.createElement(this.props.loadComponent, null) : React.createElement("h3", { id: "react-arcgis-loading-text", style: centerStyle }, "Loading.."));
+        var loadElement = (this.props.loadComponent ? this.props.loadComponent : React.createElement("h3", { id: "react-arcgis-loading-text", style: centerStyle }, "Loading.."));
         var failElement = (this.props.failComponent ? React.createElement(this.props.failComponent, null) :
             React.createElement("h3", { id: "react-arcgis-fail-text", style: centerStyle }, "The ArcGIS API failed to load."));
         if (this.state.status === 'loaded') {
