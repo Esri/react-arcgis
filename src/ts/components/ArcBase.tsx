@@ -28,8 +28,8 @@ export interface BaseProps {
     onResize?: (e: EventProperties) => any;
     onLoad?: (map: __esri.Map, view: __esri.MapView | __esri.SceneView) => any;
     onFail?: (e: any) => any;
-    loadComponent?: any;
-    failComponent?: any;
+    loadElement?: any;
+    failElement?: any;
 }
 
 interface ArcProps extends BaseProps {
@@ -53,22 +53,6 @@ interface ComponentState {
     status: string;
 }
 
-const eventMap = {
-    onClick: 'click',
-    onDoubleClick: 'double-click',
-    onDrag: 'drag',
-    onHold: 'hold',
-    onKeyDown: 'key-down',
-    onKeyUp: 'key-up',
-    onLayerViewCreate: 'layerview-create',
-    onLayerViewDestroy: 'layerview-destroy',
-    onMouseWheel: 'mouse-wheel',
-    onPointerDown: 'pointer-down',
-    onPointerMove: 'pointer-move',
-    onPointerUp: 'pointer-up',
-    onResize: 'resize'
-};
-
 export class ArcView extends React.Component<ArcProps, ComponentState> {
     constructor(props) {
         super(props);
@@ -90,13 +74,28 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             top: '50%',
             transform: 'translate(-50%, -50%)'
         };
-        const mapStyle = this.props.className ? this.props.style : { position: 'relative', width: '100%', height: '100%', ...this.props.style };
+
+        const mapStyle = this.props.className ?
+            this.props.style :
+            {
+                height: '100%',
+                position: 'relative',
+                width: '100%',
+                ...this.props.style
+            };
+
         const className = this.props.className ? this.props.className : null;
-        const loadElement = (this.props.loadComponent ? this.props.loadComponent : <h3 id="react-arcgis-loading-text" style={centerStyle as any}>Loading..</h3>);
+
+        const loadElement = (
+            this.props.loadElement ? this.props.loadElement :
+            <h3 id="react-arcgis-loading-text" style={centerStyle as any}>Loading..</h3>
+        );
+
         const failElement = (
-            this.props.failComponent ? <this.props.failComponent /> :
+            this.props.failElement ? this.props.failElement :
             <h3 id="react-arcgis-fail-text" style={centerStyle as any}>The ArcGIS API failed to load.</h3>
         );
+
         if (this.state.status === 'loaded') {
             const childrenWithProps = React.Children.map(this.props.children, (child) => {
                 const childEl = child as React.ReactElement<any>;
@@ -116,13 +115,18 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             return (
                 <div id="base-container" style={mapStyle} className={className}>
                     <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
-                    {loadElement}
+                    <div style={centerStyle as any}>
+                        {loadElement}
+                    </div>
                 </div>
             );
         }
         return (
             <div id="base-container" style={mapStyle} className={className}>
-                {failElement}
+                <ArcContainer id={this.state.mapContainerId} style={{ width: '100%', height: '100%' }} />
+                <div style={centerStyle as any}>
+                    {failElement}
+                </div>
             </div>
         );
     }
@@ -151,22 +155,5 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
                 this.props.onFail(e);
             }
         });
-    }
-
-    public componentWillReceiveProps(nextProps: ArcProps) {
-        if (this.props.dataFlow === 'oneWay') {
-            Object.keys(nextProps.userDefinedMapProperties).forEach((key) => {
-                if (this.state.map.get(key) && this.state.map.get(key) !== nextProps.userDefinedMapProperties[key]) {
-                    this.state.map.set(key, nextProps.userDefinedMapProperties[key]);
-                }
-            });
-            Object.keys(nextProps.userDefinedViewProperties).forEach((key) => {
-                if (this.state.view.get(key) && this.state.view.get(key) !== nextProps.userDefinedViewProperties[key]) {
-                    const changes = {};
-                    changes[key] = nextProps.userDefinedViewProperties[key];
-                    this.state.view.set(changes);
-                }
-            });
-        }
     }
 }
