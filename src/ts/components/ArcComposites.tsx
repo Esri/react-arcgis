@@ -53,7 +53,7 @@ export const MapBase = (props: MapBaseProps) => (
                 });
                 view.then(() => {
                     resolve({ map, view });
-                }, (err) => {
+                }, (err: Error) => {
                     reject(err);
                 });
             } catch (err) {
