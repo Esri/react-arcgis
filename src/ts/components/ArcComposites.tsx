@@ -3,14 +3,12 @@ import * as React from 'react';
 import { ArcView, BaseProps } from './ArcBase';
 
 interface MapBaseProps extends BaseProps {
-    dataFlow: 'oneWay' | 'oneTime';
     scriptUri: string[];
     userDefinedMapProperties: __esri.MapProperties;
     userDefinedViewProperties: __esri.MapViewProperties | __esri.SceneViewProperties;
 }
 
 interface WebBaseProps extends BaseProps {
-    dataFlow: 'oneWay' | 'oneTime';
     scriptUri: string[];
     id: string;
     userDefinedMapProperties: __esri.MapProperties;

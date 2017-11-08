@@ -7,7 +7,6 @@ export interface BaseProps {
     id?: string;
     children?: any;
     className?: string;
-    dataFlow?: 'oneWay' | 'oneTime';
     style?: {
         [propName: string]: any
     };
@@ -33,7 +32,6 @@ export interface BaseProps {
 }
 
 interface ArcProps extends BaseProps {
-    dataFlow: 'oneWay' | 'oneTime';
     loadMap: (modules: any[], containerId: string) => Promise<any>;
     userDefinedMapProperties: __esri.MapProperties;
     userDefinedViewProperties: __esri.ViewProperties;
