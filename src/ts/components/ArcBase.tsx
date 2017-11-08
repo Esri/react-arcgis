@@ -44,7 +44,6 @@ interface EventProperties {
     [propName: string]: any;
 }
 
-
 interface ComponentState {
     map: __esri.Map;
     mapContainerId: string;

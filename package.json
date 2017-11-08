@@ -1,11 +1,10 @@
 {
   "name": "react-arcgis",
-  "version": "2.0.7",
+  "version": "3.0.0",
   "description": "React component library for Esri ArcGIS JavaScript API",
   "main": "app.js",
   "scripts": {
-    "build": "webpack --config ./webpack.config.js",
-    "start": "webpack-dev-server --hot",
+    "build": "webpack",
     "test": "nyc mocha"
   },
   "nyc": {
@@ -36,36 +35,27 @@
     "awesome-typescript-loader": "^3.2.1",
     "calcite-web": "github:esri/calcite-web#v1.0.0-rc.2",
     "chai": "^4.0.2",
-    "copy-webpack-plugin": "^4.0.1",
-    "css-loader": "^0.26.4",
     "enzyme": "^2.9.1",
-    "extract-text-webpack-plugin": "^2.1.2",
-    "file-loader": "^0.10.1",
-    "html-webpack-plugin": "^2.29.0",
     "jsdom": "^11.0.0",
     "mocha": "^3.4.2",
     "mock-require": "^2.0.2",
-    "node-sass": "^4.5.3",
     "nyc": "^10.3.2",
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1",
-    "sass-loader": "^6.0.6",
     "sinon": "^2.3.6",
     "source-map-loader": "^0.1.6",
-    "style-loader": "^0.13.2",
     "ts-node": "^3.1.0",
     "tslint-react": "^2.6.0",
     "typescript": "^2.4.1",
-    "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.5.0"
+    "webpack": "^2.6.1"
   },
   "dependencies": {
     "@types/arcgis-js-api": "^4.3.1",
     "@types/react": "^15.0.33",
     "@types/react-dom": "^0.14.23",
     "dojo-typings": "^1.11.7",
-    "esri-promise": "^0.3.0"
+    "esri-promise": "^0.3.2"
   }
 }
