@@ -48,6 +48,7 @@
     "sinon": "^2.4.1",
     "source-map-loader": "^0.1.6",
     "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
     "tslint-react": "^2.6.0",
     "typescript": "^2.6.1",
     "webpack": "^2.6.1"
