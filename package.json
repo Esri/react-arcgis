@@ -56,7 +56,6 @@
   "dependencies": {
     "@types/arcgis-js-api": "^4.5.1",
     "@types/react": "^15.6.6",
-    "@types/react-dom": "^0.14.23",
-    "esri-promise": "^0.3.5"
+    "@types/react-dom": "^0.14.23"
   }
 }
