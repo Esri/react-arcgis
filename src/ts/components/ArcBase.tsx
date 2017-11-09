@@ -33,8 +33,6 @@ export interface BaseProps {
 
 interface ArcProps extends BaseProps {
     loadMap: (modules: any[], containerId: string) => Promise<any>;
-    userDefinedMapProperties: __esri.MapProperties;
-    userDefinedViewProperties: __esri.ViewProperties;
     scriptUri: string[];
 }
 
@@ -78,12 +76,12 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
 
         const loadElement = (
             this.props.loadElement ? this.props.loadElement :
-            <h3 id="react-arcgis-loading-text" style={centerStyle as any}>Loading..</h3>
+            <h3 id="react-arcgis-loading-text">Loading..</h3>
         );
 
         const failElement = (
             this.props.failElement ? this.props.failElement :
-            <h3 id="react-arcgis-fail-text" style={centerStyle as any}>The ArcGIS API failed to load.</h3>
+            <h3 id="react-arcgis-fail-text">The ArcGIS API failed to load.</h3>
         );
 
         if (this.state.status === 'loaded') {

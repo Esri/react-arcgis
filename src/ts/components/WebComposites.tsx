@@ -18,8 +18,6 @@ export const WebMap = (props: MapProps) => (
         {...props}
         viewProperties={props.viewProperties}
         mapProperties={props.mapProperties}
-        userDefinedMapProperties={{...props.mapProperties}}
-        userDefinedViewProperties={{...props.viewProperties}}
     />
 );
 
@@ -29,7 +27,5 @@ export const WebScene = (props: SceneProps) => (
         {...props}
         viewProperties={props.viewProperties}
         mapProperties={props.mapProperties}
-        userDefinedMapProperties={{...props.mapProperties}}
-        userDefinedViewProperties={{...props.viewProperties}}
     />
 );

@@ -228,7 +228,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var esri_promise_1 = __webpack_require__(10);
 var React = __webpack_require__(0);
 var ArcContainer_1 = __webpack_require__(4);
-var ArcView = (function (_super) {
+var ArcView = /** @class */ (function (_super) {
     __extends(ArcView, _super);
     function ArcView(props) {
         var _this = _super.call(this, props) || this;
@@ -250,9 +250,9 @@ var ArcView = (function (_super) {
         var mapStyle = this.props.className ?
             this.props.style : __assign({ height: '100%', position: 'relative', width: '100%' }, this.props.style);
         var loadElement = (this.props.loadElement ? this.props.loadElement :
-            React.createElement("h3", { id: "react-arcgis-loading-text", style: centerStyle }, "Loading.."));
+            React.createElement("h3", { id: "react-arcgis-loading-text" }, "Loading.."));
         var failElement = (this.props.failElement ? this.props.failElement :
-            React.createElement("h3", { id: "react-arcgis-fail-text", style: centerStyle }, "The ArcGIS API failed to load."));
+            React.createElement("h3", { id: "react-arcgis-fail-text" }, "The ArcGIS API failed to load."));
         if (this.state.status === 'loaded') {
             var childrenWithProps = React.Children.map(this.props.children, function (child) {
                 var childEl = child;
@@ -322,7 +322,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 ;
-var ArcContainer = (function (_super) {
+var ArcContainer = /** @class */ (function (_super) {
     __extends(ArcContainer, _super);
     function ArcContainer(props) {
         return _super.call(this, props) || this;
@@ -355,8 +355,8 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 var ArcComposites_1 = __webpack_require__(1);
-exports.Map = function (props) { return (React.createElement(ArcComposites_1.MapBase, __assign({ scriptUri: ['esri/Map', 'esri/views/MapView'] }, props, { mapProperties: __assign({ basemap: 'streets-vector' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], zoom: 6 }, props.viewProperties), userDefinedMapProperties: __assign({}, props.mapProperties), userDefinedViewProperties: __assign({}, props.viewProperties) }))); };
-exports.Scene = function (props) { return (React.createElement(ArcComposites_1.MapBase, __assign({ scriptUri: ['esri/Map', 'esri/views/SceneView'] }, props, { mapProperties: __assign({ basemap: 'satellite', ground: 'world-elevation' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], scale: 500000 }, props.viewProperties), userDefinedMapProperties: __assign({}, props.mapProperties), userDefinedViewProperties: __assign({}, props.viewProperties) }))); };
+exports.Map = function (props) { return (React.createElement(ArcComposites_1.MapBase, __assign({ scriptUri: ['esri/Map', 'esri/views/MapView'] }, props, { mapProperties: __assign({ basemap: 'streets-vector' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], zoom: 6 }, props.viewProperties) }))); };
+exports.Scene = function (props) { return (React.createElement(ArcComposites_1.MapBase, __assign({ scriptUri: ['esri/Map', 'esri/views/SceneView'] }, props, { mapProperties: __assign({ basemap: 'satellite', ground: 'world-elevation' }, props.mapProperties), viewProperties: __assign({ center: [-122.4443, 47.2529], scale: 500000 }, props.viewProperties) }))); };
 
 
 /***/ }),
@@ -376,8 +376,8 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(0);
 var ArcComposites_1 = __webpack_require__(1);
-exports.WebMap = function (props) { return (React.createElement(ArcComposites_1.WebBase, __assign({ scriptUri: ['esri/WebMap', 'esri/views/MapView', 'dojo/promise/all'] }, props, { viewProperties: props.viewProperties, mapProperties: props.mapProperties, userDefinedMapProperties: __assign({}, props.mapProperties), userDefinedViewProperties: __assign({}, props.viewProperties) }))); };
-exports.WebScene = function (props) { return (React.createElement(ArcComposites_1.WebBase, __assign({ scriptUri: ['esri/WebScene', 'esri/views/SceneView', 'dojo/promise/all'] }, props, { viewProperties: props.viewProperties, mapProperties: props.mapProperties, userDefinedMapProperties: __assign({}, props.mapProperties), userDefinedViewProperties: __assign({}, props.viewProperties) }))); };
+exports.WebMap = function (props) { return (React.createElement(ArcComposites_1.WebBase, __assign({ scriptUri: ['esri/WebMap', 'esri/views/MapView', 'dojo/promise/all'] }, props, { viewProperties: props.viewProperties, mapProperties: props.mapProperties }))); };
+exports.WebScene = function (props) { return (React.createElement(ArcComposites_1.WebBase, __assign({ scriptUri: ['esri/WebScene', 'esri/views/SceneView', 'dojo/promise/all'] }, props, { viewProperties: props.viewProperties, mapProperties: props.mapProperties }))); };
 
 
 /***/ }),

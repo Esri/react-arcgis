@@ -23,8 +23,6 @@ export const Map = (props: MapProps) => (
       zoom: 6,
       ...props.viewProperties
     }}
-    userDefinedMapProperties={{...props.mapProperties}}
-    userDefinedViewProperties={{...props.viewProperties}}
   />
 );
 
@@ -42,7 +40,5 @@ export const Scene = (props: SceneProps) => (
       scale: 500000,
       ...props.viewProperties
     }}
-    userDefinedMapProperties={{...props.mapProperties}}
-    userDefinedViewProperties={{...props.viewProperties}}
   />
 );

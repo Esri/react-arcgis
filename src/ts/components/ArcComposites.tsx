@@ -4,15 +4,11 @@ import { ArcView, BaseProps } from './ArcBase';
 
 interface MapBaseProps extends BaseProps {
     scriptUri: string[];
-    userDefinedMapProperties: __esri.MapProperties;
-    userDefinedViewProperties: __esri.MapViewProperties | __esri.SceneViewProperties;
 }
 
 interface WebBaseProps extends BaseProps {
     scriptUri: string[];
     id: string;
-    userDefinedMapProperties: __esri.MapProperties;
-    userDefinedViewProperties: __esri.MapViewProperties | __esri.SceneViewProperties;
 }
 
 const eventMap = {
@@ -39,7 +35,7 @@ export const MapBase = (props: MapBaseProps) => (
         const mapData = new Promise((resolve, reject) => {
             try {
                 const map: __esri.Map = new Map(props.mapProperties);  // Make the map
-                const viewProperties: __esri.ViewProperties | __esri.MapProperties = {
+                const viewProperties: any = {
                     map,
                     container: containerId,
                     ...props.viewProperties
