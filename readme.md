@@ -149,9 +149,9 @@ Worried about the JS API not loading? Pass in an onFail handler:
 
 ```js
 import * as React from 'react';
-import { WebMap } from 'react-arcgis';
+import { WebScene } from 'react-arcgis';
 
-export default class MakeAMap extends React.Component {
+export default class MakeAScene extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -162,7 +162,7 @@ export default class MakeAMap extends React.Component {
     }
 
     render() {
-        return <WebMap className="full-screen-map" id="foobar" onFail={this.handleFail} />;
+        return <WebScene className="full-screen-map" id="foobar" onFail={this.handleFail} />;
     }
 
     handleFail(e) {
