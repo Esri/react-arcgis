@@ -55,7 +55,6 @@ ReactDOM.render(
   document.getElementById('container')
 );
 ```
-![scene](https://user-images.githubusercontent.com/16542714/27750977-088b94ac-5d8f-11e7-997a-088a3c717cf6.jpg)
 
 You can also add webmaps and webscenes from ArcGIS Online:
 
@@ -262,8 +261,8 @@ Anyone is welcome to contribute to this package. My only "rule" is that your con
 
 Here are some commands that may be helpful for development:
 
-`npm test`: Runs the unit tests
-`npm run build`: Builds the application
+- `npm test`: Runs the unit tests
+- `npm run build`: Builds the application
 
 
 ## License
