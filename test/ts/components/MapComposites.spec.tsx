@@ -14,16 +14,6 @@ export const MapTests = () => (
         it('should exist', () => {
             expect(map).to.exist;
         });
-
-        describe('the user sets the mapProperties to oneWay', () => {
-            beforeEach(() => {
-                map = shallow(<Map dataFlow="oneWay"  />);
-            });
-
-            it('should give a Map instance with dataFlow set to oneWay', () => {
-                expect(map.instance().props.dataFlow).to.equal('oneWay');
-            });
-        });
     })
 );
 
@@ -36,16 +26,6 @@ export const SceneTests = () => (
 
         it('should exist', () => {
             expect(scene).to.exist;
-        });
-
-        describe('the user sets the dataFlow to oneWay', () => {
-            beforeEach(() => {
-                scene = shallow(<Scene dataFlow="oneWay" />);
-            });
-
-            it('should give a Scene instance with dataFlow set to oneWay', () => {
-                expect(scene.instance().props.dataFlow).to.equal('oneWay');
-            });
         });
     })
 );

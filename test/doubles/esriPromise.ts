@@ -1,4 +1,3 @@
-import { Promise } from 'es6-promise';
 import * as sinon from 'sinon';
 
 class GetterSetter {

@@ -12,7 +12,6 @@ interface SceneProps extends BaseProps {
 
 export const Map = (props: MapProps) => (
   <MapBase
-    dataFlow={props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime'}
     scriptUri={['esri/Map', 'esri/views/MapView']}
     {...props}
     mapProperties={{
@@ -24,14 +23,11 @@ export const Map = (props: MapProps) => (
       zoom: 6,
       ...props.viewProperties
     }}
-    userDefinedMapProperties={{...props.mapProperties}}
-    userDefinedViewProperties={{...props.viewProperties}}
   />
 );
 
 export const Scene = (props: SceneProps) => (
   <MapBase
-    dataFlow={props.dataFlow === 'oneWay' ? 'oneWay' : 'oneTime'}
     scriptUri={['esri/Map', 'esri/views/SceneView']}
     {...props}
     mapProperties={{
@@ -44,7 +40,5 @@ export const Scene = (props: SceneProps) => (
       scale: 500000,
       ...props.viewProperties
     }}
-    userDefinedMapProperties={{...props.mapProperties}}
-    userDefinedViewProperties={{...props.viewProperties}}
   />
 );
