@@ -1,4 +1,3 @@
-import { Promise } from 'es6-promise';
 import { esriPromise } from 'esri-promise';
 import * as React from 'react';
 import ArcContainer from './ArcContainer';

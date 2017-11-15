@@ -15,7 +15,7 @@ export default class ArcContainer extends React.Component<ArcContainerProps, Arc
     }
 
     public render() {
-        return <div id={this.props.id} style={this.props.style}></div>;
+        return <div id={this.props.id} style={this.props.style} />;
     }
 
     public shouldComponentUpdate() {

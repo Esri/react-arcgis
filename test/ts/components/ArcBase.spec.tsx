@@ -1,6 +1,5 @@
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
-import { Promise } from 'es6-promise';
 import * as React from 'react';
 import * as sinon from 'sinon';
 import { ArcView } from '../../../src/ts/components/ArcBase';

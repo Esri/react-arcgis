@@ -11,13 +11,13 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 ## Changed in version 3.0.0:
 
-### *The scope of the library has been reduced significantly (but trust me it's for the better)*
+### *The scope of the library has been reduced significantly (for the better though)*
 
 - React ArcGIS now provides only 4 core components - `<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />`
 
 The reason for this "shrinking" of react-arcgis is to promote focus in the library, and avoid concealing the underlying ArcGIS JS API.
 
-While having a declarative html-like syntax for working with maps is great, the surface area of the [ArcGIS JS API](https://developers.arcgis.com/javascript/) is very large, and it is regularly updated with new features and functionality. Rather than attempting to wrap the entire thing in a react-like syntax, I have decided to just handle the essentials, and provide clear examples for how to do more complex tasks by using the [ArcGIS API](https://developers.arcgis.com/javascript/) directly (still within your react app of course).
+While having a declarative html-like syntax for doing everything in the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) would be great, the surface area of the api is very large, and it is regularly updated with new features and functionality. Rather than attempting to wrap the entire thing in a react-like syntax, I have decided to just handle the essentials, and provide clear examples for how to perform more complex tasks by using the api directly (still within your react app of course).
 
 Because you will be less abstracted from Esri's API, you will actually be in a better position to utilize its full functionality!
 
@@ -25,6 +25,8 @@ Because you will be less abstracted from Esri's API, you will actually be in a b
 ## Basic Usage:
 
 *Don't forget to load the js api stylesheet! [https://js.arcgis.com/4.5/esri/css/main.css](https://js.arcgis.com/4.5/esri/css/main.css)*
+
+*If you need to support browsers lacking a native promise implementation, you will have to add a global `Promise` constructor polyfill to your project, as react-arcgis does not include one. I recommend [es6-promise](https://www.npmjs.com/package/es6-promise).*
 
 Render a simple map in React:
 
@@ -117,6 +119,7 @@ export default (props) => (
     />
 )
 ```
+![scene](https://user-images.githubusercontent.com/16542714/27750977-088b94ac-5d8f-11e7-997a-088a3c717cf6.jpg)
 
 If you want to access the `map` and `view` instances directly after they are loaded, pass in an `onLoad` handler:
 
@@ -145,7 +148,7 @@ export default class MakeAMap extends React.Component {
 }
 ```
 
-Worried about the JS API not loading? Pass in an onFail handler:
+Don't forget an `onFail` handler in case something goes wrong:
 
 ```js
 import * as React from 'react';
@@ -173,8 +176,96 @@ export default class MakeAScene extends React.Component {
 ```
 
 
+## "Advanced" Usage:
+
+The functionality available through the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) goes well beyond just rendering maps, and if your application needs to do more with the map than simply show it, you will quickly find that you need access to the rest of Esri's API.
+
+React-arcgis provides the children of `<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />` with access to their parent's `map` and `view` instances through props. Combined with `esriPromise`, we can use this to easily get other functionality from the ArcGIS JS API and use it within our react application.
+
+For example, let's convert a Bermuda Triangle graphic from [this example](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=intro-graphics) into a react component:
+
+```js
+import * as React from 'react';
+import { esriPromise } from 'react-arcgis';
+
+export default class BermudaTriangle extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            graphic: null
+        };
+    }
+
+    render() {
+        return null;
+    }
+
+    componentWillMount() {
+        esriPromise(['esri/Graphic']).then(([ Graphic ]) => {
+            // Create a polygon geometry
+            const polygon = {
+                type: "polygon", // autocasts as new Polygon()
+                rings: [
+                [-64.78, 32.3],
+                [-66.07, 18.45],
+                [-80.21, 25.78],
+                [-64.78, 32.3]
+                ]
+            };
+
+            // Create a symbol for rendering the graphic
+            const fillSymbol = {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: [227, 139, 79, 0.8],
+                outline: { // autocasts as new SimpleLineSymbol()
+                color: [255, 255, 255],
+                width: 1
+                }
+            };
+
+            // Add the geometry and symbol to a new graphic
+            const graphic = new Graphic({
+                geometry: polygon,
+                symbol: fillSymbol
+            });
+
+            this.setState({ graphic });
+            this.props.view.graphics.add(graphic);
+        });
+    }
+
+    componentWillUnmount() {
+        this.props.view.graphics.remove(this.state.graphic);
+    }
+}
+```
+
+Now we can use the `<BermudaTriangle />` component within our `<Map />`, `<Scene />`, `<WebMap />`, or `<WebScene />`, and the `map` and `view` props will automatically be supplied by react-arcgis:
+
+```js
+import * as React from 'react';
+import { Scene } from 'react-arcgis';
+import BermudaTriangle from './BermudaTriangle'; // The Graphic component we just made 
+
+export default (props) => (
+    <Scene class="full-screen-map">
+        <BermudaTriangle />
+    </Scene>
+)
+```
+![bermuda-triangle](https://user-images.githubusercontent.com/16542714/27752141-5f000034-5d94-11e7-83bc-c88428f99053.jpg)
 
 
+## Contributions
 
-Happy coding! :] <br />
-Nick
+Anyone is welcome to contribute to this package. My only "rule" is that your contribution must either pass the existing unit tests, or include additional unit tests to cover new functionality.
+
+Here are some commands that may be helpful for development:
+
+`npm test`: Runs the unit tests
+`npm run build`: Builds the application
+
+
+## License
+
+MIT

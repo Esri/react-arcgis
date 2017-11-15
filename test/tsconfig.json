@@ -1,14 +1,19 @@
 {
-  "compilerOptions": {
-    "sourceMap": true,
-    "noImplicitAny": false,
-    "module": "umd",
-    "moduleResolution": "node",
-    "target": "es5",
-    "experimentalDecorators": true,
-    "jsx": "react"
-  },
-  "include": [
-    "./**/*"
-  ]
+    "compilerOptions": {
+        "sourceMap": true,
+        "noImplicitAny": false,
+        "module": "umd",
+        "moduleResolution": "node",
+        "target": "es5",
+        "experimentalDecorators": true,
+        "jsx": "react",
+        "lib": [
+            "dom",
+            "es5",
+            "es2015.promise"
+        ]
+    },
+    "include": [
+        "./**/*"
+    ]
 }
