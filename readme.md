@@ -2,7 +2,7 @@
 
 # React-ArcGIS
 
-React-ArcGIS is a library of React components which use the ArcGIS API for JavaScript. React-ArcGIS uses [esri-promise](https://www.npmjs.com/package/esri-promise) internally to load and interact with the AMD ArcGIS API for JavaScript, and provide a base for building mapping applications.
+React-ArcGIS is a library of React components which use the ArcGIS API for JavaScript. React-ArcGIS uses [esri-loader](https://github.com/Esri/esri-loader) internally to load and interact with the AMD ArcGIS API for JavaScript, and provide a base for building mapping applications.
 
 ## Installation:
 
