@@ -15,7 +15,7 @@ class GetterSetter {
     }
 };
 
-export function esriPromise(modules) {
+export function loadModules(modules) {
     if (global['asyncSuccess']) {
         if (global['generateMap']) {
             return Promise.resolve([

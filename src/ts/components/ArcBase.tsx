@@ -1,4 +1,4 @@
-import { esriPromise } from 'esri-promise';
+import { loadModules } from 'esri-loader';
 import * as React from 'react';
 import ArcContainer from './ArcContainer';
 
@@ -119,7 +119,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
     }
 
     public componentDidMount() {
-        esriPromise(this.props.scriptUri)
+        loadModules(this.props.scriptUri)
         .then((modules) => (
             this.props.loadMap(modules, this.state.mapContainerId)
                 .then(

@@ -7,7 +7,7 @@ global['navigator'] = dom.window.navigator;
 global['document'] = dom.window.document;
 global['asyncSuccess'] = true;
 
-mock('esri-promise', './doubles/esriPromise');
+mock('esri-loader', './doubles/esriLoader');
 
 import SampleTests from './ts/test';
 SampleTests();
