@@ -9,13 +9,13 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 1. Run `npm i react-arcgis` (if you decide you like it, you can even include `--save`)
 
 
+## Version 3.1.0:
+
+- React ArcGIS now uses [esri-loader](https://github.com/Esri/esri-loader) under the hood, as it accomplishes the same thing as [esri-promise](https://github.com/nicksenger/esri-promise) and is being more actively maintained. React-arcgis provides `loadModules` from esri-loader as `esriPromise` so as to not break existing applications.
+
 ## Changed in version 3.0.0:
 
-### *The scope of the library has been reduced significantly (for the better though)*
-
-- React ArcGIS now provides only 4 core components - `<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />`
-
-The reason for this "shrinking" of react-arcgis is to promote focus in the library, and avoid concealing the underlying ArcGIS JS API.
+- React ArcGIS provides 4 core components - `<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />`
 
 While having a declarative html-like syntax for doing everything in the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) would be great, the surface area of the api is very large, and it is regularly updated with new features and functionality. Rather than attempting to wrap the entire thing in a react-like syntax, I have decided to just handle the essentials, and provide clear examples for how to perform more complex tasks by using the api directly (still within your react app of course).
 
@@ -45,8 +45,7 @@ ReactDOM.render(
 
 Or, render a 3D web-scene:
 
-```js
-import * as React from 'react';
+```jsimport * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Scene } from 'react-arcgis';
 
