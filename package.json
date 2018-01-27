@@ -13,7 +13,6 @@
   "devDependencies": {
     "@types/mocha": "^2.2.47",
     "awesome-typescript-loader": "^3.4.1",
-    "calcite-web": "github:esri/calcite-web#v1.0.0-rc.2",
     "chai": "^4.1.2",
     "enzyme": "^3.3.0",
     "es6-promise": "^4.2.4",
