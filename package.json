@@ -67,5 +67,5 @@
     "test": "nyc mocha"
   },
   "types": "dist/esm/index.d.ts",
-  "version": "3.1.2"
+  "version": "3.1.3"
 }
