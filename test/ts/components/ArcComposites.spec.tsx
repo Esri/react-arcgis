@@ -41,6 +41,7 @@ export const MapBaseTests = () => (
 
                     it('should display the loaded state of the application', (done) => {
                         setTimeout(() => {
+                            mapBase.update();
                             expect(mapBase.find('#react-arcgis-fail-text')).to.have.length(0);
                             expect(mapBase.find('#react-arcgis-loading-text')).to.have.length(0);
                             done();
@@ -55,6 +56,7 @@ export const MapBaseTests = () => (
 
                         it('should display the loaded state of the application', (done) => {
                             setTimeout(() => {
+                                mapBase.update();
                                 expect(mapBase.find('#react-arcgis-fail-text')).to.have.length(0);
                                 expect(mapBase.find('#react-arcgis-loading-text')).to.have.length(0);
                                 done();
@@ -87,6 +89,7 @@ export const MapBaseTests = () => (
 
                     it('should display the failed state of the application', (done) => {
                         setTimeout(() => {
+                            mapBase.update();
                             expect(mapBase.find('#react-arcgis-fail-text')).to.have.length(1);
                             expect(mapBase.find('#react-arcgis-loading-text')).to.have.length(0);
                             done();
@@ -112,6 +115,7 @@ export const MapBaseTests = () => (
 
                     it('should display the failed state for the application', (done) => {
                         setTimeout(() => {
+                            mapBase.update();
                             expect(mapBase.find('#react-arcgis-fail-text')).to.have.length(1);
                             done();
                         }, 1);
@@ -166,6 +170,7 @@ export const WebBaseTests = () => (
 
                 it('should display the loaded state of the application', (done) => {
                     setTimeout(() => {
+                        webBase.update();
                         expect(webBase.find('#react-arcgis-fail-text')).to.have.length(0);
                         expect(webBase.find('#react-arcgis-loading-text')).to.have.length(0);
                         done();
@@ -180,6 +185,7 @@ export const WebBaseTests = () => (
 
                     it('should display the loaded state of the application', (done) => {
                         setTimeout(() => {
+                            webBase.update();
                             expect(webBase.find('#react-arcgis-fail-text')).to.have.length(0);
                             expect(webBase.find('#react-arcgis-loading-text')).to.have.length(0);
                             done();
@@ -211,6 +217,7 @@ export const WebBaseTests = () => (
 
                 it('should display the failed state for the application', (done) => {
                     setTimeout(() => {
+                        webBase.update();
                         expect(webBase.find('#react-arcgis-fail-text')).to.have.length(1);
                         done();
                     }, 1);
@@ -234,6 +241,7 @@ export const WebBaseTests = () => (
 
                 it('should display the failed state for the application', (done) => {
                     setTimeout(() => {
+                        webBase.update();
                         expect(webBase.find('#react-arcgis-fail-text')).to.have.length(1);
                         done();
                     }, 1);

@@ -3,19 +3,23 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         index: [
-            './index.ts'
+            './src/ts/index.ts'
         ]
     },
     output: {
-        path: __dirname,
+        path: __dirname + '/dist/umd',
         filename: '[name].js',
         library: 'react-arcgis',
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
     externals: {
-        'react': 'commonjs react',
-        'esri-promise': 'commonjs esri-promise'
+        'react': {
+            root: 'React',
+            commonjs2: 'react',
+            commonjs: 'react',
+            amd: 'react'
+        }
     },
     devtool: 'source-map',
     resolve: {

@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import * as React from 'react';
 import * as sinon from 'sinon';
+import ChildComponent from '../../doubles/ChildComponent';
 import { ArcView } from '../../../src/ts/components/ArcBase';
 
 export default () => (
@@ -97,20 +98,21 @@ export default () => (
                     });
 
                     describe('the user has included a child component', () => {
-                        const ChildComponent = (props) => <h3 id="child">{props.map}{props.view}</h3>;
                         beforeEach(() => {
                             arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} ><ChildComponent /></ArcView>);
                         });
 
                         it('should render the child component', (done) => {
                             setTimeout(() => {
-                                expect(arcView.find('#child')).to.have.length(1);
+                                arcView.update();
+                                expect(arcView.find(ChildComponent)).to.have.length(1);
                                 done();
                             }, 1);
                         });
 
                         it('should give map and view props to the child component', (done) => {
                             setTimeout(() => {
+                                arcView.update();
                                 expect(arcView.find('#child').text()).to.equal('foobar');
                                 done();
                             }, 1);
@@ -234,6 +236,7 @@ export default () => (
 
                     it ('should display the failed state for the application', (done) => {
                         setTimeout(() => {
+                            arcView.update();
                             expect(arcView.find('#react-arcgis-fail-text')).to.have.length(1);
                             done();
                         }, 1);
@@ -260,6 +263,7 @@ export default () => (
 
                 it('should display the default failed state for the application', (done) => {
                     setTimeout(() => {
+                        arcView.update();
                         expect(arcView.find('#react-arcgis-fail-text')).to.have.length(1);
                         done();
                     }, 1);
@@ -280,6 +284,7 @@ export default () => (
 
                     it('should display the custom fail component', (done) => {
                         setTimeout(() => {
+                            arcView.update();
                             expect(arcView.find('#custom-fail-component')).to.have.length(1);
                             done();
                         }, 1);

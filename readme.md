@@ -1,4 +1,4 @@
-![Version 3.1.0](https://img.shields.io/badge/npm-v3.1.0-blue.svg) ![100% Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
+![Version 3.1.2](https://img.shields.io/badge/npm-v3.1.2-blue.svg) ![100% Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
 
 # React-ArcGIS
 
@@ -8,6 +8,10 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 1. Run `npm i react-arcgis` (if you decide you like it, you can even include `--save`)
 
+
+## Version 3.1.2:
+
+- Fixed some issues with the distribution. The package is now shipped as both ESM and bundled UMD formats. Please note that I am only officially supporting the latest version of react with this package, but will try my best to keep things backward-compatible. The peer dependency is set to `"react": "*"`.
 
 ## Version 3.1.0:
 

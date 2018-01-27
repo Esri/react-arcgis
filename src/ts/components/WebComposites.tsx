@@ -2,12 +2,12 @@ import * as React from 'react';
 import { BaseProps } from './ArcBase';
 import { WebBase } from './ArcComposites';
 
-interface MapProps extends BaseProps {
+export interface MapProps extends BaseProps {
     id: string;
     viewProperties?: __esri.MapViewProperties;
 }
 
-interface SceneProps extends BaseProps {
+export interface SceneProps extends BaseProps {
     id: string;
     viewProperties?: __esri.SceneViewProperties;
 }

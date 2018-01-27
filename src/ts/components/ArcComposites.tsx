@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { ArcView, BaseProps } from './ArcBase';
 
-interface MapBaseProps extends BaseProps {
+export interface MapBaseProps extends BaseProps {
     scriptUri: string[];
 }
 
-interface WebBaseProps extends BaseProps {
+export interface WebBaseProps extends BaseProps {
     scriptUri: string[];
     id: string;
 }
