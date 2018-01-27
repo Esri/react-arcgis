@@ -30,16 +30,16 @@ export interface BaseProps {
     failElement?: any;
 }
 
-interface ArcProps extends BaseProps {
+export interface ArcProps extends BaseProps {
     loadMap: (modules: any[], containerId: string) => Promise<any>;
     scriptUri: string[];
 }
 
-interface EventProperties {
+export interface EventProperties {
     [propName: string]: any;
 }
 
-interface ComponentState {
+export interface ComponentState {
     mapContainerId: string;
     status: string;
     map?: __esri.Map;

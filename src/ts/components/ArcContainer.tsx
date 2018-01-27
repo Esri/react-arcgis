@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-interface ArcContainerProps {
+export interface ArcContainerProps {
     id: string;
     style?: {
         [propName: string]: any;
     };
 }
 
-interface ArcContainerState {};
+export interface ArcContainerState {};
 
 export default class ArcContainer extends React.Component<ArcContainerProps, ArcContainerState> {
     constructor(props: ArcContainerProps) {

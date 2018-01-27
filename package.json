@@ -1,35 +1,15 @@
 {
-  "name": "react-arcgis",
-  "version": "3.1.2",
-  "description": "React component library for Esri ArcGIS JavaScript API",
-  "main": "app.js",
-  "scripts": {
-    "build": "webpack -p",
-    "test": "nyc mocha"
-  },
-  "nyc": {
-    "extension": [
-      ".tsx",
-      ".ts"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nicksenger/react-arcgis.git"
-  },
-  "keywords": [
-    "Esri",
-    "ArcGIS",
-    "TypeScript",
-    "React",
-    "Map"
-  ],
   "author": "Nick Senger",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/nicksenger/react-arcgis/issues"
   },
-  "homepage": "https://github.com/nicksenger/react-arcgis#readme",
+  "description": "React component library for Esri ArcGIS JavaScript API",
+  "dependencies": {
+    "@types/arcgis-js-api": "^4.5.1",
+    "@types/react": "^15.6.6",
+    "@types/react-dom": "^0.14.23",
+    "esri-loader": "^2.0.0"
+  },
   "devDependencies": {
     "@types/mocha": "^2.2.44",
     "awesome-typescript-loader": "^3.3.0",
@@ -41,6 +21,7 @@
     "jsdom": "^11.3.0",
     "mocha": "^3.5.3",
     "mock-require": "^2.0.2",
+    "npm-run-all": "^4.1.2",
     "nyc": "^10.3.2",
     "react": "^15.6.2",
     "react-addons-test-utils": "^15.6.2",
@@ -54,10 +35,34 @@
     "typescript": "^2.6.1",
     "webpack": "^2.6.1"
   },
-  "dependencies": {
-    "@types/arcgis-js-api": "^4.5.1",
-    "@types/react": "^15.6.6",
-    "@types/react-dom": "^0.14.23",
-    "esri-loader": "^2.0.0"
-  }
+  "homepage": "https://github.com/nicksenger/react-arcgis#readme",
+  "keywords": [
+    "Esri",
+    "ArcGIS",
+    "TypeScript",
+    "React",
+    "Map"
+  ],
+  "license": "ISC",
+  "main": "dist/umd/index.js",
+  "module": "dist/esm/index.js",
+  "name": "react-arcgis",
+  "nyc": {
+    "extension": [
+      ".tsx",
+      ".ts"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicksenger/react-arcgis.git"
+  },
+  "scripts": {
+    "build": "run-s build:types build:scripts",
+    "build:types": "tsc",
+    "build:scripts": "webpack -p",
+    "test": "nyc mocha"
+  },
+  "types": "dist/esm/index.d.ts",
+  "version": "3.1.2"
 }

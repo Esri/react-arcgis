@@ -1,6 +1,6 @@
-import * as MapViews from './src/ts/components/MapComposites';
-import * as WebViews from './src/ts/components/WebComposites';
-import { loadModules } from 'esri-loader';
+import * as MapViews from './components/MapComposites';
+import * as WebViews from './components/WebComposites';
+import { loadModules, ILoadScriptOptions } from 'esri-loader';
 
 const ReactArcGIS = {
     Map: MapViews.Map,
