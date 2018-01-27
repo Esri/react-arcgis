@@ -9,6 +9,10 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 1. Run `npm i react-arcgis` (if you decide you like it, you can even include `--save`)
 
 
+## Version 3.1.2:
+
+- Fixed some issues with the distribution. The package is now shipped as both ESM and bundled UMD formats. Please note that I am only officially supporting the latest version of react with this package, but will try my best to keep things backward-compatible. The peer dependency is set to `"react": "*"`.
+
 ## Version 3.1.0:
 
 - React ArcGIS now uses [esri-loader](https://github.com/Esri/esri-loader) under the hood, as it accomplishes the same thing as [esri-promise](https://github.com/nicksenger/esri-promise) and is being more actively maintained. React-arcgis provides `loadModules` from esri-loader as `esriPromise` so as to not break existing applications.

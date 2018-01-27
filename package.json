@@ -52,6 +52,9 @@
       ".ts"
     ]
   },
+  "peerDependencies": {
+    "react": "*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nicksenger/react-arcgis.git"
