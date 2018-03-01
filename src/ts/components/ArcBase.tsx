@@ -119,7 +119,16 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
     }
 
     public componentDidMount() {
-        loadModules(this.props.scriptUri)
+        const options = {
+            url: 'https://js.arcgis.com/4.6/',
+            // dojoConfig: {
+            //     has: {
+            //         "esri-promise-compatibility": 1
+            //     }
+            // }
+        };
+
+        loadModules(this.props.scriptUri, options)
         .then((modules) => (
             this.props.loadMap(modules, this.state.mapContainerId)
                 .then(
