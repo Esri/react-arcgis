@@ -25,7 +25,7 @@ export function loadModules(modules) {
                     on() {
                         return null;
                     };
-                    then(callback, errback) {
+                    when(callback, errback) {
                         callback();
                     }
                 }
@@ -38,7 +38,7 @@ export function loadModules(modules) {
                     on() {
                         return null;
                     };
-                    then(callback, errback) {
+                    when(callback, errback) {
                         errback( new Error('failed'));
                     }
                 }

@@ -119,7 +119,18 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
     }
 
     public componentDidMount() {
-        loadModules(this.props.scriptUri)
+        // The ArcGIS JavaScript API 4.6 release notes suggests, while when() should be used at 4.6 on all applicable classes, 
+        // you must specify the following has flag prior to loading the ArcGIS API for JavaScript for your application to be 
+        // compatible with native JavaScript Promises. (see https://blogs.esri.com/esri/arcgis/2017/12/14/making-better-promises/)
+        const options = {
+            dojoConfig: {
+                has: {
+                    "esri-promise-compatibility": 1
+                }
+            }
+        };
+
+        loadModules(this.props.scriptUri, options)
         .then((modules) => (
             this.props.loadMap(modules, this.state.mapContainerId)
                 .then(
