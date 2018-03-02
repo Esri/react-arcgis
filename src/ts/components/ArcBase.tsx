@@ -120,7 +120,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
 
     public componentDidMount() {
         loadModules(this.props.scriptUri)
-        .then((modules) => (
+        .then((modules: any) => (
             this.props.loadMap(modules, this.state.mapContainerId)
                 .then(
                     ({ map, view }) => {
@@ -136,7 +136,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
                 .catch((e) => {
                     throw e;
                 })
-        )).catch((e) => {
+        )).catch((e: Error) => {
             this.setState({ status: 'failed' });
             if (this.props.onFail) {
                 this.props.onFail(e);
