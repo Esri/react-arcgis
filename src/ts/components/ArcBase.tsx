@@ -33,6 +33,7 @@ export interface BaseProps {
 export interface ArcProps extends BaseProps {
     loadMap: (modules: any[], containerId: string) => Promise<any>;
     scriptUri: string[];
+    loaderOptions?: Object;
 }
 
 export interface EventProperties {
@@ -119,28 +120,28 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
     }
 
     public componentDidMount() {
-        loadModules(this.props.scriptUri)
-        .then((modules: any) => (
-            this.props.loadMap(modules, this.state.mapContainerId)
-                .then(
-                    ({ map, view }) => {
-                        this.setState({
-                            map,
-                            view,
-                            status: 'loaded'
-                        });
-                        if (this.props.onLoad) {
-                            this.props.onLoad(map, view);
-                        }
+        loadModules(this.props.scriptUri, this.props.loaderOptions)
+            .then((modules: any) => (
+                this.props.loadMap(modules, this.state.mapContainerId)
+                    .then(
+                        ({ map, view }) => {
+                            this.setState({
+                                map,
+                                view,
+                                status: 'loaded'
+                            });
+                            if (this.props.onLoad) {
+                                this.props.onLoad(map, view);
+                            }
+                        })
+                    .catch((e) => {
+                        throw e;
                     })
-                .catch((e) => {
-                    throw e;
-                })
-        )).catch((e: Error) => {
-            this.setState({ status: 'failed' });
-            if (this.props.onFail) {
-                this.props.onFail(e);
-            }
-        });
+            )).catch((e: Error) => {
+                this.setState({ status: 'failed' });
+                if (this.props.onFail) {
+                    this.props.onFail(e);
+                }
+            });
     }
 }
