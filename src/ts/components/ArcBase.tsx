@@ -28,12 +28,12 @@ export interface BaseProps {
     onFail?: (e: any) => any;
     loadElement?: any;
     failElement?: any;
+    loaderOptions?: Object;
 }
 
 export interface ArcProps extends BaseProps {
     loadMap: (modules: any[], containerId: string) => Promise<any>;
     scriptUri: string[];
-    loaderOptions?: Object;
 }
 
 export interface EventProperties {
