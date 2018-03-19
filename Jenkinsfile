@@ -31,7 +31,8 @@ pipeline {
             steps {
                 setBuildStatus("Running the tests..", "PENDING");
                 echo 'Testing...'
-                sh 'npm run test:report'
+                sh 'npm run test:junit'
+                sh 'npm run report:cobertura'
             }
         }
         stage('Build') {
@@ -45,7 +46,9 @@ pipeline {
 
     post {
         always {
+            archiveArtifacts artifacts: 'package.json', fingerprint: true
             junit("*.xml");
+            step([$class: 'CoberturaPublisher', coberturaReportFile: 'coverage/cobertura-coverage.xml'])
         }
         failure {
             setBuildStatus("¯\\_(ツ)_/¯", "FAILURE");
