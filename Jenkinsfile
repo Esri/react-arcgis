@@ -31,7 +31,7 @@ pipeline {
             steps {
                 setBuildStatus("Running the tests..", "PENDING");
                 echo 'Testing...'
-                sh 'npm test'
+                sh 'npm run test:report'
             }
         }
         stage('Build') {
@@ -44,6 +44,9 @@ pipeline {
     }
 
     post {
+        always {
+            junit("*.xml");
+        }
         failure {
             setBuildStatus("¯\\_(ツ)_/¯", "FAILURE");
         }
