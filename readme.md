@@ -1,4 +1,6 @@
-![Version 3.1.3](https://img.shields.io/badge/npm-v3.1.3-blue.svg) ![100% Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
+[![Version](https://shields.nsenger.com/react-arcgis-master/version)](https://www.npmjs.com/package/react-arcgis)
+[![Build Status](https://shields.nsenger.com/react-arcgis-master/status)](https://jenkins.nsenger.com/job/react-arcgis-master/)
+[![Coverage](https://shields.nsenger.com/react-arcgis-master/coverage)](https://jenkins.nsenger.com/job/react-arcgis-master/)
 
 # React-ArcGIS
 
@@ -8,6 +10,27 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 1. Run `npm i react-arcgis` (if you decide you like it, you can even include `--save`)
 
+## Version 3.2.0:
+
+- You can now include loader options directly in react-arcgis components. This provides an easy way to migrate to esri's newer async/await compatible promises in your react-arcgis application. For example:
+
+```js
+render() {
+    return (
+        <Map
+            loaderOptions={{
+                dojoConfig: {
+                    has: {
+                    "esri-promise-compatibility": 1
+                    }
+                }
+            }}
+        />
+    );
+}
+```
+
+Please see [this blog post](https://blogs.esri.com/esri/arcgis/2017/12/14/making-better-promises/) for more information regarding changes to the promise implementation in the ArcGIS API for JavaScript.
 
 ## Version 3.1.2:
 
@@ -28,7 +51,7 @@ Because you will be less abstracted from Esri's API, you will actually be in a b
 
 ## Basic Usage:
 
-*Don't forget to load the js api stylesheet! [https://js.arcgis.com/4.5/esri/css/main.css](https://js.arcgis.com/4.5/esri/css/main.css)*
+*Don't forget to load the js api stylesheet! [https://js.arcgis.com/4.6/esri/css/main.css](https://js.arcgis.com/4.6/esri/css/main.css)*
 
 *If you need to support browsers lacking a native promise implementation, you will have to add a global `Promise` constructor polyfill to your project, as react-arcgis does not include one. I recommend [es6-promise](https://www.npmjs.com/package/es6-promise).*
 

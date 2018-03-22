@@ -4,4 +4,5 @@ examples
 src/**/*.js
 src/**/*.js.map
 .nyc_output
+test-results.xml
 coverage

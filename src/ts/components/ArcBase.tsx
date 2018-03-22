@@ -28,6 +28,7 @@ export interface BaseProps {
     onFail?: (e: any) => any;
     loadElement?: any;
     failElement?: any;
+    loaderOptions?: Object;
 }
 
 export interface ArcProps extends BaseProps {
@@ -119,28 +120,28 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
     }
 
     public componentDidMount() {
-        loadModules(this.props.scriptUri)
-        .then((modules) => (
-            this.props.loadMap(modules, this.state.mapContainerId)
-                .then(
-                    ({ map, view }) => {
-                        this.setState({
-                            map,
-                            view,
-                            status: 'loaded'
-                        });
-                        if (this.props.onLoad) {
-                            this.props.onLoad(map, view);
-                        }
+        loadModules(this.props.scriptUri, this.props.loaderOptions)
+            .then((modules: any) => (
+                this.props.loadMap(modules, this.state.mapContainerId)
+                    .then(
+                        ({ map, view }) => {
+                            this.setState({
+                                map,
+                                view,
+                                status: 'loaded'
+                            });
+                            if (this.props.onLoad) {
+                                this.props.onLoad(map, view);
+                            }
+                        })
+                    .catch((e) => {
+                        throw e;
                     })
-                .catch((e) => {
-                    throw e;
-                })
-        )).catch((e) => {
-            this.setState({ status: 'failed' });
-            if (this.props.onFail) {
-                this.props.onFail(e);
-            }
-        });
+            )).catch((e: Error) => {
+                this.setState({ status: 'failed' });
+                if (this.props.onFail) {
+                    this.props.onFail(e);
+                }
+            });
     }
 }
