@@ -1,4 +1,6 @@
-![Version 3.2.0](https://img.shields.io/badge/npm-v3.2.0-blue.svg) ![100% Code Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)
+[![Version](https://shields.nsenger.com/react-arcgis-master/version)](https://www.npmjs.com/package/react-arcgis)
+[![Build Status](https://shields.nsenger.com/react-arcgis-master/status)](https://jenkins.nsenger.com/job/react-arcgis-master/)
+[![Coverage](https://shields.nsenger.com/react-arcgis-master/coverage)](https://jenkins.nsenger.com/job/react-arcgis-master/)
 
 # React-ArcGIS
 
