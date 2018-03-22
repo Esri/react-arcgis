@@ -30,25 +30,6 @@ render() {
 }
 ```
 
-Please see [this blog post](https://blogs.esri.com/esri/arcgis/2017/12/14/making-better-promises/) for more information regarding changes to the promise implementation in the ArcGIS API for JavaScript.
-
-## Version 3.1.2:
-
-- Fixed some issues with the distribution. The package is now shipped as both ESM and bundled UMD formats. Please note that I am only officially supporting the latest version of react with this package, but will try my best to keep things backward-compatible. The peer dependency is set to `"react": "*"`.
-
-## Version 3.1.0:
-
-- React ArcGIS now uses [esri-loader](https://github.com/Esri/esri-loader) under the hood, as it accomplishes the same thing as [esri-promise](https://github.com/nicksenger/esri-promise) and is being more actively maintained. React-arcgis provides `loadModules` from esri-loader as `esriPromise` so as to not break existing applications.
-
-## Changed in version 3.0.0:
-
-- React ArcGIS provides 4 core components - `<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />`
-
-While having a declarative html-like syntax for doing everything in the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) would be great, the surface area of the api is very large, and it is regularly updated with new features and functionality. Rather than attempting to wrap the entire thing in a react-like syntax, I have decided to just handle the essentials, and provide clear examples for how to perform more complex tasks by using the api directly (still within your react app of course).
-
-Because you will be less abstracted from Esri's API, you will actually be in a better position to utilize its full functionality!
-
-
 ## Basic Usage:
 
 *Don't forget to load the js api stylesheet! [https://js.arcgis.com/4.6/esri/css/main.css](https://js.arcgis.com/4.6/esri/css/main.css)*
