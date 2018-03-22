@@ -3,7 +3,7 @@
   "bugs": {
     "url": "https://github.com/nicksenger/react-arcgis/issues"
   },
-  "description": "React component library for Esri ArcGIS JavaScript API",
+  "description": "React component library for Esri's ArcGIS API for JavaScript",
   "dependencies": {
     "@types/arcgis-js-api": "^4.6.0",
     "@types/react": "^16.0.35",
