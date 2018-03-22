@@ -1,6 +1,6 @@
 [![Version](https://shields.nsenger.com/react-arcgis-master/version)](https://www.npmjs.com/package/react-arcgis)
-[![Build Status](https://shields.nsenger.com/react-arcgis-master/status)](https://jenkins.nsenger.com/job/react-arcgis-master/)
 [![Coverage](https://shields.nsenger.com/react-arcgis-master/coverage)](https://jenkins.nsenger.com/job/react-arcgis-master/)
+[![Build Status](https://shields.nsenger.com/react-arcgis-master/status)](https://jenkins.nsenger.com/job/react-arcgis-master/)
 
 # React-ArcGIS
 
