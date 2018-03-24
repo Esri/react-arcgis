@@ -186,13 +186,13 @@ export default class MakeAScene extends React.Component {
 
 The functionality available through the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) goes well beyond just rendering maps, and if your application needs to do more with the map than simply show it, you will quickly find that you need access to the rest of Esri's API.
 
-React-arcgis provides the children of `<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />` with access to their parent's `map` and `view` instances through props. Combined with `esriPromise`, we can use this to easily get other functionality from the ArcGIS JS API and use it within our react application.
+React-arcgis provides the children of `<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />` with access to their parent's `map` and `view` instances through props. Combined with `loadModules`, we can use this to easily get other functionality from the ArcGIS JS API and use it within our react application.
 
 For example, let's convert a Bermuda Triangle graphic from [this example](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=intro-graphics) into a react component:
 
 ```js
 import * as React from 'react';
-import { esriPromise } from 'react-arcgis';
+import { loadModules } from 'react-arcgis';
 
 export default class BermudaTriangle extends React.Component {
     constructor(props) {
@@ -207,7 +207,7 @@ export default class BermudaTriangle extends React.Component {
     }
 
     componentWillMount() {
-        esriPromise(['esri/Graphic']).then(([ Graphic ]) => {
+        loadModules(['esri/Graphic']).then(([ Graphic ]) => {
             // Create a polygon geometry
             const polygon = {
                 type: "polygon", // autocasts as new Polygon()
