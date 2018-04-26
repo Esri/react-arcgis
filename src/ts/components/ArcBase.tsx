@@ -76,7 +76,7 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
 
         const loadElement = (
             this.props.loadElement ? this.props.loadElement :
-            <h3 id="react-arcgis-loading-text">Loading..</h3>
+            <h3 id="react-arcgis-loading-text">Loading...</h3>
         );
 
         const failElement = (
