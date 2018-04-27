@@ -10,6 +10,17 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 1. Run `npm i react-arcgis` (if you decide you like it, you can even include `--save`)
 
+## Version 3.3.0
+
+- React-arcgis will now load version 4.7 by default
+- `loadModules` from [https://github.com/Esri/esri-loader](https://github.com/Esri/esri-loader) can now also be imported as `loadModules` instead of just `esriPromise` for consistency. For example:
+
+```js
+import { loadModules, esriPromise } from 'react-arcgis';
+
+loadModules === esriPromise // true
+```
+
 ## Version 3.2.0:
 
 - You can now include loader options directly in react-arcgis components. This provides an easy way to migrate to esri's newer async/await compatible promises in your react-arcgis application. For example:
