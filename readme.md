@@ -10,6 +10,17 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 1. Run `npm i react-arcgis` (if you decide you like it, you can even include `--save`)
 
+## Version 3.3.0
+
+- React-arcgis will now load version 4.7 by default
+- `loadModules` from [https://github.com/Esri/esri-loader](https://github.com/Esri/esri-loader) can now also be imported as `loadModules` instead of just `esriPromise` for consistency. For example:
+
+```js
+import { loadModules, esriPromise } from 'react-arcgis';
+
+loadModules === esriPromise // true
+```
+
 ## Version 3.2.0:
 
 - You can now include loader options directly in react-arcgis components. This provides an easy way to migrate to esri's newer async/await compatible promises in your react-arcgis application. For example:
@@ -186,13 +197,13 @@ export default class MakeAScene extends React.Component {
 
 The functionality available through the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) goes well beyond just rendering maps, and if your application needs to do more with the map than simply show it, you will quickly find that you need access to the rest of Esri's API.
 
-React-arcgis provides the children of `<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />` with access to their parent's `map` and `view` instances through props. Combined with `esriPromise`, we can use this to easily get other functionality from the ArcGIS JS API and use it within our react application.
+React-arcgis provides the children of `<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />` with access to their parent's `map` and `view` instances through props. Combined with `loadModules`, we can use this to easily get other functionality from the ArcGIS JS API and use it within our react application.
 
 For example, let's convert a Bermuda Triangle graphic from [this example](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=intro-graphics) into a react component:
 
 ```js
 import * as React from 'react';
-import { esriPromise } from 'react-arcgis';
+import { loadModules } from 'react-arcgis';
 
 export default class BermudaTriangle extends React.Component {
     constructor(props) {
@@ -207,7 +218,7 @@ export default class BermudaTriangle extends React.Component {
     }
 
     componentWillMount() {
-        esriPromise(['esri/Graphic']).then(([ Graphic ]) => {
+        loadModules(['esri/Graphic']).then(([ Graphic ]) => {
             // Create a polygon geometry
             const polygon = {
                 type: "polygon", // autocasts as new Polygon()

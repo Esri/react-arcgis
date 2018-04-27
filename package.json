@@ -5,10 +5,10 @@
   },
   "description": "React component library for Esri's ArcGIS API for JavaScript",
   "dependencies": {
-    "@types/arcgis-js-api": "^4.6.0",
-    "@types/react": "^16.0.35",
-    "@types/react-dom": "^16.0.3",
-    "esri-loader": "^2.2.0"
+    "@types/arcgis-js-api": "^4.7.0",
+    "@types/react": "^16.3.13",
+    "@types/react-dom": "^16.0.5",
+    "esri-loader": "^2.3.0"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.47",
@@ -18,22 +18,22 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "es6-promise": "^4.2.4",
     "glob": "^7.1.2",
-    "jsdom": "^11.6.1",
-    "mocha": "^5.0.0",
+    "jsdom": "^11.9.0",
+    "mocha": "^5.1.1",
     "mocha-junit-reporter": "^1.17.0",
-    "mock-require": "^3.0.1",
+    "mock-require": "^3.0.2",
     "npm-run-all": "^4.1.2",
-    "nyc": "^11.4.1",
-    "react": "^16.2.0",
+    "nyc": "^11.7.1",
+    "react": "^16.3.2",
     "react-addons-test-utils": "^15.6.2",
-    "react-dom": "^16.2.0",
-    "react-test-renderer": "^16.2.0",
-    "sinon": "^4.2.2",
+    "react-dom": "^16.3.2",
+    "react-test-renderer": "^16.3.2",
+    "sinon": "^4.5.0",
     "source-map-loader": "^0.2.3",
     "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
     "tslint-react": "^3.4.0",
-    "typescript": "^2.6.2",
+    "typescript": "^2.8.3",
     "webpack": "^3.10.0"
   },
   "homepage": "https://github.com/nicksenger/react-arcgis#readme",
@@ -70,5 +70,5 @@
     "report:cobertura": "nyc report --reporter cobertura"
   },
   "types": "dist/esm/index.d.ts",
-  "version": "3.2.1"
+  "version": "3.3.0"
 }
