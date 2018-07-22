@@ -9,7 +9,7 @@ export interface BaseProps {
     style?: {
         [propName: string]: any
     };
-    mapProperties?: __esri.MapProperties;
+    mapProperties?: __esri.MapProperties | __esri.WebMapProperties | __esri.WebSceneProperties;
     viewProperties?: __esri.MapViewProperties | __esri.SceneViewProperties;
     onClick?: (e: EventProperties) => any;
     onDoubleClick?: (e: EventProperties) => any;

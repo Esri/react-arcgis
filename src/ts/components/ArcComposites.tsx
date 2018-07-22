@@ -71,7 +71,8 @@ export const WebBase = (props: WebBaseProps) => (
                 const map: __esri.WebMap | __esri.WebScene = new WebConstructor({
                     portalItem: {
                         id: props.id
-                    }
+                    },
+                    ...props.mapProperties
                 });
                 map.load()
                     .then(() => {
