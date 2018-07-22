@@ -10,6 +10,11 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 1. Run `npm i react-arcgis` (if you decide you like it, you can even include `--save`)
 
+## Version 3.3.1
+
+- React-arcgis will now load version 4.8 by default
+- Issue with using `mapProperties` in the `WebMap` and `WebScene` components has been fixed
+
 ## Version 3.3.0
 
 - React-arcgis will now load version 4.7 by default
@@ -43,7 +48,7 @@ render() {
 
 ## Basic Usage:
 
-*Don't forget to load the js api stylesheet! [https://js.arcgis.com/4.6/esri/css/main.css](https://js.arcgis.com/4.6/esri/css/main.css)*
+*Don't forget to load the js api stylesheet! [https://js.arcgis.com/4.8/esri/css/main.css](https://js.arcgis.com/4.8/esri/css/main.css)*
 
 *If you need to support browsers lacking a native promise implementation, you will have to add a global `Promise` constructor polyfill to your project, as react-arcgis does not include one. I recommend [es6-promise](https://www.npmjs.com/package/es6-promise).*
 

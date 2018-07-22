@@ -3,10 +3,12 @@ import { BaseProps } from './ArcBase';
 import { MapBase } from './ArcComposites';
 
 export interface MapProps extends BaseProps {
+  mapProperties?: __esri.MapProperties;
   viewProperties?: __esri.MapViewProperties;
 }
 
 export interface SceneProps extends BaseProps {
+  mapProperties?: __esri.MapProperties;
   viewProperties?: __esri.SceneViewProperties;
 }
 
