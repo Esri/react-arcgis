@@ -10,6 +10,25 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 1. Run `npm i react-arcgis` (if you decide you like it, you can even include `--save`)
 
+## Version 3.3.2
+
+- React-arcgis components now accept a `childrenAsFunction` prop:
+
+```ts
+    render() {
+        return (
+            <Scene
+                className="scene__container"
+                childrenAsFunction={(map: __esri.Map, view: __esri.SceneView) => (
+                    <BermudaTriangle map={map} view={view} />
+                )}
+            />
+        );
+    }
+```
+
+This is helpful for TypeScript users, as it allows the compiler to understand the relationship between parent and child components. If you are not using TypeScript, there is no benefit to using this prop over specifying children in the usual manner. 
+
 ## Version 3.3.1
 
 - React-arcgis will now load version 4.8 by default

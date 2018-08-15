@@ -29,6 +29,7 @@ export interface BaseProps {
     loadElement?: any;
     failElement?: any;
     loaderOptions?: Object;
+    childrenAsFunction?: (map?: __esri.Map, view?: __esri.MapView | __esri.SceneView) => JSX.Element;
 }
 
 export interface ArcProps extends BaseProps {
@@ -85,6 +86,9 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
         );
 
         if (this.state.status === 'loaded') {
+            if (!!this.props.childrenAsFunction) {
+                return this.props.childrenAsFunction(this.state.map, this.state.view);
+            }
             const childrenWithProps = React.Children.map(this.props.children, (child) => {
                 const childEl = child as React.ReactElement<any>;
                 return React.cloneElement(childEl, {
