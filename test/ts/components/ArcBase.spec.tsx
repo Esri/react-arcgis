@@ -97,6 +97,36 @@ export default () => (
                         }, 1);
                     });
 
+                    describe('the user has included "childrenAsFunction" prop', () => {
+                        beforeEach(() => {
+                            arcView = mount(
+                                <ArcView
+                                    childrenAsFunction={(map: __esri.Map, view: __esri.MapView) => (
+                                        <ChildComponent map={map} view={view} />
+                                    )}
+                                    loadMap={loadMap}
+                                    scriptUri={['foo', 'bar']}
+                                />
+                            );
+                        });
+
+                        it('should render the children', (done) => {
+                            setTimeout(() => {
+                                arcView.update();
+                                expect(arcView.find(ChildComponent)).to.have.length(1);
+                                done();
+                            }, 1);
+                        });
+
+                        it('should give map and view props to the children', (done) => {
+                            setTimeout(() => {
+                                arcView.update();
+                                expect(arcView.find('#child').text()).to.equal('foobar');
+                                done();
+                            }, 1);
+                        });
+                    });
+
                     describe('the user has included a child component', () => {
                         beforeEach(() => {
                             arcView = mount(<ArcView loadMap={loadMap} scriptUri={['foo', 'bar']} ><ChildComponent /></ArcView>);
