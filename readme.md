@@ -10,6 +10,11 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 1. Run `npm i react-arcgis` (if you decide you like it, you can even include `--save`)
 
+## Version 3.3.3
+
+- React-arcgis will now load version 4.9 of the ArcGIS JS API by default
+- Fixed issue with the `zoom` prop on `Scene` components
+
 ## Version 3.3.2
 
 - React-arcgis components now accept a `childrenAsFunction` prop:
