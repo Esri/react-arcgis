@@ -39,7 +39,7 @@ export const Scene = (props: SceneProps) => (
     }}
     viewProperties={{
       center: [-122.4443, 47.2529] as __esri.PointProperties,
-      scale: 500000,
+      zoom: 6,
       ...props.viewProperties
     }}
   />
