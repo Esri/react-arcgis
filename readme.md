@@ -10,69 +10,9 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 1. Run `npm i react-arcgis` (if you decide you like it, you can even include `--save`)
 
-## Version 3.3.3
-
-- React-arcgis will now load version 4.9 of the ArcGIS JS API by default
-- Fixed issue with the `zoom` prop on `Scene` components
-
-## Version 3.3.2
-
-- React-arcgis components now accept a `childrenAsFunction` prop:
-
-```ts
-    render() {
-        return (
-            <Scene
-                className="scene__container"
-                childrenAsFunction={(map: __esri.Map, view: __esri.SceneView) => (
-                    <BermudaTriangle map={map} view={view} />
-                )}
-            />
-        );
-    }
-```
-
-This is helpful for TypeScript users, as it allows the compiler to understand the relationship between parent and child components. If you are not using TypeScript, there is no benefit to using this prop over specifying children in the usual manner. 
-
-## Version 3.3.1
-
-- React-arcgis will now load version 4.8 by default
-- Issue with using `mapProperties` in the `WebMap` and `WebScene` components has been fixed
-
-## Version 3.3.0
-
-- React-arcgis will now load version 4.7 by default
-- `loadModules` from [https://github.com/Esri/esri-loader](https://github.com/Esri/esri-loader) can now also be imported as `loadModules` instead of just `esriPromise` for consistency. For example:
-
-```js
-import { loadModules, esriPromise } from 'react-arcgis';
-
-loadModules === esriPromise // true
-```
-
-## Version 3.2.0:
-
-- You can now include loader options directly in react-arcgis components. This provides an easy way to migrate to esri's newer async/await compatible promises in your react-arcgis application. For example:
-
-```js
-render() {
-    return (
-        <Map
-            loaderOptions={{
-                dojoConfig: {
-                    has: {
-                    "esri-promise-compatibility": 1
-                    }
-                }
-            }}
-        />
-    );
-}
-```
-
 ## Basic Usage:
 
-*Don't forget to load the js api stylesheet! [https://js.arcgis.com/4.8/esri/css/main.css](https://js.arcgis.com/4.8/esri/css/main.css)*
+*Don't forget to load the js api stylesheet! https://js.arcgis.com/4.9/esri/css/main.css*
 
 *If you need to support browsers lacking a native promise implementation, you will have to add a global `Promise` constructor polyfill to your project, as react-arcgis does not include one. I recommend [es6-promise](https://www.npmjs.com/package/es6-promise).*
 
@@ -93,7 +33,8 @@ ReactDOM.render(
 
 Or, render a 3D web-scene:
 
-```jsimport * as React from 'react';
+```js
+import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Scene } from 'react-arcgis';
 
@@ -221,7 +162,6 @@ export default class MakeAScene extends React.Component {
 }
 ```
 
-
 ## "Advanced" Usage:
 
 The functionality available through the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) goes well beyond just rendering maps, and if your application needs to do more with the map than simply show it, you will quickly find that you need access to the rest of Esri's API.
@@ -291,7 +231,7 @@ Now we can use the `<BermudaTriangle />` component within our `<Map />`, `<Scene
 ```js
 import * as React from 'react';
 import { Scene } from 'react-arcgis';
-import BermudaTriangle from './BermudaTriangle'; // The Graphic component we just made 
+import BermudaTriangle from './BermudaTriangle'; // The Graphic component we just made
 
 export default (props) => (
     <Scene class="full-screen-map">
@@ -300,7 +240,6 @@ export default (props) => (
 )
 ```
 ![bermuda-triangle](https://user-images.githubusercontent.com/16542714/27752141-5f000034-5d94-11e7-83bc-c88428f99053.jpg)
-
 
 ## Contributions
 
@@ -311,7 +250,20 @@ Here are some commands that may be helpful for development:
 - `npm test`: Runs the unit tests
 - `npm run build`: Builds the application
 
+### License
 
-## License
+Copyright (c) 2017-2018 Esri
 
-MIT
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+> http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+A copy of the license is available in the repository's [LICENSE](./LICENSE) file.
