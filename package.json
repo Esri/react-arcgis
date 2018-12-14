@@ -1,12 +1,12 @@
 {
   "author": "Nick Senger",
   "bugs": {
-    "url": "https://github.com/nicksenger/react-arcgis/issues"
+    "url": "https://github.com/Esri/react-arcgis/issues"
   },
-  "description": "React component library for Esri's ArcGIS API for JavaScript",
+  "description": "React component library for the ArcGIS API for JavaScript",
   "dependencies": {
-    "@types/arcgis-js-api": "^4.9.0",
-    "esri-loader": "^2.5.0",
+    "@types/arcgis-js-api": "^4.10.0",
+    "esri-loader": "^2.6.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
   },
@@ -32,9 +32,14 @@
     "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
     "tslint-react": "^3.4.0",
-    "typescript": "^2.8.3",
-    "webpack": "^3.10.0"
+    "typescript": "^3.0.0",
+    "webpack": "^4.0.0",
+    "webpack-cli": "^3.1.2"
   },
+  "files": [
+    "src/**/*",
+    "dist/**/*"
+  ],
   "homepage": "https://github.com/nicksenger/react-arcgis#readme",
   "keywords": [
     "Esri",
@@ -58,7 +63,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nicksenger/react-arcgis.git"
+    "url": "git+https://github.com/Esri/react-arcgis.git"
   },
   "scripts": {
     "build": "run-s build:types build:scripts",

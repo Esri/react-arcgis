@@ -14,12 +14,9 @@ export default class MyFeatureLayer extends React.Component {
     }
 
     componentWillMount() {
-        // const { map } = this.props;
         loadModules(['esri/layers/FeatureLayer']).then(([ FeatureLayer ]) => {
-
-            // Add the geometry and symbol to a new graphic
             const myFeatureLayer = new FeatureLayer({
-                url: "http://sampleserver6.arcgisonline.com/arcgis/rest/services/WorldTimeZones/MapServer/0"
+                url: this.props.featureLayerProperties.url
               });
 
             this.setState({ myFeatureLayer });
