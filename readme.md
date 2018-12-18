@@ -12,8 +12,10 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 ## Basic Usage:
 
-*Don't forget to load the js api stylesheet! https://js.arcgis.com/4.9/esri/css/main.css*
-
+Don't forget to load the js api stylesheet!
+```html
+<link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
+```
 *If you need to support browsers lacking a native promise implementation, you will have to add a global `Promise` constructor polyfill to your project, as react-arcgis does not include one. I recommend [es6-promise](https://www.npmjs.com/package/es6-promise).*
 
 Render a simple map in React:
@@ -217,7 +219,7 @@ export default class BermudaTriangle extends React.Component {
 
             this.setState({ graphic });
             this.props.view.graphics.add(graphic);
-        })).catch((err) => console.error(err));
+        }).catch((err) => console.error(err));
     }
 
     componentWillUnmount() {
@@ -252,7 +254,7 @@ Here are some commands that may be helpful for development:
 
 ### License
 
-Copyright (c) 2017-2018 Esri
+Copyright &copy; 2017-2019 Esri
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
