@@ -1,8 +1,13 @@
 # React-ArcGIS
 
 [![Version](https://shields.nsenger.com/react-arcgis-master/version)](https://www.npmjs.com/package/react-arcgis)
-[![Coverage](https://shields.nsenger.com/react-arcgis-master/coverage)](https://jenkins.nsenger.com/job/react-arcgis-master/cobertura)
-[![Build Status](https://shields.nsenger.com/react-arcgis-master/status)](https://jenkins.nsenger.com/job/react-arcgis-master/)
+[![build status][travis-img]][travis-url]
+[![Test Coverage][coverage-img]][coverage-url]
+
+[coverage-img]: https://api.codeclimate.com/v1/badges/940f84ed55f223c0bea8/test_coverage
+[coverage-url]: https://codeclimate.com/github/Esri/react-arcgis/test_coverage
+[travis-img]: https://img.shields.io/travis/Esri/react-arcgis/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/Esri/react-arcgis
 
 React-ArcGIS is a library of React components which use the ArcGIS API for JavaScript. React-ArcGIS uses [esri-loader](https://github.com/Esri/esri-loader) internally to load and interact with the AMD ArcGIS API for JavaScript, and provide a base for building mapping applications.
 
