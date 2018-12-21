@@ -71,7 +71,8 @@
     "build:scripts": "webpack -p",
     "test": "nyc mocha",
     "test:junit": "nyc mocha --reporter mocha-junit-reporter",
-    "report:cobertura": "nyc report --reporter cobertura"
+    "report:cobertura": "nyc report --reporter cobertura",
+    "report:lcov": "nyc report --reporter lcov"
   },
   "types": "dist/esm/index.d.ts",
   "version": "3.3.3"
