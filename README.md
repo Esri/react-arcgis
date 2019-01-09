@@ -1,6 +1,6 @@
 # React-ArcGIS
 
-[![Version](https://shields.nsenger.com/react-arcgis-master/version)](https://www.npmjs.com/package/react-arcgis)
+[![Version](https://shields.nsenger.com/react-arcgis-master/version)](https://www.npmjs.com/package/@esri/react-arcgis)
 [![build status][travis-img]][travis-url]
 [![Test Coverage][coverage-img]][coverage-url]
 
@@ -13,7 +13,7 @@ React-ArcGIS is a library of React components which use the ArcGIS API for JavaS
 
 ## Installation:
 
-1. Run `npm i react-arcgis` (if you decide you like it, you can even include `--save`)
+1. Run `npm i @esri/react-arcgis` (if you decide you like it, you can even include `--save`)
 
 ## Basic Usage:
 
@@ -28,7 +28,7 @@ Render a simple map in React:
 ```js
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Map } from 'react-arcgis';
+import { Map } from '@esri/react-arcgis';
 
 ReactDOM.render(
   <Map />,
@@ -43,7 +43,7 @@ Or, render a 3D web-scene:
 ```js
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Scene } from 'react-arcgis';
+import { Scene } from '@esri/react-arcgis';
 
 ReactDOM.render(
   <Scene />,
@@ -56,7 +56,7 @@ You can also add webmaps and webscenes from ArcGIS Online:
 ```js
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { WebMap, WebScene } from 'react-arcgis';
+import { WebMap, WebScene } from '@esri/react-arcgis';
 
 ReactDOM.render(
     <div style={{ width: '100vw', height: '100vh' }}>
@@ -73,7 +73,7 @@ If you want to change the style of the `Map` or `Scene`, just give it a class:
 ```js
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Scene } from 'react-arcgis';
+import { Scene } from '@esri/react-arcgis';
 
 ReactDOM.render(
   <Scene className="full-screen-map" />,
@@ -85,7 +85,7 @@ You can also pass properties into the `Map`, `MapView`, or `SceneView` via the v
 
 ```js
 import * as React from 'react';
-import { Map } from 'react-arcgis';
+import { Map } from '@esri/react-arcgis';
 
 export default (props) => (
     <Map
@@ -100,7 +100,7 @@ These properties are passed directly to the available properties on the correspo
 
 ```js
 import * as React from 'react';
-import { Scene } from 'react-arcgis';
+import { Scene } from '@esri/react-arcgis';
 
 export default (props) => (
     <Scene
@@ -119,7 +119,7 @@ If you want to access the `map` and `view` instances directly after they are loa
 
 ```js
 import * as React from 'react';
-import { Map } from 'react-arcgis';
+import { Map } from '@esri/react-arcgis';
 
 export default class MakeAMap extends React.Component {
     constructor(props) {
@@ -146,7 +146,7 @@ Don't forget an `onFail` handler in case something goes wrong:
 
 ```js
 import * as React from 'react';
-import { WebScene } from 'react-arcgis';
+import { WebScene } from '@esri/react-arcgis';
 
 export default class MakeAScene extends React.Component {
     constructor(props) {
@@ -179,7 +179,7 @@ For example, let's convert a Bermuda Triangle graphic from [this example](https:
 
 ```js
 import * as React from 'react';
-import { loadModules } from 'react-arcgis';
+import { loadModules } from '@esri/react-arcgis';
 
 export default class BermudaTriangle extends React.Component {
     constructor(props) {
@@ -237,7 +237,7 @@ Now we can use the `<BermudaTriangle />` component within our `<Map />`, `<Scene
 
 ```js
 import * as React from 'react';
-import { Scene } from 'react-arcgis';
+import { Scene } from '@esri/react-arcgis';
 import BermudaTriangle from './BermudaTriangle'; // The Graphic component we just made
 
 export default (props) => (
