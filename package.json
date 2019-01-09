@@ -5,8 +5,8 @@
   },
   "description": "React component library for the ArcGIS API for JavaScript",
   "dependencies": {
-    "@types/arcgis-js-api": "^4.10.0",
-    "esri-loader": "^2.6.0",
+    "@types/arcgis-js-api": "4.10.0",
+    "esri-loader": "2.6.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
   },
@@ -51,7 +51,7 @@
   "license": "Apache-2.0",
   "main": "dist/umd/index.js",
   "module": "dist/esm/index.js",
-  "name": "react-arcgis",
+  "name": "@esri/react-arcgis",
   "nyc": {
     "extension": [
       ".tsx",
