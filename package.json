@@ -19,6 +19,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "es6-promise": "^4.2.4",
+    "gh-release": "^3.4.0",
     "glob": "^7.1.2",
     "jsdom": "^11.9.0",
     "mocha": "^5.1.1",
@@ -75,5 +76,5 @@
     "report:lcov": "nyc report --reporter lcov"
   },
   "types": "dist/esm/index.d.ts",
-  "version": "3.3.3"
+  "version": "4.0.0"
 }
