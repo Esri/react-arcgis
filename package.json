@@ -7,8 +7,8 @@
   "dependencies": {
     "@types/arcgis-js-api": "4.10.0",
     "esri-loader": "2.6.0",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.47",
