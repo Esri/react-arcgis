@@ -3,7 +3,7 @@ import { loadModules } from 'react-arcgis';
 
 const BermudaTriangle = (props) => {
 
-    const [graphic, setGraphic] = useState(0);
+    const [graphic, setGraphic] = useState(null);
     useEffect(() => {
 
         loadModules(['esri/Graphic']).then(([Graphic]) => {
