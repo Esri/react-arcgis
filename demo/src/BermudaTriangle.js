@@ -1,28 +1,20 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { loadModules } from 'react-arcgis';
 
-export default class BermudaTriangle extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            graphic: null
-        };
-    }
+const BermudaTriangle = (props) => {
 
-    render() {
-        return null;
-    }
+    const [graphic, setGraphic] = useState(null);
+    useEffect(() => {
 
-    componentWillMount() {
-        loadModules(['esri/Graphic']).then(([ Graphic ]) => {
+        loadModules(['esri/Graphic']).then(([Graphic]) => {
             // Create a polygon geometry
             const polygon = {
                 type: "polygon", // autocasts as new Polygon()
                 rings: [
-                [-64.78, 32.3],
-                [-66.07, 18.45],
-                [-80.21, 25.78],
-                [-64.78, 32.3]
+                    [-64.78, 32.3],
+                    [-66.07, 18.45],
+                    [-80.21, 25.78],
+                    [-64.78, 32.3]
                 ]
             };
 
@@ -31,8 +23,8 @@ export default class BermudaTriangle extends React.Component {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
                 color: [227, 139, 79, 0.8],
                 outline: { // autocasts as new SimpleLineSymbol()
-                color: [255, 255, 255],
-                width: 1
+                    color: [255, 255, 255],
+                    width: 1
                 }
             };
 
@@ -41,12 +33,17 @@ export default class BermudaTriangle extends React.Component {
                 geometry: polygon,
                 symbol: fillSymbol
             });
-            this.setState({ graphic });
-            this.props.view.graphics.add(graphic);
+            setGraphic(graphic);
+            props.view.graphics.add(graphic);
         }).catch((err) => console.error(err));
-    }
 
-    componentWillUnmount() {
-        this.props.view.graphics.remove(this.state.graphic);
-    }
+        return function cleanup() {
+            props.view.graphics.remove(graphic);
+        };
+    }, []);
+
+    return null;
+
 }
+
+export default BermudaTriangle;
