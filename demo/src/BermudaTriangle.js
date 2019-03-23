@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { loadModules } from 'react-arcgis';
 
 const BermudaTriangle = (props) => {
@@ -40,7 +40,7 @@ const BermudaTriangle = (props) => {
         return function cleanup() {
             props.view.graphics.remove(graphic);
         };
-    }, []);
+    }, [ graphic, props ]);
 
     return null;
 

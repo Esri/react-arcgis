@@ -26,7 +26,7 @@ Don't forget to load the js api stylesheet!
 Render a simple map in React:
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Map } from '@esri/react-arcgis';
 
@@ -41,7 +41,7 @@ ReactDOM.render(
 Or, render a 3D web-scene:
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Scene } from '@esri/react-arcgis';
 
@@ -54,7 +54,7 @@ ReactDOM.render(
 You can also add webmaps and webscenes from ArcGIS Online:
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import * as ReactDOM from 'react-dom';
 import { WebMap, WebScene } from '@esri/react-arcgis';
 
@@ -71,7 +71,7 @@ ReactDOM.render(
 If you want to change the style of the `Map` or `Scene`, just give it a class:
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Scene } from '@esri/react-arcgis';
 
@@ -84,7 +84,7 @@ ReactDOM.render(
 You can also pass properties into the `Map`, `MapView`, or `SceneView` via the viewProperties or mapProperties props:
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { Map } from '@esri/react-arcgis';
 
 export default (props) => (
@@ -99,7 +99,7 @@ export default (props) => (
 These properties are passed directly to the available properties on the corresponding [ArcGIS API classes](https://developers.arcgis.com/javascript/latest/api-reference/index.html):
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { Scene } from '@esri/react-arcgis';
 
 export default (props) => (
@@ -118,7 +118,7 @@ export default (props) => (
 If you want to access the `map` and `view` instances directly after they are loaded, pass in an `onLoad` handler:
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { Map } from '@esri/react-arcgis';
 
 export default class MakeAMap extends React.Component {
@@ -145,7 +145,7 @@ export default class MakeAMap extends React.Component {
 Don't forget an `onFail` handler in case something goes wrong:
 
 ```js
-import * as React from 'react';
+import React from 'react';
 import { WebScene } from '@esri/react-arcgis';
 
 export default class MakeAScene extends React.Component {

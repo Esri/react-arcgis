@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import { Map } from 'react-arcgis';
 import BermudaTriangle from './BermudaTriangle';
@@ -14,8 +14,8 @@ ReactDOM.render(
     }}>
     <BermudaTriangle />
     <MyFeatureLayer
-      featureLayerProperties={{ 
-        url: 'http://sampleserver6.arcgisonline.com/arcgis/rest/services/WorldTimeZones/MapServer/0'
+      featureLayerProperties={{
+        url: 'https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/World_Time_Zones/FeatureServer/0'
       }}
     >
     </MyFeatureLayer>
