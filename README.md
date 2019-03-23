@@ -1,6 +1,6 @@
 # React-ArcGIS
 
-[![Version](https://shields.nsenger.com/react-arcgis-master/version)](https://www.npmjs.com/package/@esri/react-arcgis)
+[![Version](https://img.shields.io/npm/v/@esri/react-arcgis.svg?style=flat-square)](https://www.npmjs.com/package/@esri/react-arcgis)
 [![build status][travis-img]][travis-url]
 [![Test Coverage][coverage-img]][coverage-url]
 
