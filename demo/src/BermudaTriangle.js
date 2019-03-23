@@ -40,7 +40,7 @@ const BermudaTriangle = (props) => {
         return function cleanup() {
             props.view.graphics.remove(graphic);
         };
-    }, []);
+    }, [ graphic, props ]);
 
     return null;
 

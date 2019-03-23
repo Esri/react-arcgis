@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import { loadModules } from 'react-arcgis';
 
 const MyFeatureLayer = (props) => {
-
     const [myFeatureLayer, setMyFeatureLayer] = useState(null);
     useEffect(() => {
-
         loadModules(['esri/layers/FeatureLayer']).then(([FeatureLayer]) => {
             const myFeatureLayer = new FeatureLayer({
                 url: props.featureLayerProperties.url
@@ -18,7 +16,7 @@ const MyFeatureLayer = (props) => {
         return function cleanup() {
             props.map.remove(myFeatureLayer);
         }
-    }, []);
+    }, [ props ]);
 
     return null;
 }
