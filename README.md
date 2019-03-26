@@ -178,8 +178,8 @@ React-arcgis provides the children of `<Map />`, `<Scene />`, `<WebMap />`, and 
 For example, let's convert a Bermuda Triangle graphic from [this example](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=intro-graphics) into a react component:
 
 ```js
-import React, { useState, useEffect } from 'react';
-import { loadModules } from 'react-arcgis';
+import { useState, useEffect } from 'react';
+import { loadModules } from '@esri/react-arcgis';
 
 const BermudaTriangle = (props) => {
 

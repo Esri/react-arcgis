@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@esri/react-arcgis": "^4.0.0",
     "react": "^16.8.4",
-    "react-arcgis": "^3.3.3",
     "react-dom": "^16.8.4",
     "react-scripts": "3.0.0-next.b0cbf2ca"
   },

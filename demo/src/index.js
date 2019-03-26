@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Map } from 'react-arcgis';
+import { Map } from '@esri/react-arcgis';
 import BermudaTriangle from './BermudaTriangle';
 import MyFeatureLayer from './MyFeatureLayer';
 

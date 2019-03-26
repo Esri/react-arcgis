@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { loadModules } from 'react-arcgis';
+import { loadModules } from '@esri/react-arcgis';
+
 
 const BermudaTriangle = (props) => {
 

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { loadModules } from 'react-arcgis';
+import  { useState, useEffect } from 'react';
+import { loadModules } from '@esri/react-arcgis';
 
 const MyFeatureLayer = (props) => {
     const [myFeatureLayer, setMyFeatureLayer] = useState(null);
