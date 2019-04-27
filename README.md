@@ -9,7 +9,7 @@
 [travis-img]: https://img.shields.io/travis/Esri/react-arcgis/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/Esri/react-arcgis
 
-React-ArcGIS is a library of React components which use the ArcGIS API for JavaScript. React-ArcGIS uses [esri-loader](https://github.com/Esri/esri-loader) internally to load and interact with the AMD ArcGIS API for JavaScript, and provide a base for building mapping applications.
+You can load the AMD ArcGIS API for JavaScript in React applications using [esri-loader](https://github.com/Esri/esri-loader). The sugar this project provides on top is a library of ready to use React Components.
 
 ## Installation:
 
