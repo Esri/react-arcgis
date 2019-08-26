@@ -1,22 +1,26 @@
 {
     "compilerOptions": {
         "outDir": "./dist/esm",
-        "sourceMap": true,
         "declaration": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
         "noImplicitAny": true,
-        "strictNullChecks": true,
         "module": "es2015",
         "moduleResolution": "node",
         "target": "es5",
         "jsx": "react",
-        "suppressImplicitAnyIndexErrors": true,
         "lib": [
             "dom",
             "es5",
             "es2015.promise"
-        ]
+        ],
+        "esModuleInterop": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "sourceMap": true,
+        "strict": true,
+        "skipLibCheck": true
     },
     "include": [
         "./index.ts",
