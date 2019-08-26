@@ -6,9 +6,11 @@
   "description": "React component library for the ArcGIS API for JavaScript",
   "dependencies": {
     "@types/arcgis-js-api": "4.10.0",
-    "esri-loader": "2.6.0",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "esri-loader": "2.6.0"
+  },
+  "peerDependencies": {
+    "react": "^16",
+    "react-dom": "^16"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.47",
@@ -38,7 +40,6 @@
     "webpack-cli": "^3.1.2"
   },
   "files": [
-    "src/**/*",
     "dist/**/*"
   ],
   "homepage": "https://github.com/nicksenger/react-arcgis#readme",
