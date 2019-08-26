@@ -70,7 +70,7 @@ export const MapBase = (props: MapBaseProps) => (
                 });
                 view.when(() => {
                     resolve({ map, view });
-                }, (err: Error) => {
+                },        (err: Error) => {
                     reject(err);
                 });
             } catch (err) {
@@ -86,7 +86,7 @@ export const MapBase = (props: MapBaseProps) => (
 export const WebBase = (props: WebBaseProps) => (
   <ArcView
     {...props}
-    loadMap = {
+    loadMap={
       ([WebConstructor, ViewConstructor, all], containerId) => {
         const mapData = new Promise((resolve, reject) => {
             try {
