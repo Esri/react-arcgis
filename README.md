@@ -19,7 +19,7 @@ You can load the AMD ArcGIS API for JavaScript in React applications using [esri
 
 Don't forget to load the js api stylesheet!
 ```html
-<link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
+<link rel="stylesheet" href="https://js.arcgis.com/4.12/esri/css/main.css">
 ```
 *If you need to support browsers lacking a native promise implementation, you will have to add a global `Promise` constructor polyfill to your project, as react-arcgis does not include one. I recommend [es6-promise](https://www.npmjs.com/package/es6-promise).*
 

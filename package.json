@@ -45,7 +45,7 @@
   "files": [
     "dist/**/*"
   ],
-  "homepage": "https://github.com/nicksenger/react-arcgis#readme",
+  "homepage": "https://github.com/Esri/react-arcgis#readme",
   "keywords": [
     "Esri",
     "ArcGIS",
