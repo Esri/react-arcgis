@@ -1,4 +1,4 @@
-import { loadModules } from 'esri-loader';
+import { loadModules, ILoadScriptOptions } from 'esri-loader';
 import * as React from 'react';
 import ArcContainer from './ArcContainer';
 
@@ -28,7 +28,7 @@ export interface BaseProps {
     onFail?: (e: any) => any;
     loadElement?: any;
     failElement?: any;
-    loaderOptions?: Object;
+    loaderOptions?: ILoadScriptOptions;
     childrenAsFunction?: (map?: __esri.Map, view?: __esri.MapView | __esri.SceneView) => JSX.Element;
 }
 
