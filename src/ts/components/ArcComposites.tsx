@@ -3,14 +3,36 @@ import { ArcView, BaseProps } from './ArcBase';
 
 export interface MapBaseProps extends BaseProps {
     scriptUri: string[];
+
+    [index: string]: any;
 }
 
 export interface WebBaseProps extends BaseProps {
     scriptUri: string[];
     id: string;
+
+    [index: string]: any;
 }
 
-const eventMap = {
+export interface EventMap {
+    onClick: 'click' | string;
+    onDoubleClick: 'double-click' | string;
+    onDrag: 'drag' | string;
+    onHold: 'hold' | string;
+    onKeyDown: 'key-down' | string;
+    onKeyUp: 'key-up' | string;
+    onLayerViewCreate: 'layerview-create' | string;
+    onLayerViewDestroy: 'layerview-destroy' | string;
+    onMouseWheel: 'mouse-wheel' | string;
+    onPointerDown: 'pointer-down' | string;
+    onPointerMove: 'pointer-move' | string;
+    onPointerUp: 'pointer-up' | string;
+    onResize: 'resize' | string;
+
+    [index: string]: string;
+}
+
+const eventMap: EventMap = {
     onClick: 'click',
     onDoubleClick: 'double-click',
     onDrag: 'drag',
@@ -48,7 +70,7 @@ export const MapBase = (props: MapBaseProps) => (
                 });
                 view.when(() => {
                     resolve({ map, view });
-                }, (err: Error) => {
+                },        (err: Error) => {
                     reject(err);
                 });
             } catch (err) {
@@ -64,7 +86,7 @@ export const MapBase = (props: MapBaseProps) => (
 export const WebBase = (props: WebBaseProps) => (
   <ArcView
     {...props}
-    loadMap = {
+    loadMap={
       ([WebConstructor, ViewConstructor, all], containerId) => {
         const mapData = new Promise((resolve, reject) => {
             try {
@@ -83,7 +105,7 @@ export const WebBase = (props: WebBaseProps) => (
                         const promises = allLayers.map((layer) => layer.load());
                         return all(promises.toArray());
                     })
-                    .then((layers) => {
+                    .then(() => {
                         const view = new ViewConstructor({
                             container: containerId,
                             map,

@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import * as sinon from 'sinon';
 import { Map, Scene } from '../../../src/ts/components/MapComposites';
 
 export const MapTests = () => (

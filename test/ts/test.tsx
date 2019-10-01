@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import * as sinon from 'sinon';
 import { ArcView } from '../../src/ts/components/ArcBase';
 
 export default () => (

@@ -7,7 +7,7 @@ export interface ArcContainerProps {
     };
 }
 
-export interface ArcContainerState {};
+export interface ArcContainerState {}
 
 export default class ArcContainer extends React.Component<ArcContainerProps, ArcContainerState> {
     constructor(props: ArcContainerProps) {

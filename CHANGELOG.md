@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### [Unreleased][HEAD]
 
+### Changed
+- React-arcgis will now load version 4.12 of the ArcGIS API for JavaScript by default
+
 ## [4.0.0] - January 9th 2019
 
 ### Changed

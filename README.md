@@ -17,10 +17,6 @@ You can load the AMD ArcGIS API for JavaScript in React applications using [esri
 
 ## Basic Usage:
 
-Don't forget to load the js api stylesheet!
-```html
-<link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
-```
 *If you need to support browsers lacking a native promise implementation, you will have to add a global `Promise` constructor polyfill to your project, as react-arcgis does not include one. I recommend [es6-promise](https://www.npmjs.com/package/es6-promise).*
 
 Render a simple map in React:
@@ -31,7 +27,7 @@ import * as ReactDOM from 'react-dom';
 import { Map } from '@esri/react-arcgis';
 
 ReactDOM.render(
-  <Map />,
+  <Map loaderOptions={{ version: "4.12", css: true }}/>,
   document.getElementById('container')
 );
 ```
