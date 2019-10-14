@@ -178,7 +178,7 @@ For example, let's convert a Bermuda Triangle graphic from [this example](https:
 
 ```js
 import { useState, useEffect } from 'react';
-import { loadModules } from '@esri/react-arcgis';
+import { loadModules } from 'esri-loader';
 
 const BermudaTriangle = (props) => {
 
@@ -245,7 +245,7 @@ export default (props) => (
 
 ## Contributions
 
-Anyone is welcome to contribute to this package. My only "rule" is that your contribution must either pass the existing unit tests, or include additional unit tests to cover new functionality.
+Anyone is welcome to contribute to this package. We ask that ensure that your contribution pass the existing unit tests and include additional unit tests to cover new functionality.
 
 Here are some commands that may be helpful for development:
 

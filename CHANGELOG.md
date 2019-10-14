@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Breaking
 - react-arcgis now declares React and esri-loader as peer dependencies
+- react-arcgis no longer exports `loadModules` nor `esriPromise`
 
 ## [4.0.0] - January 9th 2019
 
