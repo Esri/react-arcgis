@@ -11,7 +11,7 @@
 
 This project provides a library with a few ready to use React components (`<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />`) to get you started using the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) in your React application. These components use [esri-loader](https://github.com/Esri/esri-loader) under the hood to lazy-load the ArcGIS API modules.
 
-> **IMPORTANT** You do **not** need `react-arcgis` to use the ArcGIS API in your React application. If the above generic components do not suit your needs you can very easily [create your own React components that load the ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/latest/guide/react) using [esri-loader](https://developers.arcgis.com/javascript/latest/guide/esri-loader). Alternatively, you could get started with the components in this library and then [add your own components](#creating-your-own components) as needed.
+> **IMPORTANT:** You do **not** need `react-arcgis` to use the ArcGIS API in your React application. If the above generic components do not suit your needs you can very easily [create your own React components that load the ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/latest/guide/react) using [esri-loader](https://developers.arcgis.com/javascript/latest/guide/esri-loader). Alternatively, you could get started with the components in this library and then [add your own components](#creating-your-own-components) as needed.
 
 ## Installation
 
@@ -20,6 +20,8 @@ This project provides a library with a few ready to use React components (`<Map 
 *If you need to support browsers lacking a native promise implementation, you will have to add a global `Promise` constructor polyfill to your project, as react-arcgis does not include one. See [the esri-loader documentation](https://github.com/Esri/esri-loader#promises) for more details.*
 
 ## Basic Usage
+
+> **IMPORTANT:** You _must_ load ArcGIS API styles before using the components in this library, and [`esri-loader` provides you with a few ways to that](https://github.com/Esri/esri-loader#loading-styles). These examples show how to pass `{ css: true }` to [loaderOptions](#configuring-esri-loader) to lazy-load the styles before rendering a component's map/scene, or how to use `loadCss()` to before rendering multiple components.
 
 Render a simple map in React:
 
@@ -44,7 +46,7 @@ import * as ReactDOM from 'react-dom';
 import { Scene } from '@esri/react-arcgis';
 
 ReactDOM.render(
-  <Scene />,
+  <Scene loaderOptions={{ css: true }} />,
   document.getElementById('container')
 );
 ```
@@ -54,7 +56,11 @@ You can also add webmaps and webscenes from ArcGIS Online:
 ```js
 import React from 'react';
 import * as ReactDOM from 'react-dom';
+import { loadCss } from 'esri-loader';
 import { WebMap, WebScene } from '@esri/react-arcgis';
+
+// load esri styles before rendering multiple react-arcgis components
+loadCss();
 
 ReactDOM.render(
     <div style={{ width: '100vw', height: '100vh' }}>
@@ -74,7 +80,7 @@ import * as ReactDOM from 'react-dom';
 import { Scene } from '@esri/react-arcgis';
 
 ReactDOM.render(
-  <Scene className="full-screen-map" />,
+  <Scene className="full-screen-map" loaderOptions={{ css: true }} />,
   document.getElementById('container')
 );
 ```
@@ -89,6 +95,7 @@ export default (props) => (
     <Map
         class="full-screen-map"
         mapProperties={{ basemap: 'satellite' }}
+        loaderOptions={{ css: true }}
     />
 )
 ```
@@ -108,6 +115,7 @@ export default (props) => (
             center: [-122.4443, 47.2529],
             zoom: 6
         }}
+        loaderOptions={{ css: true }}
     />
 )
 ```
@@ -131,7 +139,7 @@ export default class MakeAMap extends React.Component {
     }
 
     render() {
-        return <Map className="full-screen-map" onLoad={this.handleMapLoad} />;
+        return <Map className="full-screen-map" onLoad={this.handleMapLoad} loaderOptions={{ css: true }} />;
     }
 
     handleMapLoad(map, view) {
@@ -157,7 +165,7 @@ export default class MakeAScene extends React.Component {
     }
 
     render() {
-        return <WebScene className="full-screen-map" id="foobar" onFail={this.handleFail} />;
+        return <WebScene className="full-screen-map" id="foobar" onFail={this.handleFail}  loaderOptions={{ css: true }} />;
     }
 
     handleFail(e) {
@@ -167,8 +175,17 @@ export default class MakeAScene extends React.Component {
 }
 ```
 
-## Creating Your Own Components
-<a name="advanced-usage" />
+## Advanced Usage
+
+### Configuring `esri-loader`
+
+The components in this library use `esri-loader`'s default options, which means they will lazy-load the modules from the CDN version of the ArcGIS API for JavaScript used by the version of `esri-loader` you have installed. However all of the components also provide a  `loaderOptions` prop that allows you to customize `esri-loader`'s behavior. For example many of the above examples use `loaderOptions` to pass `{ css: true }` to `loadModules()` in order [to lazy-load the ArcGIS API styles](https://github.com/Esri/esri-loader#when-you-load-the-script) before rendering a component's map/scene.
+
+In addition to controlling how the `css` is loaded, you can also specify a `url` to a [local build of the SDK](https://developers.arcgis.com/javascript/latest/guide/get-api/#download), or the specific CDN `version` of the ArcGIS API you want to use (`react-arcgis` is not compatible with 3.x versions of the ArcGIS API). See the [Usage](https://github.com/Esri/esri-loader#usage) and [Advanced Usage](https://github.com/Esri/esri-loader#advanced-usage) sections of the `esri-loader` documentation for more information on the available configuration options.
+
+Keep in mind that if you are not using the defaults, you should supply the same custom options to _all_ `react-arcgis` components in your application, as well as any places where your application calls `loadModules()` directly.
+
+### Creating Your Own Components
 
 The functionality available through the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) goes well beyond just rendering maps, and if your application needs to do more with the map than simply show it, you will likely need to load and use additional classes from the ArcGIS API and provide the instances of those classes with references to the maps you've created with the components in this library.
 
@@ -243,14 +260,33 @@ export default (props) => (
 ```
 ![bermuda-triangle](https://user-images.githubusercontent.com/16542714/27752141-5f000034-5d94-11e7-83bc-c88428f99053.jpg)
 
+### Using the ArcGIS Types
+
+See the [`esri-loader` documentation on working with ArcGIS types](https://github.com/Esri/esri-loader#4x-types).
+
 ## Contributions
 
-Anyone is welcome to contribute to this package. We ask that ensure that your contribution pass the existing unit tests and include additional unit tests to cover new functionality.
+Anyone is welcome to contribute to this package. However, we do not plan to add any more components to this library. If you have created a component that you'd like to share, we encourage you to share it via [CodeSandbox](https://codesandbox.io/) or a [gist](https://gist.github.com/). Once you've done that feel free to open an issue and we'll help spread the word.
+
+We gladly welcome bug fixes or improvements to documentation.
 
 Here are some commands that may be helpful for development:
 
 - `npm test`: Runs the unit tests
 - `npm run build`: Builds the application
+
+To run the demo application against the code you are developing, you'll need to run these commands:
+
+```bash
+npm link
+npm run build
+cd demo
+npm i
+npm link @esri/react-arcgis
+npm start
+```
+
+Keep in mind that the `start` script only watches for changes to code in the demo app. You'll have to re-run `npm run build` each time you make changes in to the library and want to verify them in the demo app.
 
 ### License
 
