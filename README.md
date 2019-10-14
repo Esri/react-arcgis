@@ -167,8 +167,13 @@ export default class MakeAScene extends React.Component {
 }
 ```
 
-## Creating Your Own Components
-<a name="advanced-usage" />
+## Advanced Usage
+
+### Using the ArcGIS Types
+
+See the [`esri-loader` documentation on working with ArcGIS types](https://github.com/Esri/esri-loader#4x-types).
+
+### Creating Your Own Components
 
 The functionality available through the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) goes well beyond just rendering maps, and if your application needs to do more with the map than simply show it, you will likely need to load and use additional classes from the ArcGIS API and provide the instances of those classes with references to the maps you've created with the components in this library.
 
