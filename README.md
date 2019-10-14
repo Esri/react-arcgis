@@ -252,6 +252,19 @@ Here are some commands that may be helpful for development:
 - `npm test`: Runs the unit tests
 - `npm run build`: Builds the application
 
+To run the demo application against the code you are developing, you'll need to run these commands:
+
+```bash
+npm link
+npm run build
+cd demo
+npm i
+npm link @esri/react-arcgis
+npm start
+```
+
+Keep in mind that the `start` script only watches for changes to code in the demo app. You'll have to re-run `npm run build` each time you make changes in to the library and want to verify them in the demo app.
+
 ### License
 
 Copyright &copy; 2017-2019 Esri
