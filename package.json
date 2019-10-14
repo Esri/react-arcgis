@@ -5,8 +5,7 @@
   },
   "description": "React component library for the ArcGIS API for JavaScript",
   "dependencies": {
-    "@types/arcgis-js-api": "4.12.0",
-    "esri-loader": "2.10.1"
+    "@types/arcgis-js-api": "4.12.0"
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.3",
@@ -22,6 +21,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "es6-promise": "^4.2.8",
+    "esri-loader": "2.10.2",
     "gh-release": "^3.5.0",
     "glob": "^7.1.4",
     "jsdom": "^15.1.1",
@@ -64,6 +64,7 @@
     ]
   },
   "peerDependencies": {
+    "esri-loader": "^2.10",
     "react": "^16",
     "react-dom": "^16"
   },

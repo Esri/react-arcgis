@@ -1,4 +1,4 @@
-# React-ArcGIS
+# react-arcgis
 
 [![Version](https://img.shields.io/npm/v/@esri/react-arcgis.svg?style=flat-square)](https://www.npmjs.com/package/@esri/react-arcgis)
 [![build status][travis-img]][travis-url]
@@ -9,15 +9,17 @@
 [travis-img]: https://img.shields.io/travis/Esri/react-arcgis/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/Esri/react-arcgis
 
-You can load the AMD ArcGIS API for JavaScript in React applications using [esri-loader](https://github.com/Esri/esri-loader). The sugar this project provides on top is a library of ready to use React Components.
+This project provides a library with a few ready to use React components (`<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />`) to get you started using the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) in your React application. These components use [esri-loader](https://github.com/Esri/esri-loader) under the hood to lazy-load the ArcGIS API modules.
 
-## Installation:
+> **IMPORTANT** You do **not** need `react-arcgis` to use the ArcGIS API in your React application. If the above generic components do not suit your needs you can very easily [create your own React components that load the ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/latest/guide/react) using [esri-loader](https://developers.arcgis.com/javascript/latest/guide/esri-loader). Alternatively, you could get started with the components in this library and then [add your own components](#creating-your-own components) as needed.
 
-1. Run `npm i @esri/react-arcgis` (if you decide you like it, you can even include `--save`)
+## Installation
 
-## Basic Usage:
+1. Run `npm i --save esri-loader @esri/react-arcgis` in your React application
 
-*If you need to support browsers lacking a native promise implementation, you will have to add a global `Promise` constructor polyfill to your project, as react-arcgis does not include one. I recommend [es6-promise](https://www.npmjs.com/package/es6-promise).*
+*If you need to support browsers lacking a native promise implementation, you will have to add a global `Promise` constructor polyfill to your project, as react-arcgis does not include one. See [the esri-loader documentation](https://github.com/Esri/esri-loader#promises) for more details.*
+
+## Basic Usage
 
 Render a simple map in React:
 
@@ -27,7 +29,7 @@ import * as ReactDOM from 'react-dom';
 import { Map } from '@esri/react-arcgis';
 
 ReactDOM.render(
-  <Map loaderOptions={{ version: "4.12", css: true }}/>,
+  <Map loaderOptions={{ css: true }}/>,
   document.getElementById('container')
 );
 ```
@@ -165,17 +167,18 @@ export default class MakeAScene extends React.Component {
 }
 ```
 
-## "Advanced" Usage:
+## Creating Your Own Components
+<a name="advanced-usage" />
 
-The functionality available through the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) goes well beyond just rendering maps, and if your application needs to do more with the map than simply show it, you will quickly find that you need access to the rest of Esri's API.
+The functionality available through the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) goes well beyond just rendering maps, and if your application needs to do more with the map than simply show it, you will likely need to load and use additional classes from the ArcGIS API and provide the instances of those classes with references to the maps you've created with the components in this library.
 
-React-arcgis provides the children of `<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />` with access to their parent's `map` and `view` instances through props. Combined with `loadModules`, we can use this to easily get other functionality from the ArcGIS JS API and use it within our react application.
+Fortunately you've already installed `esri-loader`, which allows you to [load any additional ArcGIS API modules your application might need](https://github.com/Esri/esri-loader#loading-modules-from-the-arcgis-api-for-javascript). Also, `react-arcgis` provides the children of `<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />` with access to their parent's `map` and `view` instances through props.
 
 For example, let's convert a Bermuda Triangle graphic from [this example](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=intro-graphics) into a react component:
 
 ```js
 import { useState, useEffect } from 'react';
-import { loadModules } from '@esri/react-arcgis';
+import { loadModules } from 'esri-loader';
 
 const BermudaTriangle = (props) => {
 
@@ -242,7 +245,7 @@ export default (props) => (
 
 ## Contributions
 
-Anyone is welcome to contribute to this package. My only "rule" is that your contribution must either pass the existing unit tests, or include additional unit tests to cover new functionality.
+Anyone is welcome to contribute to this package. We ask that ensure that your contribution pass the existing unit tests and include additional unit tests to cover new functionality.
 
 Here are some commands that may be helpful for development:
 
