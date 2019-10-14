@@ -266,7 +266,9 @@ See the [`esri-loader` documentation on working with ArcGIS types](https://githu
 
 ## Contributions
 
-Anyone is welcome to contribute to this package. We ask that ensure that your contribution pass the existing unit tests and include additional unit tests to cover new functionality.
+Anyone is welcome to contribute to this package. However, we do not plan to add any more components to this library. If you have created a component that you'd like to share, we encourage you to share it via [CodeSandbox](https://codesandbox.io/) or a [gist](https://gist.github.com/). Once you've done that feel free to open an issue and we'll help spread the word.
+
+We gladly welcome bug fixes or improvements to documentation. We ask that ensure that your contribution pass the existing unit tests and include additional unit tests to cover gaps.
 
 Here are some commands that may be helpful for development:
 
