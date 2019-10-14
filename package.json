@@ -21,6 +21,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "es6-promise": "^4.2.8",
+    "esri-loader": "2.10.2",
     "gh-release": "^3.5.0",
     "glob": "^7.1.4",
     "jsdom": "^15.1.1",
