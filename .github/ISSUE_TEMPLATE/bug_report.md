@@ -15,7 +15,7 @@ please read the README carefully. It may solve your issue: https://github.com/Es
 YOUR BUG MAY ALREADY BE LOGGED! 
 Please search this repository for existing issues: https://github.com/Esri/react-arcgis/issues
 
-This repository only handles issues regarding react-arcgis, which is a wrapper around esri-loader Esri-loader in turn helps you load the ArcGIS API for JavaScript.
+This repository only handles issues regarding react-arcgis, which is a wrapper around esri-loader. Esri-loader in turn helps you load the ArcGIS API for JavaScript.
 - Issues related to esri-loader should go here: https://github.com/Esri/esri-loader
 - Issues and questions specific to the ArcGIS API for JavaScript should go to Esri Tech Support (https://support.esri.com/contact-tech-support) or the ArcGIS API for JavaScript community on GeoNet (https://geonet.esri.com/community/developers/web-developers/arcgis-api-for-javascript)
 -->
