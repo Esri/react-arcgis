@@ -21,7 +21,7 @@
     "es6-promise": "^4.2.8",
     "esri-loader": "2.11.0",
     "gh-release": "^3.5.0",
-    "glob": "^7.1.4",
+    "glob": "^7.1.5",
     "jsdom": "^15.1.1",
     "mocha": "^6.2.0",
     "mocha-junit-reporter": "^1.23.1",
