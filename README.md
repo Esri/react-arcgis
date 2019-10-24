@@ -21,7 +21,7 @@ This project provides a library with a few ready to use React components (`<Map 
 
 ## Basic Usage
 
-> **IMPORTANT:** You _must_ load ArcGIS API styles before using the components in this library, and [`esri-loader` provides you with a few ways to that](https://github.com/Esri/esri-loader#loading-styles). These examples show how to pass `{ css: true }` to [loaderOptions](#configuring-esri-loader) to lazy-load the styles before rendering a component's map/scene, or how to use `loadCss()` to before rendering multiple components.
+> **IMPORTANT:** You _must_ load ArcGIS API styles before using the components in this library. The snippets below assume you've already used one of [the ways that `esri-loader` provides you with to load the ArcGIS API CSS](https://github.com/Esri/esri-loader#loading-styles).
 
 Render a simple map in React:
 
@@ -31,7 +31,7 @@ import * as ReactDOM from 'react-dom';
 import { Map } from '@esri/react-arcgis';
 
 ReactDOM.render(
-  <Map loaderOptions={{ css: true }}/>,
+  <Map />,
   document.getElementById('container')
 );
 ```
@@ -46,7 +46,7 @@ import * as ReactDOM from 'react-dom';
 import { Scene } from '@esri/react-arcgis';
 
 ReactDOM.render(
-  <Scene loaderOptions={{ css: true }} />,
+  <Scene />,
   document.getElementById('container')
 );
 ```
@@ -56,11 +56,7 @@ You can also add webmaps and webscenes from ArcGIS Online:
 ```js
 import React from 'react';
 import * as ReactDOM from 'react-dom';
-import { loadCss } from 'esri-loader';
 import { WebMap, WebScene } from '@esri/react-arcgis';
-
-// load esri styles before rendering multiple react-arcgis components
-loadCss();
 
 ReactDOM.render(
     <div style={{ width: '100vw', height: '100vh' }}>
@@ -80,7 +76,7 @@ import * as ReactDOM from 'react-dom';
 import { Scene } from '@esri/react-arcgis';
 
 ReactDOM.render(
-  <Scene className="full-screen-map" loaderOptions={{ css: true }} />,
+  <Scene className="full-screen-map" />,
   document.getElementById('container')
 );
 ```
@@ -95,7 +91,6 @@ export default (props) => (
     <Map
         class="full-screen-map"
         mapProperties={{ basemap: 'satellite' }}
-        loaderOptions={{ css: true }}
     />
 )
 ```
@@ -115,7 +110,6 @@ export default (props) => (
             center: [-122.4443, 47.2529],
             zoom: 6
         }}
-        loaderOptions={{ css: true }}
     />
 )
 ```
@@ -139,7 +133,7 @@ export default class MakeAMap extends React.Component {
     }
 
     render() {
-        return <Map className="full-screen-map" onLoad={this.handleMapLoad} loaderOptions={{ css: true }} />;
+        return <Map className="full-screen-map" onLoad={this.handleMapLoad} />;
     }
 
     handleMapLoad(map, view) {
@@ -165,7 +159,7 @@ export default class MakeAScene extends React.Component {
     }
 
     render() {
-        return <WebScene className="full-screen-map" id="foobar" onFail={this.handleFail}  loaderOptions={{ css: true }} />;
+        return <WebScene className="full-screen-map" id="foobar" onFail={this.handleFail} />;
     }
 
     handleFail(e) {
@@ -179,11 +173,34 @@ export default class MakeAScene extends React.Component {
 
 ### Configuring `esri-loader`
 
-The components in this library use `esri-loader`'s default options, which means they will lazy-load the modules from the CDN version of the ArcGIS API for JavaScript used by the version of `esri-loader` you have installed. However all of the components also provide a  `loaderOptions` prop that allows you to customize `esri-loader`'s behavior. For example many of the above examples use `loaderOptions` to pass `{ css: true }` to `loadModules()` in order [to lazy-load the ArcGIS API styles](https://github.com/Esri/esri-loader#when-you-load-the-script) before rendering a component's map/scene.
+By default, the components in this library will use `esri-loader`'s default options, which means they will lazy-load the modules from the CDN version of the ArcGIS API for JavaScript used by the version of `esri-loader` you have installed. See [the `esri-loader` configuration documentation](https://github.com/Esri/esri-loader/#configuring-esri-loader) for information on how you can customize `esri-loader`'s behavior.
 
-In addition to controlling how the `css` is loaded, you can also specify a `url` to a [local build of the SDK](https://developers.arcgis.com/javascript/latest/guide/get-api/#download), or the specific CDN `version` of the ArcGIS API you want to use (`react-arcgis` is not compatible with 3.x versions of the ArcGIS API). See the [Usage](https://github.com/Esri/esri-loader#usage) and [Advanced Usage](https://github.com/Esri/esri-loader#advanced-usage) sections of the `esri-loader` documentation for more information on the available configuration options.
+#### Using `setDefaultOptions()`
 
-Keep in mind that if you are not using the defaults, you should supply the same custom options to _all_ `react-arcgis` components in your application, as well as any places where your application calls `loadModules()` directly.
+The easiest way to do this is by calling `esri-loader`'s `setDefaultOptions()` once at application startup before any of the components in this library are rendered.
+
+```jsx
+import React from 'react';
+import * as ReactDOM from 'react-dom';
+import { setDefaultOptions } from 'esri-loader';
+// app contains react-arcgis components
+import { App } from './components/App.js';
+
+// configure esri-loader to lazy load the CSS
+// the fisrt time any react-arcgis components are rendered
+setDefaultOptions({ css: true });
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('app')
+);
+```
+
+This requires `esri-loader@^2.12.0`. If you are using an older version of esri-loader you should probably upgrade.
+
+#### Using `loaderOptions`
+
+If you can't use `setDefaultOptions()`, you can use the `loaderOptions` prop provided by each of the components in this library. That will be [passed as `options` to `loadModules()`](https://github.com/Esri/esri-loader/#without-setdefaultoptions). Keep in mind that if you use `loaderOptions`, you must pass the same options to _all_ `react-arcgis` components in your application, as well as any places where your application calls `loadModules()` directly.
 
 ### Creating Your Own Components
 
