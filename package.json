@@ -22,7 +22,7 @@
     "esri-loader": "2.12.0",
     "gh-release": "^3.5.0",
     "glob": "^7.1.5",
-    "jsdom": "^15.1.1",
+    "jsdom": "^15.2.1",
     "mocha": "^6.2.2",
     "mocha-junit-reporter": "^1.23.1",
     "mock-require": "^3.0.3",
