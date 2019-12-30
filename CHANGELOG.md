@@ -30,7 +30,7 @@ import { Map } from '@esri/react-arcgis';
 import { loadModules } from 'esri-loader';
 ```
 
-## [4.0.0] - January 9th 2019
+## 4.0.0 - January 9th 2019
 
 ### Changed
 - `react-arcgis` has been moved into the @esri namespace on npm.
@@ -102,6 +102,5 @@ render() {
     );
 }
 ```
-
-[4.0.1]: https://github.com/Esri/arcgis-rest-js/compare/v4.0.0...v4.0.1 "v4.0.1"
-[HEAD]: https://github.com/Esri/react-arcgis/compare/v4.0.0...HEAD "Unreleased Changes"
+[5.0.0]: https://github.com/Esri/react-arcgis/compare/v4.0.0...5.0.0 "5.0.0"
+[HEAD]: https://github.com/Esri/react-arcgis/compare/5.0.0...HEAD "Unreleased Changes"
