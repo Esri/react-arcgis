@@ -7,12 +7,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### [Unreleased][HEAD]
 
+- none
+
+## [5.0.0] - October 14th 2019
+
 ### Changed
 - document how to configure esri-loader via `loaderOptions`
 
 ### Breaking
 - react-arcgis now declares React and esri-loader as peer dependencies
 - react-arcgis no longer exports `loadModules` nor `esriPromise`
+
+```shell
+npm install esri-loader
+```
+```js
+// Replace old `loadModules` imports...
+import { Map, loadModules } from '@esri/react-arcgis';
+
+// With a new, separate esri-loader import:
+import { Map } from '@esri/react-arcgis';
+import { loadModules } from 'esri-loader';
+```
 
 ## [4.0.0] - January 9th 2019
 
