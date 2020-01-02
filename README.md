@@ -281,6 +281,27 @@ export default (props) => (
 
 See the [`esri-loader` documentation on working with ArcGIS types](https://github.com/Esri/esri-loader#4x-types).
 
+## Migrating
+
+### From v4 to v5
+
+First, make sure esri-loader is installed as a dependency of your application:
+
+```shell
+npm install --save esri-loader
+```
+
+Then, update any `import` statements for `loadModules()`:
+
+```js
+// Replace old `loadModules` imports...
+// import { Map, loadModules } from '@esri/react-arcgis';
+
+// With a new, separate esri-loader import:
+import { Map } from '@esri/react-arcgis';
+import { loadModules } from 'esri-loader';
+```
+
 ## Contributions
 
 Anyone is welcome to contribute to this package. However, we do not plan to add any more components to this library. If you have created a component that you'd like to share, we encourage you to share it via [CodeSandbox](https://codesandbox.io/) or a [gist](https://gist.github.com/). Once you've done that feel free to open an issue and we'll help spread the word.
