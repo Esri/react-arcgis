@@ -117,7 +117,7 @@ export const WebBase = (props: WebBaseProps) => (
                             }
                         });
                         resolve({ map, view });
-                    }).otherwise((err) => {
+                    }).catch((err) => {
                         reject(err);
                     });
             } catch (err) {
