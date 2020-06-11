@@ -9,12 +9,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - none
 
+## [5.1.0] - June 11th 2020
+
+### Changed
+
+- Updated to esri-loader v2.14, `otherwise` vs `catch` issue with JS API ([#178](https://github.com/Esri/react-arcgis/pull/178))
+
 ## [5.0.0] - October 14th 2019
 
 ### Changed
+
 - document how to configure esri-loader via `loaderOptions`
 
 ### Breaking
+
 - react-arcgis now declares React and esri-loader as peer dependencies
 - react-arcgis no longer exports `loadModules` nor `esriPromise`
 
@@ -23,14 +31,17 @@ See the [v5 migration guide](./README.md#from-v4-to-v5)
 ## 4.0.0 - January 9th 2019
 
 ### Changed
+
 - `react-arcgis` has been moved into the @esri namespace on npm.
 
 ```shell
 npm install @esri/react-arcgis
 ```
+
 ```js
 import { Map, Scene } from '@esri/react-arcgis';
 ```
+
 - React-arcgis will now load version 4.10 of the ArcGIS API for JavaScript by default
 
 ## 3.3.3
@@ -92,5 +103,6 @@ render() {
     );
 }
 ```
-[5.0.0]: https://github.com/Esri/react-arcgis/compare/v4.0.0...5.0.0 "5.0.0"
-[HEAD]: https://github.com/Esri/react-arcgis/compare/5.0.0...HEAD "Unreleased Changes"
+[HEAD]: https://github.com/Esri/react-arcgis/compare/5.0.0...HEAD
+[5.1.0]: https://github.com/Esri/react-arcgis/compare/v5.0.0...5.1.0
+[5.0.0]: https://github.com/Esri/react-arcgis/compare/v4.0.0...5.0.0
