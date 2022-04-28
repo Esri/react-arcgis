@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { BaseProps } from './ArcBase';
 import { MapBase } from './ArcComposites';
 

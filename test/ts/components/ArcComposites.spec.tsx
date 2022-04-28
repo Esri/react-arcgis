@@ -1,31 +1,48 @@
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
-import * as React from 'react';
+import { render, act, RenderResult } from '@testing-library/react';
 import * as sinon from 'sinon';
 import { ArcView } from '../../../src/ts/components/ArcBase';
 import { MapBase, WebBase } from '../../../src/ts/components/ArcComposites';
 
+function renderMapBase({
+    scriptUri = ['foo', 'bar'],
+    ...restProps
+}: Partial<React.ComponentProps<typeof MapBase>> = {}): RenderResult {
+    return render(<MapBase scriptUri={scriptUri} {...restProps} />);
+};
+
+function renderWebBase({
+    id = "foobar",
+    scriptUri = ['foo', 'bar'],
+    ...restProps
+}: Partial<React.ComponentProps<typeof WebBase>> = {}): RenderResult {
+    return render(<WebBase id={id} scriptUri={scriptUri} {...restProps} />);
+};
+
 export const MapBaseTests = () => (
     describe('MapBase', () => {
-        let mapBase;
-        describe('as a shallow component', () => {
-            beforeEach(() => {
-                mapBase = shallow(<MapBase scriptUri={['foo', 'bar']} />);
-            });
 
-            it('should exist', () => {
-                expect(mapBase).to.exist;
+        describe('as a shallow component', () => {
+            it('should exist', async () => {
+                const { container } = renderMapBase();
+
+                await act(async () => {
+                    expect(container.querySelector('#base-container')).to.exist;
+                });
             });
         });
 
         describe('as a mounted component', () => {
             beforeEach(() => {
                 sinon.spy(ArcView.prototype, 'componentDidMount');
-                mapBase = mount(<MapBase scriptUri={['foo', 'bar']} />);
             });
 
-            it('should call componentDidMount', () => {
-                expect(ArcView.prototype.componentDidMount['callCount']).to.equal(1);
+            it('should call componentDidMount', async () => {
+                renderMapBase();
+
+                await act(async () => {
+                    expect(ArcView.prototype.componentDidMount['callCount']).to.equal(1);
+                });
             });
 
             describe('esriPromise succeeds', () => {
@@ -35,32 +52,29 @@ export const MapBaseTests = () => (
                         global['generateMap'] = true;
                     });
 
-                    beforeEach(() => {
-                        mapBase = mount(<MapBase scriptUri={['foo', 'bar']} />);
-                    });
+                    it('should display the loaded state of the application', async () => {
+                        const mapBase = renderMapBase();
 
-                    it('should display the loaded state of the application', (done) => {
-                        setTimeout(() => {
-                            mapBase.update();
-                            expect(mapBase.find('#react-arcgis-fail-text')).to.have.length(0);
-                            expect(mapBase.find('#react-arcgis-loading-text')).to.have.length(0);
-                            done();
-                        }, 1);
+                        // Wait for implicit async state update in componentDidUpdate
+                        await act(async () => {});
+
+                        const { container } = mapBase;
+                        expect(container.querySelector('#react-arcgis-fail-text')).to.not.exist;
+                        expect(container.querySelector('#react-arcgis-loading-text')).to.not.exist;
                     });
 
                     describe('the user has included custom event handlers', () => {
                         const handler = () => 'foobar';
-                        beforeEach(() => {
-                            mapBase = mount(<MapBase scriptUri={['foo', 'bar']} onMouseWheel={handler} />);
-                        });
 
-                        it('should display the loaded state of the application', (done) => {
-                            setTimeout(() => {
-                                mapBase.update();
-                                expect(mapBase.find('#react-arcgis-fail-text')).to.have.length(0);
-                                expect(mapBase.find('#react-arcgis-loading-text')).to.have.length(0);
-                                done();
-                            }, 1);
+                        it('should display the loaded state of the application', async () => {
+                            const mapBase = renderMapBase({ onMouseWheel: handler });
+
+                            // Wait for implicit async state update in componentDidUpdate
+                            await act(async () => {});
+
+                            const { container } = mapBase;
+                            expect(container.querySelector('#react-arcgis-fail-text')).to.not.exist;
+                            expect(container.querySelector('#react-arcgis-loading-text')).to.not.exist;
                         });
 
                         it('should pass the event handler to the ArcGIS JS API', (done) => {
@@ -83,17 +97,15 @@ export const MapBaseTests = () => (
                         global['generateBrokenMap'] = true;
                     });
 
-                    beforeEach(() => {
-                        mapBase = mount(<MapBase scriptUri={['foo', 'bar']} />);
-                    });
+                    it('should display the failed state of the application', async () => {
+                        const mapBase = renderMapBase();
 
-                    it('should display the failed state of the application', (done) => {
-                        setTimeout(() => {
-                            mapBase.update();
-                            expect(mapBase.find('#react-arcgis-fail-text')).to.have.length(1);
-                            expect(mapBase.find('#react-arcgis-loading-text')).to.have.length(0);
-                            done();
-                        }, 1);
+                        // Wait for implicit async state update in componentDidUpdate
+                        await act(async () => {});
+
+                        const { container } = mapBase;
+                        expect(container.querySelector('#react-arcgis-fail-text')).to.exist;
+                        expect(container.querySelector('#react-arcgis-loading-text')).to.not.exist;
                     });
 
                     after(() => {
@@ -109,16 +121,14 @@ export const MapBaseTests = () => (
                         global['generateMap'] = false;
                     });
 
-                    beforeEach(() => {
-                        mapBase = mount(<MapBase scriptUri={['foo', 'bar']} />);
-                    });
+                    it('should display the failed state for the application', async () => {
+                        const mapBase = renderMapBase();
 
-                    it('should display the failed state for the application', (done) => {
-                        setTimeout(() => {
-                            mapBase.update();
-                            expect(mapBase.find('#react-arcgis-fail-text')).to.have.length(1);
-                            done();
-                        }, 1);
+                        // Wait for implicit async state update in componentDidUpdate
+                        await act(async () => {});
+
+                        const { container } = mapBase;
+                        expect(container.querySelector('#react-arcgis-fail-text')).to.exist;
                     });
 
                     after(() => {
@@ -137,25 +147,28 @@ export const MapBaseTests = () => (
 
 export const WebBaseTests = () => (
     describe('WebBase', () => {
-        let webBase;
-        describe('as a shallow component', () => {
-            beforeEach(() => {
-                webBase = shallow(<WebBase id="foobar" scriptUri={['foo', 'bar']} />);
-            });
 
-            it('should exist', () => {
-                expect(webBase).to.exist;
+        describe('as a shallow component', () => {
+            it('should exist', async () => {
+                const { container } = renderWebBase();
+
+                await act(async () => {
+                    expect(container.querySelector('#base-container')).to.exist;
+                });
             });
         });
 
         describe('as a mounted component', () => {
             beforeEach(() => {
                 sinon.spy(ArcView.prototype, 'componentDidMount');
-                webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} />);
             });
 
-            it('should call componentDidMount', () => {
-                expect(ArcView.prototype.componentDidMount['callCount']).to.equal(1);
+            it('should call componentDidMount', async () => {
+                renderWebBase();
+
+                await act(async () => {
+                    expect(ArcView.prototype.componentDidMount['callCount']).to.equal(1);
+                });
             });
 
             describe('loadMap successfully creates the map and view', () => {
@@ -164,32 +177,29 @@ export const WebBaseTests = () => (
                     global['generateWebMap'] = true;
                 });
 
-                beforeEach(() => {
-                    webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} />);
-                });
+                it('should display the loaded state of the application', async () => {
+                    const webBase = renderWebBase();
 
-                it('should display the loaded state of the application', (done) => {
-                    setTimeout(() => {
-                        webBase.update();
-                        expect(webBase.find('#react-arcgis-fail-text')).to.have.length(0);
-                        expect(webBase.find('#react-arcgis-loading-text')).to.have.length(0);
-                        done();
-                    }, 1);
+                    // Wait for implicit async state update in componentDidUpdate
+                    await act(async () => {});
+
+                    const { container } = webBase;
+                    expect(container.querySelector('#react-arcgis-fail-text')).to.not.exist;
+                    expect(container.querySelector('#react-arcgis-loading-text')).to.not.exist;
                 });
 
                 describe('the user has included custom event handlers', () => {
                     const handler = () => 'foobar';
-                    beforeEach(() => {
-                        webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} onMouseWheel={handler} />);
-                    });
 
-                    it('should display the loaded state of the application', (done) => {
-                        setTimeout(() => {
-                            webBase.update();
-                            expect(webBase.find('#react-arcgis-fail-text')).to.have.length(0);
-                            expect(webBase.find('#react-arcgis-loading-text')).to.have.length(0);
-                            done();
-                        }, 1);
+                    it('should display the loaded state of the application', async () => {
+                        const webBase = renderWebBase({ onMouseWheel: handler });
+
+                        // Wait for implicit async state update in componentDidUpdate
+                        await act(async () => {});
+
+                        const { container } = webBase;
+                        expect(container.querySelector('#react-arcgis-fail-text')).to.not.exist;
+                        expect(container.querySelector('#react-arcgis-loading-text')).to.not.exist;
                     });
 
                     it('should pass the event handler to the ArcGIS JS API', (done) => {
@@ -211,16 +221,14 @@ export const WebBaseTests = () => (
                     global['generateBadWebMap'] = true;
                 });
 
-                beforeEach(() => {
-                    webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} />);
-                });
+                it('should display the failed state for the application', async () => {
+                    const webBase = renderWebBase();
 
-                it('should display the failed state for the application', (done) => {
-                    setTimeout(() => {
-                        webBase.update();
-                        expect(webBase.find('#react-arcgis-fail-text')).to.have.length(1);
-                        done();
-                    }, 1);
+                    // Wait for implicit async state update in componentDidUpdate
+                    await act(async () => {});
+
+                    const { container} = webBase;
+                    expect(container.querySelector('#react-arcgis-fail-text')).to.exist;
                 });
 
                 after(() => {
@@ -235,16 +243,14 @@ export const WebBaseTests = () => (
                     global['generateMap'] = false;
                 });
 
-                beforeEach(() => {
-                    webBase = mount(<WebBase id="foobar" scriptUri={['foo', 'bar']} />);
-                });
+                it('should display the failed state for the application', async () => {
+                    const webBase = renderWebBase();
 
-                it('should display the failed state for the application', (done) => {
-                    setTimeout(() => {
-                        webBase.update();
-                        expect(webBase.find('#react-arcgis-fail-text')).to.have.length(1);
-                        done();
-                    }, 1);
+                    // Wait for implicit async state update in componentDidUpdate
+                    await act(async () => {});
+
+                    const { container} = webBase;
+                    expect(container.querySelector('#react-arcgis-fail-text')).to.exist;
                 });
 
                 after(() => {

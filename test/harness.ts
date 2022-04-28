@@ -1,32 +1,28 @@
-import { JSDOM } from 'jsdom';
-import * as mock from 'mock-require';
-import * as Enzyme from 'enzyme';
-import * as Adapter from 'enzyme-adapter-react-16';
+import { JSDOM } from "jsdom";
+import * as mock from "mock-require";
 
-Enzyme.configure({ adapter: new Adapter() });
+const dom = new JSDOM("<html><body></body></html>");
+global["window"] = dom.window;
+global["navigator"] = dom.window.navigator;
+global["document"] = dom.window.document;
+global["asyncSuccess"] = true;
 
-const dom = new JSDOM('<html><body></body></html>');
-global['window'] = dom.window;
-global['navigator'] = dom.window.navigator;
-global['document'] = dom.window.document;
-global['asyncSuccess'] = true;
+mock("esri-loader", "./doubles/esriLoader");
 
-mock('esri-loader', './doubles/esriLoader');
-
-import SampleTests from './ts/test';
+import SampleTests from "./ts/test";
 SampleTests();
 
-import ArcBaseTests from './ts/components/ArcBase.spec';
+import ArcBaseTests from "./ts/components/ArcBase.spec";
 ArcBaseTests();
 
-import { MapBaseTests, WebBaseTests } from './ts/components/ArcComposites.spec';
+import { MapBaseTests, WebBaseTests } from "./ts/components/ArcComposites.spec";
 MapBaseTests();
 WebBaseTests();
 
-import { MapTests, SceneTests } from './ts/components/MapComposites.spec';
+import { MapTests, SceneTests } from "./ts/components/MapComposites.spec";
 MapTests();
 SceneTests();
 
-import { WebMapTests, WebSceneTests } from './ts/components/WebComposites.spec';
+import { WebMapTests, WebSceneTests } from "./ts/components/WebComposites.spec";
 WebMapTests();
 WebSceneTests();

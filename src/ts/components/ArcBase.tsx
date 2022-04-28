@@ -1,5 +1,5 @@
+import { cloneElement, Component, Children } from 'react';
 import { loadModules, ILoadScriptOptions } from 'esri-loader';
-import * as React from 'react';
 import ArcContainer from './ArcContainer';
 
 export interface BaseProps {
@@ -48,7 +48,7 @@ export interface ComponentState {
     view?: __esri.MapView | __esri.SceneView;
 }
 
-export class ArcView extends React.Component<ArcProps, ComponentState> {
+export class ArcView extends Component<ArcProps, ComponentState> {
     constructor(props: ArcProps) {
         super(props);
         this.state = {
@@ -89,9 +89,9 @@ export class ArcView extends React.Component<ArcProps, ComponentState> {
             if (!!this.props.childrenAsFunction) {
                 return this.props.childrenAsFunction(this.state.map, this.state.view);
             }
-            const childrenWithProps = React.Children.map(this.props.children, (child) => {
+            const childrenWithProps = Children.map(this.props.children, (child) => {
                 const childEl = child as React.ReactElement<any>;
-                return React.cloneElement(childEl, {
+                return cloneElement(childEl, {
                         map: this.state.map,
                         view: this.state.view
                     }
