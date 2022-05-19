@@ -1,30 +1,27 @@
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
-import * as React from 'react';
+import { render, act } from '@testing-library/react';
 import { WebMap, WebScene } from '../../../src/ts/components/WebComposites';
 
 export const WebMapTests = () => (
     describe('WebMap', () => {
-        let webMap;
-        beforeEach(() => {
-            webMap = shallow(<WebMap id="foobar" />);
-        });
+        it('should exist', async () => {
+            const { container } = render(<WebMap id="foobar" />);
 
-        it('should exist', () => {
-            expect(webMap).to.exist;
+            await act(() => {
+                expect(container.querySelector('#base-container')).to.exist;
+            });
         });
     })
 );
 
 export const WebSceneTests = () => (
     describe('WebScene', () => {
-        let webScene;
-        beforeEach(() => {
-            webScene = shallow(<WebScene id="foobar" />);
-        });
+        it('should exist', async () => {
+            const { container } = render(<WebScene id="foobar" />);
 
-        it('should exist', () => {
-            expect(webScene).to.exist;
+            await act(() => {
+                expect(container.querySelector('#base-container')).to.exist;
+            });
         });
     })
 );

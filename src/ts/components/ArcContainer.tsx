@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { Component } from 'react';
 
 export interface ArcContainerProps {
     id: string;
@@ -9,7 +9,7 @@ export interface ArcContainerProps {
 
 export interface ArcContainerState {}
 
-export default class ArcContainer extends React.Component<ArcContainerProps, ArcContainerState> {
+export default class ArcContainer extends Component<ArcContainerProps, ArcContainerState> {
     constructor(props: ArcContainerProps) {
         super(props);
     }

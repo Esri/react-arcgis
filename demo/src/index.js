@@ -1,11 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import { Map } from '@esri/react-arcgis';
 import BermudaTriangle from './BermudaTriangle';
 import MyFeatureLayer from './MyFeatureLayer';
 
-ReactDOM.render(
+const rootElement =  document.getElementById('root');
+const root = createRoot(rootElement);
+
+root.render(
   <Map
     mapProperties={{ basemap: 'satellite' }}
     viewProperties={{
@@ -19,6 +21,5 @@ ReactDOM.render(
       }}
     >
     </MyFeatureLayer>
-  </Map>,
-  document.getElementById('root')
+  </Map>
 );

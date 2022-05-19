@@ -5,9 +5,9 @@
   "dependencies": {
     "@esri/react-arcgis": "^4.0.0",
     "esri-loader": "^2.10.2",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-scripts": "3.0.0"
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

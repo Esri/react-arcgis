@@ -1,30 +1,27 @@
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
-import * as React from 'react';
+import { render, act } from '@testing-library/react';
 import { Map, Scene } from '../../../src/ts/components/MapComposites';
 
 export const MapTests = () => (
     describe('Map', () => {
-        let map;
-        beforeEach(() => {
-            map = shallow(<Map />);
-        });
+        it('should exist', async () => {
+            const { container } = render(<Map />);
 
-        it('should exist', () => {
-            expect(map).to.exist;
+            await act(() => {
+                expect(container.querySelector('#base-container')).to.exist;
+            });
         });
     })
 );
 
 export const SceneTests = () => (
     describe('Scene', () => {
-        let scene;
-        beforeEach(() => {
-            scene = shallow(<Scene />);
-        });
+        it('should exist', async () => {
+            const { container } = render(<Scene />);
 
-        it('should exist', () => {
-            expect(scene).to.exist;
+            await act(() => {
+                expect(container.querySelector('#base-container')).to.exist;
+            });
         });
     })
 );

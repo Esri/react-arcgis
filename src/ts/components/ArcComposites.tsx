@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { ArcView, BaseProps } from './ArcBase';
 
 export interface MapBaseProps extends BaseProps {
