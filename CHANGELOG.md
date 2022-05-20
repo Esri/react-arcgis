@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - none
 
+## [5.2.0] - May 20th 2020
+
+- Add support of React 17 and React 18
+
 ## [5.1.0] - June 11th 2020
 
 ### Changed
@@ -103,6 +107,7 @@ render() {
     );
 }
 ```
-[HEAD]: https://github.com/Esri/react-arcgis/compare/5.0.0...HEAD
+[HEAD]: https://github.com/Esri/react-arcgis/compare/5.1.0...HEAD
+[5.2.0]: https://github.com/Esri/react-arcgis/compare/v5.1.0...5.2.0
 [5.1.0]: https://github.com/Esri/react-arcgis/compare/v5.0.0...5.1.0
 [5.0.0]: https://github.com/Esri/react-arcgis/compare/v4.0.0...5.0.0
