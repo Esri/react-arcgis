@@ -118,55 +118,42 @@ export default (props) => (
 If you want to access the `map` and `view` instances directly after they are loaded, pass in an `onLoad` handler:
 
 ```js
-import React from 'react';
+import { useState } from 'react';
 import { Map } from '@esri/react-arcgis';
 
-export default class MakeAMap extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            map: null,
-            view: null
-        };
-
-        this.handleMapLoad = this.handleMapLoad.bind(this)
+const MakeAMap = () => {
+  const [map, setMap] = useState()
+  const [view, setView] = useState()
+  
+  const handleMapLoad = (map, view) => {
+      setMap(map)
+      setView(view)
     }
 
-    render() {
-        return <Map className="full-screen-map" onLoad={this.handleMapLoad} />;
-    }
-
-    handleMapLoad(map, view) {
-        this.setState({ map, view });
-    }
+  return <Map className="full-screen-map" onLoad={handleMapLoad} />;
+    
 }
+export default MakeAMap
 ```
 
 Don't forget an `onFail` handler in case something goes wrong:
 
 ```js
-import React from 'react';
+import { useState } from 'react';
 import { WebScene } from '@esri/react-arcgis';
 
-export default class MakeAScene extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            status: 'loading'
-        };
-
-        this.handleFail = this.handleFail.bind(this);
-    }
-
-    render() {
-        return <WebScene className="full-screen-map" id="foobar" onFail={this.handleFail} />;
-    }
-
-    handleFail(e) {
+const MakeAScene = () => {
+    const {status, setStatus} = useState('loading');
+    
+    const handleFail = (e) => {
         console.error(e);
-        this.setState({ status: 'failed' });
+        setStatus('failed');
     }
+    
+    return <WebScene className="full-screen-map" id="foobar" onFail={handleFail} />;
 }
+
+export default MakeAScene;
 ```
 
 ## Advanced Usage
