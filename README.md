@@ -143,7 +143,8 @@ import { useState } from 'react';
 import { WebScene } from '@esri/react-arcgis';
 
 const MakeAScene = () => {
-    const {status, setStatus} = useState('loading');
+    const [status, setStatus] = useState('loading');
+
     
     const handleFail = (e) => {
         console.error(e);
