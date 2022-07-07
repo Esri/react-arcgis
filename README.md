@@ -9,11 +9,24 @@
 [travis-img]: https://img.shields.io/travis/Esri/react-arcgis/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/Esri/react-arcgis
 
-This project provides a library with a few ready to use React components (`<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />`) to get you started using the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) in your React application. These components use [esri-loader](https://github.com/Esri/esri-loader) under the hood to lazy-load the ArcGIS API modules.
 
-**_IMPORTANT_: You do _not_ need `react-arcgis` to use the ArcGIS API in your React application. If the above generic components do not suit your needs you can very easily [create your own React components that load the ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/latest/guide/react) using [esri-loader](https://developers.arcgis.com/javascript/latest/guide/esri-loader). Alternatively, you could get started with the components in this library and then [add your own components](#creating-your-own-components) as needed.**
+**The react-arcgis repository is now archived (July 2022)**
+
+This project provided a library with a few ready to use React components (`<Map />`, `<Scene />`, `<WebMap />`, and `<WebScene />`) to get you started using the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/) in your React application. These components used [esri-loader](https://github.com/Esri/esri-loader) under the hood to lazy-load the ArcGIS API modules.
+
+**However, for a few years you have NOT needed `react-arcgis` to use the ArcGIS API in your React application. Instead it is best to use either [@arcgis/core](https://www.npmjs.com/package/@arcgis/core) or [esri-loader](https://github.com/esri/esri-loader) directly in your React application.**
+
+Please take a look at these modern alternatives to using react-arcgis:
+
+- [ArcGIS API for JavaScript: Build with ES Modules](https://developers.arcgis.com/javascript/latest/es-modules/) - how to use [@arcgis/core](https://www.npmjs.com/package/@arcgis/core) with modern build tools (example uses React)
+- [ArcGIS API for JavaScript with create-react-app](https://github.com/Esri/jsapi-resources/tree/master/esm-samples/jsapi-create-react-app) – An example of how to use [@arcgis/core](https://www.npmjs.com/package/@arcgis/core) in [Create React App](https://create-react-app.dev/).
+- [esri-loader React examples](https://github.com/Esri/esri-loader#react)
+
+Do you have a question related to JavaScript that isn’t specific to React? Post these questions in the [GeoNET](https://community.esri.com/community/developers/web-developers/arcgis-api-for-javascript) forum for the ArcGIS API for JavaScript.
 
 ## Installation
+
+**_IMPORTANT:_ This repository is now archived (July 2022) - please see above for how to use either [@arcgis/core](https://www.npmjs.com/package/@arcgis/core) or [esri-loader](https://github.com/esri/esri-loader) directly in your React application.**
 
 1. Run `npm i --save esri-loader @esri/react-arcgis` in your React application
 
